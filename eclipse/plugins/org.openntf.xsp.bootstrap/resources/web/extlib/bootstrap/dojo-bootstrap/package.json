@@ -1,0 +1,21 @@
+{
+    "name":"dojo-bootstrap",
+    "version":"2.0",
+    "main":"main",
+    "dependencies":{
+        "dojo":"current",
+        "dijit":"current",
+        "util":"current"
+    },
+    "description":"Implementation of the Twitter Bootstrap using the Dojo Toolkit.",
+    "licenses":[
+        {
+            "type":"Apache License",
+            "url":"http://www.apache.org/licenses/LICENSE-2.0"
+        }
+    ],
+    "bugs":"https://github.com/xsokev/Dojo-Bootstrap/issues",
+    "keywords":["JavaScript", "Dojo", "Twitter Bootstrap"],
+    "homepage":"https://github.com/xsokev/Dojo-Bootstrap",
+    "dojoBuild":"bootstrap.profile.js"
+}

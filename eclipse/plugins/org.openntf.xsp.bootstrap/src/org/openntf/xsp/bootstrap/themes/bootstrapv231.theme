@@ -1,0 +1,42 @@
+<theme extends="bootstrap">
+
+	<!-- All the resources are defined here to ensure that they are loaded in order -->
+	
+    <!-- Core XPages styles -->
+    <resource>
+        <content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xsptheme/xsp.css</href>
+    </resource>
+
+    <!-- Core Bootstrap CSS files -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap231/css/bootstrap.css</href>
+	</resource>
+
+	<!-- Dojo Theme (dbootstrap)-->
+	<resource dojoTheme="true">
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/dbootstrap/dbootstrap.css</href>
+	</resource>
+
+	<!-- XPages/Bootstrap specific styles -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages.css</href>
+	</resource>
+
+
+	<!-- JQuery -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/jquery182/js/jquery-1.8.2.js</href>
+	</resource>
+
+	<!-- Core Bootstrap JavaScript files -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap231/js/bootstrap.js</href>
+	</resource>
+
+</theme>

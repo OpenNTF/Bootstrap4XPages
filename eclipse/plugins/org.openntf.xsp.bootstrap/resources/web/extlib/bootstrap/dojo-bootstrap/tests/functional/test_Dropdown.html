@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dojo-Bootstrap/Dropdown</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/tests.css">
+    </head>
+
+    <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="nav-collapse collapse">
+                    <a class="brand" href="../index.html">Dojo Bootstrap Tests</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <section class="sidebar span3"></section>
+            <section id="main" class="main span8">
+                <span id="dd1" class="dropdown" data-dojo-type="bootstrap/Dropdown">
+                    <a class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://google.com">one</a></li>
+                        <li><a href="#">two</a></li>
+                        <li><a href="#">three</a></li>
+                    </ul>
+                </span>
+                <br/>
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#">Regular link</a></li>
+                    <li class="dropdown" data-dojo-type="bootstrap/Dropdown">
+                        <a class="dropdown-toggle" id="drop4" role="button" href="#">Dropdown <b class="caret"></b></a>
+                        <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" data-dojo-type="bootstrap/Dropdown">
+                        <a class="dropdown-toggle" id="drop5" role="button" href="#">Dropdown 2 <b class="caret"></b></a>
+                        <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" data-dojo-type="bootstrap/Dropdown">
+                        <a class="dropdown-toggle" id="drop6" role="button" href="#">Dropdown 3 <b class="caret"></b></a>
+                        <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <script type="text/javascript" src="../assets/config.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.3/dojo/dojo.js"></script>
+
+    <script>
+        require([
+            "dojo/query",
+            "dojo/on",
+            "dojo/parser",
+            "bootstrap/Dropdown",
+            "dijit/registry",
+            "./tests.js"
+        ], function(query, on, parser, Dropdown, registry){
+            parser.parse().then(function(){
+                var dd1 = registry.byId("dd1");
+                dd1.on("select", function(e){
+                    console.log(e.selectedItem);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!--
+	- Includes a basic theme for the XPages core controls, based on the core theme
+		(uses the bitmaps from this theme, like the pager ones)
+	- Doesn't handle RTL, only LTR
+	- Doesn't handle browser differences like the core themes (FF, IE, ...)
+-->
+
+<theme>
+	<!-- View Root -->
+	<control>
+		<name>ViewRoot</name>
+		<property>
+			<name>docType</name>
+			<value>html</value>
+		</property>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>dbootstrap</value>
+		</property>
+	</control>
+	
+	<!-- View Title -->
+	<control>
+		<name>Text.ViewTitle</name>
+	 		<property>
+			<name>styleClass</name>
+			<value>xspTextViewTitle</value>
+		</property>
+	</control>
+	
+	<!-- File Download Table -->
+	<control>
+		<name>DataTable.FileDownload</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspDataTableFileDownload</value>
+		</property>
+		<property>
+			<name>typeStyleClass</name>
+			<value>xspDataTableFileDownloadType</value>
+		</property>
+		<property>
+			<name>sizeStyleClass</name>
+			<value>xspDataTableFileDownloadSize</value>
+		</property>
+		<property>
+			<name>nameStyleClass</name>
+			<value>xspDataTableFileDownloadName</value>
+		</property>
+		<property>
+			<name>createdStyleClass</name>
+			<value>xspDataTableFileDownloadCreated</value>
+		</property>
+		<property>
+			<name>modifiedStyleClass</name>
+			<value>xspDataTableFileDownloadModified</value>
+		</property>
+		<property>
+			<name>deleteStyleClass</name>
+			<value>xspDataTableFileDownloadDelete</value>
+		</property>
+		<property>
+            <name>captionStyleClass</name>
+            <value>xspDataTableFileDownloadCaption</value>
+        </property>
+	</control>
+
+	<!-- File Download Link -->
+	<control>
+		<name>Link.FileDownload</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspLinkFileDownload</value>
+		</property>
+	</control>
+
+	<!-- XPages Buttons -->
+	<control>
+		<name>Button</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn</value>
+		</property>
+		<property>
+			<name>outerStyleClass</name>
+			<value>btn-group</value>
+		</property>
+	</control>
+	<control>
+		<name>Button.Command</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn</value>
+		</property>
+		<property>
+			<name>outerStyleClass</name>
+			<value>btn-group</value>
+		</property>
+	</control>
+	<control>
+		<name>Button.Submit</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn btn-primary</value>
+		</property>
+		<property>
+			<name>outerStyleClass</name>
+			<value>btn-group</value>
+		</property>
+	</control>
+
+	
+	<!-- Extra Bootstrap Buttons -->
+	<control>
+		<name>Button.Cancel</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn btn-danger</value>
+		</property>
+		<property>
+			<name>outerStyleClass</name>
+			<value>btn-group</value>
+		</property>
+	</control>
+	<control>
+		<name>Button.Primary</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn btn-primary</value>
+		</property>
+		<property>
+			<name>outerStyleClass</name>
+			<value>btn-group</value>
+		</property>
+	</control>
+	<control>
+		<name>Button.Danger</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn btn-danger</value>
+		</property>
+		<property>
+			<name>outerStyleClass</name>
+			<value>btn-group</value>
+		</property>
+	</control>
+	<control>
+		<name>Button.Warning</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn btn-warning</value>
+		</property>
+		<property>
+			<name>outerStyleClass</name>
+			<value>btn-group</value>
+		</property>
+	</control>
+	<control>
+		<name>Button.Success</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn btn-success</value>
+		</property>
+		<property>
+			<name>outerStyleClass</name>
+			<value>btn-group</value>
+		</property>
+	</control>
+	<control>
+		<name>Button.Info</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn btn-info</value>
+		</property>
+		<property>
+			<name>outerStyleClass</name>
+			<value>btn-group</value>
+		</property>
+	</control>
+	<control>
+		<name>Button.Inverse</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn btn-inverse</value>
+		</property>
+		<property>
+			<name>outerStyleClass</name>
+			<value>btn-group</value>
+		</property>
+	</control>
+
+	<!-- CheckBox -->
+	<control>
+		<name>CheckBox</name>
+		<property>
+			<name>styleClass</name>
+			<value>checkbox checkbox2</value>
+		</property>
+	</control>
+
+	<!-- RadioButton -->
+	<control>
+		<name>RadioButton</name>
+		<property>
+			<name>styleClass</name>
+			<value>radio radio2</value>
+		</property>
+	</control>
+	
+	<!-- Bootstrap Images -->
+	<control>
+		<name>Image.Rounded</name>
+		<property>
+			<name>styleClass</name>
+			<value>img-rounded</value>
+		</property>
+	</control>
+	<control>
+		<name>Image.Circle</name>
+		<property>
+			<name>styleClass</name>
+			<value>img-circle</value>
+		</property>
+	</control>
+	<control>
+		<name>Image.Polaroid</name>
+		<property>
+			<name>styleClass</name>
+			<value>img-polaroid</value>
+		</property>
+	</control>
+	
+	<!-- Basic Message -->
+	<control>
+		<name>Message</name>
+		<property>
+			<name>styleClass</name>
+			<value>text-error</value>
+		</property>
+	</control>
+
+	<!-- Basic Messages -->
+	<control>
+		<name>Messages</name>
+		<property>
+			<name>styleClass</name>
+			<value>text-error unstyled</value>
+		</property>
+	</control>
+	
+	<!-- Section -->
+	<control>
+		<name>Section</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspSection</value>
+		</property>
+		<property>
+			<name>expandedImage</name>
+			<value>/.ibmxspres/.extlib/bootstrap/icons/section_expanded.png</value>
+		</property>
+		<property>
+			<name>collapsedImage</name>
+			<value>/.ibmxspres/.extlib/bootstrap/icons/section_collapsed.png</value>
+		</property>
+	</control>
+	
+	<!-- DataTable -->
+	<control>
+		<name>DataTable</name>
+		<property>
+			<name>styleClass</name>
+			<value>table</value>
+		</property>
+		<property>
+			<name>unreadMarksClass</name>
+			<value></value>
+		</property>
+		<property>
+			<name>readMarksClass</name>
+			<value></value>
+		</property>
+	</control>
+
+	<!-- Table Column -->
+	<control>
+		<name>Column</name>
+		<property>
+			<name>styleClass</name>
+			<value></value>
+		</property>
+	</control>
+	
+	<!-- View DataTable -->
+	<control>
+		<name>DataTable.ViewPanel</name>
+		<property>
+			<name>dataTableStyleClass</name>
+			<!-- <value>table table-bordered xspDataTable</value> -->
+			<value>table xspDataTable</value>
+		</property>
+	</control>
+
+	<!-- View Column -->
+	<control>
+		<name>Column.View</name>
+		<property>
+			<name>viewCheckboxStyle</name>
+			<value>margin: 0px 2px; height: 12px;</value>
+		</property>
+		<property>
+			<name>expandedImage</name>
+			<value>/.ibmxspres/.extlib/bootstrap/icons/view_expanded.png</value>
+		</property>
+		<property>
+			<name>collapsedImage</name>
+			<value>/.ibmxspres/.extlib/bootstrap/icons/view_collapsed.png</value>
+		</property>
+	</control>
+
+	<!-- View Column checkbox -->
+	<control>
+		<name>CheckBox.ViewColumn</name>
+		<property>
+			<name>styleClass</name>
+			<value>checkbox</value>
+		</property>
+	</control>
+
+	<!-- ================== View Column Header ================================ -->
+
+	<!-- View Column Header checkbox -->
+	<control>
+		<name>CheckBox.ViewColumnHeader</name>
+		<property>
+			<name>styleClass</name>
+			<value>checkbox</value>
+		</property>
+	</control>
+
+
+		
+	<!-- =======================================================================
+		Tab panel controls
+		A tab has some virtual properties when dealing with themes:
+			startStyleClass: the style class to apply to the first tab
+			middleStyleClass: the style class to apply to the tab that are neither first or last
+			endStyleClass: the style class to apply to the tab column
+		Those properties take priority over the styleClass when defined in a theme
+	======================================================================= -->
+
+	<!-- Tabbed Panel -->
+	<control>
+		<name>TabbedPanel</name>
+		<property>
+			<name>styleClass</name>
+			<value>nav nav-tabs</value> 
+		</property>
+	</control>
+
+	<!-- Tab -->
+	<control>
+		<name>Tab.TabbedPanel</name>
+		<property>
+			<name>styleClass</name>
+			<value>n5</value> 
+		</property>
+		<property>
+			<name>selectedTabStyleClass</name>
+			<value>active</value> 
+		</property>
+	</control>
+	
+
+	<!-- ================== Pager / PagerControl ================================ -->
+
+	<!-- Pager -->
+	<control>
+		<name>Pager</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.data.BootstrapPagerRenderer</value>
+		</property>
+		<property>
+			<name>styleClass</name>
+			<value></value>
+		</property>
+	</control>
+
+
+</theme>
+

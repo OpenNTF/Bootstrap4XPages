@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dojo-Bootstrap/Collapse</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/tests.css">
+        <style type="text/css">
+            #my-accordion { margin-top: 10px; }
+            #btn7 { margin: 0 5px; }
+        </style>
+    </head>
+
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <a class="brand" href="../index.html">Dojo Bootstrap Tests</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <section class="sidebar span3"></section>
+                <section id="main" class="main span8">
+                    <div class="btn-group">
+                        <button id="btn1" class="btn btn-small">Toggle First</button>
+                        <button id="btn2" class="btn btn-small">Show Second</button>
+                        <button id="btn3" class="btn btn-small">Hide Third</button>
+                        <button id="btn4" class="btn btn-small">Collapse All</button>
+                        <button id="btn5" class="btn btn-small disabled">Expand All</button>
+                    </div>
+                    <button id="chk1" class="btn btn-small btn-info" data-dojo-type="bootstrap/Button" data-dojo-props="toggleable:true">Allow All Open</button>
+                    <div id="my-accordion" data-dojo-type="bootstrap/Collapse">
+                        <div data-dojo-type="bootstrap/CollapseItem" data-dojo-props="title:'<i class=icon-globe></i>New York', content:'New York is a state in the Northeastern region of the United States. New York is the 27th-most extensive, the 3rd-most populous, and the 7th-most densely populated of the 50 United States.'"></div>
+                        <div data-dojo-type="bootstrap/CollapseItem" data-dojo-props="title:'<i class=\'icon-globe\'></i>California', content:'California is a state located on the West Coast of the United States. It is the most populous U.S. state, and the third most extensive.'"></div>
+                        <div data-dojo-type="bootstrap/CollapseItem" data-dojo-props="title:'<i class=\'icon-globe\'></i>Georgia', content:'Georgia is a state located in the southeastern United States. It was established in 1732, the last of the original Thirteen Colonies.'"></div>
+                    </div>
+                    <button id="btn7" class="btn btn-small btn-danger pull-right" data-dojo-type="bootstrap/Button">Remove Last</button>
+                    <button id="btn6" class="btn btn-small btn-primary pull-right" data-dojo-type="bootstrap/Button">Add</button>
+                </section>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="../assets/config.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.3/dojo/dojo.js"></script>
+        
+        <script>
+            require([
+                "dojo/query",
+                "dojo/parser",
+                "dojo/dom-construct",
+                "dijit/registry",
+                "bootstrap/CollapseItem",
+                "bootstrap/Collapse",
+                "bootstrap/Button",
+                "./tests.js",
+                "dojo/domReady!"
+            ], function ( query, parser, domConstruct, registry, CollapseItem, Button ) {
+                    var accord;
+                    parser.parse().then(function(){
+                        accord = registry.byId("my-accordion");
+                        accord.on('show', function (e) {
+                            console.info(e.target.id + ': show');
+                        });
+
+                        accord.on('shown', function (e) {
+                            console.info(e.target.id + ' is now shown');
+                        });
+
+                        accord.on('hide', function (e) {
+                            console.info(e.target.id + ': hide');
+                        });
+
+                        accord.on('hidden', function (e) {
+                            console.info(e.target.id + ' is now hidden');
+                        });
+                    });
+                    query("#btn1").on("click", function(){
+                        accord.toggle(0);
+                    });
+                    query("#btn2").on("click", function(){
+                        var secondWidget = accord.getChildren()[1];
+                        accord.show(secondWidget);
+                    });
+                    query("#btn3").on("click", function(){
+                        accord.hide(2);
+                    });
+                    query("#btn4").on("click", function(){
+                        accord.collapseAll();
+                    });
+                    query("#btn5").on("click", function(){
+                        accord.expandAll();
+                    });
+                    query("#btn6").on("click", function(){
+                        var c1 = new CollapseItem({
+                            title: "Tennessee",
+                            content: "Tennessee is a U.S. state located in the Southeastern United States. Tennessee is the 36th most extensive and the 17th most populous of the 50 United States."
+                        }, domConstruct.create("div", null, query("#my-accordion")[0]))
+                        accord.add(c1);
+
+                    });
+                    query("#btn7").on("click", function(){
+                        accord.remove(accord.getChildren().length-1);
+
+                    });
+                    query("#chk1").on("click", function(){
+                        if(registry.byId(this.id).isActive()){
+                            query("#btn5").removeClass("disabled");
+                            accord.set("allowAllOpen", true);
+                        } else {
+                            query("#btn5").addClass("disabled");
+                            accord.set("allowAllOpen", false);
+                        }
+                    });
+                }
+            );
+        </script>
+    </body>
+</html>

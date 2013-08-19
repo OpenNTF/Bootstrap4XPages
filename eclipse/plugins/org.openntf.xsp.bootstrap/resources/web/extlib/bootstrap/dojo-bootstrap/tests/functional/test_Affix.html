@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dojo-Bootstrap/Affix</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/tests.css">
+        <style>
+            section {
+                height: 50em;
+            }
+            #affixnav { width: 100px; margin-top: 50px; background-color: #EEEEEE; }
+            #affixnav.top { margin-top: 0px; }
+            #affixnav.affix { margin-top: 0px; }
+        </style>
+    </head>
+
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <a class="brand" href="../index.html">Dojo Bootstrap Tests</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <section class="sidebar span3"></section>
+                <section id="main" class="main span8">
+                    <div class="row-fluid">
+                        <!-- navigation -->
+                        <div class="span3">
+                            <div id="affixnav" data-dojo-type="bootstrap/Affix" data-dojo-props="offset: 50">
+                                <ul class="nav nav-list">
+                                    <li><a href="#a"><i class="icon-chevron-right"></i> A</a></li>
+                                    <li><a href="#b"><i class="icon-chevron-right"></i> B</a></li>
+                                    <li><a href="#c"><i class="icon-chevron-right"></i> C</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- content -->
+                        <div class="span9">
+                            <section id="a">
+                                <div class="page-header">
+                                    <h1>A</h1>
+                                </div>
+                            </section>
+                            <div class="clearfix"></div>
+                            <section id="b">
+                                <div class="page-header">
+                                    <h1>B</h1>
+                                </div>
+                            </section>
+                            <div class="clearfix"></div>
+                            <section id="c">
+                                <div class="page-header">
+                                    <h1>C</h1>
+                                </div>
+                            </section>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <script src="../assets/config.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.3/dojo/dojo.js"></script>
+        
+        <script>
+            require([
+                "dojo/query",
+                "dojo/parser",
+                "bootstrap/ScrollSpy",
+                "bootstrap/Affix",
+                "./tests.js"
+            ], function(query, parser, ScrollSpy){
+                parser.parse().then(function(){
+                    var scrollSpy = new ScrollSpy({
+                        target: '#affixnav',
+                        offset:'300'
+                    }, document.body);
+                    scrollSpy.on("activate", function(e){
+                        console.log(e.target);
+                        console.log(e.relatedTarget);
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

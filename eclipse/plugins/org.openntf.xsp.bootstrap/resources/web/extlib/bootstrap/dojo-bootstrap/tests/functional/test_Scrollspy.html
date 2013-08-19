@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dojo-Bootstrap/ScrollSpy</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/tests.css">
+        <style>
+            .scroll-section {
+                height: 200px;
+                overflow: auto;
+                position: relative;
+                border: 1px solid #ccc;
+                padding: 5px;
+                background-color: #efffef;
+            }
+            .scroll-section section {
+                border-top: 1px solid;
+                height: 10em;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <a class="brand" href="../index.html">Dojo Bootstrap Tests</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <section class="sidebar span3"></section>
+                <section id="main" class="main span8">
+                    <div id="my-navbar" class="navbar">
+                        <div class="navbar-inner">
+                            <ul class="nav">
+                                <li><a href="#aaa">aaa</a></li>
+                                <li><a href="#bbb">bbb</a></li>
+                                <li class="dropdown" data-dojo-type="bootstrap/Dropdown">
+                                    <a href="#" class="dropdown-toggle">more <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#one">one</a></li>
+                                        <li><a href="#two">two</a></li>
+                                        <li><a href="#three">three</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- scrollable area -->
+                    <div id="scrollspy" data-dojo-type="bootstrap/ScrollSpy" data-dojo-props="target: '#my-navbar', offset:'120'" class="scroll-section">
+                        <section id="aaa">
+                            <h1>aaa</h1>
+                        </section>
+
+                        <section id="bbb">
+                            <h1>bbb</h1>
+                        </section>
+
+                        <section id="one">
+                            <h1>one</h1>
+                        </section>
+
+                        <section id="two">
+                            <h1>two</h1>
+                        </section>
+
+                        <section id="three">
+                            <h1>three</h1>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <script type="text/javascript" src="../assets/config.js"></script>
+	    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.3/dojo/dojo.js"></script>
+
+        <script>
+            require([
+                "dojo/query",
+                "dojo/on",
+                "dojo/parser",
+                "bootstrap/ScrollSpy",
+                "dijit/registry",
+                "bootstrap/Dropdown",
+                "./tests.js"
+            ], function(query, on, parser, ScrollSpy, registry){
+                start();
+                function start(){
+                    parser.parse().then(function(){
+                        var scrollSpy = registry.byId("scrollspy");
+                        scrollSpy.on('activate', function(ev){
+                            console.log(ev.target);
+                        });
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

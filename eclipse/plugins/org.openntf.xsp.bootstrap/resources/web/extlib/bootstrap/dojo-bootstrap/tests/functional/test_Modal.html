@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dojo-Bootstrap/Modal</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/tests.css">
+        <link rel="stylesheet" href="../../assets/calendar.css">
+        <style type="text/css">
+            .login-dlg { width: 350px; }
+        </style>
+    </head>
+
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <a class="brand" href="../index.html">Dojo Bootstrap Tests</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <section class="sidebar span3"></section>
+                <section id="main" class="main span8">
+                    <button id="btn1" type="button" class="btn">Open Modal 1</button>
+                    <button id="btn2" type="button" class="btn">Login Modal</button>
+                    <button id="btn3" type="button" class="btn">Modal w/Remote</button>
+                    <div id="modal1" data-dojo-type="bootstrap/Modal"
+                         data-dojo-props="header:'My Modal', modalClass: 'fade'" class="hide">
+                        <p>Body (Hit ESC to close)</p>
+                    </div>
+                    <div id="modal2" data-dojo-type="bootstrap/Modal"
+                         data-dojo-props="showOnStart:false, modalClass: 'login-dlg fade'" class="hide">
+                        <div class="form-horizontal">
+                            <div class="control-group">
+                                <label for="username" class="control-label">Username:</label>
+                                <div class="controls">
+                                    <input id="username" class="input-small" type="text">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="password" class="control-label">Password:</label>
+                                <div class="controls">
+                                    <input id="password" class="input-small" type="password">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="verifydate" class="control-label">Today's Date:</label>
+                                <div class="controls">
+                                    <input id="verifydate" data-dojo-type="bootstrap/Datepicker" class="input-small" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="modal3" data-dojo-type="bootstrap/Modal"
+                         data-dojo-props="header:'<strong>Remote Dialog</strong>', footer: false" class="hide"/>
+                </section>
+            </div>
+        </div>
+        <script type="text/javascript" src="../assets/config.js"></script>
+	    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.3/dojo/dojo.js"></script>
+        <script>
+            require([
+                "dojo/query",
+                "dojo/on",
+                "dojo/parser",
+                "dijit/registry",
+                "bootstrap/Modal",
+                "bootstrap/Tooltip",
+                "bootstrap/Popover",
+                "bootstrap/Datepicker",
+                "dojo/dom-construct",
+                "./tests.js"
+            ], function (query, on, parser, registry, Modal, Tooltip, Popover, Datepicker, domConstruct) {
+                    var modal1, modal2, remoteLoaded = false;
+                    parser.parse().then(function(){
+                        modal1 = registry.byId("modal1");
+
+                        var loginBtn = domConstruct.toDom("<button>Login</button>");
+                        query(loginBtn).addClass("btn btn-primary").on("click", function(){
+                            alert("logging in...");
+                        });
+
+                        modal2 = registry.byId("modal2");
+                        var cancelBtn = domConstruct.toDom("<button class='btn'>Cancel</button>");
+                        query(cancelBtn).on("click", function(){ modal2.hide(); });
+
+                        var buttonContainer = domConstruct.toDom("<div></div>");
+                        domConstruct.place(cancelBtn, buttonContainer);
+                        domConstruct.place(loginBtn, buttonContainer);
+
+                        modal2.set({
+                            "header": "Login",
+                            "footer": buttonContainer,
+                            "keyboard": false
+                        });
+
+                        modal3 = registry.byId("modal3");
+                        modal3.on('remote-loaded', function () {
+                            remoteLoaded = true;
+                        });
+                    });
+                    query('#btn1').on('click', function(){
+                        modal1 && modal1.show();
+                    });
+                    query('#btn2').on('click', function(){
+                        modal2 && modal2.show();
+                    });
+                    query('#btn3').on('click', function(){
+                        modal3 && modal3.show();
+                        if(!remoteLoaded){
+                            modal3.set('remote', '../assets/basic.html');
+                        }
+                    });
+                    new Tooltip({
+                        placement: "bottom", title: "Enter your username"
+                    }, query("#username")[0]);
+                    new Popover({
+                        placement: "right",
+                        title: "Password",
+                        content: "Start with a base word phrase, lengthen the phrase, swap in non-alphabetic and uppercase characters and lastly: rotate/change your password regularly",
+                        trigger: "hover"
+                    }, query("#password")[0]);
+                }
+            );
+        </script>
+    </body>
+</html>

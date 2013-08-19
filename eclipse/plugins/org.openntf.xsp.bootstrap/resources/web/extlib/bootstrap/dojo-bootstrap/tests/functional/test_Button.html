@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dojo-Bootstrap/Button</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/tests.css">
+    </head>
+
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <a class="brand" href="../index.html">Dojo Bootstrap Tests</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <section class="sidebar span3"></section>
+                <section id="main" class="main span8">
+                    <h4>Declarative</h4>
+                    <section>
+                        <div class="page-header">
+                            <h5>Stateful</h5>
+                        </div>
+                        <button class="btn btn-primary"
+                                data-dojo-type="bootstrap/Button" data-dojo-id="btn1" id="btn1">Load<i class="icon-link"></i></button>
+                    </section>
+
+                    <section>
+                        <div class="page-header">
+                            <h5>Toggle</h5>
+                        </div>
+                        <input type="button" value="Toggle" class="btn" data-dojo-type="bootstrap/Button" data-dojo-props="toggleable:true" />
+                    </section>
+
+                    <section>
+                        <div class="page-header">
+                            <h5>Checkbox</h5>
+                        </div>
+                        <div class="btn-group" data-dojo-type="bootstrap/ButtonGroup">
+                            <button data-dojo-type="bootstrap/Button" class="btn">Left</button>
+                            <button type="button" class="btn">Middle</button>
+                            <button type="button" class="btn">Right</button>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="page-header">
+                            <h5>Radio</h5>
+                        </div>
+                        <div class="btn-group" data-dojo-type="bootstrap/ButtonGroup" data-dojo-props="mode:'radio'">
+                            <button type="button" class="btn">Left</button>
+                            <button type="button" class="btn">Middle</button>
+                            <button type="button" class="btn">Right</button>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="../assets/configParse.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.3/dojo/dojo.js"></script>
+        
+        <script>
+            require([
+                "dojo/ready",
+                "dojo/query",
+                "dijit/registry",
+                "bootstrap/Button",
+                "bootstrap/ButtonGroup",
+                "./tests.js"
+            ], function (ready, query, registry) {
+                    var b1;
+                    ready(function(){
+                        b1 = registry.byId("btn1");
+                    });
+                    query("#btn1").on("click", function(e){
+                        b1.loading();
+                        setTimeout(function(){
+                            b1.reset();
+                        }, 2000);
+                    });
+                }
+            );
+        </script>
+    </body>
+</html>

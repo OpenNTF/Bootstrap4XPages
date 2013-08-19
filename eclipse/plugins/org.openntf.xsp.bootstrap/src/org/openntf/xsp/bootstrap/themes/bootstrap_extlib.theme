@@ -1,0 +1,223 @@
+<theme>
+	
+	<!-- Application Layout -->
+	<control>
+		<name>ApplicationLayout</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.layout.BootstrapApplicationLayout</value>
+		</property>
+	</control>
+
+	<!-- Outline -->
+	<control>
+		<name>Outline.Navigator</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.outline.BootstrapOutlineMenu</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.BreadCrumbs</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.outline.BootstrapBreadCrumbs</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.SortLinks</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.outline.BootstrapSortLinks</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.LinksList</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.outline.BootstrapLinksList</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.Separator</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.outline.BootstrapSeparator</value>
+		</property>
+	</control>
+    <control>
+        <name>Outline.DropDownButton</name>
+        <property>
+            <name>rendererType</name>
+            <value>org.openntf.xsp.bootstrap.outline.BootstrapDropDownButton</value>
+        </property>
+    </control>
+
+	<!-- Container -->
+	<control>
+		<name>Container.Widget</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.containers.BootstrapWidgetContainer</value>
+		</property>
+	</control>
+<!-- 	
+	<control>
+		<name>Container.List</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.containers.List</value>
+		</property>
+	</control>
+-->	
+	<control>
+		<name>Container.List.Inline</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.containers.BootstrapInlineList</value>
+		</property>
+	</control>
+	
+
+	<!-- Pager -->
+	<control>
+		<name>Pager.Sizes</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.data.BootstrapPagerSizes</value>
+		</property>
+	</control>
+	<control>
+		<name>Pager.Expand</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.data.BootstrapPagerExpand</value>
+		</property>
+	</control>
+	<control>
+		<name>Pager.Detail</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.data.BootstrapPagerDetail</value>
+		</property>
+	</control>
+	<control>
+		<name>Pager.AddRows</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.data.BootstrapPagerAddRows</value>
+		</property>
+	</control>
+	
+	<!-- DataIterator -->
+	<control>
+		<name>DataIterator.DataView</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.data.BootstrapCustomView</value>
+		</property>
+	</control>
+	<control>
+		<name>DataIterator.ForumView</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.data.BootstrapForumView</value>
+		</property>
+	</control>
+	
+	<!-- Form -->
+	<control>
+		<name>FormLayout.FormTable</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.data.BootstrapFormTable</value>
+		</property>
+	</control>
+	<control>
+		<name>FormLayout.ForumPost</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.data.BootstrapForumPost</value>
+		</property>
+	</control>
+
+	<!-- TagCloud -->
+	<control>
+		<name>TagCloud</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.tagcloud.BootstrapTagCloud</value>
+		</property>
+	</control>
+
+	<!-- Dialog -->
+	<control>
+		<name>Dialog.Modal</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.dialog.BootstrapDialog</value>
+		</property>
+	</control>
+	<control>
+		<name>DialogBar</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.dialog.BootstrapDialogButtonBar</value>
+		</property>
+	</control>
+	<control>
+		<name>DialogContent</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.dialog.BootstrapDialogContent</value>
+		</property>
+	</control>
+	
+	<!-- Pickers -->
+	<control>
+		<name>Picker.Value</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.picker.BootstrapValuePicker</value>
+		</property>
+	</control>
+	<control>
+		<name>Picker.Name</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.picker.BootstrapNamePicker</value>
+		</property>
+	</control>
+
+	<!-- Extended Dojo Controls -->
+	<control>
+		<name>Dojo.Form.ListTextBox</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.dojoext.form.BootstrapListTextBox</value>
+		</property>
+	</control>
+	<control>
+		<name>Dojo.Form.NameTextBox</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.dojoext.form.BootstrapNameTextBox</value>
+		</property>
+	</control>
+	<control>
+		<name>Dojo.Form.LinkSelect</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.dojoext.form.BootstrapLinkSelect</value>
+		</property>
+	</control>
+	<control>
+		<name>Dojo.Form.ImageSelect</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.dojoext.form.BootstrapImageSelect</value>
+		</property>
+	</control>
+
+</theme>
+
