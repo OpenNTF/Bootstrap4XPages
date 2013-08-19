@@ -62,6 +62,9 @@ The theme has been successfully applied to several existing demo databases. The 
 
 </ul>
 
+<h3>Licensing information</h3>
+This library is delivered under the Apache 2.0 license. A compiled, ready to use version, is available from the OpenNTF web site at: <a href='http://bootstrap4xpages.openntf.org/'>http://bootstrap4xpages.openntf.org/</a>
+<br/>
 
 <h3>Known Limitations</h3>
 The components provided by the library are currently not matching the IBM standard in term of localization (support for multiple languages, bibi support) or accessibity.
