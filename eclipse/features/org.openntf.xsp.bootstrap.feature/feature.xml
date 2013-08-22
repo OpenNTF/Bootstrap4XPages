@@ -2,19 +2,19 @@
 <feature
       id="org.openntf.xsp.bootstrap.feature"
       label="Feature"
-      version="1.0.0">
+      version="1.0.0"
+      provider-name="OpenNTF">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="http://bootstrap4xpages.openntf.org">
+      Bootstrap4XPages contains new themes which can be deployed globally
+on an IBM Domino server and used in XPages applications without
+having to import any design elements or to change application
+code.
    </description>
 
    <copyright url="http://www.example.com/copyright">
       [Enter Copyright Description here.]
    </copyright>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
 
    <plugin
          id="org.openntf.xsp.bootstrap"
