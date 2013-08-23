@@ -51,14 +51,6 @@ public class BootstrapUtilityLinksRenderer extends BootstrapNavRenderer {
     }
 
     @Override
-    protected String getContainerStyle(TreeContextImpl node) {
-        if(node.getDepth()==1) {
-            return "float: right"; // $NON-NLS-1$
-        }
-        return null;
-    }
-
-    @Override
     public boolean isNodeEnabled(ITreeNode node) {
         // The user node should not be enabled by default...
         return !(node instanceof UserTreeNode);
