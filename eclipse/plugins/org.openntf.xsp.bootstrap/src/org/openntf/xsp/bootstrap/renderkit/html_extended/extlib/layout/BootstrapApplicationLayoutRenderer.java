@@ -43,6 +43,7 @@ import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.ComboBoxRenderer;
 import com.ibm.xsp.extlib.tree.ITree;
 import com.ibm.xsp.extlib.tree.impl.TreeImpl;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.HtmlUtil;
 import com.ibm.xsp.util.JSUtil;
@@ -186,8 +187,8 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 			w.writeComment("Start Banner"); // $NON-NLS-1$
 			newLine(w);
 		}
-		writeBannerLink(context, w, c, configuration);
 		writeBannerProductlogo(context, w, c, configuration);
+		writeBannerLink(context, w, c, configuration);
 		newLine(w);
 		writeBannerUtilityLinks(context, w, c, configuration);
 		newLine(w);
@@ -201,7 +202,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 
 	protected void writeBannerLink(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		w.startElement("a", c);
-		w.writeAttribute("class", "btn btn-navbar", null); // $NON-NLS-1$
+		w.writeAttribute("class", "btn btn-navbar pull-left", null); // $NON-NLS-1$
 
 		String href = "#"; // (String) getProperty(PROP_BANNERLINKHREF);
 		if (null == href || '#' != href.charAt(0)) {
@@ -213,8 +214,39 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 	}
 
 	protected void writeBannerProductlogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
-		w.startElement("span", c); // $NON-NLS-1$
-		w.endElement("span"); // $NON-NLS-1$
+        w.startElement("span",c); // $NON-NLS-1$
+        
+        String clazz = ExtLibUtil.concatStyleClasses("pull-left",configuration.getProductLogoClass());
+        if(StringUtil.isNotEmpty(clazz)) {
+            w.writeAttribute("class",clazz,null); // $NON-NLS-1$
+        }
+        String style = configuration.getProductLogoStyle();
+        if(StringUtil.isNotEmpty(style)) {
+            w.writeAttribute("style",style,null); // $NON-NLS-1$
+        }
+        
+        String logoImg = configuration.getProductLogo();
+        if(StringUtil.isNotEmpty(logoImg)) {
+            String imgSrc = HtmlRendererUtil.getImageURL(context, logoImg);
+            w.startElement("img",c); // $NON-NLS-1$
+            w.writeURIAttribute("src",imgSrc,null); // $NON-NLS-1$
+            String logoAlt = configuration.getProductLogoAlt();
+            if(!isAltNotEmpty(logoAlt)) {
+                logoAlt = "Banner Product Logo"; // $NLS-AbstractApplicationLayoutRenderer.BannerProductLogo-1$
+            }
+            w.writeAttribute("alt",logoAlt,null); // $NON-NLS-1$
+            String width = configuration.getProductLogoWidth();
+            if(StringUtil.isNotEmpty(width)) {
+                w.writeAttribute("width",width,null); // $NON-NLS-1$
+            }
+            String height = configuration.getProductLogoHeight();
+            if(StringUtil.isNotEmpty(height)) {
+                w.writeAttribute("height",height,null); // $NON-NLS-1$
+            }
+            w.endElement("img"); // $NON-NLS-1$
+        }
+    
+        w.endElement("span"); // $NON-NLS-1$
 	}
 
 	protected void writeBannerApplicationLinks(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
@@ -867,4 +899,12 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		// No children, so the list is empty
 		return true;
 	}
+
+    private boolean isAltNotEmpty(String alt) {
+        // Note, do not use StringUtil.isNotEmpty for alt text
+        // because for accessibility reasons there's a difference
+        // between alt="" and no alt attribute set,
+        // so we treat null and "" as different for alt.
+        return null != alt;
+    }	
 }

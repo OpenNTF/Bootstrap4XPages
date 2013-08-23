@@ -33,16 +33,8 @@ public class BootstrapApplicationLinksRenderer extends BootstrapNavRenderer {
     @Override
 	protected String getContainerStyleClass(TreeContextImpl node) {
     	if(node.getDepth()==1) {
-        	return "nav nav-pills";
+        	return "nav nav-pills pull-left";
     	}
     	return super.getContainerStyleClass(node);
-    }
-
-    @Override
-    protected String getContainerStyle(TreeContextImpl node) {
-        if(node.getDepth()==1) {
-        	return "float: left"; // $NON-NLS-1$
-        }
-        return null;
     }
 }
