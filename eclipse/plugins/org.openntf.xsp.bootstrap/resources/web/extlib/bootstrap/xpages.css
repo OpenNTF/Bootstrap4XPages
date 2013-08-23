@@ -87,6 +87,14 @@
 }
 .applayout-titlebar {	
 }
+.applayout-titlebar-inner {	
+	vertical:align: midddle;
+}
+.applayout-titlebar-name {
+	margin: 0 30px 0 0;
+	padding-top: 10px;
+	float: left;
+}
 .applayout-banner {	
 }
 .applayout-placebar {

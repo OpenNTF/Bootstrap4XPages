@@ -43,6 +43,7 @@ import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.ComboBoxRenderer;
 import com.ibm.xsp.extlib.tree.ITree;
 import com.ibm.xsp.extlib.tree.impl.TreeImpl;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.ibm.xsp.extlib.util.ThemeUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.HtmlUtil;
@@ -279,8 +280,18 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		newLine(w);
 
 		w.startElement("div", c);
-		w.writeAttribute("class", "navbar-inner", null); // $NON-NLS-1$
+		w.writeAttribute("class", "navbar-inner applayout-titlebar-inner", null); // $NON-NLS-1$
 		newLine(w);
+		
+        String titleBarName = configuration.getTitleBarName();
+        if( StringUtil.isNotEmpty(titleBarName)) {
+        	w.startElement("h4",c); //$NON-NLS-1$
+            w.writeAttribute("class","applayout-titlebar-name",null); // $NON-NLS-1$
+            w.writeAttribute("title",titleBarName,null); // $NON-NLS-1$
+            w.write(titleBarName);
+        	w.endElement("h4"); //$NON-NLS-1$
+        	newLine(w);
+        }
 
 		writeTitleBarTabsArea(context, w, c, configuration);
 		writeSearchBar(context, w, c, configuration);
@@ -729,48 +740,38 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 	}
 
 	protected void writeLegalLogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
-		// String logoImg = configuration.getLegalLogo();
-		// if(StringUtil.isNotEmpty(logoImg)) {
-		// w.startElement("td",c); // $NON-NLS-1$
-		// w.startElement("span",c); // $NON-NLS-1$
-		// String clazz =
-		// ExtLibUtil.concatStyleClasses((String)getProperty(PROP_LEGALLOGOCLASS),configuration.getLegalLogoClass());
-		// if(StringUtil.isNotEmpty(clazz)) {
-		// w.writeAttribute("class",clazz,null); // $NON-NLS-1$
-		// }
-		// String style =
-		// ExtLibUtil.concatStyles((String)getProperty(PROP_LEGALLOGOSTYLE),configuration.getLegalLogoStyle());
-		// if(StringUtil.isNotEmpty(style)) {
-		// w.writeAttribute("style",style,null); // $NON-NLS-1$
-		// }
-		// String imgSrc = HtmlRendererUtil.getImageURL(context, logoImg);
-		// w.startElement("img",c); // $NON-NLS-1$
-		// //w.writeAttribute("class","lotusIBMLogoFooter",null);
-		// w.writeURIAttribute("src",imgSrc,null); // $NON-NLS-1$
-		// String logoAlt = configuration.getLegalLogoAlt();
-		// if(!isAltNotEmpty(logoAlt)) {
-		// logoAlt = "Legal Logo"; //
-		// $NLS-AbstractApplicationLayoutRenderer.LegalLogo-1$
-		// }
-		// w.writeAttribute("alt",logoAlt,null); // $NON-NLS-1$
-		// String width = configuration.getLegalLogoWidth();
-		// if(StringUtil.isEmpty(width)) {
-		// width = (String)getProperty(PROP_LEGALLOGOWIDTH);
-		// }
-		// if(StringUtil.isNotEmpty(width)) {
-		// w.writeAttribute("width",width,null); // $NON-NLS-1$
-		// }
-		// String height = configuration.getLegalLogoHeight();
-		// if(StringUtil.isEmpty(height)) {
-		// height = (String)getProperty(PROP_LEGALLOGOHEIGHT);
-		// }
-		// if(StringUtil.isNotEmpty(height)) {
-		// w.writeAttribute("height",height,null); // $NON-NLS-1$
-		// }
-		// w.endElement("img"); // $NON-NLS-1$
-		// w.endElement("span"); // $NON-NLS-1$
-		// w.endElement("td"); // $NON-NLS-1$
-		// }
+		String logoImg=configuration.getLegalLogo();
+		if(StringUtil.isNotEmpty(logoImg)) {
+			w.startElement("td", c); // $NON-NLS-1$
+			w.startElement("span", c); // $NON-NLS-1$
+			String clazz=configuration.getLegalLogoClass();
+			if(StringUtil.isNotEmpty(clazz)) {
+				w.writeAttribute("class", clazz, null); // $NON-NLS-1$
+			}
+			String style=ExtLibUtil.concatStyles("float:left;vertical-align:middle;margin-right: 5px;", configuration.getLegalLogoStyle());
+			if(StringUtil.isNotEmpty(style)) {
+				w.writeAttribute("style", style, null); // $NON-NLS-1$
+			}
+			String imgSrc=HtmlRendererUtil.getImageURL(context, logoImg);
+			w.startElement("img", c); // $NON-NLS-1$
+			w.writeURIAttribute("src", imgSrc, null); // $NON-NLS-1$
+			String logoAlt=configuration.getLegalLogoAlt();
+			if(!isAltNotEmpty(logoAlt)) {
+				logoAlt="Legal Logo"; 
+			}
+			w.writeAttribute("alt", logoAlt, null); // $NON-NLS-1$
+			String width=configuration.getLegalLogoWidth();
+			if(StringUtil.isNotEmpty(width)) {
+				w.writeAttribute("width", width, null); // $NON-NLS-1$
+			}
+			String height=configuration.getLegalLogoHeight();
+			if(StringUtil.isNotEmpty(height)) {
+				w.writeAttribute("height", height, null); // $NON-NLS-1$
+			}
+			w.endElement("img"); // $NON-NLS-1$
+			w.endElement("span"); // $NON-NLS-1$
+			w.endElement("td"); // $NON-NLS-1$
+		}
 	}
 
 	protected void writeLegalText(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
