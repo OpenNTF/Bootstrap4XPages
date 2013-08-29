@@ -2,7 +2,7 @@
 <feature
       id="org.openntf.xsp.bootstrap.feature"
       label="OpenNTF Bootstrap Library for XPages Feature"
-      version="1.0.0.qualifier"
+      version="1.0.0"
       provider-name="OpenNTF">
 
    <description url="http://bootstrap4xpages.openntf.org">
