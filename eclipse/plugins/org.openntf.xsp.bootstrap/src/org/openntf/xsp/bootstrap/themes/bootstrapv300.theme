@@ -11,18 +11,12 @@
     <!-- Core Bootstrap CSS files -->
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap231/css/bootstrap.css</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap.css</href>
 	</resource>
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap231/css/bootstrap-responsive.css</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap-theme.css</href>
 	</resource>
-	<resources>
-		<metaData>
-			<name>viewport</name>
-			<content>width=device-width, initial-scale=1.0</content>
-		</metaData>
-	</resources>
 
 	<!-- Dojo Theme (dbootstrap)-->
 	<resource dojoTheme="true">
@@ -33,7 +27,7 @@
 	<!-- XPages/Bootstrap specific styles -->
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/xpages231.css</href>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages300.css</href>
 	</resource>
 
 
@@ -46,7 +40,7 @@
 	<!-- Core Bootstrap JavaScript files -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap231/js/bootstrap.js</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/js/bootstrap.js</href>
 	</resource>
 
 </theme>

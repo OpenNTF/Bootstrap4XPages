@@ -23,7 +23,7 @@
 	<!-- XPages/Bootstrap specific styles -->
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/xpages.css</href>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages231.css</href>
 	</resource>
 
 
