@@ -16,6 +16,11 @@
 
 package org.openntf.xsp.bootstrap.library;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import com.ibm.commons.extension.ExtensionManager;
 import com.ibm.xsp.library.AbstractXspLibrary;
 
 
@@ -23,6 +28,8 @@ import com.ibm.xsp.library.AbstractXspLibrary;
  * Bootstrap XPages Library
  */
 public class BootstrapLibrary extends AbstractXspLibrary {
+
+	private List<BootstrapFragment> fragments;
 
 	public BootstrapLibrary() {
 	}
@@ -57,6 +64,10 @@ public class BootstrapLibrary extends AbstractXspLibrary {
                 "org/openntf/xsp/bootstrap/config/bootstrap.xsp-config", // $NON-NLS-1$
                 "org/openntf/xsp/bootstrap/config/bootstrap-extlib.xsp-config", // $NON-NLS-1$
             };
+        List<BootstrapFragment> fragments = getBazaarFragments();
+        for( BootstrapFragment fragment: fragments) {
+        	files = fragment.getXspConfigFiles(files);
+        }
         return files;
     }
     
@@ -65,6 +76,33 @@ public class BootstrapLibrary extends AbstractXspLibrary {
         String[] files = new String[] {
                 "org/openntf/xsp/bootstrap/config/bootstrap-faces-config.xml", // $NON-NLS-1$
             };
+        List<BootstrapFragment> fragments = getBazaarFragments();
+        for( BootstrapFragment fragment: fragments) {
+        	files = fragment.getFacesConfigFiles(files);
+        }
         return files;
     }
+
+    private List<BootstrapFragment> getBazaarFragments() {
+    	if(fragments==null) {
+            List<BootstrapFragment> frags = ExtensionManager.findServices(null,
+            		BootstrapFragment.class.getClassLoader(),
+            		BootstrapFragment.EXTENSION_NAME, 
+            		BootstrapFragment.class);
+            // note, sorting the fragments alphabetically by className 
+            // so the fragment ordering is deterministic - the 
+            // default random ordering was making JUnit test fail 
+            // orderings un-repeatable.
+            Collections.sort(frags, new Comparator<BootstrapFragment>() {
+                @Override
+				public int compare(BootstrapFragment o1, BootstrapFragment o2) {
+                    String className1 = null == o1? "null":o1.getClass().getName(); //$NON-NLS-1$
+                    String className2 = null == o2? "null":o2.getClass().getName(); //$NON-NLS-1$
+                    return className1.compareTo(className2);
+                }
+            });
+            fragments = frags;
+    	}
+		return fragments;
+	}
 }
