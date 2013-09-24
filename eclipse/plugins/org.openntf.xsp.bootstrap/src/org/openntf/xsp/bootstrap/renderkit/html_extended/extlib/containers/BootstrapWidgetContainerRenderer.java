@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.outline.tree.BootstrapWidgetDropDownRenderer;
+import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
 import com.ibm.xsp.extlib.component.containers.UIWidgetContainer;
 import com.ibm.xsp.extlib.renderkit.html_extended.containers.WidgetContainerRenderer;
@@ -58,20 +59,20 @@ public class BootstrapWidgetContainerRenderer extends WidgetContainerRenderer {
             case PROP_TREEDROPDOWN:         return new BootstrapWidgetDropDownRenderer();
             // title bar looks ok when no text present - no need to insert nbsp 
             case PROP_TITLE_PREVENT_BLANK:  return false;
-            case PROP_TWISTYCLASSIMGOPEN:   return "icon-chevron-down"; // $NON-NLS-1$
-            case PROP_TWISTYCLASSIMGCLOSE:  return "icon-chevron-right"; // $NON-NLS-1$
+            case PROP_TWISTYCLASSIMGOPEN:   return BootstrapResources.get().getIconClass("chevron-down"); // $NON-NLS-1$
+            case PROP_TWISTYCLASSIMGCLOSE:  return BootstrapResources.get().getIconClass("chevron-right"); // $NON-NLS-1$
 
             // Header
             case PROP_TAGHEADER:            return "div"; // $NON-NLS-1$
             
             // Body
             case PROP_CSSSCROLLUP:          return "widget-section-scroll"; // $NON-NLS-1$
-            case PROP_CSSSCROLLUPLINK:      return "widget-section-arrow icon-arrow-up"; // $NON-NLS-1$
+            case PROP_CSSSCROLLUPLINK:      return "widget-section-arrow "+BootstrapResources.get().getIconClass("arrow-up"); // $NON-NLS-1$
             
             case PROP_CSSSCROLLUPALTTEXT:   return "&#x25b2;"; //$NON-NLS-1$
             
             case PROP_CSSSCROLLDOWN:        return "widget-section-scroll"; // $NON-NLS-1$
-            case PROP_CSSSCROLLDOWNLINK:    return "widget-section-arrow icon-arrow-down"; // $NON-NLS-1$
+            case PROP_CSSSCROLLDOWNLINK:    return "widget-section-arrow "+BootstrapResources.get().getIconClass("arrow-down"); // $NON-NLS-1$
             
             case PROP_CSSSCROLLDOWNALTTEXT: return "&#x25bc;"; //$NON-NLS-1$
 

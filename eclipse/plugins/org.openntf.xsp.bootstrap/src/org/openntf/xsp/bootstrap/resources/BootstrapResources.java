@@ -47,11 +47,15 @@ public abstract class BootstrapResources {
             return r;
         }
         Version v = BootstrapUtil.getBootstrapVersion(context);
-        if(v==BootstrapUtil.BOOTSTRAP_V211) {
+        if(v==BootstrapUtil.BOOTSTRAP_V231) {
             r = Bootstrap231Resources.instance;
+        } else if(v==BootstrapUtil.BOOTSTRAP_V232) {
+            r = Bootstrap232Resources.instance;
+        } else if(v==BootstrapUtil.BOOTSTRAP_V300) {
+            r = Bootstrap300Resources.instance;
         } else {
-            // Default to v211 anyway
-            r = Bootstrap231Resources.instance;
+            // Default to v232 anyway
+            r = Bootstrap232Resources.instance;
         }
         context.getAttributes().put("openntf.bootstrap.Resources",r); // $NON-NLS-1$
         return r;
@@ -71,5 +75,9 @@ public abstract class BootstrapResources {
         this.VIEW_COLUMN_SORT_BOTH_DESCENDING = "/.ibmxspres/.extlib/bootstrap/icons/sort_both_descending.gif"; // $NON-NLS-1$ 
         this.VIEW_COLUMN_SORT_NORMAL          = "/.ibmxspres/.extlib/bootstrap/icons/sort_normal.gif"; // $NON-NLS-1$   
         this.VIEW_COLUMN_SORT_REVERSE         = "/.ibmxspres/.extlib/bootstrap/icons/sort_reverse.gif"; // $NON-NLS-1$
+    }
+    
+    public String getIconClass(String iconName) {
+    	return "icon-"+iconName;
     }
 }

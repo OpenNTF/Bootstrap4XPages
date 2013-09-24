@@ -50,8 +50,8 @@ public class BootstrapMenuRenderer extends HtmlListRenderer {
     protected Object getProperty(int prop) {
         switch(prop) {
             case PROP_MENU_SELECTED: 	return "active"; // $NON-NLS-1$
-            case PROP_MENU_EXPANDED: 	return "icon-minus-sign icon-lighter"; // $NON-NLS-1$
-            case PROP_MENU_COLLAPSED: 	return "icon-plus-sign icon-lighter"; // $NON-NLS-1$
+            case PROP_MENU_EXPANDED: 	return BootstrapResources.get().getIconClass("minus-sign")+" icon-lighter"; // $NON-NLS-1$
+            case PROP_MENU_COLLAPSED: 	return BootstrapResources.get().getIconClass("plus-sign")+" icon-lighter"; // $NON-NLS-1$
         }
         return super.getProperty(prop);
     }

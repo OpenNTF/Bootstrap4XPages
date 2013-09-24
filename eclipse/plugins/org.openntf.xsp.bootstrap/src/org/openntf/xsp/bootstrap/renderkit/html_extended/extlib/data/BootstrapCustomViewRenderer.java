@@ -55,16 +55,16 @@ public class BootstrapCustomViewRenderer extends DataViewRenderer {
             //case PROP_COLLAPSEICON:             return "/.ibmxspres/.extlib/bootstrap/icons/view_expanded.png"; // $NON-NLS-1$
             case PROP_COLLAPSEICON:             return BootstrapResources.get().BLANK_GIF;
             case PROP_COLLAPSEICONSTYLE:        return "width:17.0px;height:17.0px;padding-right:3px"; // $NON-NLS-1$
-            case PROP_COLLAPSEICONCLASS: 		return "icon-minus-sign icon-lighter";	
+            case PROP_COLLAPSEICONCLASS: 		return BootstrapResources.get().getIconClass("minus-sign")+" icon-lighter";	
             //case PROP_EXPANDICON:               return "/.ibmxspres/.extlib/bootstrap/icons/view_collapsed.png"; // $NON-NLS-1$
             case PROP_EXPANDICON:               return BootstrapResources.get().BLANK_GIF;            
             case PROP_EXPANDICONSTYLE:          return "width:17.0px;height:17.0px;padding-right:3px"; // $NON-NLS-1$
             //case PROP_EXPANDICONCLASS: 			return "icon-lighter";	
-            case PROP_EXPANDICONCLASS: 			return "icon-plus-sign icon-lighter";	
+            case PROP_EXPANDICONCLASS: 			return BootstrapResources.get().getIconClass("plus-sign")+" icon-lighter";	
             
             case PROP_TABLEROWINDENTPX:         return 10;
-            case PROP_SHOWICONDETAILSCLASS:     return "icon-chevron-down icon-lighter"; // $NON-NLS-1$
-            case PROP_HIDEICONDETAILSCLASS:     return "icon-chevron-up icon-lighter"; // $NON-NLS-1$
+            case PROP_SHOWICONDETAILSCLASS:     return BootstrapResources.get().getIconClass("chevron-down")+" icon-lighter"; // $NON-NLS-1$
+            case PROP_HIDEICONDETAILSCLASS:     return BootstrapResources.get().getIconClass("chevron-up")+" icon-lighter"; // $NON-NLS-1$
             
             case PROP_TABLEHDRCOLIMAGE_SORTBOTH_ASCENDING:  return BootstrapResources.get().VIEW_COLUMN_SORT_BOTH_ASCENDING;
             case PROP_TABLEHDRCOLIMAGE_SORTBOTH_DESCENDING: return BootstrapResources.get().VIEW_COLUMN_SORT_BOTH_DESCENDING;

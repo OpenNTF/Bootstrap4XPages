@@ -1,2 +1,11 @@
 <theme extends="bootstrap_extlib">
+
+	<control>
+		<name>ApplicationLayout</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.layout.BootstrapApplicationLayout3</value>
+		</property>
+	</control>
+
 </theme>

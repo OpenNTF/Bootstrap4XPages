@@ -19,7 +19,7 @@ package org.openntf.xsp.bootstrap.resources;
 
 
 /**
- * Bootstrap v2.11 resources.
+ * Bootstrap v2.3.1 resources.
  * 
  * @author priand
  */

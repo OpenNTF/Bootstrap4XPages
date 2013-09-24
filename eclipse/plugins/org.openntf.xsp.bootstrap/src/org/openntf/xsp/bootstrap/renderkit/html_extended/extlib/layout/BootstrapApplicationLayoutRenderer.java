@@ -29,6 +29,7 @@ import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.Boot
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapSearchOptionsRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapTitleBarTabsRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapUtilityLinksRenderer;
+import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.UICallback;
@@ -444,7 +445,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		 w.writeAttribute("class","btn",null); // $NON-NLS-1$
 		 w.writeAttribute("onclick","javascript:"+submitSearch+"(); return false;",null); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
 		 w.startElement("span",c); // $NON-NLS-1$
-		 w.writeAttribute("class","icon-search",null); // $NON-NLS-1$
+		 w.writeAttribute("class",BootstrapResources.get().getIconClass("search"),null); // $NON-NLS-1$
 		 w.endElement("span"); // $NON-NLS-1$
 		 w.endElement("button"); // $NON-NLS-1$
 	}

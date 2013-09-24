@@ -31,7 +31,9 @@ public class BootstrapUtil {
     
     
     public static final Version BOOTSTRAP_NONE  = new Version(0, 0);	// Not Bootstrap
-    public static final Version BOOTSTRAP_V211  = new Version(2, 1, 1); // Bootstrap v3211
+    public static final Version BOOTSTRAP_V231  = new Version(2, 3, 1); // Bootstrap v231
+    public static final Version BOOTSTRAP_V232  = new Version(2, 3, 2); // Bootstrap v232
+    public static final Version BOOTSTRAP_V300  = new Version(3, 0, 0); // Bootstrap v300
     
     @SuppressWarnings("deprecation") //$NON-NLS-1$
     public static Version getBootstrapVersion(FacesContext context) {
@@ -53,8 +55,14 @@ public class BootstrapUtil {
         for(StyleKitImpl st = (StyleKitImpl)ctxEx.getStyleKit(); st!=null; st=st.getParent()) {
             if(st.getName().startsWith("bootstrap")) { // $NON-NLS-1$
                 String libname = st.getName();
-                if(libname.equals("bootstrapv2.1.1") || libname.startsWith("bootstrapv2.1.1_")) { // $NON-NLS-1$ $NON-NLS-2$
-                    return BOOTSTRAP_V211;
+                if(libname.equals("bootstrapv2.3.1") || libname.startsWith("bootstrapv2.3.1_")) { // $NON-NLS-1$ $NON-NLS-2$
+                    return BOOTSTRAP_V231;
+                }
+                if(libname.equals("bootstrapv2.3.2") || libname.startsWith("bootstrapv2.3.2_")) { // $NON-NLS-1$ $NON-NLS-2$
+                    return BOOTSTRAP_V232;
+                }
+                if(libname.equals("bootstrapv3.0.0") || libname.startsWith("bootstrapv3.0.0_")) { // $NON-NLS-1$ $NON-NLS-2$
+                    return BOOTSTRAP_V300;
                 }
             }
         }
