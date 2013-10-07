@@ -87,8 +87,10 @@
 }
 .applayout-titlebar {	
 }
-.applayout-titlebar-inner {	
-	vertical:align: midddle;
+.applayout-titlebar {	
+}
+.applayout-titlebar-tabs {	
+	float: left;
 }
 .applayout-titlebar-name {
 	margin: 0 30px 0 0;
@@ -96,10 +98,14 @@
 	float: left;
 }
 .applayout-banner {	
+	margin-bottom: 0px;
+  	min-height: 20px;
 }
 .applayout-placebar {
 	vertical-align: middle;
-}
+	margin-bottom: 0px;
+  	min-height: 20px;
+ }
 .applayout-placebar-title {
 	float: left;
 	margin-top: 5px;
@@ -220,44 +226,18 @@
 
 
 /***********************************************************************	
-	Additions to bootstrap (Compatible Bootstrap 3)
+	Additions to bootstrap
 ***********************************************************************/
 
-/*
-.panel {
-    background-color: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    border-radius: 4px 4px 4px 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
-    padding: 15px;
+.container-full {
+	margin: 0 auto;
+	width: 100%;
 }
-.panel-title {
-    font-size: 17.5px;
-    font-weight: 500;
-    margin-bottom: 0;
-    margin-top: 0;
+
+.row {
+	margin-left: 5px;
+    margin-right: 5px;
 }
-.panel-heading {
-    background-color: #F5F5F5;
-    border-bottom: 1px solid #DDDDDD;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    margin: -15px -15px 15px;
-    padding: 10px 15px;
-}
-.panel-footer {
-    background-color: #F5F5F5;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-top: 1px solid #DDDDDD;
-    margin: 15px -15px -15px;
-    padding: 10px 15px;
-}
-.panel-primary {
-    border-color: #428BCA;
-}
-*/
 
 /***********************************************************************	
 	Dojo 1.8.1 fixes for DBootstrap

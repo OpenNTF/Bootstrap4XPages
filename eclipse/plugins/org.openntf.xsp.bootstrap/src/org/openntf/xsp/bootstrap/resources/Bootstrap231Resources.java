@@ -29,4 +29,9 @@ public class Bootstrap231Resources extends BootstrapResources {
 
     public Bootstrap231Resources() {
     }
+
+    @Override
+	public boolean isBootstrap2() {
+    	return true;
+    }
 }

@@ -77,6 +77,14 @@ public abstract class BootstrapResources {
         this.VIEW_COLUMN_SORT_REVERSE         = "/.ibmxspres/.extlib/bootstrap/icons/sort_reverse.gif"; // $NON-NLS-1$
     }
     
+    public boolean isBootstrap2() {
+    	return false;
+    }
+
+    public boolean isBootstrap3() {
+    	return false;
+    }
+    
     public String getIconClass(String iconName) {
     	return "icon-"+iconName;
     }

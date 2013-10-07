@@ -43,4 +43,50 @@
 		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/js/bootstrap.js</href>
 	</resource>
 
+
+	<!-- Basic Input Text -->
+	<control>
+		<name>InputField</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Standard Edit Box -->
+	<control>
+		<name>InputField.EditBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Password Edit Box -->
+	<control>
+		<name>InputField.Secret</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Date Time Picker -->
+	<control>
+		<name>InputField.DateTimePicker</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- TextArea -->
+	<control>
+		<name>InputField.TextArea</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+
 </theme>

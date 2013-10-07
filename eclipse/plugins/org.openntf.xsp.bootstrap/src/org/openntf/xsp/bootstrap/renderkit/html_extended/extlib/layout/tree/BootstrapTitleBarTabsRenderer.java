@@ -39,7 +39,7 @@ public class BootstrapTitleBarTabsRenderer extends BootstrapNavRenderer {
     @Override
 	protected String getContainerStyleClass(TreeContextImpl node) {
     	if(node.getDepth()==1) {
-        	return "nav nav-tabs";
+        	return "nav nav-tabs applayout-titlebar-tabs";
     	}
     	return super.getContainerStyleClass(node);
     }
