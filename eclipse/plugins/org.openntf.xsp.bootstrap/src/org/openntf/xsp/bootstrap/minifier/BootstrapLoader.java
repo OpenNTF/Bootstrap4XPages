@@ -78,7 +78,13 @@ public class BootstrapLoader extends ExtLibLoaderExtension {
             prefixes.put("3T0a","/.ibmxspres/.extlib/bootstrap/bootstrap231"); 		//$NON-NLS-1$ //$NON-NLS-2$
             prefixes.put("3T0b","/.ibmxspres/.extlib/bootstrap/bootstrap231/js"); 	//$NON-NLS-1$ //$NON-NLS-2$
             prefixes.put("3T0c","/.ibmxspres/.extlib/bootstrap/bootstrap231/css"); 	//$NON-NLS-1$ //$NON-NLS-2$
-            prefixes.put("3T1a","/.ibmxspres/.extlib/bootstrap/dbootstrap"); 			//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T1a","/.ibmxspres/.extlib/bootstrap/bootstrap232"); 		//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T1b","/.ibmxspres/.extlib/bootstrap/bootstrap232/js"); 	//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T1c","/.ibmxspres/.extlib/bootstrap/bootstrap232/css"); 	//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T2a","/.ibmxspres/.extlib/bootstrap/bootstrap300"); 		//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T3b","/.ibmxspres/.extlib/bootstrap/bootstrap300/js"); 	//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T3c","/.ibmxspres/.extlib/bootstrap/bootstrap300/css"); 	//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3TXa","/.ibmxspres/.extlib/bootstrap/dbootstrap"); 			//$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 
@@ -90,6 +96,10 @@ public class BootstrapLoader extends ExtLibLoaderExtension {
     @Override
     public URL getResourceURL(HttpServletRequest request, String name) {
     	if(name.startsWith("bootstrap")) {
+    		String path = ExtlibResourceProvider.BUNDLE_RES_PATH_EXTLIB+name;
+    		return ExtLibUtil.getResourceURL(BootstrapActivator.instance.getBundle(), path);
+    	}
+    	if(name.startsWith("dijit")) {
     		String path = ExtlibResourceProvider.BUNDLE_RES_PATH_EXTLIB+name;
     		return ExtLibUtil.getResourceURL(BootstrapActivator.instance.getBundle(), path);
     	}

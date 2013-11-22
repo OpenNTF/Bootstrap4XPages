@@ -66,10 +66,7 @@ public abstract class BootstrapResources {
     
     
     public BootstrapResources() {
-    	// We know this one is available
-        this.BLANK_GIF      = "/.ibmxspres/domino/oneuiv2/images/blank.gif"; // $NON-NLS-1$
-    	
-        // This is not specific to a particular version of OneUI
+        this.BLANK_GIF      				  = "/.ibmxspres/.extlib/bootstrap/icons/blank.gif"; // $NON-NLS-1$
         this.VIEW_COLUMN_SORT_NONE            = "/.ibmxspres/.extlib/bootstrap/icons/sort_none.gif"; // $NON-NLS-1$ 
         this.VIEW_COLUMN_SORT_BOTH_ASCENDING  = "/.ibmxspres/.extlib/bootstrap/icons/sort_both_ascending.gif"; // $NON-NLS-1$ 
         this.VIEW_COLUMN_SORT_BOTH_DESCENDING = "/.ibmxspres/.extlib/bootstrap/icons/sort_both_descending.gif"; // $NON-NLS-1$ 
