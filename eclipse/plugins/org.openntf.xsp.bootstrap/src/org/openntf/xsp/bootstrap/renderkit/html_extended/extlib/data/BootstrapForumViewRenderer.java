@@ -19,11 +19,10 @@ package org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.data;
 import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
 import com.ibm.xsp.extlib.renderkit.html_extended.data.ForumViewRenderer;
-import com.ibm.xsp.extlib.resources.OneUIResources;
 
 
 /**
- * One UI data view renderer.
+ * One UI forum view renderer.
  */
 public class BootstrapForumViewRenderer extends ForumViewRenderer {
 
@@ -49,8 +48,8 @@ public class BootstrapForumViewRenderer extends ForumViewRenderer {
             case PROP_FOOTERRIGHTSTYLE:         return null; 
             case PROP_FOOTERRIGHTCLASS:         return "pull-right"; // $NON-NLS-1$
 
-            case PROP_SHOWICONDETAILSCLASS:     return "icon-chevron-down icon-lighter"; // $NON-NLS-1$
-            case PROP_HIDEICONDETAILSCLASS:     return "icon-chevron-up icon-lighter"; // $NON-NLS-1$
+            case PROP_SHOWICONDETAILSCLASS:     return BootstrapResources.get().getIconClass("chevron-down")+" icon-lighter"; // $NON-NLS-1$
+            case PROP_HIDEICONDETAILSCLASS:     return BootstrapResources.get().getIconClass("chevron-up")+" icon-lighter"; // $NON-NLS-1$
             
             
             //case PROP_MAINDIVCLASS:             return "media-list"; // $NON-NLS-1$

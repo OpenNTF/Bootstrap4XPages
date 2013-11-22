@@ -19,7 +19,7 @@ package org.openntf.xsp.bootstrap.resources;
 
 
 /**
- * Bootstrap v2.11 resources.
+ * Bootstrap v2.3.1 resources.
  * 
  * @author priand
  */
@@ -28,5 +28,10 @@ public class Bootstrap231Resources extends BootstrapResources {
     public static final Bootstrap231Resources instance = new Bootstrap231Resources();
 
     public Bootstrap231Resources() {
+    }
+
+    @Override
+	public boolean isBootstrap2() {
+    	return true;
     }
 }

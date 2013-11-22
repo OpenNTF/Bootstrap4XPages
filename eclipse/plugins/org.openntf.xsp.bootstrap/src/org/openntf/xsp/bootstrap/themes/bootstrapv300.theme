@@ -1,0 +1,92 @@
+<theme extends="bootstrap">
+
+	<!-- All the resources are defined here to ensure that they are loaded in order -->
+	
+    <!-- Core XPages styles -->
+    <resource>
+        <content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xsptheme/xsp.css</href>
+    </resource>
+
+    <!-- Core Bootstrap CSS files -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap.css</href>
+	</resource>
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap-theme.css</href>
+	</resource>
+
+	<!-- Dojo Theme (dbootstrap)-->
+	<resource dojoTheme="true">
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/dbootstrap/dbootstrap.css</href>
+	</resource>
+
+	<!-- XPages/Bootstrap specific styles -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages300.css</href>
+	</resource>
+
+
+	<!-- JQuery -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/jquery182/js/jquery-1.8.2.js</href>
+	</resource>
+
+	<!-- Core Bootstrap JavaScript files -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/js/bootstrap.js</href>
+	</resource>
+
+
+	<!-- Basic Input Text -->
+	<control>
+		<name>InputField</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Standard Edit Box -->
+	<control>
+		<name>InputField.EditBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Password Edit Box -->
+	<control>
+		<name>InputField.Secret</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Date Time Picker -->
+	<control>
+		<name>InputField.DateTimePicker</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- TextArea -->
+	<control>
+		<name>InputField.TextArea</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+
+</theme>

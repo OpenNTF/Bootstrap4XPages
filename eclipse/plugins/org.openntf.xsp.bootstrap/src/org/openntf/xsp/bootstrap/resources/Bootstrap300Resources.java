@@ -14,27 +14,29 @@
  * permissions and limitations under the License.
  */
 
-package org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree;
-
-import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlComboBoxRenderer;
+package org.openntf.xsp.bootstrap.resources;
 
 
 
-public class BootstrapSearchOptionsRenderer extends HtmlComboBoxRenderer {
-    
-    private static final long serialVersionUID = 1L;
+/**
+ * Bootstrap v3.0.0 resources.
+ * 
+ * @author priand
+ */
+public class Bootstrap300Resources extends BootstrapResources {
+	
+    public static final Bootstrap300Resources instance = new Bootstrap300Resources();
 
-    public BootstrapSearchOptionsRenderer() {
-    }
-        
-    @Override
-    public String getStyle() {
-        return "border-width: 1px; border-style: solid;";
-//      return "border-style: none;";
+    public Bootstrap300Resources() {
     }
     
     @Override
-    public String getStyleClass() {
-        return "search-options applayout-search-options";
+    public boolean isBootstrap3() {
+    	return true;
+    }
+    
+    @Override    
+    public String getIconClass(String iconName) {
+    	return "glyphicon glyphicon-"+iconName;
     }
 }

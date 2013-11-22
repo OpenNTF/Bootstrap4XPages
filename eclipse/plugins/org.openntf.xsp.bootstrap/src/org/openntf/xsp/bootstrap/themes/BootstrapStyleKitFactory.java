@@ -44,6 +44,15 @@ public class BootstrapStyleKitFactory implements StyleKitFactory {
 			if(themeId.equals("bootstrapv2.3.1r")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv231r.theme"); //$NON-NLS-1$
 			}
+			if(themeId.equals("bootstrapv2.3.2")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv232.theme"); //$NON-NLS-1$
+			}
+			if(themeId.equals("bootstrapv2.3.2r")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv232r.theme"); //$NON-NLS-1$
+			}
+			if(themeId.equals("bootstrapv3.0.0")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv300.theme"); //$NON-NLS-1$
+			}
 		}
 		return null;
 	}
@@ -57,6 +66,12 @@ public class BootstrapStyleKitFactory implements StyleKitFactory {
 			}
 			if(themeId.equals("bootstrapv2.3.1")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv231_extlib.theme"); //$NON-NLS-1$
+			}
+			if(themeId.equals("bootstrapv2.3.2")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv232_extlib.theme"); //$NON-NLS-1$
+			}
+			if(themeId.equals("bootstrapv3.0.0")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv300_extlib.theme"); //$NON-NLS-1$
 			}
 		}
 		return null;

@@ -30,7 +30,7 @@ public class BootstrapFooterLinksRenderer extends HtmlListRenderer {
     @Override
 	protected String getContainerStyleClass(TreeContextImpl node) {
     	if(node.getDepth()==1) {
-        	return "nav nav-pills";
+        	return "nav nav-pills applayout-footerlinks";
     	}
     	return super.getContainerStyleClass(node);
     }

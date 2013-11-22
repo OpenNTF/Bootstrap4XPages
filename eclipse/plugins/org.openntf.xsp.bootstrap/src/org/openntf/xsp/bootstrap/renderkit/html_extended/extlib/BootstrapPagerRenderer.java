@@ -26,6 +26,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
+import org.openntf.xsp.bootstrap.resources.BootstrapResources;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.FacesExceptionEx;
 import com.ibm.xsp.component.UIPager;
@@ -124,12 +126,26 @@ public class BootstrapPagerRenderer extends Renderer {
 
 		boolean RTL = false;
 
+		boolean b2 = BootstrapResources.get().isBootstrap2();
+		boolean b3 = BootstrapResources.get().isBootstrap3();
+
 		w.startElement("div", null);
-    	w.writeAttribute("class", ExtLibUtil.concatStyleClasses("pagination",pager.getStyleClass()), null);
+		if(b2) {
+			w.writeAttribute("class", ExtLibUtil.concatStyleClasses("pagination",pager.getStyleClass()), null);
+		}
+		if(b3) {
+	    	String pgClass = pager.getStyleClass();
+	    	if(StringUtil.isNotEmpty(pgClass)) {
+	    		w.writeAttribute("class", pgClass, null);
+	    	}
+		}
     	if(StringUtil.isNotEmpty(pagerId)) {
         	w.writeAttribute("id", pagerId, null);
     	}
 		w.startElement("ul", null);
+		if(b3) {
+			w.writeAttribute("class", "pagination", null);
+		}
 
 		List<?> listControls = pager.getChildren();
 		if (listControls.isEmpty()) {

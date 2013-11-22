@@ -45,7 +45,7 @@ public class BootstrapUtilityLinksRenderer extends BootstrapNavRenderer {
     @Override
 	protected String getContainerStyleClass(TreeContextImpl node) {
     	if(node.getDepth()==1) {
-        	return "nav nav-pills pull-right";
+        	return "nav nav-pills pull-right applayout-utility-links";
     	}
     	return super.getContainerStyleClass(node);
     }

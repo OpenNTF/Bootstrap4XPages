@@ -16,7 +16,7 @@ These files are served as global resources, thus they don't need to be added to 
 </li>
 <li>
 An XPages theme</br>
-A set of theme files are provided to automatically add the necessary resources to the pages (CSS & JS), and to make the XPages components consume the provided styles. The theme is easily selected from the Xsp properties editor within Domino Designer. To support multiple versions of Bootstrap, the theme name includes the version of Bootstrap, like, for example, 'bootstrap231' for Bootstrap 2.3.1, or 'bootstrap231r' for Bootstrap 2.3.1 Responsive (the last one add an extra responsive css and a meta tag to the page, see <a href='http://getbootstrap.com/2.3.2/scaffolding.html#responsive'>http://getbootstrap.com/2.3.2/scaffolding.html#responsive</a>). Note that the theme loads the responsive CSS version of Bootstrap.
+A set of theme files are provided to automatically add the necessary resources to the pages (CSS & JS), and to make the XPages components consume the provided styles. The theme is easily selected from the Xsp properties editor within Domino Designer. To support multiple versions of Bootstrap, the theme name includes the version of Bootstrap, like, for example, 'bootstrapv2.3.1' for Bootstrap 2.3.1, or 'bootstrapv2.3.1r' for Bootstrap 2.3.1 Responsive (the last one add an extra responsive css and a meta tag to the page, see <a href='http://getbootstrap.com/2.3.2/scaffolding.html#responsive'>http://getbootstrap.com/2.3.2/scaffolding.html#responsive</a>). Note that the theme loads the responsive CSS version of Bootstrap.
 </li>
 <li>
 DBootstrap</br>

@@ -14,27 +14,24 @@
  * permissions and limitations under the License.
  */
 
-package org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree;
-
-import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlComboBoxRenderer;
+package org.openntf.xsp.bootstrap.resources;
 
 
 
-public class BootstrapSearchOptionsRenderer extends HtmlComboBoxRenderer {
-    
-    private static final long serialVersionUID = 1L;
+/**
+ * Bootstrap v2.3.2 resources.
+ * 
+ * @author priand
+ */
+public class Bootstrap232Resources extends Bootstrap231Resources {
+	
+    public static final Bootstrap232Resources instance = new Bootstrap232Resources();
 
-    public BootstrapSearchOptionsRenderer() {
+    public Bootstrap232Resources() {
     }
-        
+
     @Override
-    public String getStyle() {
-        return "border-width: 1px; border-style: solid;";
-//      return "border-style: none;";
-    }
-    
-    @Override
-    public String getStyleClass() {
-        return "search-options applayout-search-options";
+	public boolean isBootstrap2() {
+    	return true;
     }
 }

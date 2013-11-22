@@ -32,6 +32,7 @@ import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlListRenderer;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.extlib.tree.ITreeNode;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.util.TypedUtil;
 
 
@@ -50,8 +51,8 @@ public class BootstrapMenuRenderer extends HtmlListRenderer {
     protected Object getProperty(int prop) {
         switch(prop) {
             case PROP_MENU_SELECTED: 	return "active"; // $NON-NLS-1$
-            case PROP_MENU_EXPANDED: 	return "icon-minus-sign icon-lighter"; // $NON-NLS-1$
-            case PROP_MENU_COLLAPSED: 	return "icon-plus-sign icon-lighter"; // $NON-NLS-1$
+            case PROP_MENU_EXPANDED: 	return BootstrapResources.get().getIconClass("minus-sign")+" icon-lighter"; // $NON-NLS-1$
+            case PROP_MENU_COLLAPSED: 	return BootstrapResources.get().getIconClass("plus-sign")+" icon-lighter"; // $NON-NLS-1$
         }
         return super.getProperty(prop);
     }
@@ -156,7 +157,11 @@ public class BootstrapMenuRenderer extends HtmlListRenderer {
                 writer.writeAttribute("class", "selected",null); // $NON-NLS-1$ $NON-NLS-2$
             }
             writer.startElement("img", null);
-            writer.writeAttribute("src", BootstrapResources.get().BLANK_GIF,null);
+            String bgif = BootstrapResources.get().BLANK_GIF;
+            if(StringUtil.isNotEmpty(bgif)) {
+                writer.writeAttribute("src",HtmlRendererUtil.getImageURL(context,bgif),null); // $NON-NLS-1$
+            }
+            
             int depth = tree.getDepth()-2;
 
             UIComponent uiTree = tree.getComponent();

@@ -22,6 +22,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import org.openntf.xsp.bootstrap.resources.BootstrapResources;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.FacesDataIterator;
 import com.ibm.xsp.event.PagerEvent;
@@ -49,11 +51,26 @@ public class BootstrapPagerExpandRenderer extends AbstractPagerRenderer {
     
     @Override
     protected void writePagerContent(FacesContext context, ResponseWriter w, AbstractPager _pager, FacesDataIterator dataIterator) throws IOException {
+		boolean b2 = BootstrapResources.get().isBootstrap2();
+		boolean b3 = BootstrapResources.get().isBootstrap3();
+
         UIPagerExpand pager = (UIPagerExpand)_pager;
     	w.startElement("div", null);
-    	w.writeAttribute("class", ExtLibUtil.concatStyleClasses("pagination",_pager.getStyleClass()), null);
+		if(b2) {
+			w.writeAttribute("class", ExtLibUtil.concatStyleClasses("pagination",pager.getStyleClass()), null);
+		}
+		if(b3) {
+	    	String pgClass = pager.getStyleClass();
+	    	if(StringUtil.isNotEmpty(pgClass)) {
+	    		w.writeAttribute("class", pgClass, null);
+	    	}
+		}
 
         w.startElement("ul", null);
+		if(b3) {
+			w.writeAttribute("class", "pagination", null);
+		}
+		
         writeCollapseAll(context, w, pager, dataIterator);
         writeSeparator(context, w, pager, dataIterator);
         writeExpandAll(context, w, pager, dataIterator);
