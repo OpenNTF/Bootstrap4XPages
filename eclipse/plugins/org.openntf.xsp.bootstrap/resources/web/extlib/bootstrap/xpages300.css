@@ -86,6 +86,7 @@
 .applayout-searchbar {	
 }
 .applayout-titlebar {	
+	z-index: 998;
 }
 .applayout-titlebar {	
 }
@@ -105,6 +106,7 @@
 	vertical-align: middle;
 	margin-bottom: 0px;
   	min-height: 20px;
+  	z-index: 999;
  }
 .applayout-placebar-title {
 	float: left;
@@ -143,6 +145,13 @@
 .navigator-twisty {
 	padding: 0;
 	border: 0;
+}
+
+/*disabled navigation links*/
+.navbar-inverse .navbar-nav > .disabled > a,
+.navbar-inverse .navbar-nav > .disabled > a:hover,
+.navbar-inverse .navbar-nav > .disabled > a:focus {
+	color: #666;
 }
 
 
