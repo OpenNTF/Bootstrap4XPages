@@ -23,12 +23,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapApplicationLinksRenderer;
+import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapApplicationLinksRenderer3;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapFooterLinksRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapPlaceBarActionsRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapSearchOptionsRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapTitleBarTabsRenderer;
-import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapUtilityLinksRenderer;
+import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapUtilityLinksRenderer3;
 import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
 import com.ibm.commons.util.StringUtil;
@@ -182,21 +182,12 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		w.writeAttribute("class", "navbar navbar-static-top navbar-inverse applayout-banner", null); // $NON-NLS-1$
 		newLine(w);
 
-		w.startElement("div", c);
-		//w.writeAttribute("class", "", null); // $NON-NLS-1$
-		newLine(w);
-
 		// w.startElement("div",c);
 		// w.writeAttribute("class","container-fluid",null); // $NON-NLS-1$
 		// newLine(w);
 
 		writeBannerContent(context, w, c, configuration);
 
-		// Close the banner
-		// w.endElement("div"); newLine(w,"container"); // $NON-NLS-1$
-		// $NON-NLS-2$
-		w.endElement("div");
-		newLine(w, ""); // $NON-NLS-1$ $NON-NLS-2$
 		w.endElement("div");
 		newLine(w, "navbar-fixed-top"); // $NON-NLS-1$
 	}
@@ -206,13 +197,28 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			w.writeComment("Start Banner"); // $NON-NLS-1$
 			newLine(w);
 		}
-		writeBannerProductlogo(context, w, c, configuration);
+		
+		w.startElement("div", c);
+		w.writeAttribute("class", "navbar-header", null);		// $NON-NLS-1$
+		
 		writeBannerLink(context, w, c, configuration);
 		newLine(w);
+		writeBannerProductlogo(context, w, c, configuration);
+		
+		w.endElement("div");
+		
+		w.startElement("div", c);
+		w.writeAttribute("class", "navbar-collapse collapse", null); // $NON-NLS-1$
+		newLine(w);
+		
 		writeBannerUtilityLinks(context, w, c, configuration);
 		newLine(w);
 		writeBannerApplicationLinks(context, w, c, configuration);
 		newLine(w);
+		
+		w.endElement("div");
+		newLine(w, ""); // $NON-NLS-1$ $NON-NLS-2$
+		
 		if (DEBUG) {
 			w.writeComment("End Banner"); // $NON-NLS-1$
 			newLine(w);
@@ -220,25 +226,37 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	}
 
 	protected void writeBannerLink(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
-		w.startElement("a", c);
-		w.writeAttribute("class", "btn btn-navbar pull-left", null); // $NON-NLS-1$
-
-		String href = "#"; // (String) getProperty(PROP_BANNERLINKHREF);
-		if (null == href || '#' != href.charAt(0)) {
-			href = "#"; //$NON-NLS-1$
-		}
-		w.writeAttribute("href", href, null); // $NON-NLS-1$
-
-		w.endElement("a"); // $NON-NLS-1$
+		
+		w.startElement("button", c);
+		w.writeAttribute("type",  "button",  null); // $NON-NLS-1$
+		w.writeAttribute("class", "navbar-toggle", null); // $NON-NLS-1$
+		w.writeAttribute("data-toggle", "collapse", null); // $NON-NLS-1$
+		w.writeAttribute("data-target", ".navbar-collapse", null); // $NON-NLS-1$
+		
+		w.startElement("span", c);
+		w.writeAttribute("class", "sr-only", null); // $NON-NLS-1$
+		w.endElement("span");
+		
+		w.startElement("span", c);
+		w.writeAttribute("class", "icon-bar", null); // $NON-NLS-1$
+		w.endElement("span");
+		w.startElement("span", c);
+		w.writeAttribute("class", "icon-bar", null); // $NON-NLS-1$
+		w.endElement("span");
+		w.startElement("span", c);
+		w.writeAttribute("class", "icon-bar", null); // $NON-NLS-1$
+		w.endElement("span");
+		
+		w.endElement("button"); // $NON-NLS-1$
 	}
 
 	protected void writeBannerProductlogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
-        w.startElement("span",c); // $NON-NLS-1$
+		
+		w.startElement("span",c); // $NON-NLS-1$
         
-        String clazz = ExtLibUtil.concatStyleClasses("pull-left",configuration.getProductLogoClass());
-        if(StringUtil.isNotEmpty(clazz)) {
-            w.writeAttribute("class",clazz,null); // $NON-NLS-1$
-        }
+        String clazz = ExtLibUtil.concatStyleClasses("navbar-brand", configuration.getProductLogoClass());
+        w.writeAttribute("class", clazz, null); // $NON-NLS-1$
+        
         String style = configuration.getProductLogoStyle();
         if(StringUtil.isNotEmpty(style)) {
             w.writeAttribute("style",style,null); // $NON-NLS-1$
@@ -266,12 +284,13 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
         }
     
         w.endElement("span"); // $NON-NLS-1$
+
 	}
 
 	protected void writeBannerApplicationLinks(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		ITree tree = TreeImpl.get(configuration.getBannerApplicationLinks());
 		if (tree != null) {
-			AbstractTreeRenderer renderer = new BootstrapApplicationLinksRenderer();
+			AbstractTreeRenderer renderer = new BootstrapApplicationLinksRenderer3();
 			if (renderer != null) {
 				renderer.render(context, c, "al", tree, w); // $NON-NLS-1$
 			}
@@ -281,7 +300,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	protected void writeBannerUtilityLinks(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		ITree tree = TreeImpl.get(configuration.getBannerUtilityLinks());
 		if (tree != null) {
-			AbstractTreeRenderer renderer = new BootstrapUtilityLinksRenderer();
+			AbstractTreeRenderer renderer = new BootstrapUtilityLinksRenderer3();
 			if (renderer != null) {
 				renderer.render(context, c, "ul", tree, w); // $NON-NLS-1$
 			}
