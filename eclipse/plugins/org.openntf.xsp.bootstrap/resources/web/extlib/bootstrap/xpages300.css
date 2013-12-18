@@ -147,6 +147,21 @@
 	border: 0;
 }
 
+/* Dialog */
+.modal form{
+	margin: 0;
+}
+.xspmodal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 1050;
+  width: 560px;
+  margin-left: -280px;
+  z-index: 1040;
+  overflow: none;
+}
+
 /*disabled navigation links*/
 .navbar-inverse .navbar-nav > .disabled > a,
 .navbar-inverse .navbar-nav > .disabled > a:hover,
