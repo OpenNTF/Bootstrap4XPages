@@ -13,10 +13,17 @@
 			<name>docType</name>
 			<value>html</value>
 		</property>
+<!-- 		
 		<property mode="concat">
 			<name>styleClass</name>
 			<value>dbootstrap</value>
 		</property>
+ -->			
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xsp claro</value>
+		</property>
+ 		
 	</control>
 	
 	<!-- View Title -->

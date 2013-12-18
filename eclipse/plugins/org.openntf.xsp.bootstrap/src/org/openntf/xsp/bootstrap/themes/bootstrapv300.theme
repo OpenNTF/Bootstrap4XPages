@@ -23,7 +23,27 @@
 		<content-type>text/css</content-type>
 		<href>/.ibmxspres/.extlib/bootstrap/dbootstrap/dbootstrap.css</href>
 	</resource>
-
+	<control>
+		<name>ViewRoot</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xsp dbootstrap</value>
+		</property>
+	</control>
+<!-- 	
+ 	<resource dojoTheme="true">
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/dojoroot/dijit/themes/tundra/tundra.css</href>
+	</resource>
+	<control>
+		<name>ViewRoot</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xsp tundra</value>
+		</property>
+	</control>
+ -->	
+ 
 	<!-- XPages/Bootstrap specific styles -->
 	<resource>
 		<content-type>text/css</content-type>
