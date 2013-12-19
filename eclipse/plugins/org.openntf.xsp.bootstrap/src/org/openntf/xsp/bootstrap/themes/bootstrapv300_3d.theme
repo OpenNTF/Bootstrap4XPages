@@ -1,5 +1,9 @@
 <theme extends="bootstrap">
 
+	<!-- This theme also loads the optional Bootstrap 3 theme -->
+	<!-- It adds a 3d effect to various elements (buttons, messages, ...) just as in Bootstrap 2.3 -->
+	<!-- See http://getbootstrap.com/getting-started/ for details -->
+
 	<!-- All the resources are defined here to ensure that they are loaded in order -->
 	
     <!-- Core XPages styles -->
@@ -12,6 +16,10 @@
 	<resource>
 		<content-type>text/css</content-type>
 		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap.css</href>
+	</resource>
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap-theme.css</href>
 	</resource>
 
 	<!-- Dojo Theme (dbootstrap)-->
@@ -106,3 +114,4 @@
 	</control>
 
 </theme>
+
