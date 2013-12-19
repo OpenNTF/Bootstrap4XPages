@@ -16,6 +16,8 @@
 
 package org.openntf.xsp.bootstrap.components.layout;
 
+import javax.faces.el.ValueBinding;
+
 import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl;
 
 /**
@@ -23,6 +25,27 @@ import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImp
  */
 public class BootstrapApplicationConfiguration extends BasicApplicationConfigurationImpl {
 
+	// Bootstrap specific properties
+    private Boolean navbarInverted;
+	
 	public BootstrapApplicationConfiguration() {
 	}
+	
+    public boolean isNavbarInverted() {
+        if(navbarInverted!=null) {
+            return navbarInverted;
+        }
+        ValueBinding vb = getValueBinding("navbarInverted"); // $NON-NLS-1$
+        if(vb!=null) {
+            Boolean b = (Boolean)vb.getValue(getFacesContext());
+            if(b!=null) {
+                return b;
+            }
+        }
+        return true;
+    }
+    
+    public void setNavbarInverted(boolean navbarInverted) {
+        this.navbarInverted = navbarInverted;
+    }
 }
