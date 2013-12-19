@@ -13,17 +13,6 @@
 			<name>docType</name>
 			<value>html</value>
 		</property>
-<!-- 		
-		<property mode="concat">
-			<name>styleClass</name>
-			<value>dbootstrap</value>
-		</property>
- -->			
-		<property mode="concat">
-			<name>styleClass</name>
-			<value>xsp claro</value>
-		</property>
- 		
 	</control>
 	
 	<!-- View Title -->
@@ -391,6 +380,52 @@
 		<property>
 			<name>styleClass</name>
 			<value></value>
+		</property>
+	</control>
+
+
+	<!-- Basic Input Text -->
+	<control>
+		<name>InputField</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Standard Edit Box -->
+	<control>
+		<name>InputField.EditBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Password Edit Box -->
+	<control>
+		<name>InputField.Secret</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Date Time Picker -->
+	<control>
+		<name>InputField.DateTimePicker</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- TextArea -->
+	<control>
+		<name>InputField.TextArea</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
 		</property>
 	</control>
 
