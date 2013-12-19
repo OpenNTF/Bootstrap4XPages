@@ -29,15 +29,11 @@
     	<complex-class>org.openntf.xsp.bootstrap.components.layout.BootstrapApplicationConfiguration</complex-class>
 
   		<property>
-			<description>Indicates if the navbar is inverted, using the style navbar-inverse. true by default.</description>
+			<description>Indicates if the navbar is inverted, using the style navbar-inverse. false by default.</description>
 			<display-name>Navbar Inverted</display-name>
 			<property-name>navbarInverted</property-name>
 			<property-class>boolean</property-class>
 			<property-extension>
-                 <default-value>true</default-value>
-                 <designer-extension>
-                     <tags>runtime-default-true</tags>
-                 </designer-extension>
 			</property-extension>
 		</property>
 

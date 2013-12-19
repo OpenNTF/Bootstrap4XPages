@@ -29,6 +29,10 @@ import com.ibm.xsp.stylekit.StyleKitImpl;
  */
 public class BootstrapUtil {
     
+	private static int uniqueId;
+	public static String generateTemporaryUniqueId() {
+		return "bstemp_"+Integer.toString(uniqueId++,36);
+	}
     
     public static final Version BOOTSTRAP_NONE  = new Version(0, 0);	// Not Bootstrap
     public static final Version BOOTSTRAP_V231  = new Version(2, 3, 1); // Bootstrap v231

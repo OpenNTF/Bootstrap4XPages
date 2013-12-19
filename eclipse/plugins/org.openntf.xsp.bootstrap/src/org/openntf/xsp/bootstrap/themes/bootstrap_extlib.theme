@@ -25,6 +25,13 @@
 		</property>
 	</control>
 	<control>
+		<name>Outline.Accordion</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.outline.BootstrapAccordion</value>
+		</property>
+	</control>
+	<control>
 		<name>Outline.SortLinks</name>
 		<property>
 			<name>rendererType</name>

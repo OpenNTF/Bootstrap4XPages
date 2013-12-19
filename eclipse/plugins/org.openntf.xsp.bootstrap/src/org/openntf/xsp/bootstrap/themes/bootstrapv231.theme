@@ -14,19 +14,7 @@
 		<href>/.ibmxspres/.extlib/bootstrap/bootstrap231/css/bootstrap.css</href>
 	</resource>
 
-	<!-- Dojo Theme (dbootstrap)-->
-	<resource dojoTheme="true">
-		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/dbootstrap/dbootstrap.css</href>
-	</resource>
-	<control>
-		<name>ViewRoot</name>
-		<property mode="concat">
-			<name>styleClass</name>
-			<value>xsp dbootstrap</value>
-		</property>
-	</control>
-<!-- 	
+	<!-- Dojo Theme -->
  	<resource dojoTheme="true">
 		<content-type>text/css</content-type>
 		<href>/.ibmxspres/dojoroot/dijit/themes/tundra/tundra.css</href>
@@ -38,7 +26,6 @@
 			<value>xsp tundra</value>
 		</property>
 	</control>
- -->	
 
 	<!-- XPages/Bootstrap specific styles -->
 	<resource>
