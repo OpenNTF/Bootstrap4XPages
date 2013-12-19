@@ -23,6 +23,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import org.openntf.xsp.bootstrap.components.layout.BootstrapApplicationConfiguration;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapApplicationLinksRenderer3;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapFooterLinksRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapPlaceBarActionsRenderer3;
@@ -74,6 +75,13 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	protected String getColumnPrefix() {
 		// Should choose the right column prefix based on the target device 
 		return COLUMN_MEDIUM;
+	}
+
+	public BootstrapApplicationConfiguration asBootstrapConfig(BasicApplicationConfigurationImpl configuration) {
+		if(configuration instanceof BootstrapApplicationConfiguration) {
+			return (BootstrapApplicationConfiguration)configuration;
+		}
+		return null;
 	}
 	
 	
@@ -179,7 +187,13 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 	protected void writeBanner(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		w.startElement("div", c);
-		w.writeAttribute("class", "navbar navbar-static-top navbar-inverse applayout-banner", null); // $NON-NLS-1$
+
+		String navStyle = "navbar navbar-static-top navbar-inverse applayout-banner";
+		BootstrapApplicationConfiguration bc = asBootstrapConfig(configuration);
+		if(bc!=null && !bc.isNavbarInverted()) {
+			navStyle = "navbar navbar-static-top applayout-banner";
+		}
+		w.writeAttribute("class", navStyle, null); // $NON-NLS-1$
 		newLine(w);
 
 		// w.startElement("div",c);

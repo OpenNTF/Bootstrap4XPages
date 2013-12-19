@@ -23,6 +23,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import org.openntf.xsp.bootstrap.components.layout.BootstrapApplicationConfiguration;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapApplicationLinksRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapFooterLinksRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapPlaceBarActionsRenderer;
@@ -60,6 +61,19 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 
 	public static final boolean FLUID = true;
 
+	
+	// ==========================================================================
+	// Check for the bootstrap specific configuration
+	// ==========================================================================
+
+	public BootstrapApplicationConfiguration asBootstrapConfig(BasicApplicationConfigurationImpl configuration) {
+		if(configuration instanceof BootstrapApplicationConfiguration) {
+			return (BootstrapApplicationConfiguration)configuration;
+		}
+		return null;
+	}
+	
+	
 	// ================================================================
 	// Main Frame
 	// ================================================================
@@ -84,14 +98,14 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 				writeBanner(context, w, c, configuration);
 			}
 
-			// Start the place bar
-			if (configuration.isPlaceBar()) {
-				writePlaceBar(context, w, c, configuration);
-			}
-
 			// Start the title bar
 			if (configuration.isTitleBar()) {
 				writeTitleBar(context, w, c, configuration);
+			}
+
+			// Start the place bar
+			if (configuration.isPlaceBar()) {
+				writePlaceBar(context, w, c, configuration);
 			}
 
 			// Start the main content
@@ -162,7 +176,13 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 
 	protected void writeBanner(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		w.startElement("div", c);
-		w.writeAttribute("class", "navbar navbar-static-top navbar-inverse applayout-banner", null); // $NON-NLS-1$
+
+		String navStyle = "navbar navbar-static-top navbar-inverse applayout-banner";
+		BootstrapApplicationConfiguration bc = asBootstrapConfig(configuration);
+		if(bc!=null && !bc.isNavbarInverted()) {
+			navStyle = "navbar navbar-static-top applayout-banner";
+		}
+		w.writeAttribute("class", navStyle, null); // $NON-NLS-1$
 		newLine(w);
 
 		w.startElement("div", c);
