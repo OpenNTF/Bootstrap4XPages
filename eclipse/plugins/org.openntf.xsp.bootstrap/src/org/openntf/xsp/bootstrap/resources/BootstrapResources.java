@@ -63,7 +63,13 @@ public abstract class BootstrapResources {
     
     // Dojo module
     public static final DojoModuleResource bootstrapNavigator = new DojoModuleResource("extlib.dijit.BootstrapNavigator"); // $NON-NLS-1$
-    
+    public static final DojoModuleResource bootstrapDialog = new DojoModuleResource("extlib.dijit.BootstrapDialog"); // $NON-NLS-1$
+    public static final DojoModuleResource bootstrapDialog3 = new DojoModuleResource("extlib.dijit.BootstrapDialog3"); // $NON-NLS-1$
+
+    public static final DojoModuleResource bootstrapPickerCheckbox = new DojoModuleResource("extlib.dijit.BootstrapPickerCheckbox"); // $NON-NLS-1$
+    public static final DojoModuleResource bootstrapPickerList = new DojoModuleResource("extlib.dijit.BootstrapPickerList"); // $NON-NLS-1$
+    public static final DojoModuleResource bootstrapPickerListSearch = new DojoModuleResource("extlib.dijit.BootstrapPickerListSearch"); // $NON-NLS-1$
+    public static final DojoModuleResource bootstrapPickerName = new DojoModuleResource("extlib.dijit.BootstrapPickerName"); // $NON-NLS-1$
     
     public BootstrapResources() {
         this.BLANK_GIF      				  = "/.ibmxspres/.extlib/bootstrap/icons/blank.gif"; // $NON-NLS-1$
