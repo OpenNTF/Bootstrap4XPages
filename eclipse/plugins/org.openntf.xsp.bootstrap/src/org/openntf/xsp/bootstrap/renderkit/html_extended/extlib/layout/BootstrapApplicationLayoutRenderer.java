@@ -84,14 +84,14 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 				writeBanner(context, w, c, configuration);
 			}
 
-			// Start the place bar
-			if (configuration.isPlaceBar()) {
-				writePlaceBar(context, w, c, configuration);
-			}
-
 			// Start the title bar
 			if (configuration.isTitleBar()) {
 				writeTitleBar(context, w, c, configuration);
+			}
+
+			// Start the place bar
+			if (configuration.isPlaceBar()) {
+				writePlaceBar(context, w, c, configuration);
 			}
 
 			// Start the main content
