@@ -443,7 +443,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 	protected void writeSearchOptions(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, SearchBar searchBar, ITree tree) throws IOException {
 		w.startElement("div", c); // $NON-NLS-1$
-		w.writeAttribute("class","input-group-btn",null); // $NON-NLS-1$
+		//w.writeAttribute("class","input-group-btn",null); // $NON-NLS-1$
 		newLine(w);
 
 		AbstractTreeRenderer renderer = getSearchOptionsRenderer(context, w, c, configuration, searchBar);
