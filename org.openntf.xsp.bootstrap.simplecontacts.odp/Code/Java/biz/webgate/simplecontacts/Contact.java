@@ -23,10 +23,13 @@ import java.util.List;
 import org.openntf.xpt.core.dss.annotations.DominoEntity;
 import org.openntf.xpt.core.dss.annotations.DominoStore;
 
+import biz.webgate.simplecontacts.api.ContactSessionFacade;
+import biz.webgate.simplecontacts.api.storage.SocialStorageService;
+
 import com.ibm.xsp.http.MimeMultipart;
 
 @DominoStore(Form = "frmContact", View = "LUPContactByID", PrimaryFieldClass = String.class, PrimaryKeyField = "ID")
-public class Contact extends AbstractBusinessObject implements Serializable {
+public class Contact extends AbstractAddressRelation implements Serializable {
 
 	/**
 	 * 
@@ -50,9 +53,6 @@ public class Contact extends AbstractBusinessObject implements Serializable {
 	@DominoEntity(FieldName = "Comment")
 	private MimeMultipart m_Comment;
 
-	private List<Address> m_Address;
-	private List<EMail> m_EMail;
-	private List<Phone> m_Phone;
 	private List<SocialEntity> m_Social;
 
 	public void setFirstName(String firstName) {
@@ -126,41 +126,15 @@ public class Contact extends AbstractBusinessObject implements Serializable {
 		m_Tags.add(strTag);
 	}
 
-	public void setAddress(List<Address> address) {
-		m_Address = address;
-	}
-
-	public List<Address> getAddress() {
-		return m_Address;
-	}
-
-	public void addAddress(Address adr) {
-		if (m_Address == null) {
-			m_Address = new ArrayList<Address>();
-		}
-		m_Address.add(adr);
-	}
-
-	public void setEMail(List<EMail> eMail) {
-		m_EMail = eMail;
-	}
-
-	public List<EMail> getEMail() {
-		return m_EMail;
-	}
-
-	public void addEMail(EMail eml) {
-		if (m_EMail == null) {
-			m_EMail = new ArrayList<EMail>();
-		}
-		m_EMail.add(eml);
-	}
-
 	public void setSocial(List<SocialEntity> social) {
 		m_Social = social;
 	}
 
 	public List<SocialEntity> getSocial() {
+		if (m_Social == null) {
+			m_Social = SocialStorageService.getInstance().getObjectsByForeignId(this.getID(),
+					ContactSessionFacade.LUPSOCIALENTITY_BY_PARENT_ID);
+		}
 		return m_Social;
 	}
 
@@ -169,21 +143,6 @@ public class Contact extends AbstractBusinessObject implements Serializable {
 			m_Social = new ArrayList<SocialEntity>();
 		}
 		m_Social.add(soc);
-	}
-
-	public void setPhone(List<Phone> phone) {
-		m_Phone = phone;
-	}
-
-	public List<Phone> getPhone() {
-		return m_Phone;
-	}
-
-	public void addPhone(Phone phone) {
-		if (m_Phone == null) {
-			m_Phone = new ArrayList<Phone>();
-		}
-		m_Phone.add(phone);
 	}
 
 }
