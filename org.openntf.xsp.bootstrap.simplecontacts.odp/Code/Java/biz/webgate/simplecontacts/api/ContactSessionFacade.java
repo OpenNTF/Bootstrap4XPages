@@ -17,7 +17,14 @@ import biz.webgate.simplecontacts.api.storage.SocialStorageService;
 
 public class ContactSessionFacade {
 
-	public static String BEAN_NAME = "contactBean";
+	public static final String BEAN_NAME = "contactBean";
+	public static final String LUPCONTACT_BY_PARENT_ID = "LUPContactByParentID";
+	public static final String LUPADDRESS_BY_PARENT_ID = "LUPAddressByParentID";
+	public static final String LUPEMAIL_BY_PARENT_ID = "LUPEMailByParentID";
+	public static final String LUPPHONE_BY_PARENT_ID = "LUPPhoneByParentID";
+	public static final String LUPSOCIALENTITY_BY_PARENT_ID = "LUPSocialEntityByParentID";
+	
+
 
 	// Contact API
 	public Contact createContact() {

@@ -1,27 +1,29 @@
 package biz.webgate.simplecontacts;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openntf.xpt.core.dss.annotations.DominoEntity;
 import org.openntf.xpt.core.dss.annotations.DominoStore;
 
-@DominoStore(Form="frmCompany", View="LUPCompanyByID", PrimaryFieldClass=String.class, PrimaryKeyField="ID")
-public class Company extends AbstractBusinessObject implements Serializable {
+import biz.webgate.simplecontacts.api.ContactSessionFacade;
+import biz.webgate.simplecontacts.api.storage.ContactStorageService;
+
+@DominoStore(Form = "frmCompany", View = "LUPCompanyByID", PrimaryFieldClass = String.class, PrimaryKeyField = "ID")
+public class Company extends AbstractAddressRelation implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@DominoEntity(FieldName="CompanyName")
+	@DominoEntity(FieldName = "CompanyName")
 	private String m_CompanyName;
-	private List<Address> m_Address;
-	private List<EMail> m_EMail;
-	private List<Phone> m_Phone;
+	private List<Contact> m_Contacts;
 
-	@DominoEntity(FieldName="HomePage")
+	@DominoEntity(FieldName = "HomePage")
 	private String m_HomePage;
-	@DominoEntity(FieldName="Tags")
+	@DominoEntity(FieldName = "Tags")
 	private List<String> m_Tags;
 
 	public String getCompanyName() {
@@ -30,30 +32,6 @@ public class Company extends AbstractBusinessObject implements Serializable {
 
 	public void setCompanyName(String companyName) {
 		m_CompanyName = companyName;
-	}
-
-	public List<Address> getAddress() {
-		return m_Address;
-	}
-
-	public void setAddress(List<Address> address) {
-		m_Address = address;
-	}
-
-	public List<EMail> getEMail() {
-		return m_EMail;
-	}
-
-	public void setEMail(List<EMail> mail) {
-		m_EMail = mail;
-	}
-
-	public List<Phone> getPhone() {
-		return m_Phone;
-	}
-
-	public void setPhone(List<Phone> phone) {
-		m_Phone = phone;
 	}
 
 	public String getHomePage() {
@@ -70,6 +48,24 @@ public class Company extends AbstractBusinessObject implements Serializable {
 
 	public void setTags(List<String> tags) {
 		m_Tags = tags;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		m_Contacts = contacts;
+	}
+
+	public List<Contact> getContacts() {
+		if (m_Contacts == null) {
+			m_Contacts = ContactStorageService.getInstance().getObjectsByForeignId(this.getID(), ContactSessionFacade.LUPCONTACT_BY_PARENT_ID);
+		}
+		return m_Contacts;
+	}
+
+	public void addContact(Contact con) {
+		if (m_Contacts == null) {
+			m_Contacts = new ArrayList<Contact>();
+		}
+		m_Contacts.add(con);
 	}
 
 }
