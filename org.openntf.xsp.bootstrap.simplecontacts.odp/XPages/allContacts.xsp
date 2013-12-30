@@ -5,7 +5,18 @@
 	<xc:ccApplication navigationPath="allContacts"
 		pageTitle="Simple Contacts">
 		<xp:this.facets>
-			<xe:dataView id="dataView1" xp:key="facetMiddle"
+		<xp:panel id = "main" xp:key="facetMiddle">
+		<xp:button value="Create Contact" id="btCreateContact">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="partial" refreshId="panNewContact">
+				<xp:this.action><![CDATA[#{javascript:var pan = getComponent("panNewContact");
+pan.setRendered(true);}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xc:ccContactNew></xc:ccContactNew>
+			<xe:dataView id="dataView1" 
+			
+			
 				collapsibleCategory="false" columnTitles="false" var="contactRow">
 
 				<xe:this.data>
@@ -22,5 +33,6 @@
 					</xe:viewSummaryColumn>
 				</xe:this.summaryColumn>
 			</xe:dataView>
+			</xp:panel>
 		</xp:this.facets>
 	</xc:ccApplication></xp:view>
