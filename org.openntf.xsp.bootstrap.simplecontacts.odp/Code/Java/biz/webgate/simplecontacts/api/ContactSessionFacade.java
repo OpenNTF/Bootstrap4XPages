@@ -8,6 +8,12 @@ import biz.webgate.simplecontacts.Contact;
 import biz.webgate.simplecontacts.EMail;
 import biz.webgate.simplecontacts.Phone;
 import biz.webgate.simplecontacts.SocialEntity;
+import biz.webgate.simplecontacts.api.storage.AddressStorageService;
+import biz.webgate.simplecontacts.api.storage.CompanyStorageService;
+import biz.webgate.simplecontacts.api.storage.ContactStorageService;
+import biz.webgate.simplecontacts.api.storage.EMailStorageService;
+import biz.webgate.simplecontacts.api.storage.PhoneStorageService;
+import biz.webgate.simplecontacts.api.storage.SocialStorageService;
 
 public class ContactSessionFacade {
 
@@ -15,19 +21,19 @@ public class ContactSessionFacade {
 
 	// Contact API
 	public Contact createContact() {
-		return null;
+		return ContactStorageService.getInstance().createObject();
 	}
 
 	public List<Contact> getAllContacts() {
-		return null;
+		return ContactStorageService.getInstance().getAll("allContacts");
 	}
 
 	public void saveContact(Contact con) {
-
+		ContactStorageService.getInstance().save(con);
 	}
 
 	public Contact getContactByID(String strID) {
-		return null;
+		return ContactStorageService.getInstance().getById(strID);
 	}
 
 	public void addTag(Contact con, String strTag) {
@@ -64,66 +70,74 @@ public class ContactSessionFacade {
 
 	// Company API
 	public Company createCompany() {
-		return null;
+		return CompanyStorageService.getInstance().createObject();
 	}
 
 	public Company getCompanyByID(String strID) {
-		return null;
+		return CompanyStorageService.getInstance().getById(strID);
 	}
 
 	public void saveCompany(Company comp) {
-
+		CompanyStorageService.getInstance().save(comp);
 	}
 
 	// Address API
 	public Address createNewAddress(String strParentID) {
-		return null;
+		Address adr = AddressStorageService.getInstance().createObject();
+		adr.setParentID(strParentID);
+		return adr;
 	}
 
 	public Address getAddressByID(String strID) {
-		return null;
+		return AddressStorageService.getInstance().getById(strID);
 	}
 
 	public void saveAddress(Address addr) {
-
+		AddressStorageService.getInstance().save(addr);
 	}
 
 	// EMail API
 	public EMail createNewEMail(String strParentID) {
-		return null;
+		EMail eml = EMailStorageService.getInstance().createObject();
+		eml.setParentID(strParentID);
+		return eml;
 	}
 
 	public EMail getEMailByID(String strID) {
-		return null;
+		return EMailStorageService.getInstance().getById(strID);
 	}
 
 	public void saveEMail(EMail email) {
-
+		EMailStorageService.getInstance().save(email);
 	}
 
 	// Phone API
 	public Phone createNewPhone(String strParentID) {
-		return null;
+		Phone phone = PhoneStorageService.getInstance().createObject();
+		phone.setParentID(strParentID);
+		return phone;
 	}
 
 	public Phone getPhoneByID(String strID) {
-		return null;
+		return PhoneStorageService.getInstance().getById(strID);
 	}
 
 	public void savePhone(Phone phone) {
-
+		PhoneStorageService.getInstance().save(phone);
 	}
 
 	// Social API
 	public SocialEntity createNewSocial(String strParentID) {
-		return null;
+		SocialEntity soc = SocialStorageService.getInstance().createObject();
+		soc.setParentID(strParentID);
+		return soc;
 	}
 
 	public SocialEntity getSocialByID(String strID) {
-		return null;
+		return SocialStorageService.getInstance().getById(strID);
 	}
 
 	public void saveSocial(SocialEntity soc) {
-
+		SocialStorageService.getInstance().save(soc);
 	}
 }
