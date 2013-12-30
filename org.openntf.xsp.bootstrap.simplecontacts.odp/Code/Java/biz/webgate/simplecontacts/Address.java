@@ -20,7 +20,7 @@ import java.io.Serializable;
 import org.openntf.xpt.core.dss.annotations.DominoEntity;
 import org.openntf.xpt.core.dss.annotations.DominoStore;
 
-@DominoStore(Form="frmAddress",View="lupAddressByID", PrimaryFieldClass=String.class,PrimaryKeyField="ID")
+@DominoStore(Form="frmAddress",View="LUPAddressByID", PrimaryFieldClass=String.class,PrimaryKeyField="ID")
 public class Address extends AbstractBusinessObject implements Serializable {
 
 	/**
@@ -30,11 +30,11 @@ public class Address extends AbstractBusinessObject implements Serializable {
 
 	@DominoEntity(FieldName="Street")
 	private String m_Street;
-	@DominoEntity(FieldName="Street")
+	@DominoEntity(FieldName="StreetAdd1")
 	private String m_StreetAdd1;
-	@DominoEntity(FieldName="Street")
+	@DominoEntity(FieldName="StreetAdd2")
 	private String m_StreetAdd2;
-	@DominoEntity(FieldName="Street")
+	@DominoEntity(FieldName="ZIP")
 	private String m_ZIP;
 	@DominoEntity(FieldName="Location")
 	private String m_Location;
@@ -42,7 +42,7 @@ public class Address extends AbstractBusinessObject implements Serializable {
 	private String m_Country;
 	@DominoEntity(FieldName="State")
 	private String m_State;
-
+	@DominoEntity(FieldName="AddressType")
 	private String m_AddressType;
 
 	public void setStreet(String street) {

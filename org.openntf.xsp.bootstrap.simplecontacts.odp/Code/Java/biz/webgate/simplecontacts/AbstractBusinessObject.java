@@ -15,9 +15,14 @@
  */
 package biz.webgate.simplecontacts;
 
+import org.openntf.xpt.core.dss.annotations.DominoEntity;
+
+
 public abstract class AbstractBusinessObject {
 
+	@DominoEntity(FieldName="ID")
 	private String m_ID;
+	@DominoEntity(FieldName="ParentID")
 	private String m_ParentID;
 
 	public void setID(String iD) {
