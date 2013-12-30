@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:applicationLayout id="applicationLayout1">
+		<xp:callback facetName="facetMiddle" id="facetMiddle"></xp:callback>
+		<xe:this.facets>
+			<xp:callback facetName="facetRight" id="facetRight"
+				xp:key="RightColumn">
+			</xp:callback>
+			<xp:callback facetName="facetLeft" id="facetLeft"
+				xp:key="LeftColumn">
+			</xp:callback>
+		</xe:this.facets>
+		<xe:this.configuration>
+			<xe:oneuiApplication
+				placeBarName="#{javascript:compositeData.pageTitle}"
+				navigationPath="#{javascript:compositeData.navigationPath}"
+				legalText="Webgate Consulting AG, Switzerland - 2014"
+				productLogoAlt="Bootstrap4XPages Demo" productLogoHeight=""
+				productLogo="/WebGateLogo_klein.jpg">
+				<xe:this.footerLinks>
+					<xe:basicContainerNode label="Links:">
+						<xe:this.children>
+							<xe:basicLeafNode
+								label="Webgate Consulting AG" href="http://www.webgate.biz/">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode
+								href="http://www.openntf.org/" label="openNTF">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Bootstrap"
+								href="http://getbootstrap.com/">
+							</xe:basicLeafNode>
+						</xe:this.children>
+
+					</xe:basicContainerNode>
+
+				</xe:this.footerLinks>
+				<xe:this.titleBarName><![CDATA[Demo Application "Bootstrap4XPages"]]></xe:this.titleBarName>
+				<xe:this.bannerUtilityLinks>
+					<xe:basicContainerNode>
+						<xe:this.label><![CDATA[#{javascript:@Name("[CN]",context.getUser().getDistinguishedName()) }]]></xe:this.label>
+						<xe:this.children>
+							<xe:basicLeafNode label="Logout"
+								href="/names.nsf?logout">
+							</xe:basicLeafNode>
+						</xe:this.children>
+					</xe:basicContainerNode>
+
+
+
+
+
+
+				</xe:this.bannerUtilityLinks>
+			</xe:oneuiApplication>
+		</xe:this.configuration>
+	</xe:applicationLayout></xp:view>

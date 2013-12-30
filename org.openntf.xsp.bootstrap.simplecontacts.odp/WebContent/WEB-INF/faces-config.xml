@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config>
-
- <managed-bean>
+  <managed-bean>
     <managed-bean-name>contactBean</managed-bean-name>
     <managed-bean-class>biz.webgate.simplecontacts.api.ContactSessionFacade</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>

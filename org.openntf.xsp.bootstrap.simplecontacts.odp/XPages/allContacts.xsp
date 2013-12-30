@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xc:ccApplication navigationPath="allContacts"
+		pageTitle="Simple Contacts">
+		<xp:this.facets>
+			<xe:dataView id="dataView1" xp:key="facetMiddle">
+				<xe:this.data>
+					<xp:dominoView var="allContacts"
+						viewName="Contacts">
+					</xp:dominoView>
+				</xe:this.data>
+			</xe:dataView>
+		</xp:this.facets>
+	</xc:ccApplication></xp:view>

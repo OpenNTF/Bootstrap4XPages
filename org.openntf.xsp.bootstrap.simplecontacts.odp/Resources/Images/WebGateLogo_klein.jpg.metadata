@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257C5100313BE3" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1f2" sequence="1" unid="AEF4E5A447168761C1257C51004ABBC3">
+<created><datetime>20131230T143617,31+01</datetime></created>
+<modified><datetime>20131230T143617,32+01</datetime></modified>
+<revised><datetime>20131230T143617,31+01</datetime></revised>
+<lastaccessed><datetime>20131230T143617,31+01</datetime></lastaccessed>
+<addedtofile><datetime>20131230T143617,31+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></updatedby>
+<wassignedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></wassignedby>
+<item name="$TITLE"><text>WebGateLogo_klein.jpg</text></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+
+
+<item name="$MimeType" sign="true"><text>image/jpeg</text></item>
+<item name="$FileModDT" sign="true"><datetime>20131230T143556,57+01</datetime></item>
+<item name="$ImageNames" sign="true"><text>WebGateLogo_klein.jpg</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item></note>
