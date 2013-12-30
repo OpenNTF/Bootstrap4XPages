@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xpt="http://www.openntf.org/xsp/xpt">
 
 	<xc:ccApplication navigationPath="allContacts"
 		pageTitle="Simple Contacts">
 		<xp:this.facets>
-			<xe:dataView id="dataView1" xp:key="facetMiddle">
+			<xe:dataView id="dataView1" xp:key="facetMiddle"
+				collapsibleCategory="false" columnTitles="false" var="contactRow">
+
 				<xe:this.data>
-					<xp:dominoView var="allContacts"
-						viewName="Contacts">
-					</xp:dominoView>
+					<xpt:objectlistSource
+						buildValues="#{javascript:contactBean.getAllContacts()}"
+						sortAttribute="LastName" ascending="true" scope="view"
+						var="dsContatList">
+					</xpt:objectlistSource>
 				</xe:this.data>
+				<xe:this.summaryColumn>
+					<xe:viewSummaryColumn>
+						<xe:this.value><![CDATA[#{javascript:contactRow.firstName + " " +contactRow.lastName}]]></xe:this.value>
+						<xe:this.href><![CDATA[#{javascript:"Contact.xsp?id="+contactRow.ID;}]]></xe:this.href>
+					</xe:viewSummaryColumn>
+				</xe:this.summaryColumn>
 			</xe:dataView>
 		</xp:this.facets>
 	</xc:ccApplication></xp:view>
