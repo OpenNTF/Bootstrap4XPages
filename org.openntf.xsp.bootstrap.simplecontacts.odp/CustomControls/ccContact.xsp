@@ -65,13 +65,16 @@ return contact;
 			<xp:button value="Save" id="Save">
 				<xp:eventHandler event="onclick" submit="true"
 					refreshMode="complete">
-					<xp:this.action><![CDATA[#{javascript:contactBean.saveContact(newContact);
-var dsContact =xptBean.findDataSource("panNewContact","newContact");
+					<xp:this.action><![CDATA[#{javascript:contactBean.saveContact(contact);
+var dsContact =xptBean.findDataSource("panContact","contact");
 dsContact.refresh();
-var pan = getComponent("panNewContact");
-pan.setRendered(false);
-var dsContactList = getComponent("dsContactList");
-dsContactList.refresh();}]]></xp:this.action>
+if (view.getPageName() == "/Contact.xsp") {
+	context.redirectToPage("allContacts.xsp");
+} else {
+	var pan = getComponent("panContact");
+	pan.setRendered(false);
+}
+}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
 			<xp:button value="Cancel" id="Cancel"></xp:button>
