@@ -1,40 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xpt="http://www.openntf.org/xsp/xpt">
-
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xpt="http://www.openntf.org/xsp/xpt">
 	<xc:ccApplication navigationPath="allContacts"
 		pageTitle="Simple Contacts">
 		<xp:this.facets>
-		<xp:panel xp:key="facetRight">
-			<xpt:oneuitps id="oneuitps1" title="Using DataView"
-				text="In this example are we using a data view UI Element to render the object list datasource.">
-			</xpt:oneuitps></xp:panel>
-		<xc:ccNav xp:key="facetLeft"></xc:ccNav>
-		<xp:panel id="main" xp:key="facetMiddle">
-		<xp:button value="Create Contact" id="btCreateContact">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="partial" refreshId="main">
-				<xp:this.action><![CDATA[#{javascript:var pan = getComponent("panNewContact");
-pan.setRendered(true);}]]></xp:this.action>
-			</xp:eventHandler>
-		</xp:button>
-		<xc:ccContactNew></xc:ccContactNew>
-			<xe:dataView id="dataView1" 
-				collapsibleCategory="false" columnTitles="false" var="contactRow">
-				<xe:this.data>
-					<xpt:objectlistSource
-						buildValues="#{javascript:contactBean.getAllContacts()}"
-						sortAttribute="LastName" ascending="true" scope="view"
-						var="dsContactList">
-					</xpt:objectlistSource>
-				</xe:this.data>
-				<xe:this.summaryColumn>
-					<xe:viewSummaryColumn>
-						<xe:this.value><![CDATA[#{javascript:contactRow.firstName + " " +contactRow.lastName}]]></xe:this.value>
-						<xe:this.href><![CDATA[#{javascript:@FullUrl("Contact.xsp")+"?id="+contactRow.ID;}]]></xe:this.href>
-					</xe:viewSummaryColumn>
-				</xe:this.summaryColumn>
-			</xe:dataView>
+			<xp:panel xp:key="facetRight">
+				<xpt:oneuitps id="oneuitps1" title="Using DataView"
+					text="In this example are we using a data view UI Element to render the object list datasource.">
+				</xpt:oneuitps>
 			</xp:panel>
+			<xc:ccNav xp:key="facetLeft"></xc:ccNav>
+			<xp:panel id="main" xp:key="facetMiddle">
+				<xp:button value="Create Contact" id="btCreateContact">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="main">
+						<xp:this.action><![CDATA[#{javascript:var pan = getComponent("panNewContact");
+pan.setRendered(true);}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xc:ccContactNew></xc:ccContactNew>
+				<xe:dataView id="dataView1" collapsibleCategory="false"
+					columnTitles="false" var="contactRow" collapsibleDetail="true"
+					refreshId="dataView1" detailsOnClient="true" expandedDetail="true">
+					<xp:this.facets>
+						<xp:panel xp:key="detail">
+							<xc:ccButtonsAddInformation></xc:ccButtonsAddInformation>
+						</xp:panel>
+					</xp:this.facets>
+					<xe:this.data>
+						<xpt:objectlistSource buildValues="#{javascript:contactBean.getAllContacts()}"
+							sortAttribute="LastName" ascending="true" scope="view" var="dsContactList">
+						</xpt:objectlistSource>
+					</xe:this.data>
+					<xe:this.summaryColumn>
+						<xe:viewSummaryColumn>
+							<xe:this.value><![CDATA[#{javascript:contactRow.firstName + " " +contactRow.lastName}]]></xe:this.value>
+							<xe:this.href><![CDATA[#{javascript:@FullUrl("Contact.xsp")+"?id="+contactRow.ID;}]]></xe:this.href>
+						</xe:viewSummaryColumn>
+					</xe:this.summaryColumn>
+				</xe:dataView>
+
+				<xe:dialog id="dlgAddress" title="Address information">
+					<xc:ccDialogAddAddress></xc:ccDialogAddAddress>
+				</xe:dialog>
+				<xe:dialog id="dlgPhone" title="Phone number">
+					<xc:ccDialogAddPhone></xc:ccDialogAddPhone>
+				</xe:dialog>
+				<xe:dialog id="dlgEmail" title="Email">
+					<xc:ccDialogAddEmail></xc:ccDialogAddEmail>
+				</xe:dialog>
+				<xe:dialog id="dlgSocial" title="Social entities">
+					<xc:ccDialogAddSocial></xc:ccDialogAddSocial>
+				</xe:dialog>
+
+			</xp:panel>
+
 		</xp:this.facets>
-	</xc:ccApplication></xp:view>
+	</xc:ccApplication>
+</xp:view>

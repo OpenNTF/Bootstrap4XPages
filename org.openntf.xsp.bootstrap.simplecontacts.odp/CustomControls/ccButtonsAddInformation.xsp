@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
 	<xp:panel>
-		<xp:button value="add address information" id="btnAddAddress">
+		<xp:button value="add address" id="btnAddAddress">
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="complete">
 				<xp:this.action><![CDATA[#{javascript:getComponent("dlgAddress").show()}]]></xp:this.action>
 			</xp:eventHandler></xp:button>
-		<xp:br></xp:br>
-		<xp:button value="add phone number" id="btnAddPhone"></xp:button>
-		<xp:br></xp:br>
-		<xp:button value="add email" id="btnAddEmail"></xp:button>
-		<xp:br></xp:br>
-		<xp:button value="add social information" id="btnAddSocial"></xp:button>
+		<xp:button value="add phone number" id="btnAddPhone">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:getComponent("dlgPhone").show()}]]></xp:this.action>
+			</xp:eventHandler></xp:button>
+		<xp:button value="add email" id="btnAddEmail">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:getComponent("dlgEmail").show()}]]></xp:this.action>
+			</xp:eventHandler></xp:button>
+		<xp:button value="add social entity" id="btnAddSocial">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:getComponent("dlgSocial").show()}]]></xp:this.action>
+			</xp:eventHandler></xp:button>
 	</xp:panel>
 </xp:view>

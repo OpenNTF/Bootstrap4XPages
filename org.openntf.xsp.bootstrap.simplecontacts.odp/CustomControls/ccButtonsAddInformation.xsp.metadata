@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257C5100313BE3" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="232" sequence="8" unid="B3CC6E6B208B9677C1257C520025FE7F">
+<noteinfo noteid="232" sequence="26" unid="B3CC6E6B208B9677C1257C520025FE7F">
 <created><datetime>20131231T075459,83+01</datetime></created>
-<modified><datetime>20131231T080204,58+01</datetime></modified>
-<revised><datetime>20131231T080204,57+01</datetime></revised>
-<lastaccessed><datetime>20131231T080204,57+01</datetime></lastaccessed>
+<modified><datetime>20131231T091026,91+01</datetime></modified>
+<revised><datetime>20131231T091026,90+01</datetime></revised>
+<lastaccessed><datetime>20131231T091026,90+01</datetime></lastaccessed>
 <addedtofile><datetime>20131231T075459,83+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></updatedby>
 <wassignedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></wassignedby>
@@ -12,5 +12,11 @@
 
 
 
+<item name="$DesignerVersion"><text>8.5</text></item>
 
-<item name="$FileNames" sign="true"><text>ccButtonsAddInformation.xsp</text></item></note>
+
+
+
+<item name="$FileNames" sign="true"><text>ccButtonsAddInformation.xsp</text></item>
+
+</note>
