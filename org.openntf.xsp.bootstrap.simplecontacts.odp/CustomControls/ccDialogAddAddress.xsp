@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel>
+		<xe:formTable id="frmAddAddress" formTitle="Address Information">
+			<xe:formRow id="formRow9" label="ID">
+				<xp:text escape="true" id="computedField1"></xp:text>
+			</xe:formRow>
+			<xe:formRow id="formRow1" label="Street">
+				<xp:inputText id="inputText1"></xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow2" label="Additional address information">
+				<xp:inputText id="inputText2"></xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow3" label="Additional address information">
+				<xp:inputText id="inputText3"></xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow4" label="Zip">
+				<xp:inputText id="inputText4"></xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow5" label="Location">
+				<xp:inputText id="inputText5"></xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow6" label="Country">
+				<xp:inputText id="inputText6"></xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow7" label="State">
+				<xp:inputText id="inputText7"></xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow8" label="Address Type">
+				<xp:inputText id="inputText8"></xp:inputText>
+			</xe:formRow>
+		</xe:formTable>
+	</xp:panel>
+</xp:view>
