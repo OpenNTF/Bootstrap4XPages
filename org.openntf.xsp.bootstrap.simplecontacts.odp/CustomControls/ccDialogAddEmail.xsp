@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:panel>
+		<xp:this.data>
+			<xe:objectData var="email">
+				<xe:this.createObject><![CDATA[#{javascript:if (viewScope.ID == "NEW") {
+	return contactBean.createNewEMail(viewScope.ParentID);
+} else {
+	return contactBean.getEMailByID(viewScope.ID);
+}}]]></xe:this.createObject>
+			</xe:objectData>
+		</xp:this.data>
 		<xe:formTable id="frmAddEmail" formTitle="Email">
 			<xe:formRow id="formRow9" label="ID">
-				<xp:text escape="true" id="computedField1"></xp:text>
+				<xp:text escape="true" id="computedField1" value="#{email.ID}"></xp:text>
 			</xe:formRow>
 			<xe:formRow id="formRow1" label="Email">
-				<xp:inputText id="inputText1"></xp:inputText>
+				<xp:inputText id="inputText1" value="#{email.EMail}"></xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow8" label="Email type">
-				<xp:inputText id="inputText8"></xp:inputText>
+				<xp:inputText id="inputText8" value="#{email.EMailType}"></xp:inputText>
 			</xe:formRow>
 		</xe:formTable>
 		<xp:panel>
-			<xp:button value="Submit" id="btnSubmit"></xp:button>
-			<xp:button value="Cancel" id="btnCancel"></xp:button>
+			<xp:button value="Submit" id="btnSubmit">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:contactBean.addEMail(viewScope.BO, email);
+getComponent("dlgEmail").hide()
+}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Cancel" id="btnCancel">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dlgEmail").hide()}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
 		</xp:panel>
 	</xp:panel>
 </xp:view>

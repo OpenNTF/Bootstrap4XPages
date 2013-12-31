@@ -5,23 +5,33 @@
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="complete">
 				<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
-viewScope.ParentID = contactRow.ID; 
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
 getComponent("dlgAddress").show()}]]></xp:this.action>
 			</xp:eventHandler></xp:button>
 		<xp:button value="add phone number" id="btnAddPhone">
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="complete">
-				<xp:this.action><![CDATA[#{javascript:getComponent("dlgPhone").show()}]]></xp:this.action>
+				<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgPhone").show()}]]></xp:this.action>
 			</xp:eventHandler></xp:button>
 		<xp:button value="add email" id="btnAddEmail">
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="complete">
-				<xp:this.action><![CDATA[#{javascript:getComponent("dlgEmail").show()}]]></xp:this.action>
+				<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgEmail").show()}]]></xp:this.action>
 			</xp:eventHandler></xp:button>
 		<xp:button value="add social entity" id="btnAddSocial">
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="complete">
-				<xp:this.action><![CDATA[#{javascript:getComponent("dlgSocial").show()}]]></xp:this.action>
+				<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgSocial").show()}]]></xp:this.action>
 			</xp:eventHandler></xp:button>
 	</xp:panel>
 </xp:view>
