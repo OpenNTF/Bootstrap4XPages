@@ -19,17 +19,41 @@ pan.setRendered(true);}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
 				<xc:ccContactNew></xc:ccContactNew>
-				<xe:dataView id="dataView1" collapsibleCategory="false"
-					columnTitles="false" var="contactRow" collapsibleDetail="true"
-					refreshId="dataView1" detailsOnClient="true">
+				<xe:dataView id="dataView1" columnTitles="false"
+					var="contactRow" collapsibleDetail="true" collapsibleRows="true"
+					pageName="Contact.xsp" rows="10">
 					<xp:this.facets>
 						<xp:panel xp:key="detail">
+
 							<xc:ccButtonsAddInformation></xc:ccButtonsAddInformation>
+							<xe:djTabContainer id="djTabContainer1"
+								doLayout="true" style="height:100.0px;width:100%">
+								<xe:djTabPane id="djTabPane1"
+									title="Address">
+									<xp:panel id="panAddress">
+										fghjk
+									</xp:panel>
+								</xe:djTabPane>
+								<xe:djTabPane id="djTabPane2"
+									title="Phone">
+									<xp:panel></xp:panel>
+								</xe:djTabPane>
+								<xe:djTabPane id="djTabPane3"
+									title="Mail">
+									<xp:panel></xp:panel>
+								</xe:djTabPane>
+								<xe:djTabPane id="djTabPane4"
+									title="Social">
+									<xp:panel></xp:panel>
+								</xe:djTabPane>
+							</xe:djTabContainer>
 						</xp:panel>
 					</xp:this.facets>
 					<xe:this.data>
-						<xpt:objectlistSource buildValues="#{javascript:contactBean.getAllContacts()}"
-							sortAttribute="LastName" ascending="true" scope="view" var="dsContactList">
+						<xpt:objectlistSource
+							buildValues="#{javascript:contactBean.getAllContacts()}"
+							sortAttribute="LastName" ascending="true" scope="view"
+							var="dsContactList">
 						</xpt:objectlistSource>
 					</xe:this.data>
 					<xe:this.summaryColumn>
