@@ -15,11 +15,17 @@
  */
 package biz.webgate.simplecontacts;
 
+import java.io.Serializable;
+
 import org.openntf.xpt.core.dss.annotations.DominoEntity;
 
 
-public abstract class AbstractBusinessObject {
+public abstract class AbstractBusinessObject implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@DominoEntity(FieldName="ID")
 	private String m_ID;
 	@DominoEntity(FieldName="ParentID")

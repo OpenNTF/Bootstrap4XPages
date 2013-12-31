@@ -5,31 +5,28 @@
 	<xc:ccApplication navigationPath="allContacts"
 		pageTitle="Simple Contacts">
 		<xp:this.facets>
-		<xp:panel id = "main" xp:key="facetMiddle">
+		<xp:panel id="main" xp:key="facetMiddle">
 		<xp:button value="Create Contact" id="btCreateContact">
 			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="partial" refreshId="panNewContact">
+				refreshMode="partial" refreshId="main">
 				<xp:this.action><![CDATA[#{javascript:var pan = getComponent("panNewContact");
 pan.setRendered(true);}]]></xp:this.action>
 			</xp:eventHandler>
 		</xp:button>
 		<xc:ccContactNew></xc:ccContactNew>
 			<xe:dataView id="dataView1" 
-			
-			
 				collapsibleCategory="false" columnTitles="false" var="contactRow">
-
 				<xe:this.data>
 					<xpt:objectlistSource
 						buildValues="#{javascript:contactBean.getAllContacts()}"
 						sortAttribute="LastName" ascending="true" scope="view"
-						var="dsContatList">
+						var="dsContactList">
 					</xpt:objectlistSource>
 				</xe:this.data>
 				<xe:this.summaryColumn>
 					<xe:viewSummaryColumn>
 						<xe:this.value><![CDATA[#{javascript:contactRow.firstName + " " +contactRow.lastName}]]></xe:this.value>
-						<xe:this.href><![CDATA[#{javascript:"Contact.xsp?id="+contactRow.ID;}]]></xe:this.href>
+						<xe:this.href><![CDATA[#{javascript:@FullUrl("Contact.xsp")+"?id="+contactRow.ID;}]]></xe:this.href>
 					</xe:viewSummaryColumn>
 				</xe:this.summaryColumn>
 			</xe:dataView>

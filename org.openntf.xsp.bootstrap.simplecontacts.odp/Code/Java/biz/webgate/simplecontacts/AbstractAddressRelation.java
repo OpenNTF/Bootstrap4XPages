@@ -10,6 +10,10 @@ import biz.webgate.simplecontacts.api.storage.PhoneStorageService;
 
 public abstract class AbstractAddressRelation extends AbstractBusinessObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Address> m_Address;
 	private List<EMail> m_EMail;
 	private List<Phone> m_Phone;

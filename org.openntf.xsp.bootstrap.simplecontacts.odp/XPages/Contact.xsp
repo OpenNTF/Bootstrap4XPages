@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:ccApplication navigationPath="Contact" pageTitle="Contact">
+		<xp:this.facets>
+			<xc:ccContact xp:key="facetMiddle"></xc:ccContact>
+		</xp:this.facets>
+	</xc:ccApplication>
+</xp:view>
