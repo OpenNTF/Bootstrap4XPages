@@ -5,6 +5,11 @@
 	<xc:ccApplication navigationPath="allContacts"
 		pageTitle="Simple Contacts">
 		<xp:this.facets>
+		<xp:panel xp:key="facetRight">
+			<xpt:oneuitps id="oneuitps1" title="Using DataView"
+				text="In this example are we using a data view UI Element to render the object list datasource.">
+			</xpt:oneuitps></xp:panel>
+		<xc:ccNav xp:key="facetLeft"></xc:ccNav>
 		<xp:panel id="main" xp:key="facetMiddle">
 		<xp:button value="Create Contact" id="btCreateContact">
 			<xp:eventHandler event="onclick" submit="true"

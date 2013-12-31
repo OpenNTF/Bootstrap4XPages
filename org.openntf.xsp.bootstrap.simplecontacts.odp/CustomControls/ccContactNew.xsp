@@ -52,13 +52,13 @@
 		<xp:panel>
 			<xp:button value="Save" id="Save">
 				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="complete">
+					refreshMode="partial" refreshId="main">
 					<xp:this.action><![CDATA[#{javascript:contactBean.saveContact(newContact);
 var dsContact =xptBean.findDataSource("panNewContact","newContact");
 dsContact.refresh();
 var pan = getComponent("panNewContact");
 pan.setRendered(false);
-var dsContactList = getComponent("dsContactList");
+var dsContactList = getComponent("dataView1").getData();
 dsContactList.refresh();}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
