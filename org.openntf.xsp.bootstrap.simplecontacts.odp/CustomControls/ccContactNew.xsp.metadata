@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257C51002881FF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="202" sequence="15" unid="0201F0F33C2AE522C1257C520024CA55">
-<created><datetime>20131231T074150,93+01</datetime></created>
-<modified><datetime>20131231T080115,03+01</datetime></modified>
-<revised><datetime>20131231T080115,02+01</datetime></revised>
-<lastaccessed><datetime>20131231T080115,03+01</datetime></lastaccessed>
-<addedtofile><datetime>20131231T074151,16+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></updatedby>
-<wassignedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></wassignedby>
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257C5100313BE3" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="216" sequence="56" unid="BFC174E3368F7ADDC1257C51004EAAF9">
+<created><datetime>20131230T151915,77+01</datetime></created>
+<modified><datetime>20131231T110913,27+01</datetime></modified>
+<revised><datetime>20131231T110913,26+01</datetime></revised>
+<lastaccessed><datetime>20131231T110913,26+01</datetime></lastaccessed>
+<addedtofile><datetime>20131230T151915,77+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></updatedby>
+<wassignedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></wassignedby>
 <item name="$Flags"><text>gC~4;</text></item>
 <item name="$TITLE"><text>ccContactNew.xsp</text></item>
 
 
 
-
-
 <item name="$DesignerVersion"><text>8.5</text></item>
+
+
 
 
 <item name="$FileNames" sign="true"><text>ccContactNew.xsp</text></item>

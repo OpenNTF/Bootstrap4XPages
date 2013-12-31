@@ -10,15 +10,32 @@
 }}]]></xe:this.createObject>
 			</xe:objectData>
 		</xp:this.data>
-		<xe:formTable id="frmAddSocial" formTitle="Social entity">
+		<xe:formTable id="frmAddSocial" formTitle="Social entity"
+			disableErrorSummary="false" disableRowError="true">
 			<xe:formRow id="formRow1" label="ID">
-				<xp:text escape="true" id="computedField1" value="#{social.ID}"></xp:text>
+				<xp:text escape="true" id="computedField1"
+					value="#{social.ID}">
+				</xp:text>
 			</xe:formRow>
 			<xe:formRow id="formRow2" label="Service">
-				<xp:inputText id="inputText1" value="#{social.service}"></xp:inputText>
+				<xp:inputText id="inputText1" value="#{social.service}"
+					required="true">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="Service is mandatory">
+						</xp:validateRequired>
+					</xp:this.validators>
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow3" label="Username">
-				<xp:inputText id="inputText2" value="#{social.userName}"></xp:inputText>
+				<xp:inputText id="inputText2" value="#{social.userName}"
+					required="true">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="Username is mandatory">
+						</xp:validateRequired>
+					</xp:this.validators>
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow4" label="Url">
 				<xp:inputText id="inputText3" value="#{social.URL}"></xp:inputText>
@@ -33,7 +50,7 @@ getComponent("dlgSocial").hide();}]]></xp:this.action>
 				</xp:eventHandler></xp:button>
 			<xp:button value="Cancel" id="btnCancel">
 				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="complete">
+					refreshMode="complete" immediate="true">
 					<xp:this.action><![CDATA[#{javascript:getComponent("dlgSocial").hide();}]]></xp:this.action>
 				</xp:eventHandler></xp:button>
 		</xp:panel>

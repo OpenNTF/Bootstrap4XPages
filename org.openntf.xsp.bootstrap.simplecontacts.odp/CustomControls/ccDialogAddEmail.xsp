@@ -10,15 +10,33 @@
 }}]]></xe:this.createObject>
 			</xe:objectData>
 		</xp:this.data>
-		<xe:formTable id="frmAddEmail" formTitle="Email">
+		<xe:formTable id="frmAddEmail" formTitle="Email"
+			disableErrorSummary="false" disableRowError="true">
 			<xe:formRow id="formRow9" label="ID">
-				<xp:text escape="true" id="computedField1" value="#{email.ID}"></xp:text>
+				<xp:text escape="true" id="computedField1"
+					value="#{email.ID}">
+				</xp:text>
 			</xe:formRow>
 			<xe:formRow id="formRow1" label="Email">
-				<xp:inputText id="inputText1" value="#{email.EMail}"></xp:inputText>
+				<xp:inputText id="inputText1" value="#{email.EMail}"
+					required="true">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="Please provide an email address.">
+						</xp:validateRequired>
+
+
+						<xp:validateConstraint
+							message="Email address is not valid">
+							<xp:this.regex><![CDATA[\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,7}\b]]></xp:this.regex>
+						</xp:validateConstraint>
+					</xp:this.validators>
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow8" label="Email type">
-				<xp:inputText id="inputText8" value="#{email.EMailType}"></xp:inputText>
+				<xp:inputText id="inputText8"
+					value="#{email.EMailType}">
+				</xp:inputText>
 			</xe:formRow>
 		</xe:formTable>
 		<xp:panel>
@@ -32,7 +50,7 @@ getComponent("dlgEmail").hide()
 			</xp:button>
 			<xp:button value="Cancel" id="btnCancel">
 				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="complete">
+					refreshMode="complete" immediate="true">
 					<xp:this.action><![CDATA[#{javascript:getComponent("dlgEmail").hide()}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>

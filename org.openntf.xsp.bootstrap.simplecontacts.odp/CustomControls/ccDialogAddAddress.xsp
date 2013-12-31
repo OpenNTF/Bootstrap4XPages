@@ -10,36 +10,61 @@
 }}]]></xe:this.createObject>
 			</xe:objectData>
 		</xp:this.data>
-		<xe:formTable id="frmAddAddress"
-			formTitle="Address information">
+		<xe:formTable id="frmAddAddress" formTitle="Address information"
+			disableErrorSummary="false" disableRowError="true">
 			<xe:formRow id="formRow1" label="ID">
-				<xp:text escape="true" id="computedField1" value="#{address.ID}"></xp:text>
+				<xp:text escape="true" id="computedField1"
+					value="#{address.ID}">
+				</xp:text>
 			</xe:formRow>
 			<xe:formRow id="formRow2" label="Street">
-				<xp:inputText id="inputText1" value="#{address.street}"></xp:inputText>
+				<xp:inputText id="inputText1" value="#{address.street}"
+					required="true">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="Street information is mandatory">
+						</xp:validateRequired>
+					</xp:this.validators>
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow3"
 				label="Additional address information">
-				<xp:inputText id="inputText2" value="#{address.streetAdd1}"></xp:inputText>
+				<xp:inputText id="inputText2"
+					value="#{address.streetAdd1}">
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow4"
 				label="Additional address information">
-				<xp:inputText id="inputText3" value="#{address.streetAdd2}"></xp:inputText>
+				<xp:inputText id="inputText3"
+					value="#{address.streetAdd2}">
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow5" label="Zip">
 				<xp:inputText id="inputText4" value="#{address.ZIP}"></xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow6" label="Location">
-				<xp:inputText id="inputText5" value="#{address.location}"></xp:inputText>
+				<xp:inputText id="inputText5"
+					value="#{address.location}" required="true">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Location is mandatory">
+					</xp:validateRequired>
+				</xp:this.validators></xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow7" label="Country">
-				<xp:inputText id="inputText6" value="#{address.country}"></xp:inputText>
+				<xp:inputText id="inputText6"
+					value="#{address.country}">
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow8" label="State">
-				<xp:inputText id="inputText7" value="#{address.state}"></xp:inputText>
+				<xp:inputText id="inputText7"
+					value="#{address.state}">
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow9" label="Address type">
-				<xp:inputText id="inputText8" value="#{address.addressType}"></xp:inputText>
+				<xp:inputText id="inputText8"
+					value="#{address.addressType}">
+				</xp:inputText>
 			</xe:formRow>
 		</xe:formTable>
 		<xp:panel>
@@ -51,7 +76,7 @@ getComponent("dlgAddress").hide();}]]></xp:this.action>
 				</xp:eventHandler></xp:button>
 			<xp:button value="Cancel" id="btnCancel">
 				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="complete">
+					refreshMode="complete" immediate="true">
 					<xp:this.action><![CDATA[#{javascript:getComponent("dlgAddress").hide()}]]></xp:this.action>
 				</xp:eventHandler></xp:button>
 		</xp:panel>
