@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='9.0'
- maintenanceversion='1.0' replicaid='C1257C5100313BE3'>
-<noteinfo noteid='11e' unid='5F74D074C062DA02C1257C5100313BE6' sequence='15'>
-<created><datetime>20131230T095745,98+01</datetime></created>
-<modified><datetime>20131230T134404,82+01</datetime></modified>
-<revised><datetime>20131230T134404,81+01</datetime></revised>
-<lastaccessed><datetime>20131230T134404,81+01</datetime></lastaccessed>
-<addedtofile><datetime>20131230T095746,01+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></updatedby>
-<wassignedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></wassignedby>
+ maintenanceversion='1.0' replicaid='C1257C51002881FF'>
+<noteinfo noteid='11a' unid='73ED4C8C631ABADBC1257C5100288204' sequence='11'>
+<created><datetime>20131230T082227,24+01</datetime></created>
+<modified><datetime>20131231T074059,39+01</datetime></modified>
+<revised><datetime>20131231T074059,38+01</datetime></revised>
+<lastaccessed><datetime>20131231T074059,39+01</datetime></lastaccessed>
+<addedtofile><datetime>20131230T082227,28+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></updatedby>
+<wassignedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></wassignedby>
 <item name='IconBitmap' summary='true'>
 <rawitemdata type='6'>
 AiAgAQAA///////wD///4Af//8AD//4AAH/8AAA/+AAAH/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAA
@@ -25,9 +25,9 @@ EREdd3fRERER8AAAAAAA////Ed3dEf///wAAAAAAAAAAAPERER8AAAAAAAAAAAAAAAAP///wAAAA
 AAAAUEECICABAAD/////+A4DgA==
 </rawitemdata></item>
 <item name='$Daos'><text>0</text></item>
-<item name='$TITLE'><text>SimpleContacts</text></item>
-<item name='$DefaultXPage'><text>allContacts.xsp</text></item>
-<item name='$Flags'><text>J7!</text></item>
 <item name='$LaunchXPageRunOnServer'><text>0</text></item>
+<item name='$DefaultXPage'><text>allContacts.xsp</text></item>
+<item name='$TITLE'><text>SimpleContacts</text></item>
+<item name='$Flags'><text>J7!</text></item>
 <item name='$FlagsNoRefresh'><text>rv</text></item></note>
 
