@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:panel>
-		<xe:formTable id="frmAddAddress" formTitle="Address information">
+		<xp:this.data>
+			<xe:objectData var="address">
+				<xe:this.createObject><![CDATA[#{javascript:if (viewScope.ID == "NEW") {
+	return contactBean.createNewAddress( viewScope.ParentID);
+} else {
+	return contactBean.getAddressByID( viewScope.ID);
+}}]]></xe:this.createObject>
+			</xe:objectData>
+		</xp:this.data>
+		<xe:formTable id="frmAddAddress"
+			formTitle="Address information">
 			<xe:formRow id="formRow1" label="ID">
 				<xp:text escape="true" id="computedField1"></xp:text>
 			</xe:formRow>
 			<xe:formRow id="formRow2" label="Street">
 				<xp:inputText id="inputText1"></xp:inputText>
 			</xe:formRow>
-			<xe:formRow id="formRow3" label="Additional address information">
+			<xe:formRow id="formRow3"
+				label="Additional address information">
 				<xp:inputText id="inputText2"></xp:inputText>
 			</xe:formRow>
-			<xe:formRow id="formRow4" label="Additional address information">
+			<xe:formRow id="formRow4"
+				label="Additional address information">
 				<xp:inputText id="inputText3"></xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow5" label="Zip">

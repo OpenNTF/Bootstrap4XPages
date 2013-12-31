@@ -4,7 +4,9 @@
 		<xp:button value="add address" id="btnAddAddress">
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="complete">
-				<xp:this.action><![CDATA[#{javascript:getComponent("dlgAddress").show()}]]></xp:this.action>
+				<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID; 
+getComponent("dlgAddress").show()}]]></xp:this.action>
 			</xp:eventHandler></xp:button>
 		<xp:button value="add phone number" id="btnAddPhone">
 			<xp:eventHandler event="onclick" submit="true"

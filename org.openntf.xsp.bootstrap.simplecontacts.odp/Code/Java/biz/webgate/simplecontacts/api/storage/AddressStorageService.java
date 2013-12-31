@@ -24,7 +24,7 @@ public class AddressStorageService extends AbstractStorageService<Address> {
 	public Address createObject() {
 		Address adr = new Address();
 		adr.setID(UUID.randomUUID().toString());
-		return null;
+		return adr;
 	}
 
 }
