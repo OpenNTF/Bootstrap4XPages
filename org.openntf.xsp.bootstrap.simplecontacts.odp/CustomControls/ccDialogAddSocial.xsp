@@ -1,23 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:panel>
-		<xe:formTable id="frmAddSocial" formTitle="Social entity">
+		<xp:this.data>
+			<xe:objectData var="social">
+				<xe:this.createObject><![CDATA[#{javascript:if (viewScope.ID == "NEW") {
+	return contactBean.createNewSocial(viewScope.ParentID);
+} else {
+	return contactBean.getSocialByID(viewScope.ID);
+}}]]></xe:this.createObject>
+			</xe:objectData>
+		</xp:this.data>
+		<xe:formTable id="frmAddSocial" formTitle="Social entity"
+			disableErrorSummary="false" disableRowError="true">
 			<xe:formRow id="formRow1" label="ID">
-				<xp:text escape="true" id="computedField1"></xp:text>
+				<xp:text escape="true" id="computedField1"
+					value="#{social.ID}">
+				</xp:text>
 			</xe:formRow>
 			<xe:formRow id="formRow2" label="Service">
-				<xp:inputText id="inputText1"></xp:inputText>
+				<xp:inputText id="inputText1" value="#{social.service}"
+					required="true">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="Service is mandatory">
+						</xp:validateRequired>
+					</xp:this.validators>
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow3" label="Username">
-				<xp:inputText id="inputText2"></xp:inputText>
+				<xp:inputText id="inputText2" value="#{social.userName}"
+					required="true">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="Username is mandatory">
+						</xp:validateRequired>
+					</xp:this.validators>
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow4" label="Url">
-				<xp:inputText id="inputText3"></xp:inputText>
+				<xp:inputText id="inputText3" value="#{social.URL}"></xp:inputText>
 			</xe:formRow>
 		</xe:formTable>
 		<xp:panel>
-			<xp:button value="Submit" id="btnSubmit"></xp:button>
-			<xp:button value="Cancel" id="btnCancel"></xp:button>
+			<xp:button value="Submit" id="btnSubmit">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:contactBean.addSocial(viewScope.BO, social);
+getComponent("dlgSocial").hide();}]]></xp:this.action>
+				</xp:eventHandler></xp:button>
+			<xp:button value="Cancel" id="btnCancel">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete" immediate="true">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dlgSocial").hide();}]]></xp:this.action>
+				</xp:eventHandler></xp:button>
 		</xp:panel>
 	</xp:panel>
 </xp:view>

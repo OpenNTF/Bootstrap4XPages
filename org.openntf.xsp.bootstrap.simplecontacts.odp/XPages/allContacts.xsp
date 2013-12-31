@@ -23,7 +23,7 @@ pan.setRendered(true);}]]></xp:this.action>
 				<xc:ccContactNew></xc:ccContactNew>
 				<xe:dataView id="dataView1" collapsibleCategory="false"
 					columnTitles="false" var="contactRow" collapsibleDetail="true"
-					refreshId="dataView1" detailsOnClient="true" expandedDetail="true">
+					refreshId="dataView1" detailsOnClient="true">
 					<xp:this.facets>
 						<xp:panel xp:key="detail">
 							<xc:ccButtonsAddInformation></xc:ccButtonsAddInformation>
