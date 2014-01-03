@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257C5100313BE3" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="176" sequence="11" unid="D4789DA46D210E9AC1257C5100313EBB">
-<created><datetime>20131230T095753,23+01</datetime></created>
-<modified><datetime>20131230T145945,02+01</datetime></modified>
-<revised><datetime>20131230T145945,01+01</datetime></revised>
-<lastaccessed><datetime>20131230T145945,01+01</datetime></lastaccessed>
-<addedtofile><datetime>20131230T095753,26+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></updatedby>
-<wassignedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></wassignedby>
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257C51002881FF" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="162" sequence="36" unid="FD089634AC041B03C1257C51002902F1">
+<created><datetime>20131230T082757,29+01</datetime></created>
+<modified><datetime>20140103T131024,44+01</datetime></modified>
+<revised><datetime>20140103T131024,43+01</datetime></revised>
+<lastaccessed><datetime>20140103T131024,44+01</datetime></lastaccessed>
+<addedtofile><datetime>20131230T082757,31+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></updatedby>
+<wassignedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></wassignedby>
 <item name="$Flags"><text>34567Cg~[</text></item>
 <item name="$TITLE"><text>biz/webgate/simplecontacts/Contact.java</text></item>
+
+
+
 <item name="$DesignerVersion"><text>8.5.3</text></item>
 
 
-<item name="$FileNames" sign="true"><text>biz/webgate/simplecontacts/Contact.java</text></item>
-
-
-</note>
+<item name="$FileNames" sign="true"><text>biz/webgate/simplecontacts/Contact.java</text></item></note>

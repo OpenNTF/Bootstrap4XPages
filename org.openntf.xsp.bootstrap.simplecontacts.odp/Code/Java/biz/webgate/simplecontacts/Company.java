@@ -56,7 +56,8 @@ public class Company extends AbstractAddressRelation implements Serializable {
 
 	public List<Contact> getContacts() {
 		if (m_Contacts == null) {
-			m_Contacts = ContactStorageService.getInstance().getObjectsByForeignId(this.getID(), ContactSessionFacade.LUPCONTACT_BY_PARENT_ID);
+			m_Contacts = ContactStorageService.getInstance().getObjectsByForeignId(this.getID(),
+					ContactSessionFacade.LUPCONTACT_BY_PARENT_ID);
 		}
 		return m_Contacts;
 	}
@@ -64,8 +65,15 @@ public class Company extends AbstractAddressRelation implements Serializable {
 	public void addContact(Contact con) {
 		if (m_Contacts == null) {
 			m_Contacts = new ArrayList<Contact>();
+			m_Contacts.add(con);
+			return;
 		}
-		m_Contacts.add(con);
+		int posOf = m_Contacts.indexOf(con);
+		if (posOf > -1) {
+			m_Contacts.set(posOf, con);
+		} else {
+			m_Contacts.add(con);
+		}
 	}
 
 }

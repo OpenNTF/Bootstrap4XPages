@@ -37,8 +37,15 @@ public abstract class AbstractAddressRelation extends AbstractBusinessObject {
 	public void addAddress(Address adr) {
 		if (m_Address == null) {
 			m_Address = new ArrayList<Address>();
+			m_Address.add(adr);
+			return;
 		}
-		m_Address.add(adr);
+		int posOf = m_Address.indexOf(adr);
+		if (posOf > -1) {
+			m_Address.set(posOf, adr);
+		} else {
+			m_Address.add(adr);
+		}
 	}
 
 	public List<EMail> getEMail() {
@@ -51,8 +58,15 @@ public abstract class AbstractAddressRelation extends AbstractBusinessObject {
 	public void addEMail(EMail eml) {
 		if (m_EMail == null) {
 			m_EMail = new ArrayList<EMail>();
+			m_EMail.add(eml);
+			return;
 		}
-		m_EMail.add(eml);
+		int posOf = m_EMail.indexOf(eml);
+		if (posOf > -1) {
+			m_EMail.set(posOf, eml);
+		} else {
+			m_EMail.add(eml);
+		}
 	}
 
 	public void setEMail(List<EMail> mail) {
@@ -73,8 +87,15 @@ public abstract class AbstractAddressRelation extends AbstractBusinessObject {
 	public void addPhone(Phone phone) {
 		if (m_Phone == null) {
 			m_Phone = new ArrayList<Phone>();
+			m_Phone.add(phone);
+			return;
 		}
-		m_Phone.add(phone);
+		int posOf = m_Phone.indexOf(phone);
+		if (posOf > -1) {
+			m_Phone.set(posOf, phone);
+		} else {
+			m_Phone.add(phone);
+		}
 	}
 
 }
