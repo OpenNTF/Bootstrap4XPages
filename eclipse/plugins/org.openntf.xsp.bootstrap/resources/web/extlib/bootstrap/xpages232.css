@@ -144,6 +144,11 @@
 	margin: 0;
 }
 
+/*Bootstrap relies on the href attribute on a's to show the correct cursos: fix for XPage pagination that by default doesn't have that*/
+.nav, .pagination, .carousel a {
+	cursor: pointer;
+}
+
 /***********************************************************************	
 	OneUI like specific styles used by XPages controls
 	-> Ideally, these classes should be renamed and the rendered adapted
