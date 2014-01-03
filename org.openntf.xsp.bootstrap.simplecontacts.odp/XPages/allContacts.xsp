@@ -184,12 +184,13 @@ getComponent("dlgPhone").show()}]]></xp:this.action>
 													<xp:td>
 														<xp:image url="#{javascript:@ViewIconUrl(12)}"
 															id="image1">
-														<xp:eventHandler
-															event="onclick" submit="true" refreshMode="complete">
-															<xp:this.action><![CDATA[#{javascript:viewScope.ID = phoneRow.ID;
-viewScope.BO = phoneRow.getBO();
+															<xp:eventHandler event="onclick" submit="true"
+																refreshMode="complete">
+																<xp:this.action><![CDATA[#{javascript:viewScope.ID = phoneRow.ID;
+viewScope.BO = contactRow.getBO();
 getComponent("dlgPhone").show()}]]></xp:this.action>
-														</xp:eventHandler></xp:image>
+															</xp:eventHandler>
+														</xp:image>
 														<xp:image url="#{javascript:@ViewIconUrl(80)}"
 															id="image2">
 														</xp:image>
@@ -240,14 +241,15 @@ getComponent("dlgEmail").show()}]]></xp:this.action>
 														</xp:text>
 													</xp:td>
 													<xp:td>
-													<xp:image url="#{javascript:@ViewIconUrl(12)}"
+														<xp:image url="#{javascript:@ViewIconUrl(12)}"
 															id="image3">
-														<xp:eventHandler
-															event="onclick" submit="true" refreshMode="complete">
-															<xp:this.action><![CDATA[#{javascript:viewScope.ID = mailRow.ID;
+															<xp:eventHandler event="onclick" submit="true"
+																refreshMode="complete">
+																<xp:this.action><![CDATA[#{javascript:viewScope.ID = mailRow.ID;
 viewScope.BO = contactRow.getBO();
 getComponent("dlgEmail").show()}]]></xp:this.action>
-														</xp:eventHandler></xp:image>
+															</xp:eventHandler>
+														</xp:image>
 														<xp:image url="#{javascript:@ViewIconUrl(80)}"
 															id="image4">
 														</xp:image>
@@ -306,14 +308,15 @@ getComponent("dlgSocial").show()}]]></xp:this.action>
 														</xp:text>
 													</xp:td>
 													<xp:td>
-													<xp:image url="#{javascript:@ViewIconUrl(12)}"
+														<xp:image url="#{javascript:@ViewIconUrl(12)}"
 															id="image5">
-														<xp:eventHandler
-															event="onclick" submit="true" refreshMode="complete">
-															<xp:this.action><![CDATA[#{javascript:viewScope.ID = socialRow.ID;
+															<xp:eventHandler event="onclick" submit="true"
+																refreshMode="complete">
+																<xp:this.action><![CDATA[#{javascript:viewScope.ID = socialRow.ID;
 viewScope.BO = contactRow.getBO();
 getComponent("dlgSocial").show()}]]></xp:this.action>
-														</xp:eventHandler></xp:image>
+															</xp:eventHandler>
+														</xp:image>
 														<xp:image url="#{javascript:@ViewIconUrl(80)}"
 															id="image6">
 														</xp:image>
@@ -343,7 +346,7 @@ getComponent("dlgSocial").show()}]]></xp:this.action>
 					<xc:ccDialogAddAddress></xc:ccDialogAddAddress>
 				</xe:dialog>
 				<xe:dialog id="dlgPhone" title="Phone number">
-					<xc:ccDialogAddPhone></xc:ccDialogAddPhone>
+						<xc:ccDialogAddPhone></xc:ccDialogAddPhone>
 				</xe:dialog>
 				<xe:dialog id="dlgEmail" title="Email">
 					<xc:ccDialogAddEmail></xc:ccDialogAddEmail>

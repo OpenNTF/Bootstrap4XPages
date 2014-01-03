@@ -1,64 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
-	<xp:panel>
-		<xp:this.data>
-			<xe:objectData var="phone">
-				<xe:this.createObject><![CDATA[#{javascript:if (viewScope.ID == "NEW") {
+
+	<xp:this.data>
+		<xe:objectData var="phone">
+			<xe:this.createObject><![CDATA[#{javascript:if (viewScope.ID == "NEW") {
 	return contactBean.createNewPhone(viewScope.ParentID);
 } else {
 	return contactBean.getPhoneByID(viewScope.ID);
 }}]]></xe:this.createObject>
-			</xe:objectData>
-		</xp:this.data>
+		</xe:objectData>
+	</xp:this.data>
+	
+	<xe:dialogContent id="dialogContent1">
 		<xe:formTable id="frmAddPhone" formTitle="Phone number"
 			disableErrorSummary="false" disableRowError="true">
 			<xe:formRow id="formRow1" label="ID">
-				<xp:text escape="true" id="computedField1"
-					value="#{phone.ID}">
+				<xp:text escape="true" id="computedField1" value="#{phone.ID}">
 				</xp:text>
 			</xe:formRow>
 			<xe:formRow id="formRow2" label="Number">
 				<xp:inputText id="inputText3" value="#{phone.number}"
 					required="true">
 					<xp:this.validators>
-						<xp:validateRequired
-							message="Phone number is mandatory">
+						<xp:validateRequired message="Phone number is mandatory">
 						</xp:validateRequired>
 					</xp:this.validators>
 				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow3" label="Area code">
-				<xp:inputText id="inputText1"
-					value="#{phone.areaCode}">
+				<xp:inputText id="inputText1" value="#{phone.areaCode}">
 				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow4" label="Country code">
-				<xp:inputText id="inputText2"
-					value="#{phone.countryCode}">
+				<xp:inputText id="inputText2" value="#{phone.countryCode}">
 				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow5" label="Phone type">
-				<xp:inputText id="inputText8"
+				<xp:comboBox id="comboBox1"
 					value="#{phone.phoneType}">
-				</xp:inputText>
+					<xp:selectItem itemLabel="Untitled"></xp:selectItem>
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript:keywordBean.getPhoneTypes()}]]></xp:this.value>
+					</xp:selectItems>
+				</xp:comboBox>
+				
 			</xe:formRow>
 		</xe:formTable>
-		<xp:panel>
-			<xp:button value="Submit" id="btnSubmit">
-				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="complete">
-					<xp:this.action><![CDATA[#{javascript:contactBean.addPhone(viewScope.BO, phone);
+	</xe:dialogContent>
+
+	<xe:dialogButtonBar id="dialogButtonBar1">
+		<xp:button value="Cancel" id="btnCancel">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete" immediate="true">
+				<xp:this.action><![CDATA[#{javascript:getComponent("dlgPhone").hide()}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button value="Submit" id="btnSubmit">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:contactBean.addPhone(viewScope.BO, phone);
 var dsOL = xptBean.findDataSource("dataView1","dsContactList");
 dsOL.refresh();
 getComponent("dlgPhone").hide("main");}]]></xp:this.action>
-				</xp:eventHandler>
-			</xp:button>
-			<xp:button value="Cancel" id="btnCancel">
-				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="complete" immediate="true">
-					<xp:this.action><![CDATA[#{javascript:getComponent("dlgPhone").hide()}]]></xp:this.action>
-				</xp:eventHandler>
-			</xp:button>
-		</xp:panel>
-	</xp:panel>
+			</xp:eventHandler>
+		</xp:button>
+	</xe:dialogButtonBar>
 </xp:view>

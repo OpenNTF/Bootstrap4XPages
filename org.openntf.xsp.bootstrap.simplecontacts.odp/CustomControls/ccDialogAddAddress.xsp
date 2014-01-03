@@ -1,90 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
-	<xp:panel>
-		<xp:this.data>
-			<xe:objectData var="address">
-				<xe:this.createObject><![CDATA[#{javascript:if (viewScope.ID == "NEW") {
+
+	<xp:this.data>
+		<xe:objectData var="address">
+			<xe:this.createObject><![CDATA[#{javascript:if (viewScope.ID == "NEW") {
 	return contactBean.createNewAddress(viewScope.ParentID);
 } else {
 	return contactBean.getAddressByID(viewScope.ID);
 }}]]></xe:this.createObject>
-			</xe:objectData>
-		</xp:this.data>
+		</xe:objectData>
+	</xp:this.data>
+
+	<xe:dialogContent id="dialogContent1">
 		<xe:formTable id="frmAddAddress" formTitle="Address information"
 			disableErrorSummary="false" disableRowError="true">
 			<xe:formRow id="formRow1" label="ID">
-				<xp:text escape="true" id="computedField1"
-					value="#{address.ID}">
+				<xp:text escape="true" id="computedField1" value="#{address.ID}">
 				</xp:text>
 			</xe:formRow>
 			<xe:formRow id="formRow2" label="Street">
 				<xp:inputText id="inputText1" value="#{address.street}"
 					required="true">
 					<xp:this.validators>
-						<xp:validateRequired
-							message="Street information is mandatory">
+						<xp:validateRequired message="Street information is mandatory">
 						</xp:validateRequired>
 					</xp:this.validators>
 				</xp:inputText>
 			</xe:formRow>
-			<xe:formRow id="formRow3"
-				label="Additional address information">
-				<xp:inputText id="inputText2"
-					value="#{address.streetAdd1}">
+			<xe:formRow id="formRow3" label="Additional address information">
+				<xp:inputText id="inputText2" value="#{address.streetAdd1}">
 				</xp:inputText>
 			</xe:formRow>
-			<xe:formRow id="formRow4"
-				label="Additional address information">
-				<xp:inputText id="inputText3"
-					value="#{address.streetAdd2}">
+			<xe:formRow id="formRow4" label="Additional address information">
+				<xp:inputText id="inputText3" value="#{address.streetAdd2}">
 				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow5" label="Zip">
 				<xp:inputText id="inputText4" value="#{address.ZIP}"></xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow6" label="Location">
-				<xp:inputText id="inputText5"
-					value="#{address.location}" required="true">
-				<xp:this.validators>
-					<xp:validateRequired
-						message="Location is mandatory">
-					</xp:validateRequired>
-				</xp:this.validators></xp:inputText>
+				<xp:inputText id="inputText5" value="#{address.location}"
+					required="true">
+					<xp:this.validators>
+						<xp:validateRequired message="Location is mandatory">
+						</xp:validateRequired>
+					</xp:this.validators>
+				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow7" label="Country">
-				<xp:inputText id="inputText6"
-					value="#{address.country}">
+				<xp:inputText id="inputText6" value="#{address.country}">
 				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow8" label="State">
-				<xp:inputText id="inputText7"
-					value="#{address.state}">
+				<xp:inputText id="inputText7" value="#{address.state}">
 				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow9" label="Address type">
-				<xp:comboBox id="comboBox1"
-					value="#{address.addressType}">
+				<xp:comboBox id="comboBox1" value="#{address.addressType}">
 					<xp:selectItems>
 						<xp:this.value><![CDATA[#{javascript:keywordBean.getAddressTypes()}]]></xp:this.value>
 					</xp:selectItems>
 				</xp:comboBox>
-				
 			</xe:formRow>
 		</xe:formTable>
-		<xp:panel>
-			<xp:button value="Submit" id="btnSubmit">
-				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="complete">
-					<xp:this.action><![CDATA[#{javascript:contactBean.addAddress(viewScope.BO, address);
+	</xe:dialogContent>
+
+	<xe:dialogButtonBar id="dialogButtonBar1">
+		<xp:button value="Cancel" id="btnCancel">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete" immediate="true">
+				<xp:this.action><![CDATA[#{javascript:getComponent("dlgAddress").hide()}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button value="Submit" id="btnSubmit">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:contactBean.addAddress(viewScope.BO, address);
 var dsOL = xptBean.findDataSource("dataView1","dsContactList");
 dsOL.refresh();
 getComponent("dlgAddress").hide("main");}]]></xp:this.action>
-				</xp:eventHandler></xp:button>
-			<xp:button value="Cancel" id="btnCancel">
-				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="complete" immediate="true">
-					<xp:this.action><![CDATA[#{javascript:getComponent("dlgAddress").hide()}]]></xp:this.action>
-				</xp:eventHandler></xp:button>
-		</xp:panel>
-	</xp:panel>
+			</xp:eventHandler>
+		</xp:button>
+	</xe:dialogButtonBar>
+
 </xp:view>
