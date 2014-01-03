@@ -48,6 +48,12 @@ public abstract class AbstractAddressRelation extends AbstractBusinessObject {
 		}
 	}
 
+	public void removeAddress(Address adr) {
+		if (m_Address != null) {
+			m_Address.remove(adr);
+		}
+	}
+
 	public List<EMail> getEMail() {
 		if (m_EMail == null) {
 			m_EMail = EMailStorageService.getInstance().getObjectsByForeignId(this.getID(), ContactSessionFacade.LUPEMAIL_BY_PARENT_ID);
@@ -66,6 +72,12 @@ public abstract class AbstractAddressRelation extends AbstractBusinessObject {
 			m_EMail.set(posOf, eml);
 		} else {
 			m_EMail.add(eml);
+		}
+	}
+
+	public void removeEMail(EMail eml) {
+		if (m_EMail != null) {
+			m_EMail.remove(eml);
 		}
 	}
 
@@ -95,6 +107,12 @@ public abstract class AbstractAddressRelation extends AbstractBusinessObject {
 			m_Phone.set(posOf, phone);
 		} else {
 			m_Phone.add(phone);
+		}
+	}
+
+	public void removePhone(Phone phone) {
+		if (m_Phone != null) {
+			m_Phone.remove(phone);
 		}
 	}
 
