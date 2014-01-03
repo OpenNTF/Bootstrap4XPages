@@ -6,7 +6,8 @@
 		<xp:this.facets>
 			<xp:panel xp:key="facetRight">
 				<xpt:oneuitps id="oneuitps1" title="Using DataView"
-					text="In this example are we using a data view UI Element to render the object list datasource.">
+					text="In this example are we using a data view UI Element to render the object list datasource."
+					rendererType="biz.webgate.simplecontacts.bootstrap.uitips">
 				</xpt:oneuitps>
 			</xp:panel>
 			<xc:ccNav xp:key="facetLeft"></xc:ccNav>
@@ -27,55 +28,69 @@ pan.setRendered(true);}]]></xp:this.action>
 
 							<xc:ccButtonsAddInformation></xc:ccButtonsAddInformation>
 							<xe:djTabContainer id="djTabContainer1"
-								doLayout="true" style="height:100.0px;width:100%">
-								<xe:djTabPane id="djTabPane1" title="Address">
+								doLayout="false" style="width:100%">
+								<xe:djTabPane id="djTabPane1"
+									title="Address" partialRefresh="true">
 									<xp:panel id="panAddress">
 										<xp:this.data>
-											<xpt:objectlistSource var="lstAddress"
-												scope="view">
+											<xpt:objectlistSource
+												var="lstAddress" scope="view">
 												<xpt:this.buildValues><![CDATA[#{javascript:contactRow.getBO().getAddress();
 }]]></xpt:this.buildValues>
 											</xpt:objectlistSource>
 										</xp:this.data>
-										<xp:table style="width:100.0%">
+										<xp:table
+											style="width:100.0%">
 											<xp:tr>
 												<xp:td>
-													<xp:label value="Street" id="lblStreet">
+													<xp:label
+														value="Street" id="lblStreet">
 													</xp:label>
 												</xp:td>
 												<xp:td>
-													<xp:label value="ZIP" id="lblZIP">
+													<xp:label
+														value="ZIP" id="lblZIP">
 													</xp:label>
 												</xp:td>
 												<xp:td>
-													<xp:label value="Location" id="lblLocation">
+													<xp:label
+														value="Location" id="lblLocation">
 													</xp:label>
 												</xp:td>
 												<xp:td>
-													<xp:label value="Country" id="lblCountry">
+													<xp:label
+														value="Country" id="lblCountry">
 													</xp:label>
 												</xp:td>
 											</xp:tr>
-											<xp:repeat id="repeat1" rows="30"
-												value="#{javascript:lstAddress}" var="addressRow">
+											<xp:repeat id="repeat1"
+												rows="30" value="#{javascript:lstAddress}"
+												var="addressRow">
 												<xp:tr>
 													<xp:td>
 														<xp:text
 															escape="true" id="computedField1"
 															value="#{addressRow.street}">
-														</xp:text></xp:td>
+														</xp:text>
+													</xp:td>
 													<xp:td>
 														<xp:text
-															escape="true" id="computedField2" value="#{addressRow.ZIP}">
-														</xp:text></xp:td>
+															escape="true" id="computedField2"
+															value="#{addressRow.ZIP}">
+														</xp:text>
+													</xp:td>
 													<xp:td>
 														<xp:text
-															escape="true" id="computedField3" value="#{addressRow.location}">
-														</xp:text></xp:td>
+															escape="true" id="computedField3"
+															value="#{addressRow.location}">
+														</xp:text>
+													</xp:td>
 													<xp:td>
 														<xp:text
-															escape="true" id="computedField4" value="#{addressRow.country}">
-														</xp:text></xp:td>
+															escape="true" id="computedField4"
+															value="#{addressRow.country}">
+														</xp:text>
+													</xp:td>
 												</xp:tr>
 											</xp:repeat>
 										</xp:table>
