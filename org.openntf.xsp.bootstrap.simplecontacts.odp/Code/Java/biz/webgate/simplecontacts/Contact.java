@@ -141,8 +141,15 @@ public class Contact extends AbstractAddressRelation implements Serializable {
 	public void addSocial(SocialEntity soc) {
 		if (m_Social == null) {
 			m_Social = new ArrayList<SocialEntity>();
+			m_Social.add(soc);
+			return;
 		}
-		m_Social.add(soc);
+		int posOf = m_Social.indexOf(soc);
+		if (posOf > -1) {
+			m_Social.set(posOf, soc);
+		} else {
+			m_Social.add(soc);
+		}
 	}
 
 }

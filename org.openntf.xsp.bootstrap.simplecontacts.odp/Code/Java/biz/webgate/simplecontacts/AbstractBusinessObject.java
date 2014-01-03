@@ -27,9 +27,9 @@ public abstract class AbstractBusinessObject implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	@DominoEntity(FieldName="ID")
-	private String m_ID;
+	private String m_ID = "";
 	@DominoEntity(FieldName="ParentID")
-	private String m_ParentID;
+	private String m_ParentID = "";
 
 	public void setID(String iD) {
 		m_ID = iD;
@@ -42,5 +42,19 @@ public abstract class AbstractBusinessObject implements Serializable{
 	}
 	public String getParentID() {
 		return m_ParentID;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof AbstractBusinessObject && m_ID.equals(((AbstractBusinessObject)obj).getID());
+	}
+	
+	@Override
+	public int hashCode() {
+		return m_ID.hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getCanonicalName() +" / ID: "+ m_ID;
 	}
 }
