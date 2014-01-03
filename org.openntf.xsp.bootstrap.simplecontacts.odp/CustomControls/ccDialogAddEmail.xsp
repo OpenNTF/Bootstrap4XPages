@@ -39,7 +39,6 @@
 						<xp:this.value><![CDATA[#{javascript:keywordBean.getEMailTypes()}]]></xp:this.value>
 					</xp:selectItems>
 				</xp:comboBox>
-				
 			</xe:formRow>
 		</xe:formTable>
 	</xe:dialogContent>

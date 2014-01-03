@@ -10,7 +10,7 @@
 }}]]></xe:this.createObject>
 		</xe:objectData>
 	</xp:this.data>
-	
+
 	<xe:dialogContent id="dialogContent1">
 		<xe:formTable id="frmAddPhone" formTitle="Phone number"
 			disableErrorSummary="false" disableRowError="true">
@@ -18,7 +18,15 @@
 				<xp:text escape="true" id="computedField1" value="#{phone.ID}">
 				</xp:text>
 			</xe:formRow>
-			<xe:formRow id="formRow2" label="Number">
+			<xe:formRow id="formRow2" label="Country code">
+				<xp:inputText id="inputText2" value="#{phone.countryCode}">
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow3" label="Area code">
+				<xp:inputText id="inputText1" value="#{phone.areaCode}">
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow4" label="Number">
 				<xp:inputText id="inputText3" value="#{phone.number}"
 					required="true">
 					<xp:this.validators>
@@ -27,23 +35,13 @@
 					</xp:this.validators>
 				</xp:inputText>
 			</xe:formRow>
-			<xe:formRow id="formRow3" label="Area code">
-				<xp:inputText id="inputText1" value="#{phone.areaCode}">
-				</xp:inputText>
-			</xe:formRow>
-			<xe:formRow id="formRow4" label="Country code">
-				<xp:inputText id="inputText2" value="#{phone.countryCode}">
-				</xp:inputText>
-			</xe:formRow>
+
 			<xe:formRow id="formRow5" label="Phone type">
-				<xp:comboBox id="comboBox1"
-					value="#{phone.phoneType}">
-					<xp:selectItem itemLabel="Untitled"></xp:selectItem>
+				<xp:comboBox id="comboBox1" value="#{phone.phoneType}">
 					<xp:selectItems>
 						<xp:this.value><![CDATA[#{javascript:keywordBean.getPhoneTypes()}]]></xp:this.value>
 					</xp:selectItems>
 				</xp:comboBox>
-				
 			</xe:formRow>
 		</xe:formTable>
 	</xe:dialogContent>

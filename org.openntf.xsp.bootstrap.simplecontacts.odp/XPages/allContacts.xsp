@@ -117,7 +117,12 @@ getComponent("dlgAddress").show()}]]></xp:this.action>
 														</xp:image>
 														<xp:image url="#{javascript:@ViewIconUrl(80)}"
 															id="delete">
-														</xp:image>
+														<xp:eventHandler
+															event="onclick" submit="true" refreshMode="partial" refreshId="main">
+															<xp:this.action><![CDATA[#{javascript:contactBean.deleteAddress (contactRow.getBO(), addressRow.getBO());
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();}]]></xp:this.action>
+														</xp:eventHandler></xp:image>
 													</xp:td>
 												</xp:tr>
 											</xp:repeat>
@@ -193,7 +198,12 @@ getComponent("dlgPhone").show()}]]></xp:this.action>
 														</xp:image>
 														<xp:image url="#{javascript:@ViewIconUrl(80)}"
 															id="image2">
-														</xp:image>
+														<xp:eventHandler
+															event="onclick" submit="true" refreshMode="partial" refreshId="main">
+															<xp:this.action><![CDATA[#{javascript:contactBean.deletePhone (contactRow.getBO(), phoneRow.getBO());
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();}]]></xp:this.action>
+														</xp:eventHandler></xp:image>
 													</xp:td>
 												</xp:tr>
 											</xp:repeat>
@@ -252,7 +262,12 @@ getComponent("dlgEmail").show()}]]></xp:this.action>
 														</xp:image>
 														<xp:image url="#{javascript:@ViewIconUrl(80)}"
 															id="image4">
-														</xp:image>
+														<xp:eventHandler
+															event="onclick" submit="true" refreshMode="partial" refreshId="main">
+															<xp:this.action><![CDATA[#{javascript:contactBean.deleteEMail (contactRow.getBO(), mailRow.getBO());
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();}]]></xp:this.action>
+														</xp:eventHandler></xp:image>
 													</xp:td>
 												</xp:tr>
 											</xp:repeat>
@@ -319,7 +334,12 @@ getComponent("dlgSocial").show()}]]></xp:this.action>
 														</xp:image>
 														<xp:image url="#{javascript:@ViewIconUrl(80)}"
 															id="image6">
-														</xp:image>
+														<xp:eventHandler
+															event="onclick" submit="true" refreshMode="partial" refreshId="main">
+															<xp:this.action><![CDATA[#{javascript:contactBean.deleteSocial(contactRow.getBO(), socialRow.getBO());
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();}]]></xp:this.action>
+														</xp:eventHandler></xp:image>
 													</xp:td>
 												</xp:tr>
 											</xp:repeat>

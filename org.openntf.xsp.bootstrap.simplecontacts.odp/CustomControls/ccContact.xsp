@@ -77,7 +77,16 @@ if (view.getPageName() == "/Contact.xsp") {
 }]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
-			<xp:button value="Cancel" id="Cancel"></xp:button>
+			<xp:button value="Cancel" id="Cancel">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete" immediate="true">
+					<xp:this.action><![CDATA[#{javascript:if (view.getPageName() == "/Contact.xsp") {
+	context.redirectToPage("allContacts.xsp");
+} else {
+	var pan = getComponent("panContact");
+	pan.setRendered(false);
+}}]]></xp:this.action>
+				</xp:eventHandler></xp:button>
 		</xp:panel>
 	</xp:panel>
 </xp:view>
