@@ -44,15 +44,15 @@ pan.setRendered(true);}]]></xp:this.action>
 													</xp:label>
 												</xp:td>
 												<xp:td>
-													<xp:label value="ZIP" id="label2">
+													<xp:label value="ZIP" id="lblZIP">
 													</xp:label>
 												</xp:td>
 												<xp:td>
-													<xp:label value="Location" id="label3">
+													<xp:label value="Location" id="lblLocation">
 													</xp:label>
 												</xp:td>
 												<xp:td>
-													<xp:label value="Country" id="label4">
+													<xp:label value="Country" id="lblCountry">
 													</xp:label>
 												</xp:td>
 											</xp:tr>
