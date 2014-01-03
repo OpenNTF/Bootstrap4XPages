@@ -30,9 +30,35 @@
 							<xe:basicLeafNode label="Bootstrap"
 								href="http://getbootstrap.com/">
 							</xe:basicLeafNode>
+							<xe:basicLeafNode label="IBM"
+								href="http://www.ibm.com">
+							</xe:basicLeafNode>
 						</xe:this.children>
 
 					</xe:basicContainerNode>
+
+					<xe:basicContainerNode label="Social Links:">
+						<xe:this.children>
+							<xe:basicLeafNode label="Twitter"
+								href="http://www.twitter.com">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Xing"
+								href="http://www.xing.com">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Linked In"
+								href="http://www.linkedin.com">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Flickr"
+								href="http://www.flickr.com/">
+							</xe:basicLeafNode>
+							
+						</xe:this.children>
+					</xe:basicContainerNode>
+
+
+
+
+
 
 				</xe:this.footerLinks>
 				<xe:this.titleBarName><![CDATA[Demo Application "Bootstrap4XPages"]]></xe:this.titleBarName>
