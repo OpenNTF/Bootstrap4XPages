@@ -25,20 +25,28 @@ pan.setRendered(true);}]]></xp:this.action>
 					rows="10">
 					<xp:this.facets>
 						<xp:panel xp:key="detail">
-							<xc:ccButtonsAddInformation></xc:ccButtonsAddInformation>
 							<xe:djTabContainer id="djTabContainer1"
 								doLayout="false" style="width:100%">
-								<xe:djTabPane id="djtpAddress"
-									title="Address" partialRefresh="true" partialEvents="true"
-									preventCache="true" refreshOnShow="true">
+								<xe:djTabPane id="djtpAddress" title="Address"
+									partialRefresh="true" partialEvents="true" preventCache="true"
+									refreshOnShow="true">
 									<xp:panel id="panAddress">
 										<xp:this.data>
-											<xpt:objectlistSource
-												var="lstAddress" scope="request">
+											<xpt:objectlistSource var="lstAddress"
+												scope="request">
 												<xpt:this.buildValues><![CDATA[#{javascript:contactRow.getBO().getAddress();
 }]]></xpt:this.buildValues>
 											</xpt:objectlistSource>
 										</xp:this.data>
+										<xp:button value="add address" id="btnAddAddress">
+											<xp:eventHandler event="onclick" submit="true"
+												refreshMode="complete">
+												<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgAddress").show()}]]></xp:this.action>
+											</xp:eventHandler>
+										</xp:button>
 										<xp:table style="width:100.0%">
 											<xp:tr>
 												<xp:td>
@@ -103,10 +111,18 @@ pan.setRendered(true);}]]></xp:this.action>
 									<xp:panel>
 										<xp:this.data>
 											<xpt:objectlistSource var="lstPhone"
-												scope="view" buildValues="#{javascript:contactRow.getBO().getPhone();}">
+												scope="request" buildValues="#{javascript:contactRow.getBO().getPhone();}">
 											</xpt:objectlistSource>
 										</xp:this.data>
-
+										<xp:button value="add phone number" id="btnAddPhone">
+											<xp:eventHandler event="onclick" submit="true"
+												refreshMode="complete">
+												<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgPhone").show()}]]></xp:this.action>
+											</xp:eventHandler>
+										</xp:button>
 										<xp:table>
 											<xp:tr>
 												<xp:td>
@@ -155,9 +171,18 @@ pan.setRendered(true);}]]></xp:this.action>
 									<xp:panel>
 										<xp:this.data>
 											<xpt:objectlistSource var="lstMail"
-												scope="view" buildValues="#{javascript:contactRow.getBO().getEMail();}">
+												scope="request" buildValues="#{javascript:contactRow.getBO().getEMail();}">
 											</xpt:objectlistSource>
 										</xp:this.data>
+										<xp:button value="add email" id="btnAddEmail">
+											<xp:eventHandler event="onclick" submit="true"
+												refreshMode="complete">
+												<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgEmail").show()}]]></xp:this.action>
+											</xp:eventHandler>
+										</xp:button>
 										<xp:table>
 											<xp:tr>
 												<xp:td>
@@ -188,10 +213,20 @@ pan.setRendered(true);}]]></xp:this.action>
 								<xe:djTabPane id="djTabPane4" title="Social">
 									<xp:panel>
 										<xp:this.data>
-											<xpt:objectlistSource scope="view" var="lstSocial"
+											<xpt:objectlistSource
+												scope="request" var="lstSocial"
 												buildValues="#{javascript:contactRow.getBO().getSocial();}">
 											</xpt:objectlistSource>
 										</xp:this.data>
+										<xp:button value="add social entity" id="btnAddSocial">
+											<xp:eventHandler event="onclick" submit="true"
+												refreshMode="complete">
+												<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgSocial").show()}]]></xp:this.action>
+											</xp:eventHandler>
+										</xp:button>
 										<xp:table>
 											<xp:tr>
 												<xp:td>

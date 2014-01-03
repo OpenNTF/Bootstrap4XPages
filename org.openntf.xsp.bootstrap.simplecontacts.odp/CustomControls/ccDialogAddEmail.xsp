@@ -44,7 +44,9 @@
 				<xp:eventHandler event="onclick" submit="true"
 					refreshMode="complete">
 					<xp:this.action><![CDATA[#{javascript:contactBean.addEMail(viewScope.BO, email);
-getComponent("dlgEmail").hide()
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();
+getComponent("dlgEmail").hide("main")
 }]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>

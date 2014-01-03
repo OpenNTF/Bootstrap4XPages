@@ -48,7 +48,9 @@
 				<xp:eventHandler event="onclick" submit="true"
 					refreshMode="complete">
 					<xp:this.action><![CDATA[#{javascript:contactBean.addPhone(viewScope.BO, phone);
-getComponent("dlgPhone").hide();}]]></xp:this.action>
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();
+getComponent("dlgPhone").hide("main");}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
 			<xp:button value="Cancel" id="btnCancel">

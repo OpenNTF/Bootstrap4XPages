@@ -46,7 +46,9 @@
 				<xp:eventHandler event="onclick" submit="true"
 					refreshMode="complete">
 					<xp:this.action><![CDATA[#{javascript:contactBean.addSocial(viewScope.BO, social);
-getComponent("dlgSocial").hide();}]]></xp:this.action>
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();
+getComponent("dlgSocial").hide("main");}]]></xp:this.action>
 				</xp:eventHandler></xp:button>
 			<xp:button value="Cancel" id="btnCancel">
 				<xp:eventHandler event="onclick" submit="true"
