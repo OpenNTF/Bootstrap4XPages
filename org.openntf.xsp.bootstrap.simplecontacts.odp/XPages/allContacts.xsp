@@ -28,12 +28,13 @@ pan.setRendered(true);}]]></xp:this.action>
 							<xc:ccButtonsAddInformation></xc:ccButtonsAddInformation>
 							<xe:djTabContainer id="djTabContainer1"
 								doLayout="false" style="width:100%">
-								<xe:djTabPane id="djTabPane1" title="Address"
-									partialRefresh="true">
+								<xe:djTabPane id="djtpAddress"
+									title="Address" partialRefresh="true" partialEvents="true"
+									preventCache="true" refreshOnShow="true">
 									<xp:panel id="panAddress">
 										<xp:this.data>
-											<xpt:objectlistSource var="lstAddress"
-												scope="view">
+											<xpt:objectlistSource
+												var="lstAddress" scope="request">
 												<xpt:this.buildValues><![CDATA[#{javascript:contactRow.getBO().getAddress();
 }]]></xpt:this.buildValues>
 											</xpt:objectlistSource>
