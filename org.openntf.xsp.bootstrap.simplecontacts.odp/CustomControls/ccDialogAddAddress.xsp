@@ -62,9 +62,13 @@
 				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow id="formRow9" label="Address type">
-				<xp:inputText id="inputText8"
+				<xp:comboBox id="comboBox1"
 					value="#{address.addressType}">
-				</xp:inputText>
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript:keywordBean.getAddressTypes()}]]></xp:this.value>
+					</xp:selectItems>
+				</xp:comboBox>
+				
 			</xe:formRow>
 		</xe:formTable>
 		<xp:panel>
@@ -72,6 +76,8 @@
 				<xp:eventHandler event="onclick" submit="true"
 					refreshMode="complete">
 					<xp:this.action><![CDATA[#{javascript:contactBean.addAddress(viewScope.BO, address);
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();
 getComponent("dlgAddress").hide();}]]></xp:this.action>
 				</xp:eventHandler></xp:button>
 			<xp:button value="Cancel" id="btnCancel">
