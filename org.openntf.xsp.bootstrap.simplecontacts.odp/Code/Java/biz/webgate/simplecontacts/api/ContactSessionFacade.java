@@ -23,8 +23,6 @@ public class ContactSessionFacade {
 	public static final String LUPEMAIL_BY_PARENT_ID = "LUPEMailByParentID";
 	public static final String LUPPHONE_BY_PARENT_ID = "LUPPhoneByParentID";
 	public static final String LUPSOCIALENTITY_BY_PARENT_ID = "LUPSocialEntityByParentID";
-	
-
 
 	// Contact API
 	public Contact createContact() {
@@ -37,6 +35,14 @@ public class ContactSessionFacade {
 
 	public void saveContact(Contact con) {
 		ContactStorageService.getInstance().save(con);
+	}
+
+	public void deleteContact(Contact con) {
+		try {
+			ContactStorageService.getInstance().hardDelete(con, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Contact getContactByID(String strID) {
@@ -88,6 +94,14 @@ public class ContactSessionFacade {
 		CompanyStorageService.getInstance().save(comp);
 	}
 
+	public void deleteCompany(Company com) {
+		try {
+			CompanyStorageService.getInstance().hardDelete(com, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	// Address API
 	public Address createNewAddress(String strParentID) {
 		Address adr = AddressStorageService.getInstance().createObject();
@@ -101,6 +115,14 @@ public class ContactSessionFacade {
 
 	public void saveAddress(Address addr) {
 		AddressStorageService.getInstance().save(addr);
+	}
+
+	public void deleteAddress(Address adr) {
+		try {
+			AddressStorageService.getInstance().hardDelete(adr, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	// EMail API
@@ -118,6 +140,14 @@ public class ContactSessionFacade {
 		EMailStorageService.getInstance().save(email);
 	}
 
+	public void deleteEMail(EMail eml) {
+		try {
+			EMailStorageService.getInstance().hardDelete(eml, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	// Phone API
 	public Phone createNewPhone(String strParentID) {
 		Phone phone = PhoneStorageService.getInstance().createObject();
@@ -131,6 +161,14 @@ public class ContactSessionFacade {
 
 	public void savePhone(Phone phone) {
 		PhoneStorageService.getInstance().save(phone);
+	}
+
+	public void deletePhone(Phone phone) {
+		try {
+			PhoneStorageService.getInstance().hardDelete(phone, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Social API
@@ -147,4 +185,13 @@ public class ContactSessionFacade {
 	public void saveSocial(SocialEntity soc) {
 		SocialStorageService.getInstance().save(soc);
 	}
+
+	public void deleteSocial(SocialEntity social) {
+		try {
+			SocialStorageService.getInstance().hardDelete(social, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
