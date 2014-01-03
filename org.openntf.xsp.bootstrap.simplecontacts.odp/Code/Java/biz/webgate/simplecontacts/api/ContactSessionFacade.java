@@ -2,6 +2,8 @@ package biz.webgate.simplecontacts.api;
 
 import java.util.List;
 
+import biz.webgate.simplecontacts.AbstractAddressRelation;
+import biz.webgate.simplecontacts.AbstractBusinessObject;
 import biz.webgate.simplecontacts.Address;
 import biz.webgate.simplecontacts.Company;
 import biz.webgate.simplecontacts.Contact;
@@ -117,9 +119,10 @@ public class ContactSessionFacade {
 		AddressStorageService.getInstance().save(addr);
 	}
 
-	public void deleteAddress(Address adr) {
+	public void deleteAddress(AbstractAddressRelation aar,Address adr) {
 		try {
 			AddressStorageService.getInstance().hardDelete(adr, true);
+			aar.removeAddress(adr);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -140,9 +143,10 @@ public class ContactSessionFacade {
 		EMailStorageService.getInstance().save(email);
 	}
 
-	public void deleteEMail(EMail eml) {
+	public void deleteEMail(AbstractAddressRelation aar, EMail eml) {
 		try {
 			EMailStorageService.getInstance().hardDelete(eml, true);
+			aar.removeEMail(eml);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -163,9 +167,10 @@ public class ContactSessionFacade {
 		PhoneStorageService.getInstance().save(phone);
 	}
 
-	public void deletePhone(Phone phone) {
+	public void deletePhone(AbstractAddressRelation aar,Phone phone) {
 		try {
 			PhoneStorageService.getInstance().hardDelete(phone, true);
+			aar.removePhone(phone);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -186,9 +191,10 @@ public class ContactSessionFacade {
 		SocialStorageService.getInstance().save(soc);
 	}
 
-	public void deleteSocial(SocialEntity social) {
+	public void deleteSocial(Contact con, SocialEntity social) {
 		try {
 			SocialStorageService.getInstance().hardDelete(social, true);
+			con.removeSocial(social);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

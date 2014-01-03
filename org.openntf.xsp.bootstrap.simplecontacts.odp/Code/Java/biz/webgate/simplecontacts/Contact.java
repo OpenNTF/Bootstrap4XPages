@@ -152,4 +152,11 @@ public class Contact extends AbstractAddressRelation implements Serializable {
 		}
 	}
 
+	public void removeSocial(SocialEntity social) {
+		if (m_Social != null) {
+			m_Social.remove(social);
+		}
+
+	}
+
 }
