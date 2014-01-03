@@ -6,9 +6,7 @@
 		<xp:this.facets>
 			<xp:panel xp:key="facetRight">
 				<xpt:oneuitps id="oneuitps1" title="Using DataView"
-					text="In this example are we using a data view UI Element to render the object list datasource."
-					 rendererType="biz.webgate.simplecontacts.bootstrap.uitips">
-
+					text="In this example are we using a data view UI Element to render the object list datasource.">
 				</xpt:oneuitps>
 			</xp:panel>
 			<xc:ccNav xp:key="facetLeft"></xc:ccNav>
@@ -21,41 +19,83 @@ pan.setRendered(true);}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
 				<xc:ccContactNew></xc:ccContactNew>
-				<xe:dataView id="dataView1" columnTitles="false"
-					var="contactRow" collapsibleDetail="true" collapsibleRows="true"
-					pageName="Contact.xsp" rows="10">
+				<xe:dataView id="dataView1" columnTitles="false" var="contactRow"
+					collapsibleDetail="true" collapsibleRows="true" pageName="Contact.xsp"
+					rows="10">
 					<xp:this.facets>
 						<xp:panel xp:key="detail">
 
 							<xc:ccButtonsAddInformation></xc:ccButtonsAddInformation>
 							<xe:djTabContainer id="djTabContainer1"
 								doLayout="true" style="height:100.0px;width:100%">
-								<xe:djTabPane id="djTabPane1"
-									title="Address">
+								<xe:djTabPane id="djTabPane1" title="Address">
 									<xp:panel id="panAddress">
-										fghjk
+										<xp:this.data>
+											<xpt:objectlistSource var="lstAddress"
+												scope="view">
+												<xpt:this.buildValues><![CDATA[#{javascript:contactRow.getBO().getAddress();
+}]]></xpt:this.buildValues>
+											</xpt:objectlistSource>
+										</xp:this.data>
+										<xp:table style="width:100.0%">
+											<xp:tr>
+												<xp:td>
+													<xp:label value="Street" id="lblStreet">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label value="ZIP" id="label2">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label value="Location" id="label3">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label value="Country" id="label4">
+													</xp:label>
+												</xp:td>
+											</xp:tr>
+											<xp:repeat id="repeat1" rows="30"
+												value="#{javascript:lstAddress}" var="addressRow">
+												<xp:tr>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField1"
+															value="#{addressRow.street}">
+														</xp:text></xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField2" value="#{addressRow.ZIP}">
+														</xp:text></xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField3" value="#{addressRow.location}">
+														</xp:text></xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField4" value="#{addressRow.country}">
+														</xp:text></xp:td>
+												</xp:tr>
+											</xp:repeat>
+										</xp:table>
 									</xp:panel>
 								</xe:djTabPane>
-								<xe:djTabPane id="djTabPane2"
-									title="Phone">
+								<xe:djTabPane id="djTabPane2" title="Phone">
 									<xp:panel></xp:panel>
 								</xe:djTabPane>
-								<xe:djTabPane id="djTabPane3"
-									title="Mail">
+								<xe:djTabPane id="djTabPane3" title="Mail">
 									<xp:panel></xp:panel>
 								</xe:djTabPane>
-								<xe:djTabPane id="djTabPane4"
-									title="Social">
+								<xe:djTabPane id="djTabPane4" title="Social">
 									<xp:panel></xp:panel>
 								</xe:djTabPane>
 							</xe:djTabContainer>
 						</xp:panel>
 					</xp:this.facets>
 					<xe:this.data>
-						<xpt:objectlistSource
-							buildValues="#{javascript:contactBean.getAllContacts()}"
-							sortAttribute="LastName" ascending="true" scope="view"
-							var="dsContactList">
+						<xpt:objectlistSource buildValues="#{javascript:contactBean.getAllContacts()}"
+							sortAttribute="LastName" ascending="true" scope="view" var="dsContactList">
 						</xpt:objectlistSource>
 					</xe:this.data>
 					<xe:this.summaryColumn>
