@@ -73,6 +73,9 @@ getComponent("dlgAddress").show()}]]></xp:this.action>
 													<xp:label value="State" id="lblState">
 													</xp:label>
 												</xp:td>
+												<xp:td>
+												</xp:td>
+
 											</xp:tr>
 											<xp:repeat id="repeat1" rows="30"
 												value="#{javascript:lstAddress}" var="addressRow">
@@ -101,6 +104,20 @@ getComponent("dlgAddress").show()}]]></xp:this.action>
 													<xp:td>
 														<xp:text escape="true" id="computedField6" value="#{addressRow.state}">
 														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:image url="#{javascript:@ViewIconUrl(12)}"
+															id="edit">
+															<xp:eventHandler event="onclick" submit="true"
+																refreshMode="complete">
+																<xp:this.action><![CDATA[#{javascript:viewScope.ID = addressRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgAddress").show()}]]></xp:this.action>
+															</xp:eventHandler>
+														</xp:image>
+														<xp:image url="#{javascript:@ViewIconUrl(80)}"
+															id="delete">
+														</xp:image>
 													</xp:td>
 												</xp:tr>
 											</xp:repeat>
@@ -141,6 +158,8 @@ getComponent("dlgPhone").show()}]]></xp:this.action>
 													<xp:label value="Number" id="lblPhoneNumber">
 													</xp:label>
 												</xp:td>
+												<xp:td>
+												</xp:td>
 											</xp:tr>
 											<xp:repeat id="repeat2" rows="30" var="phoneRow"
 												value="#{javascript:lstPhone}">
@@ -161,6 +180,19 @@ getComponent("dlgPhone").show()}]]></xp:this.action>
 													<xp:td>
 														<xp:text escape="true" id="computedField12" value="#{phoneRow.number}">
 														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:image url="#{javascript:@ViewIconUrl(12)}"
+															id="image1">
+														<xp:eventHandler
+															event="onclick" submit="true" refreshMode="complete">
+															<xp:this.action><![CDATA[#{javascript:viewScope.ID = phoneRow.ID;
+viewScope.BO = phoneRow.getBO();
+getComponent("dlgPhone").show()}]]></xp:this.action>
+														</xp:eventHandler></xp:image>
+														<xp:image url="#{javascript:@ViewIconUrl(80)}"
+															id="image2">
+														</xp:image>
 													</xp:td>
 												</xp:tr>
 											</xp:repeat>
@@ -193,6 +225,8 @@ getComponent("dlgEmail").show()}]]></xp:this.action>
 													<xp:label id="lblEMail" value="EMail">
 													</xp:label>
 												</xp:td>
+												<xp:td>
+												</xp:td>
 											</xp:tr>
 											<xp:repeat id="repeat3" rows="30"
 												value="#{javascript:lstMail}" var="mailRow">
@@ -205,6 +239,19 @@ getComponent("dlgEmail").show()}]]></xp:this.action>
 														<xp:text escape="true" id="computedField8" value="#{mailRow.EMail}">
 														</xp:text>
 													</xp:td>
+													<xp:td>
+													<xp:image url="#{javascript:@ViewIconUrl(12)}"
+															id="image3">
+														<xp:eventHandler
+															event="onclick" submit="true" refreshMode="complete">
+															<xp:this.action><![CDATA[#{javascript:viewScope.ID = mailRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgEmail").show()}]]></xp:this.action>
+														</xp:eventHandler></xp:image>
+														<xp:image url="#{javascript:@ViewIconUrl(80)}"
+															id="image4">
+														</xp:image>
+													</xp:td>
 												</xp:tr>
 											</xp:repeat>
 										</xp:table>
@@ -213,9 +260,8 @@ getComponent("dlgEmail").show()}]]></xp:this.action>
 								<xe:djTabPane id="djTabPane4" title="Social">
 									<xp:panel>
 										<xp:this.data>
-											<xpt:objectlistSource
-												scope="request" var="lstSocial"
-												buildValues="#{javascript:contactRow.getBO().getSocial();}">
+											<xpt:objectlistSource scope="request"
+												var="lstSocial" buildValues="#{javascript:contactRow.getBO().getSocial();}">
 											</xpt:objectlistSource>
 										</xp:this.data>
 										<xp:button value="add social entity" id="btnAddSocial">
@@ -241,6 +287,8 @@ getComponent("dlgSocial").show()}]]></xp:this.action>
 													<xp:label value="URL" id="lblURL">
 													</xp:label>
 												</xp:td>
+												<xp:td>
+												</xp:td>
 											</xp:tr>
 											<xp:repeat id="repeat4" rows="30"
 												value="#{javascript:lstSocial}" var="socialRow">
@@ -256,6 +304,19 @@ getComponent("dlgSocial").show()}]]></xp:this.action>
 													<xp:td>
 														<xp:text escape="true" id="computedField15" value="#{socialRow.URL}">
 														</xp:text>
+													</xp:td>
+													<xp:td>
+													<xp:image url="#{javascript:@ViewIconUrl(12)}"
+															id="image5">
+														<xp:eventHandler
+															event="onclick" submit="true" refreshMode="complete">
+															<xp:this.action><![CDATA[#{javascript:viewScope.ID = socialRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgSocial").show()}]]></xp:this.action>
+														</xp:eventHandler></xp:image>
+														<xp:image url="#{javascript:@ViewIconUrl(80)}"
+															id="image6">
+														</xp:image>
 													</xp:td>
 												</xp:tr>
 											</xp:repeat>
