@@ -19,13 +19,21 @@ package org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.outline;
 import javax.faces.context.FacesContext;
 
 import com.ibm.xsp.extlib.component.outline.AbstractOutline;
+import com.ibm.xsp.extlib.component.outline.UIOutlineGeneric;
 import com.ibm.xsp.extlib.renderkit.html_extended.outline.OutlineDropDownButtonRenderer;
+import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlListRenderer;
 import com.ibm.xsp.extlib.tree.ITreeRenderer;
 
 public class BootstrapAccordionRenderer3 extends OutlineDropDownButtonRenderer {
 
     @Override
     protected ITreeRenderer findTreeRenderer(FacesContext context, AbstractOutline outline) {
+    	// ExtLib bug, where the regular outline picks up the accordion theme (style kit family)
+    	// we hard code a workaround here
+    	if(outline instanceof UIOutlineGeneric) {
+    		HtmlListRenderer r = new HtmlListRenderer();
+    		return r;
+    	}
         return new org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.outline.tree.BootstrapAccordionRenderer3(outline.getClientId(context));
     }
 }
