@@ -67,9 +67,13 @@ public abstract class BootstrapResources {
     public static final DojoModuleResource bootstrapDialog3 = new DojoModuleResource("extlib.dijit.BootstrapDialog3"); // $NON-NLS-1$
 
     public static final DojoModuleResource bootstrapPickerCheckbox = new DojoModuleResource("extlib.dijit.BootstrapPickerCheckbox"); // $NON-NLS-1$
+    public static final DojoModuleResource bootstrapPickerCheckbox3 = new DojoModuleResource("extlib.dijit.BootstrapPickerCheckbox3"); // $NON-NLS-1$
     public static final DojoModuleResource bootstrapPickerList = new DojoModuleResource("extlib.dijit.BootstrapPickerList"); // $NON-NLS-1$
+    public static final DojoModuleResource bootstrapPickerList3 = new DojoModuleResource("extlib.dijit.BootstrapPickerList3"); // $NON-NLS-1$
     public static final DojoModuleResource bootstrapPickerListSearch = new DojoModuleResource("extlib.dijit.BootstrapPickerListSearch"); // $NON-NLS-1$
+    public static final DojoModuleResource bootstrapPickerListSearch3 = new DojoModuleResource("extlib.dijit.BootstrapPickerListSearch3"); // $NON-NLS-1$
     public static final DojoModuleResource bootstrapPickerName = new DojoModuleResource("extlib.dijit.BootstrapPickerName"); // $NON-NLS-1$
+    public static final DojoModuleResource bootstrapPickerName3 = new DojoModuleResource("extlib.dijit.BootstrapPickerName3"); // $NON-NLS-1$
     
     public BootstrapResources() {
         this.BLANK_GIF      				  = "/.ibmxspres/.extlib/bootstrap/icons/blank.gif"; // $NON-NLS-1$
