@@ -35,6 +35,6 @@ public class BootstrapSearchOptionsRenderer extends HtmlComboBoxRenderer {
     
     @Override
     public String getStyleClass() {
-        return "form-control search-options applayout-search-options";
+        return "search-options applayout-search-options";
     }
 }

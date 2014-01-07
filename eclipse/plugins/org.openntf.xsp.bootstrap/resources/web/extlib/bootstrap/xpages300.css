@@ -84,7 +84,8 @@
 .applayout-legal {
 }
 .applayout-searchbar {	
-
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 .applayout-searchbar select {
 	margin-right: 7px;
