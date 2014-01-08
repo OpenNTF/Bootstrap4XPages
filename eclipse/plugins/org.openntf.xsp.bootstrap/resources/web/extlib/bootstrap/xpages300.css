@@ -80,6 +80,7 @@
 	padding: 10px 0 10px 0;
 }
 .applayout-footer {
+	display: table; margin-left: auto; margin-right: auto; text-align: center;
 }
 .applayout-legal {
 }

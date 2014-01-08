@@ -789,21 +789,10 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 	protected void writeFooter(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		w.startElement("footer", c);
-		w.writeAttribute("class", "navbar navbar-bottom  applayout-footer", null); // $NON-NLS-1$
-		newLine(w);
-
-		w.startElement("div", c);
-		//w.writeAttribute("class", "", null); // $NON-NLS-1$
-		w.startElement("div", c);
-		w.writeAttribute("style", "display: table; margin-left: auto; margin-right: auto; text-align: center;", null); // $NON-NLS-1$
+		w.writeAttribute("class", "navbar navbar-bottom applayout-footer", null); // $NON-NLS-1$
 		newLine(w);
 
 		writeFooterLinks(context, w, c, configuration);
-
-		w.endElement("div");
-		newLine(w, null); // $NON-NLS-1$ $NON-NLS-2$
-		w.endElement("div");
-		newLine(w, ""); // $NON-NLS-1$ $NON-NLS-2$
 
 		w.endElement("footer");
 		newLine(w, "footer");
