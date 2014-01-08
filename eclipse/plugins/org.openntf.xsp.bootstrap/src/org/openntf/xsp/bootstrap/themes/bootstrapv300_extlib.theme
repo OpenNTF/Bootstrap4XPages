@@ -15,6 +15,22 @@
 			<value>org.openntf.xsp.bootstrap.dialog.BootstrapDialog3</value>
 		</property>
 	</control>
+	
+	<control>
+		<name>Picker.Value</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.picker.BootstrapValuePicker3</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Picker.Name</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.picker.BootstrapValuePicker3</value>
+		</property>
+	</control>
 
 	<control>
 		<name>Outline.Accordion</name>

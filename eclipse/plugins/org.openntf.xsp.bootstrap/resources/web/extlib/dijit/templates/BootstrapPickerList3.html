@@ -1,0 +1,21 @@
+<div class="pickerlist3">
+<style>
+.xspPickerBodyWrapper {border:1px solid #b7b7b7;cursor:pointer;overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none}
+.xspPickerBody { margin:0; padding:0; background:#fff; }
+.xspPickerItemSelected { background:#b7cdee !important; }
+.xspPickerItem {margin:0;user-select: none;-moz-user-select: none;-webkit-user-select: none}
+.xspPickerItem:hover { background:#ffffc8 }
+.xspPickerBody li {padding:2px 2px 2px 2px}
+.xspPickerButton{width:70px!important;margin:0 8px 0 5px;}
+</style>
+<div style="padding:10px">
+	<div dojoAttachPoint="bodyWrapper" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" 
+		 dojoAttachEvent="onclick:_handleClick, ondblclick:_handleDblClick, onkeypress:_handleKeyPress">
+		<ul dojoAttachPoint="containerNode" class="xspPickerBody" style="width: 100%"></ul>
+	</div>
+</div>
+<div class="modal-footer">
+  <button dojoAttachPoint="pkCancel" class="btn btn-default">${PickerList_Cancel}</button>
+  <button dojoAttachPoint="pkOk" class="btn btn-primary">${PickerList_OK}</button>
+</div>
+</div>

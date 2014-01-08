@@ -84,7 +84,8 @@
 .applayout-legal {
 }
 .applayout-searchbar {	
-
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 .applayout-searchbar select {
 	margin-right: 7px;
@@ -164,11 +165,13 @@
   position: fixed;
   top: 10%;
   left: 50%;
-  z-index: 1050;
+  z-index: 1050 !important;
   width: 560px;
   margin-left: -280px;
-  z-index: 1040;
   overflow: none;
+}
+.dijitDialogUnderlayWrapper {
+	z-index: 1049 !important;
 }
 
 /*disabled navigation links*/

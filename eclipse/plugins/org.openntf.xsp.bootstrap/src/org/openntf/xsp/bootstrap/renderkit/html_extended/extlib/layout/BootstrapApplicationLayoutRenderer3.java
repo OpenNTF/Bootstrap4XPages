@@ -406,7 +406,6 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			}
 			w.startElement("div", c); // $NON-NLS-1$
 			w.writeAttribute("class","col-md-4 navbar-search navbar-right input-group applayout-searchbar",null); // $NON-NLS-1$
-			w.writeAttribute("style", "margin-top: 5px; margin-bottom: 5px", null); // $NON-NLS-1$
 			w.writeAttribute("role", "search", null); // $NON-NLS-1$
 			newLine(w);
 
@@ -443,7 +442,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 	protected void writeSearchOptions(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, SearchBar searchBar, ITree tree) throws IOException {
 		w.startElement("div", c); // $NON-NLS-1$
-		//w.writeAttribute("class","input-group-btn",null); // $NON-NLS-1$
+		w.writeAttribute("class","input-group-btn",null); // $NON-NLS-1$
 		newLine(w);
 
 		AbstractTreeRenderer renderer = getSearchOptionsRenderer(context, w, c, configuration, searchBar);
