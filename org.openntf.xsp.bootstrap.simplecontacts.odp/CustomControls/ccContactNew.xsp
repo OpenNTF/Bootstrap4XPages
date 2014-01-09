@@ -75,8 +75,7 @@ var pan = getComponent("panNewContact");
 pan.setRendered(false);
 var dsContactList = getComponent("dataView1").getData();
 dsContactList.refresh();
-var btnCreate = getComponent("btCreateContact");
-btnCreate.setRendered(true);}]]></xp:this.action>
+viewScope.showBtnCreateContact=true;}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
 			<xp:button value="Cancel" id="Cancel">
@@ -86,8 +85,7 @@ btnCreate.setRendered(true);}]]></xp:this.action>
 dsContact.refresh();
 var pan = getComponent("panNewContact");
 pan.setRendered(false);
-var btnCreate = getComponent("btCreateContact");
-btnCreate.setRendered(true);}]]></xp:this.action>
+viewScope.showBtnCreateContact=true;}]]></xp:this.action>
 				</xp:eventHandler></xp:button>
 		</xp:panel>
 	</xp:panel>

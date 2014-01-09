@@ -12,13 +12,13 @@
 			</xp:panel>
 			<xc:ccNav xp:key="facetLeft"></xc:ccNav>
 			<xp:panel id="main" xp:key="facetMiddle">
-				<xp:button value="Create Contact" id="btCreateContact">
+				<xp:button value="Create Contact" id="btCreateContact"
+					rendered="#{javascript:return viewScope.showBtnCreateContact != false}">
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="partial" refreshId="main">
 						<xp:this.action><![CDATA[#{javascript:var pan = getComponent("panNewContact");
 pan.setRendered(true);
-var btnCreate = getComponent("btCreateContact");
-btnCreate.setRendered(false);}]]></xp:this.action>
+viewScope.showBtnCreateContact=false;}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
 				<xc:ccContactNew></xc:ccContactNew>
