@@ -16,7 +16,9 @@
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="partial" refreshId="main">
 						<xp:this.action><![CDATA[#{javascript:var pan = getComponent("panNewContact");
-pan.setRendered(true);}]]></xp:this.action>
+pan.setRendered(true);
+var btnCreate = getComponent("btCreateContact");
+btnCreate.setRendered(false);}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
 				<xc:ccContactNew></xc:ccContactNew>
