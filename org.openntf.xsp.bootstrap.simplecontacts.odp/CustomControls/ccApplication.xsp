@@ -17,7 +17,7 @@
 				navigationPath="#{javascript:compositeData.navigationPath}"
 				legalText="Webgate Consulting AG, Switzerland - 2014"
 				productLogoAlt="Bootstrap4XPages Demo" productLogoHeight=""
-				productLogo="/WebGateLogo_klein.jpg">
+				productLogo="/WebGateLogo.jpg">
 				<xe:this.footerLinks>
 					<xe:basicContainerNode label="Links:">
 						<xe:this.children>
@@ -51,7 +51,7 @@
 							<xe:basicLeafNode label="Flickr"
 								href="http://www.flickr.com/">
 							</xe:basicLeafNode>
-							
+
 						</xe:this.children>
 					</xe:basicContainerNode>
 
