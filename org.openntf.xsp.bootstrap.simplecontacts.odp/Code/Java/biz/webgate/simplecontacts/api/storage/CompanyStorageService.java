@@ -14,7 +14,7 @@ public class CompanyStorageService extends AbstractStorageService<Company> {
 
 	}
 
-	public static CompanyStorageService getInstance() {
+	public static synchronized CompanyStorageService getInstance() {
 		if (m_Service == null) {
 			m_Service = new CompanyStorageService();
 		}

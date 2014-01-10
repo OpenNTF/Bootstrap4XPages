@@ -14,7 +14,7 @@ public class ContactStorageService extends AbstractStorageService<Contact> {
 
 	}
 
-	public static ContactStorageService getInstance() {
+	public static synchronized ContactStorageService getInstance() {
 		if (m_Service == null) {
 			m_Service = new ContactStorageService();
 		}

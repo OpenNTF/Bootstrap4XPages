@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
- replicaid='C1257C5100313BE3'>
-<noteinfo noteid='1e2' unid='CDD212B8BB9EE248C1257C5100464B9B' sequence='5'>
-<created><datetime>20131230T134748,75+01</datetime></created>
-<modified><datetime>20131230T140525,84+01</datetime></modified>
-<revised><datetime>20131230T140525,83+01</datetime></revised>
-<lastaccessed><datetime>20131230T140525,83+01</datetime></lastaccessed>
-<addedtofile><datetime>20131230T134748,76+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></updatedby>
-<wassignedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></wassignedby>
+ replicaid='C1257C51002881FF'>
+<noteinfo noteid='1fa' unid='3ABFED105AA4089AC1257C520024CA53' sequence='2'>
+<created><datetime>20131231T074150,91+01</datetime></created>
+<modified><datetime>20131231T074151,08+01</datetime></modified>
+<revised><datetime>20131231T074151,07+01</datetime></revised>
+<lastaccessed><datetime>20131231T074630,87+01</datetime></lastaccessed>
+<addedtofile><datetime>20131231T074151,06+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></updatedby>
+<wassignedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>

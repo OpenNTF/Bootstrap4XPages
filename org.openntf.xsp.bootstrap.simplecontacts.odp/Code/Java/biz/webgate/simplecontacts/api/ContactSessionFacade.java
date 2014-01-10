@@ -1,9 +1,12 @@
 package biz.webgate.simplecontacts.api;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import com.ibm.xsp.extlib.util.ExtLibUtil;
+
 import biz.webgate.simplecontacts.AbstractAddressRelation;
-import biz.webgate.simplecontacts.AbstractBusinessObject;
 import biz.webgate.simplecontacts.Address;
 import biz.webgate.simplecontacts.Company;
 import biz.webgate.simplecontacts.Contact;
@@ -26,6 +29,8 @@ public class ContactSessionFacade {
 	public static final String LUPPHONE_BY_PARENT_ID = "LUPPhoneByParentID";
 	public static final String LUPSOCIALENTITY_BY_PARENT_ID = "LUPSocialEntityByParentID";
 
+	private static final List<String> LST_OBSERVER = new ArrayList<String>(Arrays.asList("observer"));
+
 	// Contact API
 	public Contact createContact() {
 		return ContactStorageService.getInstance().createObject();
@@ -33,6 +38,10 @@ public class ContactSessionFacade {
 
 	public List<Contact> getAllContacts() {
 		return ContactStorageService.getInstance().getAll("allContacts");
+	}
+
+	public List<Contact> getMyContacts() {
+		return ContactStorageService.getInstance().getAllMyObjects("allContacts", LST_OBSERVER);
 	}
 
 	public void saveContact(Contact con) {
@@ -104,6 +113,10 @@ public class ContactSessionFacade {
 		}
 	}
 
+	public List<Company> getMyCompanys() {
+		return CompanyStorageService.getInstance().getAllMyObjects("allCompanys", LST_OBSERVER);
+	}
+
 	// Address API
 	public Address createNewAddress(String strParentID) {
 		Address adr = AddressStorageService.getInstance().createObject();
@@ -119,7 +132,7 @@ public class ContactSessionFacade {
 		AddressStorageService.getInstance().save(addr);
 	}
 
-	public void deleteAddress(AbstractAddressRelation aar,Address adr) {
+	public void deleteAddress(AbstractAddressRelation aar, Address adr) {
 		try {
 			AddressStorageService.getInstance().hardDelete(adr, true);
 			aar.removeAddress(adr);
@@ -167,7 +180,7 @@ public class ContactSessionFacade {
 		PhoneStorageService.getInstance().save(phone);
 	}
 
-	public void deletePhone(AbstractAddressRelation aar,Phone phone) {
+	public void deletePhone(AbstractAddressRelation aar, Phone phone) {
 		try {
 			PhoneStorageService.getInstance().hardDelete(phone, true);
 			aar.removePhone(phone);
@@ -200,4 +213,32 @@ public class ContactSessionFacade {
 		}
 	}
 
+	// Observer API
+	public void addToObserve(AbstractAddressRelation aar) {
+		try {
+			aar.addObserver(ExtLibUtil.getCurrentSession().getEffectiveUserName());
+			if (aar instanceof Contact) {
+				ContactStorageService.getInstance().save((Contact) aar);
+			}
+			if (aar instanceof Company) {
+				CompanyStorageService.getInstance().save((Company) aar);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void removeToObserve(AbstractAddressRelation aar) {
+		try {
+			aar.removeObserver(ExtLibUtil.getCurrentSession().getEffectiveUserName());
+			if (aar instanceof Contact) {
+				ContactStorageService.getInstance().save((Contact) aar);
+			}
+			if (aar instanceof Company) {
+				CompanyStorageService.getInstance().save((Company) aar);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

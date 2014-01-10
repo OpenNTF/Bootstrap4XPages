@@ -14,7 +14,7 @@ public class SocialStorageService extends AbstractStorageService<SocialEntity> {
 
 	}
 
-	public static SocialStorageService getInstance() {
+	public static synchronized SocialStorageService getInstance() {
 		if (m_Service == null) {
 			m_Service = new SocialStorageService();
 		}

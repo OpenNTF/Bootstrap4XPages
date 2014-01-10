@@ -14,7 +14,7 @@ public class PhoneStorageService extends AbstractStorageService<Phone> {
 
 	}
 
-	public static PhoneStorageService getInstance() {
+	public static synchronized PhoneStorageService getInstance() {
 		if (m_Service == null) {
 			m_Service = new PhoneStorageService();
 		}

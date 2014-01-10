@@ -1,6 +1,5 @@
 package biz.webgate.simplecontacts;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import biz.webgate.simplecontacts.api.ContactSessionFacade;
 import biz.webgate.simplecontacts.api.storage.ContactStorageService;
 
 @DominoStore(Form = "frmCompany", View = "LUPCompanyByID", PrimaryFieldClass = String.class, PrimaryKeyField = "ID")
-public class Company extends AbstractAddressRelation implements Serializable {
+public class Company extends AbstractAddressRelation {
 
 	/**
 	 * 

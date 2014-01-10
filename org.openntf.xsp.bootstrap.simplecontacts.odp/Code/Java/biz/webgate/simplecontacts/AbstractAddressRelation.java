@@ -3,6 +3,8 @@ package biz.webgate.simplecontacts;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openntf.xpt.core.dss.annotations.DominoEntity;
+
 import biz.webgate.simplecontacts.api.ContactSessionFacade;
 import biz.webgate.simplecontacts.api.storage.AddressStorageService;
 import biz.webgate.simplecontacts.api.storage.EMailStorageService;
@@ -17,6 +19,29 @@ public abstract class AbstractAddressRelation extends AbstractBusinessObject {
 	private List<Address> m_Address;
 	private List<EMail> m_EMail;
 	private List<Phone> m_Phone;
+	@DominoEntity(FieldName = "observer")
+	private List<String> m_Observer;
+
+	public void removeObserver(String strObserver) {
+		if (m_Observer != null) {
+			m_Observer.remove(strObserver);
+		}
+	}
+
+	public void addObserver(String strObserver) {
+		if (m_Observer == null) {
+			m_Observer = new ArrayList<String>();
+		}
+		m_Observer.add(strObserver);
+	}
+
+	public List<String> getObserver() {
+		return m_Observer;
+	}
+
+	public void setObserver(List<String> observer) {
+		m_Observer = observer;
+	}
 
 	public AbstractAddressRelation() {
 		super();

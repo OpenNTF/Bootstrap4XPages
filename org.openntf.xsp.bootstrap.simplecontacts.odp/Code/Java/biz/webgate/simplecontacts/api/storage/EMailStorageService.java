@@ -14,7 +14,7 @@ public class EMailStorageService extends AbstractStorageService<EMail> {
 
 	}
 
-	public static EMailStorageService getInstance() {
+	public static synchronized EMailStorageService getInstance() {
 		if (m_Service == null) {
 			m_Service = new EMailStorageService();
 		}
