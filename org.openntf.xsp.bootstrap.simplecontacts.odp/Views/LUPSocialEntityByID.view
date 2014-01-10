@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
- replicaid='C1257C5100313BE3'>
-<noteinfo noteid='1ba' unid='A51CDE839B471022C1257C510034783A' sequence='2'>
-<created><datetime>20131230T103306,50+01</datetime></created>
-<modified><datetime>20131230T103524,70+01</datetime></modified>
-<revised><datetime>20131230T103524,69+01</datetime></revised>
-<lastaccessed><datetime>20131230T103524,69+01</datetime></lastaccessed>
-<addedtofile><datetime>20131230T103306,50+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></updatedby>
-<wassignedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></wassignedby>
+ replicaid='C1257C51002881FF'>
+<noteinfo noteid='18a' unid='C3890EDFF32E2C44C1257C51003F4736' sequence='2'>
+<created><datetime>20131230T123109,98+01</datetime></created>
+<modified><datetime>20131230T123110,12+01</datetime></modified>
+<revised><datetime>20131230T123110,11+01</datetime></revised>
+<lastaccessed><datetime>20131230T123110,12+01</datetime></lastaccessed>
+<addedtofile><datetime>20131230T123110,10+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></updatedby>
+<wassignedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>LUPSocialEntityByID</text></item>
 <item name='$Index' sign='true'><text/></item>

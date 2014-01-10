@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
- replicaid='C1257C5100313BE3'>
-<noteinfo noteid='1ca' unid='12682B4045B22512C1257C510034EC4A' sequence='3'>
-<created><datetime>20131230T103803,62+01</datetime></created>
-<modified><datetime>20131230T103914,65+01</datetime></modified>
-<revised><datetime>20131230T103914,64+01</datetime></revised>
-<lastaccessed><datetime>20131230T103914,64+01</datetime></lastaccessed>
-<addedtofile><datetime>20131230T103803,62+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></updatedby>
-<wassignedby><name>CN=Barbara Hegnauer/O=WGC/C=CH</name></wassignedby>
+ replicaid='C1257C51002881FF'>
+<noteinfo noteid='18e' unid='0A7434705D108442C1257C51003F4737' sequence='2'>
+<created><datetime>20131230T123109,99+01</datetime></created>
+<modified><datetime>20131230T123110,16+01</datetime></modified>
+<revised><datetime>20131230T123110,15+01</datetime></revised>
+<lastaccessed><datetime>20131230T123110,16+01</datetime></lastaccessed>
+<addedtofile><datetime>20131230T123110,14+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></updatedby>
+<wassignedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>LUPPhoneByParentID</text></item>
 <item name='$Index' sign='true'><text/></item>

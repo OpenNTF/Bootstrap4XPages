@@ -10,10 +10,14 @@ import org.openntf.xpt.oneui.component.UITips;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.renderkit.FacesRenderer;
-public class UITipsRenderer extends FacesRenderer{
 
-	
+public class UITipsRenderer extends FacesRenderer {
+
 	public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
+
+		if (!(component instanceof UITips)) {
+			return;
+		}
 		UITips uit = (UITips) component;
 		if (!uit.isRendered()) {
 			return;
@@ -38,7 +42,7 @@ public class UITipsRenderer extends FacesRenderer{
 		if (!StringUtil.isEmpty(strStyle)) {
 			writer.writeAttribute("style", strStyle, null);
 		}
-		//writer.writeAttribute("role", "note", null);
+		// writer.writeAttribute("role", "note", null);
 
 		writeTitle(context, writer, uit, strTitle);
 		writeText(context, writer, uit, strText);
@@ -58,12 +62,12 @@ public class UITipsRenderer extends FacesRenderer{
 
 	private void writeTitle(FacesContext context, ResponseWriter writer, UITips uit, String strTitle) throws IOException {
 		writer.startElement("h4", uit);
-		//writer.startElement("span", null);
-		//writer.writeAttribute("class", "lotusLeft", null);
+		// writer.startElement("span", null);
+		// writer.writeAttribute("class", "lotusLeft", null);
 		if (!StringUtil.isEmpty(strTitle)) {
 			writer.writeText(strTitle, null);
 		}
-		//writer.endElement("span");
+		// writer.endElement("span");
 		writer.endElement("h4");
 
 	}

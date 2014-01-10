@@ -13,7 +13,7 @@ public class AddressStorageService extends AbstractStorageService<Address> {
 	private AddressStorageService() {
 	};
 
-	public static AddressStorageService getInstance() {
+	public static synchronized AddressStorageService getInstance() {
 		if (m_Service == null) {
 			m_Service = new AddressStorageService();
 		}

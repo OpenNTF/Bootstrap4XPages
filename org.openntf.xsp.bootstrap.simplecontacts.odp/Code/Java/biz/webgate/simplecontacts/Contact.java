@@ -15,7 +15,6 @@
  */
 package biz.webgate.simplecontacts;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +28,7 @@ import biz.webgate.simplecontacts.api.storage.SocialStorageService;
 import com.ibm.xsp.http.MimeMultipart;
 
 @DominoStore(Form = "frmContact", View = "LUPContactByID", PrimaryFieldClass = String.class, PrimaryKeyField = "ID")
-public class Contact extends AbstractAddressRelation implements Serializable {
+public class Contact extends AbstractAddressRelation{
 
 	/**
 	 * 

@@ -15,13 +15,11 @@
  */
 package biz.webgate.simplecontacts;
 
-import java.io.Serializable;
-
 import org.openntf.xpt.core.dss.annotations.DominoEntity;
 import org.openntf.xpt.core.dss.annotations.DominoStore;
 
 @DominoStore(Form="frmAddress",View="LUPAddressByID", PrimaryFieldClass=String.class,PrimaryKeyField="ID")
-public class Address extends AbstractBusinessObject implements Serializable {
+public class Address extends AbstractBusinessObject {
 
 	/**
 	 * 
