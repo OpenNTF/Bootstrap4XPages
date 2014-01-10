@@ -40,12 +40,4 @@ public class BootstrapPlaceBarActionsRenderer extends BootstrapNavButtonRenderer
 		}
 		return super.getProperty(prop);
 	}
-
-    @Override
-	protected String getContainerStyleClass(TreeContextImpl node) {
-    	if(node.getDepth()==1) {
-        	return ExtLibUtil.concatStyleClasses(super.getContainerStyleClass(node),"pull-right applayout-placebar-actions");
-    	}
-    	return super.getContainerStyleClass(node);
-    }
 }

@@ -134,9 +134,6 @@
 .nav-search-panel {
 	margin-left: 8px;
 }
-.dbootstrap .form-search button:focus { /* Override .dbootstrap style */
-    outline: 0;
-}
 	
 /* Widgets */
 .widget-section-scroll {
@@ -185,6 +182,13 @@
 .nav, .pagination, .carousel a {
 	cursor: pointer;
 }
+
+/* Submenu don't exist any more in BS 3 - adding them here - Also need some custome JS (see xpagesxxx.js*/
+.dropdown-submenu{position:relative;}
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+.dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
+.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
 
 
 /***********************************************************************	
@@ -284,27 +288,6 @@
 	Dojo 1.8.1 fixes for DBootstrap
 ***********************************************************************/
 
-/* Combo box */
-.dbootstrap .dijitComboBox input.dijitArrowButtonInner {
-    display: inline;			/* Hidden by dbootstrap */
-    text-indent: 0 !important;	/* Makes the arrow displaying */
-    width: 16px;					/* Else, the input box is not sized properly */
-    height: 100%;				/* To fill the box vertically */
-    font-size: 12px;			/* Default to 14px, which doesn't show well */
-    
-    margin: 0;
-	padding: 0;
-	border: 0 none;
-	box-shadow: none;	
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	transition: none;
-	-moz-transition: none;
-    -webkit-transition: none;
-    -o-transition: color 0 ease-in;
-        		
-}
-
 /* Spinner button */
 .dijitSpinner .dijitArrowButtonInner .dijitInputField {
     margin: 0;
@@ -320,99 +303,4 @@
 }
 .dijitSpinnerButtonContainer {
     height: 20px;        		
-}
-
-/* There is a conflict between the dojo dijits and the regular HTML input fields */
-.dbootstrap .dijitInputContainer input, .dbootstrap .dijitInputContainer textarea {
-	margin: 0;
-	padding: 0;
-	border: 0 none;
-	box-shadow: none;	
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	transition: none;
-	-moz-transition: none;
-    -webkit-transition: none;
-    -o-transition: color 0 ease-in;
-}
-.dbootstrap .dijitInputContainer input:focus, .dbootstrap .dijitInputContainer textarea:focus {
-	border: 0 none;
-	box-shadow: none;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-    transition: none;	
-	-moz-transition: none;
-    -webkit-transition: none;
-    -o-transition: color 0 ease-in;
-}
-
-/* Override this dbootstrap style as it breaks the display of Dojo checkboxes (ex: picker dialogs)*/
-.dbootstrap label {
-    display: inline;
-}
-
-/* The field is not matching std bootstrap */
-.dbootstrap fieldset {
-    background-color: white;
-    border: 0 none;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-	margin-bottom: 0;
-    min-height: 0;
-    padding: 0;
-}
-
-/* Fix for the tree */
-.dbootstrap .dijitTreeExpando {
-    background-image: url("/xsp/.ibmxspres/.extlib/bootstrap/bootstrap231/img/glyphicons-halflings.png");
-    height: 14px;
-    width: 14px;
-    opacity: 0.25;
-}
-.dbootstrap .dijitTreeExpandoOpened {
-	/*background-position: -313px -119px */ /*chevron */
-	background-position: -24px -96px;
-}
-.dbootstrap .dijitTreeExpandoClosed {
-	/*background-position: -456px -72px;*/ /*chevron */
-	background-position: 0 -96px;
- }
-.dbootstrap .dijitTreeExpandoLeaf {
- 	background-position: 0px 0px;
-    height: 0px;
-    width: 0px;
-}
-.dbootstrap .dijitTreeIcon {
-    background-image: url("/xsp/.ibmxspres/.extlib/bootstrap/bootstrap231/img/glyphicons-halflings.png");
-    height: 14px;
-    width: 14px;
-    opacity: 0.25;
-}
-.dbootstrap .dijitFolderOpened {
-	background-position: -408px -120px;
-}
-.dbootstrap .dijitFolderClosed {
-	background-position: -384px -120px;
-}
-.dbootstrap .dijitLeaf {
- 	background-position: -24px -24px;
-}
-.dbootstrap .dijitContentPane {
-    padding: 5px 0px 0px 5px; /* dbootstrap makes it 10px all around */
-}
-.dbootstrap .dijitToolbar {
-    margin-bottom: 5px; /* dboostrap sets in to 2- */
-}
-.dbootstrap .dijitSplitterV .dijitSplitterThumb { /* materialize the BorderContainer vertical splitter */
-    background: none repeat scroll 0 0 #AAAAAA;
-    height: 19px;
-    left: 3px;
-    width: 1px;
-}
-.dbootstrap .dijitSplitterH .dijitSplitterThumb { /* materialize the BorderContainer horizontal splitter */
-    background: none repeat scroll 0 0 #AAAAAA;
-    height: 1px;
-    top: 3px;
-    width: 19px;
 }

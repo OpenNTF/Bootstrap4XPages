@@ -16,12 +16,12 @@
 
 package org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree;
 
-import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.util.BootstrapNavButtonRenderer;
+import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.outline.tree.BootstrapDropDownButtonRenderer;
 
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 
-public class BootstrapPlaceBarActionsRenderer3 extends BootstrapNavButtonRenderer {
+public class BootstrapPlaceBarActionsRenderer3 extends BootstrapDropDownButtonRenderer {
     
     private static final long serialVersionUID = 1L;
 
@@ -40,12 +40,4 @@ public class BootstrapPlaceBarActionsRenderer3 extends BootstrapNavButtonRendere
 		}
 		return super.getProperty(prop);
 	}
-
-    @Override
-	protected String getContainerStyleClass(TreeContextImpl node) {
-    	if(node.getDepth()==1) {
-        	return ExtLibUtil.concatStyleClasses(super.getContainerStyleClass(node),"navbar-right applayout-placebar-actions");
-    	}
-    	return super.getContainerStyleClass(node);
-    }
 }
