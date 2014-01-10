@@ -441,16 +441,18 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	}
 
 	protected void writeSearchOptions(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, SearchBar searchBar, ITree tree) throws IOException {
-		w.startElement("div", c); // $NON-NLS-1$
-		w.writeAttribute("class","input-group-btn",null); // $NON-NLS-1$
-		newLine(w);
-
 		AbstractTreeRenderer renderer = getSearchOptionsRenderer(context, w, c, configuration, searchBar);
 		if (renderer != null) {
+			w.startElement("div", c); // $NON-NLS-1$
+			w.writeAttribute("class","input-group-btn",null); // $NON-NLS-1$
+			// Feels like a hack...
+			w.writeAttribute("style","width: 30%",null); // $NON-NLS-1$
+			newLine(w);
+			
 			renderer.render(context, c, "so", tree, w); // $NON-NLS-1$
+			
+			w.endElement("div"); // $NON-NLS-1$
 		}
-		
-		w.endElement("div"); // $NON-NLS-1$
 	}
 
 	protected AbstractTreeRenderer getSearchOptionsRenderer(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, SearchBar searchBar) {
@@ -602,7 +604,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		w.endElement("div"); // $NON-NLS-1$
 
 		w.startElement("div", c);
-		w.writeAttribute("class", "applayout-placebar-actions", null); // $NON-NLS-1$
+		w.writeAttribute("class", "navbar navbar-right applayout-placebar-actions", null); // $NON-NLS-1$
 		writePlaceBarActions(context, w, c, configuration);
 		UIComponent cPlaceBarActions = c.getPlaceBarActions();
 		if (!isEmptyComponent(cPlaceBarActions)) {

@@ -55,5 +55,11 @@
 		<content-type>application/x-javascript</content-type>
 		<href>/.ibmxspres/.extlib/bootstrap/bootstrap231/js/bootstrap.js</href>
 	</resource>
+ 
+	<!-- XPages/Bootstrap specific JS -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages231.js</href>
+	</resource>
 
 </theme>
