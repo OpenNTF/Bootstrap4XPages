@@ -74,7 +74,8 @@ dsContact.refresh();
 var pan = getComponent("panNewContact");
 pan.setRendered(false);
 var dsContactList = getComponent("dataView1").getData();
-dsContactList.refresh();}]]></xp:this.action>
+dsContactList.refresh();
+viewScope.showBtnCreateContact=true;}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
 			<xp:button value="Cancel" id="Cancel">
@@ -83,7 +84,8 @@ dsContactList.refresh();}]]></xp:this.action>
 					<xp:this.action><![CDATA[#{javascript:var dsContact =xptBean.findDataSource("panNewContact","newContact");
 dsContact.refresh();
 var pan = getComponent("panNewContact");
-pan.setRendered(false);}]]></xp:this.action>
+pan.setRendered(false);
+viewScope.showBtnCreateContact=true;}]]></xp:this.action>
 				</xp:eventHandler></xp:button>
 		</xp:panel>
 	</xp:panel>
