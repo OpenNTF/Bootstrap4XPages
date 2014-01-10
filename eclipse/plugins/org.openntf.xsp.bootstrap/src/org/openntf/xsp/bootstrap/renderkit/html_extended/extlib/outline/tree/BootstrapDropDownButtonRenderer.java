@@ -26,6 +26,7 @@ import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.util.BootstrapNa
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.tree.ITreeNode;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
+import com.ibm.xsp.renderkit.html_extended.RenderUtil;
 import com.ibm.xsp.util.JSUtil;
 
 
@@ -41,15 +42,37 @@ public class BootstrapDropDownButtonRenderer extends BootstrapNavButtonRenderer 
 		return false;
 	}
 	
+    @Override
+	protected void startRenderContainer(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
+        int depth = tree.getDepth();
+        if(depth==1) {
+            writer.startElement("div",null);
+            writer.writeAttribute("class", "btn-group", null); // $NON-NLS-1$
+        } else {
+        	super.startRenderContainer(context, writer, tree);
+        }
+    }
+    
+    @Override
+    protected void endRenderContainer(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
+        int depth = tree.getDepth();
+        if(depth==1) {
+            writer.endElement("div");
+            writer.write('\n');
+        } else {
+        	super.endRenderContainer(context, writer, tree);
+        }
+    }
 
     @Override
-    protected void renderEntryItemContent(FacesContext context, ResponseWriter writer, TreeContextImpl tree, boolean enabled, boolean selected) throws IOException {
-        boolean leaf = tree.getNode().getType() == ITreeNode.NODE_LEAF;
-        if (leaf || tree.getDepth()>2) {
-            super.renderEntryItemContent(context, writer, tree, enabled, selected);
-        }
-        else {
+	protected void renderEntryNode(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
+        int depth = tree.getDepth();
+        if(depth==2) {
+            boolean enabled = tree.getNode().isEnabled(); 
+            boolean selected = tree.getNode().isSelected();
             renderPopupButton(context, writer, tree, enabled, selected);
+        } else {
+        	super.renderEntryNode(context, writer, tree);
         }
     }
 
@@ -66,15 +89,25 @@ public class BootstrapDropDownButtonRenderer extends BootstrapNavButtonRenderer 
 	}
 
     protected void renderPopupButton(FacesContext context, ResponseWriter writer, TreeContextImpl tree, boolean enabled, boolean selected) throws IOException {
+    	boolean popup = tree.getNode().getType()==ITreeNode.NODE_CONTAINER; 
+
+    	writer.startElement("div",null); //$NON-NLS-1$
+        writer.writeAttribute("class", "btn-group", null); // $NON-NLS-1$
+    	
         writer.startElement("button",null); //$NON-NLS-1$
+        writer.writeAttribute("type", "button", null); // $NON-NLS-1$
         
-        // A popup button requires an id
-        String clientId = tree.getClientId(context,"ab",1); // $NON-NLS-1$
-        if(StringUtil.isNotEmpty(clientId)) {
-            writer.writeAttribute("id", clientId, null); // $NON-NLS-1$
+        if(popup) {
+            // A popup button requires an id
+            String clientId = tree.getClientId(context,"ab",1); // $NON-NLS-1$
+            if(StringUtil.isNotEmpty(clientId)) {
+                writer.writeAttribute("id", clientId, null); // $NON-NLS-1$
+            }
+        	writer.writeAttribute("class","btn btn-default dropdown-toggle",null); // $NON-NLS-1$ $NON-NLS-2$
+        	writer.writeAttribute("data-toggle","dropdown",null); // $NON-NLS-1$ $NON-NLS-2$
+        } else {
+        	writer.writeAttribute("class","btn btn-default",null); // $NON-NLS-1$ $NON-NLS-2$
         }
-        writer.writeAttribute("class","btn dropdown-toggle",null); // $NON-NLS-1$ $NON-NLS-2$
-        writer.writeAttribute("data-toggle","dropdown",null); // $NON-NLS-1$ $NON-NLS-2$
 
         String image = tree.getNode().getImage();
         boolean hasImage = StringUtil.isNotEmpty(image);
@@ -99,23 +132,48 @@ public class BootstrapDropDownButtonRenderer extends BootstrapNavButtonRenderer 
             writer.endElement("img"); // $NON-NLS-1$
         }
         
+        // Add the action if necessary
+        if(!popup && enabled) {
+            String href = tree.getNode().getHref();
+            String onclick = findNodeOnClick(tree);
+            if (StringUtil.isNotEmpty(onclick)) {
+                writer.writeAttribute("onclick", onclick, null); // $NON-NLS-1$
+            } else if (StringUtil.isNotEmpty(href)) {
+                StringBuilder b = new StringBuilder();
+                b.append("window.location.href='"); // $NON-NLS-1$
+                JSUtil.appendJavaScriptString(b,RenderUtil.formatLinkRef(context,href));
+                b.append("'");
+                writer.writeAttribute("onclick", b.toString(), null); // $NON-NLS-1$
+            }           
+        }
+        
         // Render the text
         String label = tree.getNode().getLabel();
         if(StringUtil.isNotEmpty(label)) {
             writer.writeText(label, "label"); // $NON-NLS-1$
         }
 
-        writePopupImage(context, writer, tree);
+        if(popup) {
+        	writePopupImage(context, writer, tree);
+        }
 
         writer.endElement("button");//$NON-NLS-1$
+        JSUtil.writeln(writer);
+        
+        // Render the children
+        renderChildren(context, writer, tree);
+
+        writer.endElement("div");//$NON-NLS-1$
         JSUtil.writeln(writer);
     }
     
     @Override
 	protected void renderEntryItemLinkAttributes(FacesContext context, ResponseWriter writer, TreeContextImpl tree, boolean enabled, boolean selected) throws IOException {
-//    	if(tree.getNode().getType()==ITreeNode.NODE_CONTAINER) {
-//	        writer.writeAttribute("class","dropdown-toggle",null); // $NON-NLS-1$ $NON-NLS-2$
-//	        writer.writeAttribute("data-toggle","dropdown",null); // $NON-NLS-1$ $NON-NLS-2$
-//    	}
-    }
+    	boolean popup = tree.getNode().getType()==ITreeNode.NODE_CONTAINER;
+    	if(popup) {
+            writer.writeAttribute("class", "dropdown-toggle", null); // $NON-NLS-1$
+            writer.writeAttribute("data-toggle", "dropdown", null); // $NON-NLS-1$
+            writer.writeAttribute("href", "#", null); // $NON-NLS-1$
+        }
+   }
 }

@@ -59,12 +59,13 @@ public class BootstrapNavRenderer extends HtmlListRenderer {
     @Override
 	protected String getItemStyleClass(TreeContextImpl tree, boolean enabled, boolean selected) {
     	String clazz=null;
+		clazz = ExtLibUtil.concatStyleClasses(clazz, "menu-item");
     	if(tree.getNode().getType()==ITreeNode.NODE_SEPARATOR) {
     		return "divider";
     	}
     	if(tree.getNode().getType()==ITreeNode.NODE_CONTAINER) {
         	if(tree.getDepth()>2) {
-        		clazz = ExtLibUtil.concatStyleClasses(clazz, "dropdown-submenu");
+        		clazz = ExtLibUtil.concatStyleClasses(clazz, "dropdown dropdown-submenu");
         	} else {
         		clazz = ExtLibUtil.concatStyleClasses(clazz, "dropdown");
         	}

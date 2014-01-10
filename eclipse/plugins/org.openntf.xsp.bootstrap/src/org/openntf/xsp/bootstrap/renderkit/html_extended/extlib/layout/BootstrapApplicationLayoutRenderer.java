@@ -557,7 +557,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		w.endElement("div"); // $NON-NLS-1$
 
 		w.startElement("div", c);
-		w.writeAttribute("class", "applayout-placebar-actions", null); // $NON-NLS-1$
+		w.writeAttribute("class", "navbar pull-right applayout-placebar-actions", null); // $NON-NLS-1$
 		writePlaceBarActions(context, w, c, configuration);
 		UIComponent cPlaceBarActions = c.getPlaceBarActions();
 		if (!isEmptyComponent(cPlaceBarActions)) {
