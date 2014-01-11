@@ -16,9 +16,21 @@
 
 package org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.data;
 
+import java.io.IOException;
+
+import javax.faces.component.NamingContainer;
+import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
+
 import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
+import com.ibm.commons.util.StringUtil;
+import com.ibm.xsp.extlib.component.data.AbstractDataView;
+import com.ibm.xsp.extlib.component.data.UIDataView;
 import com.ibm.xsp.extlib.renderkit.html_extended.data.DataViewRenderer;
+import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
+import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
+import com.ibm.xsp.util.JSUtil;
 
 
 /**
@@ -29,8 +41,6 @@ public class BootstrapCustomViewRenderer extends DataViewRenderer {
     @Override
     protected Object getProperty(int prop) {
         switch(prop) {
-            // TODO the AbstractWebDataViewRenderer has hard-coded the width and height of this gif
-            // as 16x16 - the width and height should be specified here along with the gif name.
             case PROP_BLANKIMG:                 return BootstrapResources.get().BLANK_GIF;
             // note, for an Alt, there's a difference between the empty string and null
             case PROP_BLANKIMGALT:              return ""; //$NON-NLS-1$
@@ -52,14 +62,11 @@ public class BootstrapCustomViewRenderer extends DataViewRenderer {
             case PROP_TABLECLASS:               return "clearfix table"; // $NON-NLS-1$
             case PROP_TABLEROWEXTRA:            return "lotusMeta lotusNowrap"; // $NON-NLS-1$
             
-            //case PROP_COLLAPSEICON:             return "/.ibmxspres/.extlib/bootstrap/icons/view_expanded.png"; // $NON-NLS-1$
             case PROP_COLLAPSEICON:             return BootstrapResources.get().BLANK_GIF;
-            case PROP_COLLAPSEICONSTYLE:        return "width:17.0px;height:17.0px;padding-right:3px"; // $NON-NLS-1$
+            case PROP_COLLAPSEICONSTYLE:        return "padding-right:3px"; // $NON-NLS-1$
             case PROP_COLLAPSEICONCLASS: 		return BootstrapResources.get().getIconClass("minus-sign")+" icon-lighter";	
-            //case PROP_EXPANDICON:               return "/.ibmxspres/.extlib/bootstrap/icons/view_collapsed.png"; // $NON-NLS-1$
             case PROP_EXPANDICON:               return BootstrapResources.get().BLANK_GIF;            
-            case PROP_EXPANDICONSTYLE:          return "width:17.0px;height:17.0px;padding-right:3px"; // $NON-NLS-1$
-            //case PROP_EXPANDICONCLASS: 			return "icon-lighter";	
+            case PROP_EXPANDICONSTYLE:          return "padding-right:3px"; // $NON-NLS-1$
             case PROP_EXPANDICONCLASS: 			return BootstrapResources.get().getIconClass("plus-sign")+" icon-lighter";	
             
             case PROP_TABLEROWINDENTPX:         return 10;
@@ -76,5 +83,118 @@ public class BootstrapCustomViewRenderer extends DataViewRenderer {
             case PROP_TABLEHDRCOLIMAGE_SORT_HEIGHT:          return "13"; //$NON-NLS-1$
         }
         return super.getProperty(prop);
+    }
+    
+    @Override
+	protected void writeShowHideDetailContent(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
+        if(!viewDef.hasSummary || !viewDef.hasDetail) {
+            return;
+        }
+        
+        // In case this is diabled for this particular row
+        if(viewDef.rowDisableHideRow) {
+            return;
+        }
+        
+        boolean detailsOnClient = viewDef.detailsOnClient;
+        String linkId = c.getClientId(context) + (viewDef.rowDetailVisible?HIDE_DELIMITER:SHOW_DELIMITER) + viewDef.rowPosition;
+
+        w.startElement("a",c);
+        w.writeAttribute("id",linkId,null); // $NON-NLS-1$
+        w.writeAttribute("href","javascript:;",null); // $NON-NLS-1$ $NON-NLS-2$
+        //LHEY97CCSZ adding the role=button
+        w.writeAttribute("role", "button", null); // $NON-NLS-1$ // $NON-NLS-2$
+        String label = (String)getProperty(viewDef.rowDetailVisible ? PROP_HIDEICONDETAILSTOOLTIP : PROP_SHOWICONDETAILSTOOLTIP);
+        if(StringUtil.isNotEmpty(label)) {
+            w.writeAttribute("title", label, null); // $NON-NLS-1$
+            w.writeAttribute("aria-label", label, null); // $NON-NLS-1$
+        }
+        
+        if(detailsOnClient) {
+            StringBuilder b = new StringBuilder();
+            b.append(viewDef.showHideDetailFunctionName);
+            b.append("(");
+            JSUtil.addSingleQuoteString(b,Integer.toString(viewDef.dataModel.getRowIndex()));
+            b.append(",");
+            JSUtil.addSingleQuoteString(b,viewDef.rowPosition);
+            b.append(")");
+            w.writeAttribute("onclick","javascript:"+b.toString(),null); // $NON-NLS-1$ $NON-NLS-2$
+        }
+        String clazz = (String)getProperty(viewDef.rowDetailVisible?PROP_HIDEICONDETAILSCLASS:PROP_SHOWICONDETAILSCLASS);
+       
+        w.startElement("span",c); // $NON-NLS-1$    
+        w.writeAttribute("class",clazz,null); // $NON-NLS-1$
+   
+        if( viewDef.rowDetailVisible ){
+            w.writeAttribute("title", "Hide",null); // $NLS-AbstractWebDataViewRenderer.Hide_HideDetailIconAlt-1$
+        }else{
+        	 w.writeAttribute("title", "Show",null); // $NLS-AbstractWebDataViewRenderer.Show-1$
+        }
+        w.endElement("span"); // $NON-NLS-1$
+        w.endElement("a");
+
+        if(!detailsOnClient) {
+            if(viewDef.viewRowRefresh) {
+                String refreshId = c.getClientId(context)+NamingContainer.SEPARATOR_CHAR+UIDataView.ROW_ID;
+                setupSubmitOnClick(context, c, linkId, linkId, refreshId);
+            } else {
+                setupSubmitOnClick(context, c, linkId, linkId, null);
+            }
+        }
+    }
+    
+    @Override
+	protected void writeExpandCollapseIcon(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
+        boolean leaf = isRowLeaf(context, c, viewDef);
+        if(leaf) {
+            String icon = (String)getProperty(PROP_EMPTYICON);
+            if(icon!=null) {
+                w.startElement("img",c); // $NON-NLS-1$
+                w.writeAttribute("src",HtmlRendererUtil.getImageURL(context,icon),null); // $NON-NLS-1$
+                String iconAlt = (String) getProperty(PROP_EMPTYICONALT);
+                if( ExtLibRenderUtil.isAltPresent(iconAlt) ){
+                    // "" - present but empty
+                    w.writeAttribute("alt",iconAlt,null); //$NON-NLS-1$
+                }
+                String style = (String)getProperty(PROP_EMPTYICONSTYLE);
+                if(StringUtil.isNotEmpty(style)) {
+                    w.writeAttribute("style",style,null); // $NON-NLS-1$
+                }
+                String clazz = (String)getProperty(PROP_EMPTYICONCLASS);
+                if(StringUtil.isNotEmpty(clazz)) {
+                    w.writeAttribute("class",clazz,null); // $NON-NLS-1$
+                }
+                w.endElement("img"); // $NON-NLS-1$
+            }
+        } else {
+            boolean expanded = isRowExpanded(context, c, viewDef);
+            String icon = (String)getProperty(expanded ? PROP_COLLAPSEICON : PROP_EXPANDICON);
+            if(icon!=null) {
+                String linkId = c.getClientId(context) + (expanded?SHRINK_DELIMITER:EXPAND_DELIMITER) + viewDef.rowPosition;
+                w.startElement("a",c);
+                w.writeAttribute("id",linkId,null); // $NON-NLS-1$
+                w.writeAttribute("href","javascript:;",null); // $NON-NLS-1$ $NON-NLS-2$
+                //LHEY97CCSZ adding the role=button
+                w.writeAttribute("role", "button", null); // $NON-NLS-1$ // $NON-NLS-2$
+                String iconAlt = (String) getProperty(expanded? PROP_COLLAPSEICONALT : PROP_EXPANDICONALT);
+                w.writeAttribute("title", iconAlt, null); //$NON-NLS-1$
+                w.writeAttribute("aria-label", iconAlt, null); //$NON-NLS-1$
+
+                w.startElement("span",c); // $NON-NLS-1$
+                w.writeAttribute("title", iconAlt, null); //$NON-NLS-1$
+                String style = (String)getProperty(expanded ? PROP_COLLAPSEICONSTYLE : PROP_EXPANDICONSTYLE);
+                if(StringUtil.isNotEmpty(style)) {
+                    w.writeAttribute("style",style,null); // $NON-NLS-1$
+                }
+                String clazz = (String)getProperty(expanded ? PROP_COLLAPSEICONCLASS : PROP_EXPANDICONCLASS);
+                if(StringUtil.isNotEmpty(clazz)) {
+                    w.writeAttribute("class",clazz,null); // $NON-NLS-1$
+                }
+                w.endElement("span"); // $NON-NLS-1$
+                w.endElement("a");
+                
+                setupSubmitOnClick(context, c, linkId, linkId, null);
+            }
+        }
     }
 }
