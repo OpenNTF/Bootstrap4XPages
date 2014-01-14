@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xpt="http://www.openntf.org/xsp/xpt">
 
-	<xc:ccApplication>
+	<xc:ccApplication pageTitle="My Contacts">
 		<xp:this.facets>
 			<xc:ccNav xp:key="facetLeft"></xc:ccNav>
 			<xp:panel xp:key="facetMiddle" id="panMyContacts">
@@ -17,26 +17,31 @@
 						<xp:td style="width:20px"></xp:td>
 						<xp:td style="width:20px"></xp:td>
 						<xp:td>
-							<xp:label value="Firstname" id="lblFirstname">
+							<xp:label value="Firstname"
+								id="lblFirstname">
 							</xp:label>
 						</xp:td>
 						<xp:td>
-							<xp:label value="Middlename" id="lblMiddlename">
+							<xp:label value="Middlename"
+								id="lblMiddlename">
 							</xp:label>
 						</xp:td>
 						<xp:td>
-							<xp:label value="Lastname" id="lblLastname">
+							<xp:label value="Lastname"
+								id="lblLastname">
 							</xp:label>
 						</xp:td>
 						<xp:td>
 							<xp:label value="Title" id="lblTitle"></xp:label>
 						</xp:td>
 						<xp:td>
-							<xp:label value="Salutation" id="lblSalutation">
+							<xp:label value="Salutation"
+								id="lblSalutation">
 							</xp:label>
 						</xp:td>
 						<xp:td>
-							<xp:label value="Birthday" id="lblBirthday">
+							<xp:label value="Birthday"
+								id="lblBirthday">
 							</xp:label>
 						</xp:td>
 					</xp:tr>
@@ -52,9 +57,10 @@
 
 
 									<xp:eventHandler event="onclick"
-										submit="true" refreshMode="partial" execMode="partial" execId="panMyContacts" refreshId="panMyContacts">
+										submit="true" refreshMode="partial" execMode="partial"
+										execId="panMyContacts" refreshId="panMyContacts">
 										<xp:this.action><![CDATA[#{javascript:contactBean.removeToObserve(contact.getBO());
-var dsMyContacts = getComponent("panMyContacts").getData();
+var dsMyContacts = xptBean.findDataSource("panMyContacts","myContacts");
 dsMyContacts.refresh();}]]></xp:this.action>
 									</xp:eventHandler>
 								</xp:image>
@@ -70,27 +76,33 @@ dsMyContacts.refresh();}]]></xp:this.action>
 								</xp:image>
 							</xp:td>
 							<xp:td>
-								<xp:text escape="true" id="firstname" value="#{contact.firstName}">
+								<xp:text escape="true" id="firstname"
+									value="#{contact.firstName}">
 								</xp:text>
 							</xp:td>
 							<xp:td>
-								<xp:text escape="true" id="computedField1" value="#{contact.middleName}">
+								<xp:text escape="true"
+									id="computedField1" value="#{contact.middleName}">
 								</xp:text>
 							</xp:td>
 							<xp:td>
-								<xp:text escape="true" id="computedField2" value="#{contact.lastName}">
+								<xp:text escape="true"
+									id="computedField2" value="#{contact.lastName}">
 								</xp:text>
 							</xp:td>
 							<xp:td>
-								<xp:text escape="true" id="computedField3" value="#{contact.title}">
+								<xp:text escape="true"
+									id="computedField3" value="#{contact.title}">
 								</xp:text>
 							</xp:td>
 							<xp:td>
-								<xp:text escape="true" id="computedField4" value="#{contact.salutation}">
+								<xp:text escape="true"
+									id="computedField4" value="#{contact.salutation}">
 								</xp:text>
 							</xp:td>
 							<xp:td>
-								<xp:text escape="true" id="computedField5" value="#{contact.birthday}">
+								<xp:text escape="true"
+									id="computedField5" value="#{contact.birthday}">
 								</xp:text>
 							</xp:td>
 

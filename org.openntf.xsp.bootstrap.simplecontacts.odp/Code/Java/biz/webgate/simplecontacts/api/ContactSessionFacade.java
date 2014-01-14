@@ -33,7 +33,13 @@ public class ContactSessionFacade {
 
 	// Contact API
 	public Contact createContact() {
-		return ContactStorageService.getInstance().createObject();
+		Contact conCurrent = ContactStorageService.getInstance().createObject();
+		try {
+			conCurrent.addObserver(ExtLibUtil.getCurrentSession().getEffectiveUserName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return conCurrent;
 	}
 
 	public List<Contact> getAllContacts() {

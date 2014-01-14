@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xpt="http://www.openntf.org/xsp/xpt">
 	<xc:ccApplication navigationPath="allContacts"
-		pageTitle="Simple Contacts">
+		pageTitle="All Contacts">
 		<xp:this.facets>
 			<xp:panel xp:key="facetRight">
 				<xpt:oneuitps id="oneuitps1" title="Using DataView"
@@ -27,19 +27,20 @@ viewScope.showBtnCreateContact=false;}]]></xp:this.action>
 					pageName="Contact.xsp" rows="10">
 					<xp:this.facets>
 						<xp:panel xp:key="detail">
-						<xp:link escape="true" text="add to my contacts"
-							id="lnkAddWatchlist">
-							<xp:image id="image7"
-								url="#{javascript:@ViewIconUrl(182)}"
-								alt="add to my contacts watchlist"
-								title="add to my contacts watchlist">
-							</xp:image>
-							&#160;
-							<xp:eventHandler event="onclick"
-								submit="true" refreshMode="complete">
-								<xp:this.action><![CDATA[#{javascript:contactBean.addToObserve(contactRow.getBO());}]]></xp:this.action>
-							</xp:eventHandler></xp:link>
-						<xe:djTabContainer id="djTabContainer1"
+							<xp:link escape="true"
+								text="add to my contacts" id="lnkAddWatchlist">
+								<xp:image id="image7"
+									url="#{javascript:@ViewIconUrl(182)}"
+									alt="add to my contacts watchlist"
+									title="add to my contacts watchlist">
+								</xp:image>
+								&#160;
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:contactBean.addToObserve(contactRow.getBO());}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xe:djTabContainer id="djTabContainer1"
 								doLayout="false" style="width:100%">
 								<xe:this.selectedTab><![CDATA[#{javascript:viewScope.get(contactRow.ID +"_selTab")}]]></xe:this.selectedTab>
 								<xe:djTabPane id="djTabAddress"
@@ -465,11 +466,12 @@ dsOL.refresh();}]]></xp:this.action>
 					</xe:this.summaryColumn>
 				</xe:dataView>
 
-				<xe:dialog id="dlgAddress" title="Address information">
+				<xe:dialog id="dlgAddress"
+					title="Address information">
 					<xc:ccDialogAddAddress></xc:ccDialogAddAddress>
 				</xe:dialog>
 				<xe:dialog id="dlgPhone" title="Phone number">
-						<xc:ccDialogAddPhone></xc:ccDialogAddPhone>
+					<xc:ccDialogAddPhone></xc:ccDialogAddPhone>
 				</xe:dialog>
 				<xe:dialog id="dlgEmail" title="Email">
 					<xc:ccDialogAddEmail></xc:ccDialogAddEmail>

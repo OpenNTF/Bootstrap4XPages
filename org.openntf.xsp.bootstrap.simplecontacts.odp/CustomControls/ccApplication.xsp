@@ -17,7 +17,7 @@
 				navigationPath="#{javascript:compositeData.navigationPath}"
 				legalText="Webgate Consulting AG, Switzerland - 2014"
 				productLogoAlt="Bootstrap4XPages Demo" productLogoHeight=""
-				productLogo="/WebGateLogo.jpg">
+				productLogo="/simpleContacts.png">
 				<xe:this.footerLinks>
 					<xe:basicContainerNode label="Links:">
 						<xe:this.children>
