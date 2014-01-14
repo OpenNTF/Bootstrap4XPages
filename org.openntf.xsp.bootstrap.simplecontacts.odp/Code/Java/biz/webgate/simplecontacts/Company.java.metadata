@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257C51002881FF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="176" sequence="8" unid="858FFADB638E4200C1257C51002A7A0B">
+<noteinfo noteid="176" sequence="25" unid="858FFADB638E4200C1257C51002A7A0B">
 <created><datetime>20131230T084357,55+01</datetime></created>
-<modified><datetime>20131230T084924,72+01</datetime></modified>
-<revised><datetime>20131230T084924,71+01</datetime></revised>
-<lastaccessed><datetime>20131230T084924,72+01</datetime></lastaccessed>
+<modified><datetime>20140103T131139,05+01</datetime></modified>
+<revised><datetime>20140103T131139,04+01</datetime></revised>
+<lastaccessed><datetime>20140103T131139,05+01</datetime></lastaccessed>
 <addedtofile><datetime>20131230T084357,56+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></updatedby>
 <wassignedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></wassignedby>
 <item name="$Flags"><text>34567Cg~[</text></item>
 <item name="$TITLE"><text>biz/webgate/simplecontacts/Company.java</text></item>
+
+
+
 <item name="$DesignerVersion"><text>8.5.3</text></item>
 
 

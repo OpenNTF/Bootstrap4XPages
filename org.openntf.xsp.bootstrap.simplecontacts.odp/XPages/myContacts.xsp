@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xpt="http://www.openntf.org/xsp/xpt">
+
+	<xc:ccApplication pageTitle="My Contacts">
+		<xp:this.facets>
+			<xc:ccNav xp:key="facetLeft"></xc:ccNav>
+			<xp:panel xp:key="facetMiddle" id="panMyContacts">
+				<xp:this.data>
+					<xpt:objectlistSource var="myContacts"
+						buildValues="#{javascript:contactBean.getMyContacts();}">
+					</xpt:objectlistSource>
+				</xp:this.data>
+
+				<xp:table style="width:100.0%">
+					<xp:tr>
+						<xp:td style="width:20px"></xp:td>
+						<xp:td style="width:20px"></xp:td>
+						<xp:td>
+							<xp:label value="Firstname"
+								id="lblFirstname">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:label value="Middlename"
+								id="lblMiddlename">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:label value="Lastname"
+								id="lblLastname">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:label value="Title" id="lblTitle"></xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:label value="Salutation"
+								id="lblSalutation">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:label value="Birthday"
+								id="lblBirthday">
+							</xp:label>
+						</xp:td>
+					</xp:tr>
+
+					<xp:repeat rows="30" id="rpMyContacts" var="contact"
+						indexVar="indexContact" value="#{javascript:myContacts}">
+						<xp:tr>
+							<xp:td>
+								<xp:image id="image1"
+									alt="remove from my contacts"
+									url="#{javascript:@ViewIconUrl(183)}"
+									title="remove from my contacts">
+
+
+									<xp:eventHandler event="onclick"
+										submit="true" refreshMode="partial" execMode="partial"
+										execId="panMyContacts" refreshId="panMyContacts">
+										<xp:this.action><![CDATA[#{javascript:contactBean.removeToObserve(contact.getBO());
+var dsMyContacts = xptBean.findDataSource("panMyContacts","myContacts");
+dsMyContacts.refresh();}]]></xp:this.action>
+									</xp:eventHandler>
+								</xp:image>
+							</xp:td>
+							<xp:td>
+								<xp:image id="imgEdit"
+									alt="edit contact" url="#{javascript:@ViewIconUrl(12)}"
+									title="edit contact">
+									<xp:eventHandler event="onclick"
+										submit="true" refreshMode="complete">
+										<xp:this.action><![CDATA[#{javascript:@FullUrl("Contact.xsp")+"?id="+contact.ID;}]]></xp:this.action>
+									</xp:eventHandler>
+								</xp:image>
+							</xp:td>
+							<xp:td>
+								<xp:text escape="true" id="firstname"
+									value="#{contact.firstName}">
+								</xp:text>
+							</xp:td>
+							<xp:td>
+								<xp:text escape="true"
+									id="computedField1" value="#{contact.middleName}">
+								</xp:text>
+							</xp:td>
+							<xp:td>
+								<xp:text escape="true"
+									id="computedField2" value="#{contact.lastName}">
+								</xp:text>
+							</xp:td>
+							<xp:td>
+								<xp:text escape="true"
+									id="computedField3" value="#{contact.title}">
+								</xp:text>
+							</xp:td>
+							<xp:td>
+								<xp:text escape="true"
+									id="computedField4" value="#{contact.salutation}">
+								</xp:text>
+							</xp:td>
+							<xp:td>
+								<xp:text escape="true"
+									id="computedField5" value="#{contact.birthday}">
+								</xp:text>
+							</xp:td>
+
+						</xp:tr>
+					</xp:repeat>
+				</xp:table>
+			</xp:panel>
+
+		</xp:this.facets>
+	</xc:ccApplication>
+</xp:view>

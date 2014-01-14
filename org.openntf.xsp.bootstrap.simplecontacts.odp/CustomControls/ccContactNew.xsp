@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel id="panNewContact" rendered="false">
+		<xp:this.data>
+			<xe:objectData var="newContact"
+				createObject="#{javascript:contactBean.createContact()}" scope="view">
+			</xe:objectData>
+		</xp:this.data>
+		<xe:formTable id="formTable1" formTitle="New Contact"
+			disableRowError="true" disableErrorSummary="false">
+
+			<xe:formRow id="formRow1" label="ID">
+				<xp:text escape="true" id="computedField1"
+					value="#{newContact.ID}">
+				</xp:text>
+			</xe:formRow>
+			<xe:formRow id="formRow2" label="Firstname">
+				<xp:inputText id="inputText1"
+					value="#{newContact.firstName}">
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow3" label="Lastname">
+				<xp:inputText id="inputText2"
+					value="#{newContact.lastName}" required="true">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="Lastname is mandatory">
+						</xp:validateRequired>
+					</xp:this.validators>
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow4" label="Middlename">
+				<xp:inputText id="inputText3"
+					value="#{newContact.middleName}">
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow5" label="Title">
+				<xp:inputText id="inputText4"
+					value="#{newContact.title}">
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow6" label="Birthday">
+				<xp:inputText id="inputText6"
+					value="#{newContact.birthday}">
+					<xp:dateTimeHelper id="dateTimeHelper1"></xp:dateTimeHelper>
+					<xp:this.converter>
+						<xp:convertDateTime type="date"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow7" label="Salutation">
+				<xp:inputText id="inputText5"
+					value="#{newContact.salutation}">
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow8" label="Tags">
+				<xp:inputText id="inputText7"
+					value="#{newContact.tags}">
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow9" label="Comment">
+				<xp:inputRichText id="inputRichText1"
+					value="#{newContact.comment}">
+				</xp:inputRichText>
+			</xe:formRow>
+		</xe:formTable>
+		<xp:panel>
+			<xp:button value="Save" id="Save">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="main">
+					<xp:this.action><![CDATA[#{javascript:contactBean.saveContact(newContact);
+var dsContact =xptBean.findDataSource("panNewContact","newContact");
+dsContact.refresh();
+var pan = getComponent("panNewContact");
+pan.setRendered(false);
+var dsContactList = getComponent("dataView1").getData();
+dsContactList.refresh();
+viewScope.showBtnCreateContact=true;}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Cancel" id="Cancel">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete" immediate="true">
+					<xp:this.action><![CDATA[#{javascript:var dsContact =xptBean.findDataSource("panNewContact","newContact");
+dsContact.refresh();
+var pan = getComponent("panNewContact");
+pan.setRendered(false);
+viewScope.showBtnCreateContact=true;}]]></xp:this.action>
+				</xp:eventHandler></xp:button>
+		</xp:panel>
+	</xp:panel>
+</xp:view>
