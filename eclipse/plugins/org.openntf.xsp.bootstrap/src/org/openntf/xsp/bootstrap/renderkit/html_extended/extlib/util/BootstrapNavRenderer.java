@@ -93,6 +93,7 @@ public class BootstrapNavRenderer extends HtmlListRenderer {
     	if(tree.getNode().getType()==ITreeNode.NODE_CONTAINER && tree.getDepth()<=2) {
 	        writer.writeAttribute("class","dropdown-toggle",null); // $NON-NLS-1$ $NON-NLS-2$
 	        writer.writeAttribute("data-toggle","dropdown",null); // $NON-NLS-1$ $NON-NLS-2$
+	        writer.writeAttribute("href", "#",  null); // $NON-NLS-1$ $NON-NLS-2$
     	}
     }
 

@@ -71,7 +71,7 @@
 .applayout-main {	
 }
 .applayout-content {
-	padding: 10px 0 10px 0;
+	padding: 10px;
 }
 .applayout-column-left {
 	padding: 10px 0 10px 0;
@@ -84,18 +84,29 @@
 .applayout-legal {
 }
 .applayout-searchbar {	
+
+}
+.applayout-searchbar select {
+	margin-right: 7px;
 }
 .applayout-titlebar {	
-}
-.applayout-titlebar {	
+	z-index: 998;
+	margin-bottom: 0;
 }
 .applayout-titlebar-tabs {	
-	float: left;
+	margin: 4px 0 0 0;
+	padding-top: 3px;
 }
 .applayout-titlebar-name {
 	margin: 0 30px 0 0;
 	padding-top: 10px;
 	float: left;
+}
+.applayout-titlebar-inner ul:nth-child(2) > li {
+	margin-left: 12px;
+}
+.applayout-titlebar-inner h4:nth-child(2) {
+	margin-left: 12px;
 }
 .applayout-banner {	
 	margin-bottom: 0px;
@@ -105,6 +116,7 @@
 	vertical-align: middle;
 	margin-bottom: 0px;
   	min-height: 20px;
+  	z-index: 999;
  }
 .applayout-placebar-title {
 	float: left;
@@ -112,11 +124,10 @@
 	margin-bottom: 5px;
 }
 .applayout-placebar-title h3 {
-	float: left;
-	margin: 0;
+	margin: 0 0 0 15px;
 }
 .applayout-placebar-actions {
-	float: right;
+	/*float: right;*/
 }
 
 .nav-search-panel {
@@ -143,6 +154,28 @@
 .navigator-twisty {
 	padding: 0;
 	border: 0;
+}
+
+/* Dialog */
+.modal form{
+	margin: 0;
+}
+.xspmodal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 1050;
+  width: 560px;
+  margin-left: -280px;
+  z-index: 1040;
+  overflow: none;
+}
+
+/*disabled navigation links*/
+.navbar-inverse .navbar-nav > .disabled > a,
+.navbar-inverse .navbar-nav > .disabled > a:hover,
+.navbar-inverse .navbar-nav > .disabled > a:focus {
+	color: #666;
 }
 
 

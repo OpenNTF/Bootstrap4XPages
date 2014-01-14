@@ -8,4 +8,20 @@
 		</property>
 	</control>
 
+	<control>
+		<name>Dialog.Modal</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.dialog.BootstrapDialog3</value>
+		</property>
+	</control>
+
+	<control>
+		<name>Outline.Accordion</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.outline.BootstrapAccordion3</value>
+		</property>
+	</control>
+
 </theme>

@@ -111,6 +111,11 @@
     </renderer>
     <renderer>
       <component-family>com.ibm.xsp.extlib.Dialog</component-family>
+      <renderer-type>org.openntf.xsp.bootstrap.dialog.BootstrapDialog3</renderer-type>
+      <renderer-class>org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.dialog.BootstrapDialogRenderer3</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>com.ibm.xsp.extlib.Dialog</component-family>
       <renderer-type>org.openntf.xsp.bootstrap.dialog.BootstrapDialogButtonBar</renderer-type>
       <renderer-class>org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.dialog.BootstrapDialogButtonBarRenderer</renderer-class>
     </renderer>
@@ -165,6 +170,16 @@
       <component-family>com.ibm.xsp.extlib.Outline</component-family>
       <renderer-type>org.openntf.xsp.bootstrap.outline.BootstrapBreadCrumbs</renderer-type>
       <renderer-class>org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.outline.BootstrapBreadCrumbsRenderer</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <renderer-type>org.openntf.xsp.bootstrap.outline.BootstrapAccordion</renderer-type>
+      <renderer-class>org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.outline.BootstrapAccordionRenderer</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <renderer-type>org.openntf.xsp.bootstrap.outline.BootstrapAccordion3</renderer-type>
+      <renderer-class>org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.outline.BootstrapAccordionRenderer3</renderer-class>
     </renderer>
     <renderer>
       <component-family>com.ibm.xsp.extlib.Outline</component-family>

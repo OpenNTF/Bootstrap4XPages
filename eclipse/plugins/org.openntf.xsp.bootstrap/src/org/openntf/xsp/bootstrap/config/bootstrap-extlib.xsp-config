@@ -23,10 +23,19 @@
   </faces-config-extension>
     
 	<complex-type>
-    	<description>Extended layout configuration object that supports Boostrap specific properties.</description>
+    	<description>Extended layout configuration object that supports Bootstrap specific properties.</description>
     	<display-name>Bootstrap Application Configuration</display-name>
     	<complex-id>org.openntf.xsp.bootstrap.components.layout.BootstrapApplicationConfiguration</complex-id>
     	<complex-class>org.openntf.xsp.bootstrap.components.layout.BootstrapApplicationConfiguration</complex-class>
+
+  		<property>
+			<description>Indicates if the navbar is inverted, using the style navbar-inverse. false by default.</description>
+			<display-name>Navbar Inverted</display-name>
+			<property-name>navbarInverted</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+			</property-extension>
+		</property>
 
     	<complex-extension>
 			<base-complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</base-complex-id>

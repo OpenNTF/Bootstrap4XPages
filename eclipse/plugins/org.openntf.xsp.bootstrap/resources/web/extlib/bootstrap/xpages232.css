@@ -139,6 +139,10 @@
 	border: 0;
 }
 
+/* Dialog */
+.modal form {
+	margin: 0;
+}
 
 /***********************************************************************	
 	OneUI like specific styles used by XPages controls

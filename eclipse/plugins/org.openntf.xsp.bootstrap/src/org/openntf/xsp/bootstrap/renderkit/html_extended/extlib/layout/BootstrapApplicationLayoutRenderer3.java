@@ -23,12 +23,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapApplicationLinksRenderer;
+import org.openntf.xsp.bootstrap.components.layout.BootstrapApplicationConfiguration;
+import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapApplicationLinksRenderer3;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapFooterLinksRenderer;
-import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapPlaceBarActionsRenderer;
+import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapPlaceBarActionsRenderer3;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapSearchOptionsRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapTitleBarTabsRenderer;
-import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapUtilityLinksRenderer;
+import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapUtilityLinksRenderer3;
 import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
 import com.ibm.commons.util.StringUtil;
@@ -75,6 +76,13 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		// Should choose the right column prefix based on the target device 
 		return COLUMN_MEDIUM;
 	}
+
+	public BootstrapApplicationConfiguration asBootstrapConfig(BasicApplicationConfigurationImpl configuration) {
+		if(configuration instanceof BootstrapApplicationConfiguration) {
+			return (BootstrapApplicationConfiguration)configuration;
+		}
+		return null;
+	}
 	
 	
 	// ================================================================
@@ -100,15 +108,15 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			if (configuration.isBanner()) {
 				writeBanner(context, w, c, configuration);
 			}
+			
+			// Start the title bar
+			if (configuration.isTitleBar()) {
+				writeTitleBar(context, w, c, configuration);
+			}
 
 			// Start the place bar
 			if (configuration.isPlaceBar()) {
 				writePlaceBar(context, w, c, configuration);
-			}
-
-			// Start the title bar
-			if (configuration.isTitleBar()) {
-				writeTitleBar(context, w, c, configuration);
 			}
 
 			// Start the main content
@@ -179,11 +187,13 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 	protected void writeBanner(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		w.startElement("div", c);
-		w.writeAttribute("class", "navbar navbar-static-top navbar-inverse applayout-banner", null); // $NON-NLS-1$
-		newLine(w);
 
-		w.startElement("div", c);
-		//w.writeAttribute("class", "", null); // $NON-NLS-1$
+		String navStyle = "navbar navbar-static-top navbar-inverse applayout-banner";
+		BootstrapApplicationConfiguration bc = asBootstrapConfig(configuration);
+		if(bc!=null && !bc.isNavbarInverted()) {
+			navStyle = "navbar navbar-static-top applayout-banner";
+		}
+		w.writeAttribute("class", navStyle, null); // $NON-NLS-1$
 		newLine(w);
 
 		// w.startElement("div",c);
@@ -192,11 +202,6 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 		writeBannerContent(context, w, c, configuration);
 
-		// Close the banner
-		// w.endElement("div"); newLine(w,"container"); // $NON-NLS-1$
-		// $NON-NLS-2$
-		w.endElement("div");
-		newLine(w, ""); // $NON-NLS-1$ $NON-NLS-2$
 		w.endElement("div");
 		newLine(w, "navbar-fixed-top"); // $NON-NLS-1$
 	}
@@ -206,13 +211,28 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			w.writeComment("Start Banner"); // $NON-NLS-1$
 			newLine(w);
 		}
-		writeBannerProductlogo(context, w, c, configuration);
+		
+		w.startElement("div", c);
+		w.writeAttribute("class", "navbar-header", null);		// $NON-NLS-1$
+		
 		writeBannerLink(context, w, c, configuration);
 		newLine(w);
+		writeBannerProductlogo(context, w, c, configuration);
+		
+		w.endElement("div");
+		
+		w.startElement("div", c);
+		w.writeAttribute("class", "navbar-collapse collapse", null); // $NON-NLS-1$
+		newLine(w);
+		
 		writeBannerUtilityLinks(context, w, c, configuration);
 		newLine(w);
 		writeBannerApplicationLinks(context, w, c, configuration);
 		newLine(w);
+		
+		w.endElement("div");
+		newLine(w, ""); // $NON-NLS-1$ $NON-NLS-2$
+		
 		if (DEBUG) {
 			w.writeComment("End Banner"); // $NON-NLS-1$
 			newLine(w);
@@ -220,25 +240,37 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	}
 
 	protected void writeBannerLink(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
-		w.startElement("a", c);
-		w.writeAttribute("class", "btn btn-navbar pull-left", null); // $NON-NLS-1$
-
-		String href = "#"; // (String) getProperty(PROP_BANNERLINKHREF);
-		if (null == href || '#' != href.charAt(0)) {
-			href = "#"; //$NON-NLS-1$
-		}
-		w.writeAttribute("href", href, null); // $NON-NLS-1$
-
-		w.endElement("a"); // $NON-NLS-1$
+		
+		w.startElement("button", c);
+		w.writeAttribute("type",  "button",  null); // $NON-NLS-1$
+		w.writeAttribute("class", "navbar-toggle", null); // $NON-NLS-1$
+		w.writeAttribute("data-toggle", "collapse", null); // $NON-NLS-1$
+		w.writeAttribute("data-target", ".navbar-collapse", null); // $NON-NLS-1$
+		
+		w.startElement("span", c);
+		w.writeAttribute("class", "sr-only", null); // $NON-NLS-1$
+		w.endElement("span");
+		
+		w.startElement("span", c);
+		w.writeAttribute("class", "icon-bar", null); // $NON-NLS-1$
+		w.endElement("span");
+		w.startElement("span", c);
+		w.writeAttribute("class", "icon-bar", null); // $NON-NLS-1$
+		w.endElement("span");
+		w.startElement("span", c);
+		w.writeAttribute("class", "icon-bar", null); // $NON-NLS-1$
+		w.endElement("span");
+		
+		w.endElement("button"); // $NON-NLS-1$
 	}
 
 	protected void writeBannerProductlogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
-        w.startElement("span",c); // $NON-NLS-1$
+		
+		w.startElement("span",c); // $NON-NLS-1$
         
-        String clazz = ExtLibUtil.concatStyleClasses("pull-left",configuration.getProductLogoClass());
-        if(StringUtil.isNotEmpty(clazz)) {
-            w.writeAttribute("class",clazz,null); // $NON-NLS-1$
-        }
+        String clazz = ExtLibUtil.concatStyleClasses("navbar-brand", configuration.getProductLogoClass());
+        w.writeAttribute("class", clazz, null); // $NON-NLS-1$
+        
         String style = configuration.getProductLogoStyle();
         if(StringUtil.isNotEmpty(style)) {
             w.writeAttribute("style",style,null); // $NON-NLS-1$
@@ -266,12 +298,13 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
         }
     
         w.endElement("span"); // $NON-NLS-1$
+
 	}
 
 	protected void writeBannerApplicationLinks(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		ITree tree = TreeImpl.get(configuration.getBannerApplicationLinks());
 		if (tree != null) {
-			AbstractTreeRenderer renderer = new BootstrapApplicationLinksRenderer();
+			AbstractTreeRenderer renderer = new BootstrapApplicationLinksRenderer3();
 			if (renderer != null) {
 				renderer.render(context, c, "al", tree, w); // $NON-NLS-1$
 			}
@@ -281,7 +314,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	protected void writeBannerUtilityLinks(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		ITree tree = TreeImpl.get(configuration.getBannerUtilityLinks());
 		if (tree != null) {
-			AbstractTreeRenderer renderer = new BootstrapUtilityLinksRenderer();
+			AbstractTreeRenderer renderer = new BootstrapUtilityLinksRenderer3();
 			if (renderer != null) {
 				renderer.render(context, c, "ul", tree, w); // $NON-NLS-1$
 			}
@@ -301,6 +334,8 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		w.writeAttribute("class", "applayout-titlebar-inner", null); // $NON-NLS-1$
 		newLine(w);
 		
+		writeSearchBar(context, w, c, configuration);
+		
         String titleBarName = configuration.getTitleBarName();
         if( StringUtil.isNotEmpty(titleBarName)) {
         	w.startElement("h4",c); //$NON-NLS-1$
@@ -312,7 +347,6 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
         }
 
 		writeTitleBarTabsArea(context, w, c, configuration);
-		writeSearchBar(context, w, c, configuration);
 
 		// Close the banner
 		w.endElement("div");
@@ -350,7 +384,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 				newLine(w);
 			}
 			w.startElement("div", c); // $NON-NLS-1$
-			w.writeAttribute("class","navbar-search navbar-form pull-right applayout-searchbar",null); // $NON-NLS-1$
+			w.writeAttribute("class","col-md-4 navbar-search navbar-right applayout-searchbar",null); // $NON-NLS-1$
 			w.writeAttribute("role", "search", null); // $NON-NLS-1$
 			w.startElement("div", c); // $NON-NLS-1$
 			w.writeAttribute("class","form-group",null); // $NON-NLS-1$
@@ -371,7 +405,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 				newLine(w);
 			}
 			w.startElement("div", c); // $NON-NLS-1$
-			w.writeAttribute("class","navbar-search navbar-form pull-right input-append applayout-searchbar",null); // $NON-NLS-1$
+			w.writeAttribute("class","col-md-4 navbar-search navbar-right input-group applayout-searchbar",null); // $NON-NLS-1$
 			w.writeAttribute("style", "margin-top: 5px; margin-bottom: 5px", null); // $NON-NLS-1$
 			w.writeAttribute("role", "search", null); // $NON-NLS-1$
 			newLine(w);
@@ -386,22 +420,18 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			if (searchOptions) {
 				writeSearchOptions(context, w, c, configuration, searchBar, tree);
 			}
-
+			
 			// Write the search box
-			w.startElement("span", c); // $NON-NLS-1$
-			w.writeAttribute("class","form-search nav-search-panel",null); // $NON-NLS-1$
-			w.startElement("span", c); // $NON-NLS-1$
-			w.writeAttribute("class","input-append",null); // $NON-NLS-1$
+			//w.startElement("span", c); // $NON-NLS-1$
+			//w.writeAttribute("class","form-search nav-search-panel",null); // $NON-NLS-1$
+			//w.startElement("span", c); // $NON-NLS-1$
+			//w.writeAttribute("class","input-append",null); // $NON-NLS-1$
 			writeSearchBox(context, w, c, configuration, searchBar, tree, searchOptions);
-			writeSearchButton(context, w, c, configuration, searchBar, tree);
-			w.endElement("span"); // $NON-NLS-1$
-			w.endElement("span"); // $NON-NLS-1$
-			newLine(w);
-
-			// Write the required script
-			writeSearchScript(context, w, c, configuration, searchBar, tree, searchOptions);
-			newLine(w);
-
+			writeSearchButton(context, w, c, configuration, searchBar, tree, searchOptions);
+			//w.endElement("span"); // $NON-NLS-1$
+			//w.endElement("span"); // $NON-NLS-1$
+			//newLine(w);
+			
 			w.endElement("div"); // $NON-NLS-1$
 			newLine(w);
 			if (DEBUG) {
@@ -412,10 +442,16 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	}
 
 	protected void writeSearchOptions(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, SearchBar searchBar, ITree tree) throws IOException {
+		w.startElement("div", c); // $NON-NLS-1$
+		//w.writeAttribute("class","input-group-btn",null); // $NON-NLS-1$
+		newLine(w);
+
 		AbstractTreeRenderer renderer = getSearchOptionsRenderer(context, w, c, configuration, searchBar);
 		if (renderer != null) {
 			renderer.render(context, c, "so", tree, w); // $NON-NLS-1$
 		}
+		
+		w.endElement("div"); // $NON-NLS-1$
 	}
 
 	protected AbstractTreeRenderer getSearchOptionsRenderer(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, SearchBar searchBar) {
@@ -458,8 +494,16 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
         newLine(w);
 	}
 
-	protected void writeSearchButton(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, SearchBar searchBar, ITree tree) throws IOException {
+	protected void writeSearchButton(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, SearchBar searchBar, ITree tree, boolean searchOptions) throws IOException {
 		 String submitSearch = "_xspAppSearchSubmit"; // $NON-NLS-1$
+		 
+		 w.startElement("div", c); // $NON-NLS-1$
+		 w.writeAttribute("class","input-group-btn",null); // $NON-NLS-1$
+		 newLine(w);
+		 
+		 // Write the required script (done here because of Bootstrap 3 last-child selector on the input-group-btn)
+		 writeSearchScript(context, w, c, configuration, searchBar, tree, searchOptions);
+		 newLine(w);
 		
 		 w.startElement("button",c); // $NON-NLS-1$
 		 w.writeAttribute("class","btn btn-default",null); // $NON-NLS-1$
@@ -468,6 +512,8 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		 w.writeAttribute("class",BootstrapResources.get().getIconClass("search"),null); // $NON-NLS-1$
 		 w.endElement("span"); // $NON-NLS-1$
 		 w.endElement("button"); // $NON-NLS-1$
+		 
+		 w.endElement("div");
 	}
 
 	protected void writeSearchScript(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, SearchBar searchBar, ITree tree, boolean options) throws IOException {
@@ -595,7 +641,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	protected void writePlaceBarActions(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		ITree tree = TreeImpl.get(configuration.getPlaceBarActions());
 		if (tree != null) {
-			AbstractTreeRenderer renderer = new BootstrapPlaceBarActionsRenderer();
+			AbstractTreeRenderer renderer = new BootstrapPlaceBarActionsRenderer3();
 			if (renderer != null) {
 				renderer.render(context, c, "pb", tree, w); // $NON-NLS-1$
 			}
@@ -650,9 +696,36 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 				w.writeComment("Start Left Column"); // $NON-NLS-1$
 				newLine(w);
 			}
+			
+			/*
+			// Write the small screen component
 			w.startElement("div", c); // $NON-NLS-1$
-			w.writeAttribute("class", getColumnPrefix()+size+" applayout-column-left", null); // $NON-NLS-1$
+			w.writeAttribute("class", "visible-xs visible-sm dropdown applayout-column-left", null); // $NON-NLS-1$
+			
+			// dropdown button
+			w.startElement("button", c); // $NON-NLS-1$
+			w.writeAttribute("class", "btn dropdown-toggle", null); // $NON-NLS-1$
+			w.writeAttribute("type", "button", null); // $NON-NLS-1$
+			w.writeAttribute("data-toggle", "dropdown", null); // $NON-NLS-1$
+			
+			w.writeText("Menu",  null);
+			
+			w.startElement("span", c); // $NON-NLS-1$
+			w.writeAttribute("class", "caret", null); // $NON-NLS-1$
+			w.endElement("span");
+			
+			w.endElement("button");
+			
+			FacesUtil.renderComponent(context, left);
 
+			w.endElement("div");
+			newLine(w); // $NON-NLS-1$
+			*/
+			// Write the medium/ large screen component
+			w.startElement("div", c); // $NON-NLS-1$
+			//w.writeAttribute("class", getColumnPrefix()+size+" hidden-xs hidden-sm applayout-column-left", null); // $NON-NLS-1$
+			w.writeAttribute("class", getColumnPrefix()+size+" applayout-column-left", null); // $NON-NLS-1$
+			
 			FacesUtil.renderComponent(context, left);
 
 			w.endElement("div");
