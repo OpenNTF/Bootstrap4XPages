@@ -1,0 +1,51 @@
+<faces-config>
+    <faces-config-extension>
+        <namespace-uri>http://www.openntf.org/xsp/bootstrap/select2</namespace-uri>
+        <default-prefix>bxs</default-prefix>
+    </faces-config-extension>
+   
+    <component>
+        <description>Select2 Picker</description>
+        <display-name>Select2 Picker</display-name>
+        <component-type>com.example.blank.Select2</component-type>
+        <component-class>org.openntf.xsp.bootstrap.component.UISelect2Picker</component-class>
+        <component-extension>
+            <tag-name>select2Picker</tag-name>
+        </component-extension>
+        
+       <property>
+	      <description>%property.for.component.com.ibm.xsp.extlib.picker.AbstractPicker.descr%</description>
+	      <display-name>%property.for.component.com.ibm.xsp.extlib.picker.AbstractPicker.name%</display-name>
+	      <property-name>for</property-name>
+	      <property-class>java.lang.String</property-class>
+	      <property-extension>
+	        <required>true</required>
+	        <designer-extension>
+	          <category>basics</category>
+	          <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+	          <editor-parameter>
+	                            http://www.ibm.com/xsp/core|inputText
+	                            http://www.ibm.com/xsp/core|inputTextarea                           
+	                    </editor-parameter>
+	        </designer-extension>
+	      </property-extension>
+	    </property>
+	    
+	     <property>
+      <description>%property.dataProvider.component.valuePicker.descr%</description>
+      <display-name>%property.dataProvider.component.valuePicker.name%</display-name>
+      <property-name>dataProvider</property-name>
+      <property-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
+                     todo
+                    </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    </component>
+    
+</faces-config>
