@@ -17,7 +17,7 @@ package org.openntf.xsp.bootstrap.component;
  */
 
 import javax.faces.el.ValueBinding;
-
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 
 
@@ -59,7 +60,11 @@ public class UISelect2Picker extends UIBaseRestService {
 	
 	private String _for;
 	private IValuePickerData dataProvider;
-	
+	private boolean useRemoteData;
+	private String placeHolder;
+	private boolean allowClearing;
+	private String template;
+
 	public UISelect2Picker() {
 		super();
 		setRendererType("org.openntf.xsp.bootstrap.Select2PickerRendererType");
@@ -86,6 +91,13 @@ public class UISelect2Picker extends UIBaseRestService {
         this._for = _for;
     }
     
+    public String getTemplate() {
+		return template;
+	}
+    public void setTemplate(String template) {
+		this.template = template;
+	}
+    
     public IValuePickerData getDataProvider() {
 		return this.dataProvider;
 	}
@@ -94,6 +106,26 @@ public class UISelect2Picker extends UIBaseRestService {
 		this.dataProvider = dataProvider;
 	}
 	
+	public boolean isUseRemoteData() {
+		return useRemoteData;
+	}
+	public void setUseRemoteData(boolean useSearch) {
+		this.useRemoteData = useSearch;
+	}
+	
+	public String getPlaceHolder() {
+		return placeHolder;
+	}
+	public void setPlaceHolder(String placeHolder) {
+		this.placeHolder = placeHolder;
+	}
+	
+	public boolean isAllowClearing() {
+		return allowClearing;
+	}
+	public void setAllowClearing(boolean allowClearing) {
+		this.allowClearing = allowClearing;
+	}
 	
 	@Override
 	public void restoreState(FacesContext _context, Object _state) {

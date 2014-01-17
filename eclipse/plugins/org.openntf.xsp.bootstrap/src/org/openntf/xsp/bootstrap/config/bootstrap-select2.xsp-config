@@ -1,7 +1,10 @@
 <faces-config>
     <faces-config-extension>
-        <namespace-uri>http://www.openntf.org/xsp/bootstrap/select2</namespace-uri>
-        <default-prefix>bxs</default-prefix>
+          <namespace-uri>http://www.openntf.org/xsp/bootstrap</namespace-uri>
+   		 <default-prefix>bx</default-prefix>
+        <designer-extension>
+      		<control-subpackage-name>select2</control-subpackage-name>
+    	</designer-extension>
     </faces-config-extension>
    
     <component>
@@ -11,11 +14,21 @@
         <component-class>org.openntf.xsp.bootstrap.component.UISelect2Picker</component-class>
         <component-extension>
             <tag-name>select2Picker</tag-name>
+            <designer-extension>
+                      <in-palette>true</in-palette>
+                      <category>Bootstrap</category>
+                      <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+	&lt;xp:image url="/extlib/designer/markup/ValuePicker.png" id="image1"&gt;&lt;/xp:image&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+             </designer-extension>
+            
         </component-extension>
         
        <property>
-	      <description>%property.for.component.com.ibm.xsp.extlib.picker.AbstractPicker.descr%</description>
-	      <display-name>%property.for.component.com.ibm.xsp.extlib.picker.AbstractPicker.name%</display-name>
+	      <description>Defines an ID to an hidden input control whose value is set when choosing an option in the Select2 picker</description>
+	      <display-name>For Control</display-name>
 	      <property-name>for</property-name>
 	      <property-class>java.lang.String</property-class>
 	      <property-extension>
@@ -24,28 +37,96 @@
 	          <category>basics</category>
 	          <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
 	          <editor-parameter>
+	          					http://www.ibm.com/xsp/core|inputHidden
 	                            http://www.ibm.com/xsp/core|inputText
 	                            http://www.ibm.com/xsp/core|inputTextarea                           
-	                    </editor-parameter>
+				</editor-parameter>
 	        </designer-extension>
 	      </property-extension>
 	    </property>
-	    
-	     <property>
-      <description>%property.dataProvider.component.valuePicker.descr%</description>
-      <display-name>%property.dataProvider.component.valuePicker.name%</display-name>
-      <property-name>dataProvider</property-name>
-      <property-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</property-class>
-      <property-extension>
-        <allow-run-time-binding>false</allow-run-time-binding>
-        <designer-extension>
-          <category>basics</category>
-          <tags>
-                     todo
-                    </tags>
-        </designer-extension>
-      </property-extension>
-    </property>
-    </component>
+		<property>
+			<description>Indicates if the picker loads its data remotely based on queries by the user</description>
+			<display-name>Use remote data</display-name>
+			<property-name>useRemoteData</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property> 
+		<property>
+			<description>Text shown when no value is selected</description>
+			<display-name>Placeholder</display-name>
+			<property-name>placeHolder</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Allow users to clear the selected value</description>
+			<display-name>Allow clearing</display-name>
+			<property-name>allowClearing</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Define the (HTML) template to render each entry in the picker. The template can use the variables {value} and {text} to refer to the value and text of the entry.</description>
+			<display-name>Template</display-name>
+			<property-name>template</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Select2 Data Provider</description>
+			<display-name>Defines a data provider for the Select2 picker control</display-name>
+			<property-name>dataProvider</property-name>
+			<property-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</property-class>
+			<property-extension>
+				<allow-run-time-binding>false</allow-run-time-binding>
+				<designer-extension>
+					<category>basics</category>
+					<tags>
+						todo
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Defines the width of the item list</description>
+			<display-name>List Width</display-name>
+			<property-name>listWidth</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+							50%
+							30px
+							10em
+							2cm
+							auto
+							inherit
+					</editor-parameter>
+					<tags>
+						todo
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+	</component>
     
 </faces-config>

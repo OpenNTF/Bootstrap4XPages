@@ -30,6 +30,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 import org.openntf.xsp.bootstrap.component.UISelect2Picker;
+import org.openntf.xsp.bootstrap.util.BootstrapUtil;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
@@ -39,30 +40,15 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.xsp.component.UIInputEx;
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.extlib.component.picker.data.IPickerData;
+import com.ibm.xsp.extlib.component.picker.data.SimpleValuePickerData;
+import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
+import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.resource.ScriptResource;
 import com.ibm.xsp.resource.StyleSheetResource;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.renderkit.FacesRenderer;
 
-/*
- *
-
-import org.openntf.xsp.bootstrap.util.BootstrapUtil;
-
-import com.ibm.xsp.FacesExceptionEx;
-import com.ibm.xsp.component.UIInputEx;
-import com.ibm.xsp.component.UIViewRootEx;
-//import com.ibm.xsp.extlib.component.picker.AbstractPicker;
-
-import com.ibm.xsp.extlib.renderkit.dojo.DojoRendererUtil;
-//import com.ibm.xsp.extlib.renderkit.html_extended.picker.AbstractPickerRenderer;
-import com.ibm.xsp.extlib.resources.ExtLibResources;
-
-import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
-import com.ibm.xsp.util.JSUtil;
- */
-
-public class Select2PickerRenderer extends FacesRenderer {
+public class Select2PickerRenderer extends FacesRendererEx {
 
 	@Override
 	public void encodeBegin(FacesContext context, UIComponent component)
@@ -72,21 +58,12 @@ public class Select2PickerRenderer extends FacesRenderer {
         
         UISelect2Picker picker = (UISelect2Picker)component;
         IPickerData data = picker.getDataProvider();
-        
+                   
         UIInputEx _for = (UIInputEx) getFor(context,picker);
        
         boolean readOnly = _for!=null ? FacesUtil.isComponentReadOnly(context, _for) : false;
         
-        
-       /* 
-        String dojoType = picker.getDojoType();
-        if(StringUtil.isEmpty(dojoType)) {
-            dojoType = getDefaultDojoType(); //"extlib.dijit.ValuePickerList";
-        }
-        dojoType = encodeDojoType(dojoType);
-        */
-        
-        //load select2 library
+        //load select2 library and stylesheet
     	ScriptResource js = new ScriptResource();
     	js.setClientSide(true);
     	js.setSrc("/.ibmxspres/.extlib/bootstrap/select2/select2.js");
@@ -98,68 +75,69 @@ public class Select2PickerRenderer extends FacesRenderer {
     	rootEx.addEncodeResource(js);
     	rootEx.addEncodeResource(css);
     	
-/*
-        // Encode the necessary resources
-        rootEx.setDojoTheme(true);
-        rootEx.setDojoParseOnLoad(true);
-        ExtLibResources.addEncodeResource(rootEx, ExtLibResources.extlibPicker);
-        encodeExtraResources(context, picker, data, rootEx, dojoType);
-
-        writeLink(context, w, picker, data, dojoType);
-         */
-    	
     	if (readOnly ) {
     		
+    		//selected values, let's not wrap them in a frameset and table here :-)
+    		writer.writeText( Select2PickerRenderer.join( _for.getValueAsList(), ", "), null);
+    		
+    		//TODO: FIX
     		
     	} else {
   
     		String id = picker.getId();
-    		writer.startElement("select", component);
-    		writer.writeAttribute("id", picker.getId(), null);
     		
-    		if (StringUtil.isNotEmpty(_for.getMultipleSeparator()) ) {
-    			writer.writeAttribute("multiple", "multiple", null);
+    		//if we're using the search option, select2 needs to be attached to the hidden input
+    		if (!picker.isUseRemoteData() ) {
     			
-    		}
+    			newLine(writer);
+    			writer.startElement("select", component);
+    			writer.writeAttribute("id", picker.getId(), null);
+    			writer.writeAttribute("class", "select2picker", null);
+    		
+    			if (StringUtil.isNotEmpty(_for.getMultipleSeparator()) ) {
+    				writer.writeAttribute("multiple", "multiple", null);
+    			}
     		    		
-    		writer.endElement("select");
-    		
-    		
-    		
+    			writer.endElement("select");
+    		}
+   
+    		newLine(writer);
     		writer.startElement("script", component); // $NON-NLS-1$
-    		
-    		////JsonJavaObject json = new JsonJavaObject();
-    		
-    		List params = new ArrayList();
-    		
-    		HashMap<String,Object> json = new HashMap<String,Object>();
-    		
-            json.put("id",  id);
-            json.put("forId", _for.getClientId(context));
-            json.put("allowMultiple", StringUtil.isNotEmpty(_for.getMultipleSeparator()));
-            json.put("restUrl", picker.getUrl(context, null));		// rest service URL
+
+    		//create the parameters to initialize a new select2 object
+    		HashMap<String,Object> params = new HashMap<String,Object>();
+    	    		
+            params.put("id",  id);
+            params.put("forId", _for.getClientId(context));
+            params.put("currentValue", _for.getValueAsString() );		//TODO: implement for multi value
+            params.put("allowMultiple", StringUtil.isNotEmpty(_for.getMultipleSeparator()) );
+            params.put("restUrl", picker.getUrl(context, null));		// rest service URL
+            params.put("useRemoteData", picker.isUseRemoteData() );
+           	params.put("placeHolder", picker.getPlaceHolder() );
+            params.put("allowClearing", picker.isAllowClearing() );
+            params.put("template", picker.getTemplate() );
             
-            //JsonJavaObject paramsJson = new JsonJavaObject();
-            //paramsJson.putMap(arg0, arg1);
-            
-    		//writer.writeText( "initSelect2(" + json.toString()'" + id + "','" + _for.getClientId(context) + "','" + restUrl + "');", null);
-    		//JsonGenerator.to
-         
-				try {
-					writer.writeText("initSelect2(" + JsonGenerator.toJson(JsonJavaFactory.instanceEx, json) + ");", null);
-				} catch (JsonException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			try {
+				//writer.writeText("dojo.addOnLoad( function() { initSelect2(" + JsonGenerator.toJson(JsonJavaFactory.instanceEx, params) + "); } );", null);
+				writer.writeText("XSP.initSelect2Picker(" + JsonGenerator.toJson(JsonJavaFactory.instanceEx, params) + ");", null);
+			} catch (JsonException e) { }
 			
-            
     		writer.endElement("script");
+    		newLine(writer);
     		
     	}
     	
     }
 	
-	
+	public static String join(List<?> in, String sep_in) {
+	    StringBuilder sb = new StringBuilder();
+	    String sep = "";
+	    for(Object i : in) {
+	        sb.append(sep).append( i.toString() );
+	        sep = sep_in;
+	    }
+	    return sb.toString();                           
+	}
 	
     @Override
 	public void encodeEnd(FacesContext context, UIComponent component)
@@ -185,59 +163,6 @@ public class Select2PickerRenderer extends FacesRenderer {
 
 public class Select2Renderer extends FacesRenderer {
 	
-    protected String getDefaultDojoType() {
-        return "extlib.dijit.PickerList"; // $NON-NLS-1$
-    }
-    
-    protected String getImageLink() {
-        return ExtLibResources.iconValuePicker;
-    }
-    
-    protected String getDialogTitleSingleSelect() {
-        return "Select A Value"; // $NLS-ValuePickerRenderer.SelectAValue-1$
-    }
-    protected String getDialogTitleMultipleSelect() {
-        return "Select One Or More Values"; // $NLS-ValuePickerRenderer.SelectOneOrMoreValues-1$
-    }
-
-    protected void encodeExtraResources(FacesContext context, UISelect2 picker, IPickerData data, UIViewRootEx rootEx, String dojoType) {
-        if(StringUtil.equals(dojoType, "extlib.dijit.PickerList")) { // $NON-NLS-1$
-            ExtLibResources.addEncodeResource(rootEx, ExtLibResources.extlibPickerList);
-        }
-        if(StringUtil.equals(dojoType, "extlib.dijit.PickerCheckbox")) { // $NON-NLS-1$
-            ExtLibResources.addEncodeResource(rootEx, ExtLibResources.extlibPickerCheckbox);
-        }
-       
-            // if the grid is to be used, load the grid CSS
-            if(StringUtil.equals(dojoType, "extlib.dijit.ValuePickerGrid")) { // $NON-NLS-1$
-                ExtLibResources.addEncodeResources(rootEx, ExtLibResources.GRID_EXTRA_RESOURCES);
-            }
-            
-       
-    }
-    
-   
-    
-    @Override
-    public void decode(FacesContext context, UIComponent component) {
-        // Nothing to decode here...
-    }
-
-    @Override
-    public boolean getRendersChildren() {
-        return true;
-    }
-    
-
-    @Override
-    public void encodeChildren(FacesContext context, UIComponent component) throws IOException {
-    }
-
-    @Override
-    public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
-    }
-    
-  
 
     protected void writeLink(FacesContext context, ResponseWriter w, UISelect2 picker, IPickerData data, String dojoType) throws IOException {
         UIComponent _for = getFor(context,picker);
@@ -275,26 +200,8 @@ public class Select2Renderer extends FacesRenderer {
                   //LHEY97QME8 adding the role= button
                     w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
             }
-            // Get the text/icon
-            String text = picker.getPickerText();
-            String icon = picker.getPickerIcon();
-            
-            boolean custom = StringUtil.isNotEmpty(text) || StringUtil.isNotEmpty(icon);
-            if(!custom) {
-                icon = getImageLink();
-            }
-            
-            if(StringUtil.isNotEmpty(icon)) {
-                w.startElement("img", null); // $NON-NLS-1$
-                w.writeAttribute("src", HtmlRendererUtil.getImageURL(context,icon), null); // $NON-NLS-1$
-                String iconAlt = "Open Picker"; // $NLS-AbstractPickerRenderer.OpenPicker-1$
-                w.writeAttribute("alt", iconAlt, null); // $NON-NLS-1$
-                w.endElement("img"); // $NON-NLS-1$
-            }
-            
-            if(StringUtil.isNotEmpty(text)) {
-                w.writeText(text, null);
-            }
+          
+          
             
             if(disabled) {
                 w.endElement("span"); // $NON-NLS-1$
@@ -304,12 +211,6 @@ public class Select2Renderer extends FacesRenderer {
         }
     }
     
-    
-    protected String encodeDojoType(String dojoType) {
-        return dojoType;
-    }
-    
-   
     
     protected String createParametersAsJson(FacesContext context, UISelect2 picker, UIComponent _for, IPickerData data, String dojoType) {
         try {

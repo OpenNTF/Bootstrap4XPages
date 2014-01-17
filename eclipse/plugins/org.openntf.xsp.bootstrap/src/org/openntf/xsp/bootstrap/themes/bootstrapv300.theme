@@ -49,9 +49,12 @@
 	<!-- XPages/Bootstrap specific JS -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages.js</href>
+	</resource>
+	<resource>
+		<content-type>application/x-javascript</content-type>
 		<href>/.ibmxspres/.extlib/bootstrap/xpages300.js</href>
 	</resource>
-
 
 	<!-- Basic Input Text -->
 	<control>
