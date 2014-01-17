@@ -144,6 +144,10 @@
 	cursor: pointer;
 }
 
+.btn + .btn {
+	margin-left: 5px;
+}
+
 /***********************************************************************	
 	OneUI like specific styles used by XPages controls
 	-> Ideally, these classes should be renamed and the rendered adapted
