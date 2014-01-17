@@ -77,10 +77,6 @@
 			<name>styleClass</name>
 			<value>btn</value>
 		</property>
-		<property>
-			<name>outerStyleClass</name>
-			<value>btn-group</value>
-		</property>
 	</control>
 	<control>
 		<name>Button.Command</name>
@@ -88,20 +84,12 @@
 			<name>styleClass</name>
 			<value>btn</value>
 		</property>
-		<property>
-			<name>outerStyleClass</name>
-			<value>btn-group</value>
-		</property>
 	</control>
 	<control>
 		<name>Button.Submit</name>
 		<property>
 			<name>styleClass</name>
 			<value>btn btn-primary</value>
-		</property>
-		<property>
-			<name>outerStyleClass</name>
-			<value>btn-group</value>
 		</property>
 	</control>
 
@@ -113,20 +101,12 @@
 			<name>styleClass</name>
 			<value>btn btn-danger</value>
 		</property>
-		<property>
-			<name>outerStyleClass</name>
-			<value>btn-group</value>
-		</property>
 	</control>
 	<control>
 		<name>Button.Primary</name>
 		<property>
 			<name>styleClass</name>
 			<value>btn btn-primary</value>
-		</property>
-		<property>
-			<name>outerStyleClass</name>
-			<value>btn-group</value>
 		</property>
 	</control>
 	<control>
@@ -135,20 +115,12 @@
 			<name>styleClass</name>
 			<value>btn btn-danger</value>
 		</property>
-		<property>
-			<name>outerStyleClass</name>
-			<value>btn-group</value>
-		</property>
 	</control>
 	<control>
 		<name>Button.Warning</name>
 		<property>
 			<name>styleClass</name>
 			<value>btn btn-warning</value>
-		</property>
-		<property>
-			<name>outerStyleClass</name>
-			<value>btn-group</value>
 		</property>
 	</control>
 	<control>
@@ -157,10 +129,6 @@
 			<name>styleClass</name>
 			<value>btn btn-success</value>
 		</property>
-		<property>
-			<name>outerStyleClass</name>
-			<value>btn-group</value>
-		</property>
 	</control>
 	<control>
 		<name>Button.Info</name>
@@ -168,20 +136,12 @@
 			<name>styleClass</name>
 			<value>btn btn-info</value>
 		</property>
-		<property>
-			<name>outerStyleClass</name>
-			<value>btn-group</value>
-		</property>
 	</control>
 	<control>
 		<name>Button.Inverse</name>
 		<property>
 			<name>styleClass</name>
 			<value>btn btn-inverse</value>
-		</property>
-		<property>
-			<name>outerStyleClass</name>
-			<value>btn-group</value>
 		</property>
 	</control>
 
