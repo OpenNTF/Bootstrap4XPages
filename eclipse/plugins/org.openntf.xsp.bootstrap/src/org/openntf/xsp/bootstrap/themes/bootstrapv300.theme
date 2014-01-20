@@ -60,7 +60,7 @@
 			<name>styleClass</name>
 			<value>form-control</value>
 		</property>
-	</control>
+	</control>	 
 	
 	<!-- Standard Edit Box -->
 	<control>
@@ -95,6 +95,15 @@
 		<property mode="concat">
 			<name>styleClass</name>
 			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Rich Text -->
+	<control>
+		<name>InputField.RichText</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value></value> <!-- avoid form-control -->
 		</property>
 	</control>
 	
