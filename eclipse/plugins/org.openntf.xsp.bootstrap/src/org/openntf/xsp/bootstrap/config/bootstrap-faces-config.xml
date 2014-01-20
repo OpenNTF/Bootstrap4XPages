@@ -124,6 +124,15 @@
       <renderer-type>org.openntf.xsp.bootstrap.dialog.BootstrapDialogContent</renderer-type>
       <renderer-class>org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.dialog.BootstrapDialogContentRenderer</renderer-class>
     </renderer>
+    
+<!--
+    Tooltips
+-->
+    <renderer>
+      <component-family>com.ibm.xsp.extlib.Tooltip</component-family>
+      <renderer-type>org.openntf.xsp.bootstrap.tooltip.BootstrapTooltipRenderer</renderer-type>
+      <renderer-class>org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.tooltip.BootstrapTooltipRenderer</renderer-class>
+    </renderer>
 
 <!--
     Dojo

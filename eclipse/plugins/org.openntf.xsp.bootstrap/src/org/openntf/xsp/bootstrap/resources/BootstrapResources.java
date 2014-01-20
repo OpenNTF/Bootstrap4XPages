@@ -66,6 +66,8 @@ public abstract class BootstrapResources {
     public static final DojoModuleResource bootstrapDialog = new DojoModuleResource("extlib.dijit.BootstrapDialog"); // $NON-NLS-1$
     public static final DojoModuleResource bootstrapDialog3 = new DojoModuleResource("extlib.dijit.BootstrapDialog3"); // $NON-NLS-1$
 
+    public static final DojoModuleResource bootstrapTooltip = new DojoModuleResource("extlib.dijit.BootstrapTooltip");   // $NON-NLS-1$
+    
     public static final DojoModuleResource bootstrapPickerCheckbox = new DojoModuleResource("extlib.dijit.BootstrapPickerCheckbox"); // $NON-NLS-1$
     public static final DojoModuleResource bootstrapPickerCheckbox3 = new DojoModuleResource("extlib.dijit.BootstrapPickerCheckbox3"); // $NON-NLS-1$
     public static final DojoModuleResource bootstrapPickerList = new DojoModuleResource("extlib.dijit.BootstrapPickerList"); // $NON-NLS-1$
