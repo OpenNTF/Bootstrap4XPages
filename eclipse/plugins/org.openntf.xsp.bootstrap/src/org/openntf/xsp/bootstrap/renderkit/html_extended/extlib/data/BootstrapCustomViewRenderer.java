@@ -114,9 +114,9 @@ public class BootstrapCustomViewRenderer extends DataViewRenderer {
             StringBuilder b = new StringBuilder();
             b.append(viewDef.showHideDetailFunctionName);
             b.append("(");
-            JSUtil.addSingleQuoteString(b,Integer.toString(viewDef.dataModel.getRowIndex()));
+            addSingleQuoteString(b,Integer.toString(viewDef.dataModel.getRowIndex()));
             b.append(",");
-            JSUtil.addSingleQuoteString(b,viewDef.rowPosition);
+            addSingleQuoteString(b,viewDef.rowPosition);
             b.append(")");
             w.writeAttribute("onclick","javascript:"+b.toString(),null); // $NON-NLS-1$ $NON-NLS-2$
         }
@@ -142,6 +142,19 @@ public class BootstrapCustomViewRenderer extends DataViewRenderer {
             }
         }
     }
+    
+    // From 9.0.1 JSUtils
+    public static void addSingleQuoteString(StringBuilder b, String s) {
+        if( null == s ){
+            b.append("null"); // $NON-NLS-1$
+        }else if( s.length() == 0 ){
+            b.append("''"); // $NON-NLS-1$
+        }else{
+            b.append('\'');
+            JSUtil.appendJavaScriptString(b, s);
+            b.append('\'');
+        }
+    }   
     
     @Override
 	protected void writeExpandCollapseIcon(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
