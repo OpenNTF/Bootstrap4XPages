@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xpt="http://www.openntf.org/xsp/xpt">
+	<xc:ccApplication navigationPath="allContacts"
+		pageTitle="All Contacts">
+		<xp:this.facets>
+			<xp:panel xp:key="facetRight">
+				<xpt:oneuitps id="oneuitps1" title="Using DataView"
+					text="In this example are we using a data view UI Element to render the object list datasource."
+					rendererType="biz.webgate.simplecontacts.bootstrap.uitips">
+				</xpt:oneuitps>
+			</xp:panel>
+			<xc:ccNav xp:key="facetLeft"></xc:ccNav>
+			<xp:panel id="main" xp:key="facetMiddle">
+				<xp:button value="Create Contact" id="btCreateContact"
+					rendered="#{javascript:return viewScope.showBtnCreateContact != false}">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="main">
+						<xp:this.action><![CDATA[#{javascript:var pan = getComponent("panNewContact");
+pan.setRendered(true);
+viewScope.showBtnCreateContact=false;}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xc:ccContactNew></xc:ccContactNew>
+				<xe:dataView id="dataView1" columnTitles="false"
+					var="contactRow" collapsibleDetail="true" collapsibleRows="true"
+					pageName="Contact.xsp" rows="10">
+					<xp:this.facets>
+						<xp:panel xp:key="detail">
+							<xp:link escape="true"
+								text="add to my contacts" id="lnkAddWatchlist">
+								<xp:image id="image7"
+									url="#{javascript:@ViewIconUrl(182)}"
+									alt="add to my contacts watchlist"
+									title="add to my contacts watchlist">
+								</xp:image>
+								&#160;
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:contactBean.addToObserve(contactRow.getBO());}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xe:djTabContainer id="djTabContainer1"
+								doLayout="false" style="width:100%">
+								<xe:this.selectedTab><![CDATA[#{javascript:viewScope.get(contactRow.ID +"_selTab")}]]></xe:this.selectedTab>
+								<xe:djTabPane id="djTabAddress"
+									title="Address" partialRefresh="true" partialEvents="true"
+									preventCache="true" refreshOnShow="true">
+									<xp:panel id="panAddress">
+										<xp:this.data>
+											<xpt:objectlistSource
+												var="lstAddress" scope="request">
+												<xpt:this.buildValues><![CDATA[#{javascript:contactRow.getBO().getAddress();
+}]]></xpt:this.buildValues>
+											</xpt:objectlistSource>
+										</xp:this.data>
+										<xp:button value="add address"
+											id="btnAddAddress">
+											<xp:eventHandler
+												event="onclick" submit="true" refreshMode="complete">
+												<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgAddress").show()}]]></xp:this.action>
+											</xp:eventHandler>
+										</xp:button>
+										<xp:table
+											style="width:100.0%">
+											<xp:tr>
+												<xp:td>
+													<xp:label
+														value="Type" id="lblTypeAddress">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														value="Street" id="lblStreet">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														value="ZIP" id="lblZIP">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														value="Location" id="lblLocation">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														value="Country" id="lblCountry">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														value="State" id="lblState">
+													</xp:label>
+												</xp:td>
+												<xp:td></xp:td>
+
+											</xp:tr>
+											<xp:repeat id="repeat1"
+												rows="30" value="#{javascript:lstAddress}"
+												var="addressRow">
+												<xp:tr>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField1"
+															value="#{addressRow.addressType}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField2"
+															value="#{addressRow.street}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField3"
+															value="#{addressRow.ZIP}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField4"
+															value="#{addressRow.location}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField5"
+															value="#{addressRow.country}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField6"
+															value="#{addressRow.state}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:image
+															url="#{javascript:@ViewIconUrl(12)}" id="edit" alt="edit"
+															title="edit">
+															<xp:eventHandler
+																event="onclick" submit="true" refreshMode="complete">
+																<xp:this.action><![CDATA[#{javascript:viewScope.ID = addressRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgAddress").show()}]]></xp:this.action>
+															</xp:eventHandler>
+														</xp:image>
+														<xp:image
+															url="#{javascript:@ViewIconUrl(80)}" id="delete"
+															alt="delete" title="delete">
+															<xp:eventHandler
+																event="onclick" submit="true" refreshMode="partial"
+																refreshId="main">
+																<xp:this.action><![CDATA[#{javascript:contactBean.deleteAddress (contactRow.getBO(), addressRow.getBO());
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();}]]></xp:this.action>
+															</xp:eventHandler>
+														</xp:image>
+													</xp:td>
+												</xp:tr>
+											</xp:repeat>
+										</xp:table>
+									</xp:panel>
+									<xp:eventHandler event="onClick"
+										submit="true" refreshMode="norefresh">
+										<xe:this.action><![CDATA[#{javascript:viewScope.put(contactRow.ID +"_selTab", "djTabAddress")}]]></xe:this.action>
+									</xp:eventHandler>
+								</xe:djTabPane>
+								<xe:djTabPane id="djTabPhone"
+									title="Phone" partialEvents="true" partialRefresh="true"
+									preventCache="true" refreshOnShow="true">
+									<xp:panel>
+										<xp:this.data>
+											<xpt:objectlistSource
+												var="lstPhone" scope="request"
+												buildValues="#{javascript:contactRow.getBO().getPhone();}">
+											</xpt:objectlistSource>
+										</xp:this.data>
+										<xp:button
+											value="add phone number" id="btnAddPhone">
+											<xp:eventHandler
+												event="onclick" submit="true" refreshMode="complete">
+												<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgPhone").show()}]]></xp:this.action>
+											</xp:eventHandler>
+										</xp:button>
+										<xp:table>
+											<xp:tr>
+												<xp:td>
+													<xp:label
+														value="Type" id="lblTypePhone">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														value="Country Code" id="lblCountryCode">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														value="Area Code" id="lblAreaCode">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														value="Number" id="lblPhoneNumber">
+													</xp:label>
+												</xp:td>
+												<xp:td></xp:td>
+											</xp:tr>
+											<xp:repeat id="repeat2"
+												rows="30" var="phoneRow" value="#{javascript:lstPhone}">
+												<xp:tr>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField9"
+															value="#{phoneRow.phoneType}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField10"
+															value="#{phoneRow.countryCode}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField11"
+															value="#{phoneRow.areaCode}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField12"
+															value="#{phoneRow.number}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:image
+															url="#{javascript:@ViewIconUrl(12)}" id="image1"
+															alt="edit" title="edit">
+															<xp:eventHandler
+																event="onclick" submit="true" refreshMode="complete">
+																<xp:this.action><![CDATA[#{javascript:viewScope.ID = phoneRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgPhone").show()}]]></xp:this.action>
+															</xp:eventHandler>
+														</xp:image>
+														<xp:image
+															url="#{javascript:@ViewIconUrl(80)}" id="image2"
+															alt="delete" title="delete">
+															<xp:eventHandler
+																event="onclick" submit="true" refreshMode="partial"
+																refreshId="main">
+																<xp:this.action><![CDATA[#{javascript:contactBean.deletePhone (contactRow.getBO(), phoneRow.getBO());
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();}]]></xp:this.action>
+															</xp:eventHandler>
+														</xp:image>
+													</xp:td>
+												</xp:tr>
+											</xp:repeat>
+										</xp:table>
+									</xp:panel>
+									<xp:eventHandler event="onBlur"
+										submit="true" refreshMode="norefresh">
+										<xe:this.action><![CDATA[#{javascript:viewScope.put(contactRow.ID +"_selTab", "djTabPhone")}]]></xe:this.action>
+									</xp:eventHandler>
+								</xe:djTabPane>
+								<xe:djTabPane id="djTabEMail"
+									title="Mail" partialEvents="true" partialRefresh="true"
+									preventCache="true" refreshOnShow="true">
+									<xp:panel>
+										<xp:this.data>
+											<xpt:objectlistSource
+												var="lstMail" scope="request"
+												buildValues="#{javascript:contactRow.getBO().getEMail();}">
+											</xpt:objectlistSource>
+										</xp:this.data>
+										<xp:button value="add email"
+											id="btnAddEmail">
+											<xp:eventHandler
+												event="onclick" submit="true" refreshMode="complete">
+												<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgEmail").show()}]]></xp:this.action>
+											</xp:eventHandler>
+										</xp:button>
+										<xp:table>
+											<xp:tr>
+												<xp:td>
+													<xp:label
+														id="lblTypeMail" value="Type">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														id="lblEMail" value="EMail">
+													</xp:label>
+												</xp:td>
+												<xp:td></xp:td>
+											</xp:tr>
+											<xp:repeat id="repeat3"
+												rows="30" value="#{javascript:lstMail}" var="mailRow">
+												<xp:tr>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField7"
+															value="#{mailRow.EMailType}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField8"
+															value="#{mailRow.EMail}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:image
+															url="#{javascript:@ViewIconUrl(12)}" id="image3"
+															alt="edit" title="edit">
+															<xp:eventHandler
+																event="onclick" submit="true" refreshMode="complete">
+																<xp:this.action><![CDATA[#{javascript:viewScope.ID = mailRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgEmail").show()}]]></xp:this.action>
+															</xp:eventHandler>
+														</xp:image>
+														<xp:image
+															url="#{javascript:@ViewIconUrl(80)}" id="image4"
+															alt="delete" title="delete">
+															<xp:eventHandler
+																event="onclick" submit="true" refreshMode="partial"
+																refreshId="main">
+																<xp:this.action><![CDATA[#{javascript:contactBean.deleteEMail (contactRow.getBO(), mailRow.getBO());
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();}]]></xp:this.action>
+															</xp:eventHandler>
+														</xp:image>
+													</xp:td>
+												</xp:tr>
+											</xp:repeat>
+										</xp:table>
+									</xp:panel>
+									<xp:eventHandler event="onClick"
+										submit="true" refreshMode="norefresh">
+										<xe:this.action><![CDATA[#{javascript:viewScope.put(contactRow.ID +"_selTab", "djTabEMail")}]]></xe:this.action>
+									</xp:eventHandler>
+								</xe:djTabPane>
+								<xe:djTabPane id="djTabSocial"
+									title="Social" partialEvents="true" partialRefresh="true"
+									preventCache="true" refreshOnShow="true">
+									<xp:panel>
+										<xp:this.data>
+											<xpt:objectlistSource
+												scope="request" var="lstSocial"
+												buildValues="#{javascript:contactRow.getBO().getSocial();}">
+											</xpt:objectlistSource>
+										</xp:this.data>
+										<xp:button
+											value="add social entity" id="btnAddSocial">
+											<xp:eventHandler
+												event="onclick" submit="true" refreshMode="complete">
+												<xp:this.action><![CDATA[#{javascript:viewScope.ID = "NEW";
+viewScope.ParentID = contactRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgSocial").show()}]]></xp:this.action>
+											</xp:eventHandler>
+										</xp:button>
+										<xp:table>
+											<xp:tr>
+												<xp:td>
+													<xp:label
+														value="Service" id="lblService">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														value="Username" id="lblUserName">
+													</xp:label>
+												</xp:td>
+												<xp:td>
+													<xp:label
+														value="URL" id="lblURL">
+													</xp:label>
+												</xp:td>
+												<xp:td></xp:td>
+											</xp:tr>
+											<xp:repeat id="repeat4"
+												rows="30" value="#{javascript:lstSocial}" var="socialRow">
+												<xp:tr>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField13"
+															value="#{socialRow.service}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField14"
+															value="#{socialRow.userName}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:text
+															escape="true" id="computedField15"
+															value="#{socialRow.URL}">
+														</xp:text>
+													</xp:td>
+													<xp:td>
+														<xp:image
+															url="#{javascript:@ViewIconUrl(12)}" id="image5"
+															alt="edit" title="edit">
+															<xp:eventHandler
+																event="onclick" submit="true" refreshMode="complete">
+																<xp:this.action><![CDATA[#{javascript:viewScope.ID = socialRow.ID;
+viewScope.BO = contactRow.getBO();
+getComponent("dlgSocial").show()}]]></xp:this.action>
+															</xp:eventHandler>
+														</xp:image>
+														<xp:image
+															url="#{javascript:@ViewIconUrl(80)}" id="image6"
+															alt="delete" title="delete">
+															<xp:eventHandler
+																event="onclick" submit="true" refreshMode="partial"
+																refreshId="main">
+																<xp:this.action><![CDATA[#{javascript:contactBean.deleteSocial(contactRow.getBO(), socialRow.getBO());
+var dsOL = xptBean.findDataSource("dataView1","dsContactList");
+dsOL.refresh();}]]></xp:this.action>
+															</xp:eventHandler>
+														</xp:image>
+													</xp:td>
+												</xp:tr>
+											</xp:repeat>
+										</xp:table>
+									</xp:panel>
+									<xp:eventHandler event="onBlur"
+										submit="true" refreshMode="norefresh">
+										<xe:this.action><![CDATA[#{javascript:viewScope.put(contactRow.ID +"_selTab", "djTabSocial")}]]></xe:this.action>
+									</xp:eventHandler>
+								</xe:djTabPane>
+							</xe:djTabContainer>
+						</xp:panel>
+					</xp:this.facets>
+					<xe:this.data>
+						<xpt:objectlistSource
+							buildValues="#{javascript:contactBean.getAllContacts()}"
+							sortAttribute="LastName" ascending="true" scope="view"
+							var="dsContactList">
+						</xpt:objectlistSource>
+					</xe:this.data>
+					<xe:this.summaryColumn>
+						<xe:viewSummaryColumn>
+							<xe:this.value><![CDATA[#{javascript:contactRow.firstName + " " +contactRow.lastName}]]></xe:this.value>
+							<xe:this.href><![CDATA[#{javascript:@FullUrl("Contact.xsp")+"?id="+contactRow.ID;}]]></xe:this.href>
+						</xe:viewSummaryColumn>
+					</xe:this.summaryColumn>
+				</xe:dataView>
+
+				<xe:dialog id="dlgAddress"
+					title="Address information">
+					<xc:ccDialogAddAddress></xc:ccDialogAddAddress>
+				</xe:dialog>
+				<xe:dialog id="dlgPhone" title="Phone number">
+					<xc:ccDialogAddPhone></xc:ccDialogAddPhone>
+				</xe:dialog>
+				<xe:dialog id="dlgEmail" title="Email">
+					<xc:ccDialogAddEmail></xc:ccDialogAddEmail>
+				</xe:dialog>
+				<xe:dialog id="dlgSocial" title="Social entities">
+					<xc:ccDialogAddSocial></xc:ccDialogAddSocial>
+				</xe:dialog>
+
+			</xp:panel>
+
+		</xp:this.facets>
+	</xc:ccApplication>
+</xp:view>
