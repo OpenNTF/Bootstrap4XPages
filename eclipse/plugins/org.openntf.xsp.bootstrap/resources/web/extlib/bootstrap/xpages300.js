@@ -19,3 +19,4 @@ $(document).ready(function() {
     	menu.css({ left:newpos, width: menu.width() });
 	});
 });
+

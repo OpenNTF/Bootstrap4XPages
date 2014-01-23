@@ -53,6 +53,16 @@
 		<content-type>application/x-javascript</content-type>
 		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/js/bootstrap.js</href>
 	</resource>
+	
+	<!-- XPages/Bootstrap specific JS -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages.js</href>
+	</resource>
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages300.js</href>
+	</resource>
 
 
 	<!-- Basic Input Text 

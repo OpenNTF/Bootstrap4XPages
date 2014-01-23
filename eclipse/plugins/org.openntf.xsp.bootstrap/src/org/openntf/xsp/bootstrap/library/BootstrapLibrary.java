@@ -63,7 +63,8 @@ public class BootstrapLibrary extends AbstractXspLibrary {
         String[] files = new String[] {
                 "org/openntf/xsp/bootstrap/config/bootstrap.xsp-config", // $NON-NLS-1$
                 "org/openntf/xsp/bootstrap/config/bootstrap-extlib.xsp-config", // $NON-NLS-1$
-            };
+                "org/openntf/xsp/bootstrap/config/bootstrap-select2.xsp-config", // $NON-NLS-1$
+        	};
         List<BootstrapFragment> fragments = getBazaarFragments();
         for( BootstrapFragment fragment: fragments) {
         	files = fragment.getXspConfigFiles(files);
@@ -75,7 +76,8 @@ public class BootstrapLibrary extends AbstractXspLibrary {
 	public String[] getFacesConfigFiles() {
         String[] files = new String[] {
                 "org/openntf/xsp/bootstrap/config/bootstrap-faces-config.xml", // $NON-NLS-1$
-            };
+                "org/openntf/xsp/bootstrap/config/bootstrap-select2-faces-config.xml", // $NON-NLS-1$
+        	};
         List<BootstrapFragment> fragments = getBazaarFragments();
         for( BootstrapFragment fragment: fragments) {
         	files = fragment.getFacesConfigFiles(files);

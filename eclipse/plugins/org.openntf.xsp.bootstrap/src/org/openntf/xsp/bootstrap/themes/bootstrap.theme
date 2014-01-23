@@ -99,7 +99,7 @@
 		<name>Button.Cancel</name>
 		<property>
 			<name>styleClass</name>
-			<value>btn btn-danger</value>
+			<value>btn</value>
 		</property>
 	</control>
 	<control>
