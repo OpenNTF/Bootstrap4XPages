@@ -18,35 +18,25 @@ package org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.picker;
  */
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
-import javax.faces.render.Renderer;
 
 import org.openntf.xsp.bootstrap.component.UISelect2Picker;
-import org.openntf.xsp.bootstrap.util.BootstrapUtil;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
-import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.xsp.component.UIInputEx;
 import com.ibm.xsp.component.UIViewRootEx;
-import com.ibm.xsp.extlib.component.picker.data.IPickerData;
-import com.ibm.xsp.extlib.component.picker.data.SimpleValuePickerData;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
-import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.resource.ScriptResource;
 import com.ibm.xsp.resource.StyleSheetResource;
 import com.ibm.xsp.util.FacesUtil;
-import com.ibm.xsp.renderkit.FacesRenderer;
 
 public class Select2PickerRenderer extends FacesRendererEx {
 
@@ -57,7 +47,7 @@ public class Select2PickerRenderer extends FacesRendererEx {
         ResponseWriter writer = context.getResponseWriter();
         
         UISelect2Picker picker = (UISelect2Picker)component;
-        IPickerData data = picker.getDataProvider();
+        //IPickerData data = picker.getDataProvider();
                    
         UIInputEx _for = (UIInputEx) getFor(context,picker);
        
@@ -71,16 +61,18 @@ public class Select2PickerRenderer extends FacesRendererEx {
     	StyleSheetResource css = new StyleSheetResource();
     	css.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2.css");
     	
+    	StyleSheetResource cssBootstrap = new StyleSheetResource();
+    	cssBootstrap.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2-bootstrap.css");
+    	
     	UIViewRootEx rootEx = (UIViewRootEx) context.getViewRoot();
     	rootEx.addEncodeResource(js);
     	rootEx.addEncodeResource(css);
+    	rootEx.addEncodeResource(cssBootstrap);
     	
     	if (readOnly ) {
     		
     		//selected values, let's not wrap them in a frameset and table here :-)
     		writer.writeText( Select2PickerRenderer.join( _for.getValueAsList(), ", "), null);
-    		
-    		//TODO: FIX
     		
     	} else {
   
@@ -109,13 +101,26 @@ public class Select2PickerRenderer extends FacesRendererEx {
     	    		
             params.put("id",  id);
             params.put("forId", _for.getClientId(context));
-            params.put("currentValue", _for.getValueAsString() );		//TODO: implement for multi value
+            params.put("currentValue", _for.getValueAsString() );		
             params.put("allowMultiple", StringUtil.isNotEmpty(_for.getMultipleSeparator()) );
             params.put("restUrl", picker.getUrl(context, null));		// rest service URL
             params.put("useRemoteData", picker.isUseRemoteData() );
            	params.put("placeHolder", picker.getPlaceHolder() );
             params.put("allowClearing", picker.isAllowClearing() );
-            params.put("template", picker.getTemplate() );
+            params.put("formatSelection", picker.getFormatSelection() );
+            params.put("formatResult", picker.getFormatResult() );
+            params.put("isNativeSelect", false);
+            
+            String lw = picker.getListWidth();
+            if(StringUtil.isNotEmpty(lw)) {
+                params.put("listWidth",lw); // $NON-NLS-1$
+            }
+            
+            int maxRowCount = picker.getMaxRowCount();
+            
+            if (maxRowCount>0) {
+                params.put("maxRowCount", maxRowCount); // $NON-NLS-1$
+            }
             
 			try {
 				//writer.writeText("dojo.addOnLoad( function() { initSelect2(" + JsonGenerator.toJson(JsonJavaFactory.instanceEx, params) + "); } );", null);
@@ -156,124 +161,3 @@ public class Select2PickerRenderer extends FacesRendererEx {
     }
 
 }
-
-
-
-/*
-
-public class Select2Renderer extends FacesRenderer {
-	
-
-    protected void writeLink(FacesContext context, ResponseWriter w, UISelect2 picker, IPickerData data, String dojoType) throws IOException {
-        UIComponent _for = getFor(context,picker);
-   boolean readOnly = _for!=null ? FacesUtil.isComponentReadOnly(context, _for) : false;
-        
-        
-        if(!readOnly) {
-            Boolean _disabled_ = _for!=null ? (Boolean)_for.getAttributes().get("disabled") : null; // $NON-NLS-1$
-            boolean disabled = _disabled_!=null ? _disabled_:false; // $NON-NLS-1$
-            
-            if(disabled) {
-                w.startElement("span", null); // $NON-NLS-1$
-            } else {
-                w.startElement("a", null);
-                w.writeAttribute("href", "javascript:;", null); // $NON-NLS-1$ $NON-NLS-2$
-                if(data!=null) {
-                    //PHAN8YWEJZ fix IE namepicker beforeunload event occurring
-                    StringBuilder onclick = new StringBuilder();
-                    onclick.append("return XSP.selectValue("); // $NON-NLS-1$
-                    JSUtil.addSingleQuoteString(onclick, dojoType);
-                    onclick.append(","); // $NON-NLS-1$
-                    onclick.append(createParametersAsJson(context, picker, _for, data, dojoType));
-                    onclick.append(")"); // $NON-NLS-1$
-                    w.writeAttribute("onclick", onclick.toString(), null); // $NON-NLS-1$
-                    
-                    StringBuilder onkeydown = new StringBuilder();
-                    onkeydown.append("javascript:var kc=event.keyCode?event.keyCode:event.which;if(kc==32){ return XSP.selectValue("); // $NON-NLS-1$
-                    JSUtil.addSingleQuoteString(onkeydown, dojoType);
-                    onkeydown.append(","); // $NON-NLS-1$
-                    // TODO this onkeydown="javascript: something" contains JSON with double-quotes, breaking the XML attribute
-                    onkeydown.append(createParametersAsJson(context, picker, _for,data, dojoType));
-                    onkeydown.append(")}"); // $NON-NLS-1$
-                    w.writeAttribute("onkeydown", onkeydown.toString(), null); // $NON-NLS-1$ $NON-NLS-2$
-                }
-                  //LHEY97QME8 adding the role= button
-                    w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
-            }
-          
-          
-            
-            if(disabled) {
-                w.endElement("span"); // $NON-NLS-1$
-            } else {
-                w.endElement("a");
-            }
-        }
-    }
-    
-    
-    protected String createParametersAsJson(FacesContext context, UISelect2 picker, UIComponent _for, IPickerData data, String dojoType) {
-        try {
-            JsonJavaObject json = new JsonJavaObject();
-            DojoRendererUtil.getDojoAttributeMap(picker,json);
-            initDojoAttributes(context, picker, _for, data, dojoType, json);
-            // And generate them
-            return DojoRendererUtil.getDojoAttributesAsJson(context,picker,json);
-        } catch(Exception e) {
-            throw new FacesExceptionEx(e);
-        }
-    }
-    
-    protected void initDojoAttributes(FacesContext context, UISelect2 picker, UIComponent _for, IPickerData data, String dojoType, JsonJavaObject json) throws IOException {
-        // Associated control
-        boolean allowMultiple = false;
-        if(_for!=null) {
-            json.putString("control",_for.getClientId(context)); // $NON-NLS-1$
-            if(_for instanceof UIInputEx) {
-                UIInputEx iex = (UIInputEx)_for; 
-                // Check for a multiple separator
-                String ch = iex.getMultipleSeparator();
-                if(StringUtil.isNotEmpty(ch)) {
-                    boolean trim = iex.isMultipleTrim();
-                    json.putString("msep",ch); // $NON-NLS-1$
-                    json.putBoolean("trim",trim); // $NON-NLS-1$
-                    allowMultiple = true;
-                }
-            }
-        }
-
-        // Dialog title
-        String title = picker.getDialogTitle();
-        if(StringUtil.isEmpty(title)) {
-            if( allowMultiple ){
-                title = getDialogTitleMultipleSelect();
-            }else{
-                title = getDialogTitleSingleSelect();
-            }
-        }
-        json.putString("dlgTitle",title); // $NON-NLS-1$
-        // Dialog sizes
-        String lw = picker.getListWidth();
-        if(StringUtil.isNotEmpty(lw)) {
-            json.putString("listWidth",lw); // $NON-NLS-1$
-        }
-        String lh = picker.getListHeight();
-        if(StringUtil.isNotEmpty(lh)) {
-            json.putString("listHeight",lh); // $NON-NLS-1$
-        }
-        // The rest service URL
-        String url = picker.getUrl(context, null);
-        json.putString("url",url); // $NON-NLS-1$
-        // Generate the source list, if applicable
-        boolean hasMultipleSource = data.hasCapability(IPickerData.CAPABILITY_MULTIPLESOURCES);
-        if(hasMultipleSource) {
-            String[] labels = data.getSourceLabels();
-            if(labels!=null && labels.length>=2) {
-                json.putObject("sources",labels); // $NON-NLS-1$
-            }
-        }
-    }  
-    
-}
-
-*/

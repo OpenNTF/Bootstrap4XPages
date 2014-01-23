@@ -8,7 +8,12 @@
       <renderer-type>org.openntf.xsp.bootstrap.Select2PickerRendererType</renderer-type>
       <renderer-class>org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.picker.Select2PickerRenderer</renderer-class>
     </renderer>
+    
+    <renderer>
+      <component-family>org.openntf.xsp.bootstrap.Select2ComboPicker</component-family>
+      <renderer-type>org.openntf.xsp.bootstrap.Select2PickerComboRendererType</renderer-type>
+      <renderer-class>org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.picker.Select2PickerRendererCombo</renderer-class>
+    </renderer>
   </render-kit>
-  
   
 </faces-config>

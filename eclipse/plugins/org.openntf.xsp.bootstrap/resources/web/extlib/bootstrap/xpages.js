@@ -1,8 +1,11 @@
+"use strict";
+
 /*
-  XPages Boostrap specific JavaScript files for all versions
+  XPages Bootstrap specific JavaScript files for all versions
 */
 
-/*x$ snippet by Mark Roden
+/*
+ * x$ snippet by Mark Roden
  * http://openntf.org/XSnippets.nsf/snippet.xsp?id=x-jquery-selector-for-xpages
  */
 function x$(idTag, param){ //Updated 18 Feb 2012
@@ -12,11 +15,6 @@ function x$(idTag, param){ //Updated 18 Feb 2012
 
 
 XSP.initSelect2Picker = function(params) {
-	
-	var select2Options = {
-			placeholder: params.placeHolder,
-			allowClear: params.allowClearing
-		};
 	
 	if (params.useRemoteData) {		//picker with remote search capability
 		
@@ -32,7 +30,6 @@ XSP.initSelect2Picker = function(params) {
 					return "Searching...";
 			},
 		    quietMillis: 1000,
-		    width: '250px',		//TODO: configurable
 		    ajax: {
               url: params.restUrl,
                dataType: 'json',
@@ -70,8 +67,8 @@ XSP.initSelect2Picker = function(params) {
             		}
                    
                }//results
-		    },//ajax
-		    initSelection: function(element, callback) {		//TODO
+		    }//ajax
+		    /*initSelection: function(element, callback) {		//TODO
 	            //sets a default value (if a value was selected previously
 	            var id=$(element).val();
 	            if (id!=="") {
@@ -85,8 +82,13 @@ XSP.initSelect2Picker = function(params) {
 	                    dataType: "json"
 	                }).done(function(data) { callback(data); } );
 				}
-			}	
+			}	*/
 		};
+		
+		if (params.hasOwnProperty('listWidth') ) {
+			select2Options.width = params.listWidth;
+			console.log("width set to " + params.listWidth);
+		}
 		
 		x$(params.forId)
 			.select2(select2Options);
@@ -95,70 +97,102 @@ XSP.initSelect2Picker = function(params) {
 		
 		var select2Options = {
 			placeholder: params.placeHolder,
-			allowClear: params.allowClearing,
-			width: "resolve"		//TODO: configurable
+			allowClear: params.allowClearing
 		};
 		
-		//use the template to render the entries
-		if (params.template != null) {
-			
-			function format(entry) {
-			    if (!entry.id) return entry.text; // optgroup
-			    return params.template
-			    	.replace("{value}", entry.id)
-			    	.replace("{text}", entry.text);
-			}
-			
-			select2Options.formatResult = format;
-			select2Options.formatSelection = format;
+		if (params.hasOwnProperty('listWidth') ) {
+			select2Options.width = params.listWidth;
+		}
+		
+		if (params.formatSelection != null) {
+			//use a template to render the selected entry
+		
+			select2Options.formatSelection = function(entry) {
+			    if (!entry.id) { return entry.text; } // optgroup
+			    return params.formatSelection
+			    	.replace(/{value}/g, entry.id)
+			    	.replace(/{text}/g, entry.text);
+			};
 			select2Options.escapeMarkup = function(m) { return m; };
 			
 		}
+		
+		if (params.formatResult != null) {
+			//use a template to render the entries
+		
+			select2Options.formatResult = function(entry) {
+			    if (!entry.id) { return entry.text; } // optgroup
+			    return (params.formatResult)
+			    	.replace(/{value}/g, entry.id)
+			    	.replace(/{text}/g, entry.text);
+			};
+			select2Options.escapeMarkup = function(m) { return m; };
+			
+		}
+		
+		if (params.isNativeSelect) {
+			//code to execute if select2 should be attached to a <select> element 
+			
+			var $select = x$(params.forId);
+			
+			if (params.placeHolder != null || params.allowClearing ) { 
+				
+				//add a blank option add the beginning of the option list: required for the placeH
+				$select.prepend("<option>");
+				
+			}
 	
-		$.get(
-			params.restUrl,
-			function(data, status, request) {
-				
-				var $select = x$(params.id);
-				var _hasLabels = null;
-				
-				//add a blank option if a placeholder is set
-				if (params.placeHolder) {
-					$select.append( "<option>" );
-				}
-				
-				$(data.items).each( function() {
+			$select
+				.select2( select2Options );
+			
+		} else {
+			//code to execute if select2 is attached to a (hidden) import
+	
+			$.get(
+				params.restUrl,
+				function(data, status, request) {
 					
-					var val = this['@value'];
+					var $select = x$(params.id);
+					var _hasLabels = null;
 					
-					//check if we have labels or only values
-					if (_hasLabels == null) {
-						_hasLabels = this.hasOwnProperty('@label');
+					//add a blank option if a placeholder is set
+					if (params.placeHolder) {
+						$select.append( "<option>" );
 					}
 					
-					var txt = this[ ( _hasLabels ? '@label' : '@value' ) ];
-					
-					$select.append(
-						$("<option>")
-							.attr('value',val)
-							.text(txt)
+					$(data.items).each( function() {
 						
-					)
-				});
-				
-				if (params.currentValue.length > 0 ) {
-					$select.val(params.currentValue);		//select current value
-					
-				}
-					
-				x$(params.id)
-					.select2(select2Options)
-					.on("change", function(e) {		//set value in target field on change
-						x$(params.forId).val(e.val);
+						var val = this['@value'];
+						
+						//check if we have labels or only values
+						if (_hasLabels == null) {
+							_hasLabels = this.hasOwnProperty('@label');
+						}
+						
+						var txt = this[ ( _hasLabels ? '@label' : '@value' ) ];
+						
+						$select.append(
+							$("<option>")
+								.attr('value',val)
+								.text(txt)
+							
+						)
 					});
-			},
-			"json"
-		);
+					
+					if (params.currentValue.length > 0 ) {
+						$select.val(params.currentValue);		//select current value
+						
+					}
+						
+					x$(params.id)
+						.select2(select2Options)
+						.on("change", function(e) {		//set value in target field on change
+							x$(params.forId).val(e.val);
+						});
+				},
+				"json"
+			);
+		} // params.nativeSelect
 	}
 	
 };

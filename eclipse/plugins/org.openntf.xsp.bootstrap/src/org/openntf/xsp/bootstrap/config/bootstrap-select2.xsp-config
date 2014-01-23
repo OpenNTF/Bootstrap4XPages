@@ -6,11 +6,94 @@
       		<control-subpackage-name>select2</control-subpackage-name>
     	</designer-extension>
     </faces-config-extension>
+    
+    <component>
+     <description>Use this control to enhance a Combo Box or List Box control with the Select2 Picker</description>
+        <display-name>Select2 Picker for Combo/ List Box</display-name>
+        <component-type>org.openntf.bootstrap.pickers.Select2Combo</component-type>
+        <component-class>org.openntf.xsp.bootstrap.component.UISelect2PickerCombo</component-class>
+        <component-extension>
+            <tag-name>select2PickerCombo</tag-name>
+            <designer-extension>
+                      <in-palette>true</in-palette>
+                      <category>Bootstrap</category>
+                      <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+	&lt;xp:image url="/extlib/designer/markup/ValuePicker.png" id="image1"&gt;&lt;/xp:image&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+             </designer-extension>
+            
+        </component-extension>
+        
+        <property>
+	      <description>Defines an ID to an hidden input control whose value is set when choosing an option in the Select2 picker</description>
+	      <display-name>For Control</display-name>
+	      <property-name>for</property-name>
+	      <property-class>java.lang.String</property-class>
+	      <property-extension>
+	        <required>true</required>
+	        <designer-extension>
+	          <category>basics</category>
+	          <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+	          <editor-parameter>
+	          					http://www.ibm.com/xsp/core|listBox
+	                            http://www.ibm.com/xsp/core|comboBox                         
+				</editor-parameter>
+	        </designer-extension>
+	      </property-extension>
+	    </property>
+	    
+	    <property>
+			<description>Text shown when no value is selected</description>
+			<display-name>Placeholder</display-name>
+			<property-name>placeHolder</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Allow users to clear the selected value</description>
+			<display-name>Allow clearing</display-name>
+			<property-name>allowClearing</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Define the (HTML) template to render the entries (search results) in the picker. The template can use the variables {value} and {text} to refer to the value and text of the entry.</description>
+			<display-name>Format result</display-name>
+			<property-name>formatResult</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Define the (HTML) template to render a selected entry in the picker. The template can use the variables {value} and {text} to refer to the value and text of the entry.</description>
+			<display-name>Format selection</display-name>
+			<property-name>formatSelection</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+    </component>
    
     <component>
         <description>Select2 Picker</description>
         <display-name>Select2 Picker</display-name>
-        <component-type>com.example.blank.Select2</component-type>
+        <component-type>org.openntf.bootstrap.pickers.Select2</component-type>
         <component-class>org.openntf.xsp.bootstrap.component.UISelect2Picker</component-class>
         <component-extension>
             <tag-name>select2Picker</tag-name>
@@ -78,9 +161,20 @@
 			</property-extension>
 		</property>
 		<property>
-			<description>Define the (HTML) template to render each entry in the picker. The template can use the variables {value} and {text} to refer to the value and text of the entry.</description>
-			<display-name>Template</display-name>
-			<property-name>template</property-name>
+			<description>Define the (HTML) template to render the entries (search results) in the picker. The template can use the variables {value} and {text} to refer to the value and text of the entry.</description>
+			<display-name>Format result</display-name>
+			<property-name>formatResult</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Define the (HTML) template to render a selected entry in the picker. The template can use the variables {value} and {text} to refer to the value and text of the entry.</description>
+			<display-name>Format selection</display-name>
+			<property-name>formatSelection</property-name>
 			<property-class>java.lang.String</property-class>
 			<property-extension>
 				<designer-extension>
@@ -126,6 +220,17 @@
 				</designer-extension>
 			</property-extension>
 		</property>
+		 <property>
+          <description>Maximum number of entries to return from the data provider. Default is 50</description>
+            <display-name>Max Row Count</display-name>
+            <property-name>maxRowCount</property-name>
+            <property-class>int</property-class>
+             <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+       </property>
 		
 	</component>
     
