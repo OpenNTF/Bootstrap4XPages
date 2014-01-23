@@ -15,6 +15,14 @@
 			<value>org.openntf.xsp.bootstrap.dialog.BootstrapDialog3</value>
 		</property>
 	</control>
+
+	<control>
+		<name>Tooltip</name>
+		<property>
+			<name>rendererType</name>
+			<value>org.openntf.xsp.bootstrap.tooltip.BootstrapTooltipRenderer</value>
+		</property>
+	</control>
 	
 	<control>
 		<name>Picker.Value</name>

@@ -65,7 +65,7 @@
 	</resource>
 
 
-	<!-- Basic Input Text -->
+	<!-- Basic Input Text 
 	<control>
 		<name>InputField</name>
 		<property mode="concat">
@@ -73,6 +73,7 @@
 			<value>form-control</value>
 		</property>
 	</control>
+	-->
 	
 	<!-- Standard Edit Box -->
 	<control>
@@ -109,6 +110,14 @@
 			<value>form-control</value>
 		</property>
 	</control>
-
+	
+	<!-- Rich Text -->
+	<control>
+		<name>InputField.RichText</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value></value> <!-- avoid form-control -->
+		</property>
+	</control>
 </theme>
 

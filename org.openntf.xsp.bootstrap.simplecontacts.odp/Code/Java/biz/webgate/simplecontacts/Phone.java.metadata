@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257C51002881FF" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="16a" sequence="5" unid="D94409479FE30D6AC1257C510029FB04">
+<created><datetime>20131230T083832,36+01</datetime></created>
+<modified><datetime>20131230T084948,08+01</datetime></modified>
+<revised><datetime>20131230T084948,07+01</datetime></revised>
+<lastaccessed><datetime>20131230T084948,08+01</datetime></lastaccessed>
+<addedtofile><datetime>20131230T083832,37+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></updatedby>
+<wassignedby><name>CN=Christian Guedemann/O=WGC/C=CH</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>biz/webgate/simplecontacts/Phone.java</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>biz/webgate/simplecontacts/Phone.java</text></item></note>
