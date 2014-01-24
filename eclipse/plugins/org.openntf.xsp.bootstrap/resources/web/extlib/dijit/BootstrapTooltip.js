@@ -17,7 +17,7 @@ dojo.provide("extlib.dijit.BootstrapTooltip");
 
 dojo.require("extlib.dijit.Tooltip")
 
-dijit.Tooltip._MasterTooltip.templateString = dojo.cache("extlib.dijit", "templates/BootstrapTooltip.html");
+//dijit.Tooltip._MasterTooltip.templateString = dojo.cache("extlib.dijit", "templates/BootstrapTooltip.html");
 
 // Big hack here as changing the template to tooltip is not easy
 // Dojo uses a singleton with the template assign to it.
