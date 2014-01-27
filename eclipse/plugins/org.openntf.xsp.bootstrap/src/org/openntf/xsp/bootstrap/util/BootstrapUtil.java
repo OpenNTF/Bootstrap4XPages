@@ -114,4 +114,23 @@ public class BootstrapUtil {
     public static boolean isBootstrapVersionAtLeast(int major, int minor) {
         return isBootstrapVersionAtLeast(FacesContext.getCurrentInstance(), major, minor);
     }
+    
+    public static boolean isResponsive(FacesContextEx ctxEx) {
+    	
+    	
+    			
+    	 for(StyleKitImpl st = (StyleKitImpl)ctxEx.getStyleKit(); st!=null; st=st.getParent()) {
+             if(st.getName().startsWith("bootstrap")) { // $NON-NLS-1$
+                 String libname = st.getName();
+                 if(libname.equals("bootstrapv3.0.0") || libname.startsWith("bootstrapv3.0.0_")) { // $NON-NLS-1$ $NON-NLS-2$
+                     return true;
+                 } else {
+                	 return libname.endsWith("r");
+                	 
+                 }
+             }
+         }
+         return false;
+    	
+    }
 }

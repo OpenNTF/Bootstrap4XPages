@@ -31,21 +31,25 @@ import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.Boot
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapTitleBarTabsRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapUtilityLinksRenderer;
 import org.openntf.xsp.bootstrap.resources.BootstrapResources;
+import org.openntf.xsp.bootstrap.util.BootstrapUtil;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.UICallback;
+import com.ibm.xsp.component.UIPassThroughTag;
+import com.ibm.xsp.component.UIPassThroughText;
 import com.ibm.xsp.component.xp.XspEventHandler;
+import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.component.layout.ApplicationConfiguration;
 import com.ibm.xsp.extlib.component.layout.UIApplicationLayout;
 import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl;
 import com.ibm.xsp.extlib.component.layout.impl.SearchBar;
+import com.ibm.xsp.extlib.component.outline.AbstractOutline;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
 import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.AbstractTreeRenderer;
 import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.ComboBoxRenderer;
 import com.ibm.xsp.extlib.tree.ITree;
 import com.ibm.xsp.extlib.tree.impl.TreeImpl;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
-import com.ibm.xsp.extlib.util.ThemeUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.HtmlUtil;
@@ -60,6 +64,8 @@ import com.ibm.xsp.util.TypedUtil;
 public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 
 	public static final boolean FLUID = true;
+	
+	private boolean addedDropdownButton = false;
 
 	
 	// ==========================================================================
@@ -79,6 +85,16 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 	// ================================================================
 
 	protected void writeMainFrame(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
+		
+		boolean navbarInverted = false;
+		boolean collapseLeftColumn = false;
+		
+		BootstrapApplicationConfiguration bc = asBootstrapConfig(configuration);
+		if(bc!=null) {
+			navbarInverted = bc.isNavbarInverted();
+			collapseLeftColumn = bc.isCollapseLeftColumn();
+		}
+		
 		// Start the mast header
 		if (null != configuration && configuration.isMastHeader()) {
 			writeMastHeader(context, w, c, configuration);
@@ -95,7 +111,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 
 			// Start the banner
 			if (configuration.isBanner()) {
-				writeBanner(context, w, c, configuration);
+				writeBanner(context, w, c, configuration, navbarInverted);
 			}
 
 			// Start the title bar
@@ -109,7 +125,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 			}
 
 			// Start the main content
-			writeMainContent(context, w, c, configuration);
+			writeMainContent(context, w, c, configuration, collapseLeftColumn);
 
 			// Start the footer
 			if (configuration.isFooter()) {
@@ -174,13 +190,13 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 	// Banner
 	// ================================================================
 
-	protected void writeBanner(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
+	protected void writeBanner(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration,
+			boolean navbarInverted) throws IOException {
 		w.startElement("div", c);
 
-		String navStyle = "navbar navbar-static-top navbar-inverse applayout-banner";
-		BootstrapApplicationConfiguration bc = asBootstrapConfig(configuration);
-		if(bc!=null && !bc.isNavbarInverted()) {
-			navStyle = "navbar navbar-static-top applayout-banner";
+		String navStyle = "navbar navbar-static-top applayout-banner";
+		if (navbarInverted) {
+			navStyle = "navbar navbar-static-top navbar-inverse applayout-banner";
 		}
 		w.writeAttribute("class", navStyle, null); // $NON-NLS-1$
 		newLine(w);
@@ -209,13 +225,26 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 			w.writeComment("Start Banner"); // $NON-NLS-1$
 			newLine(w);
 		}
+		
+		boolean isResponsive = BootstrapUtil.isResponsive ( (FacesContextEx)context );
+		
 		writeBannerProductlogo(context, w, c, configuration);
-		writeBannerLink(context, w, c, configuration);
+		if (isResponsive) { 
+			writeBannerLink(context, w, c, configuration);
+		}
 		newLine(w);
+		
+		w.startElement("div", c);
+		if (isResponsive) {
+			w.writeAttribute("class", "nav-collapse collapse", null); // $NON-NLS-1$
+		}
+		
 		writeBannerUtilityLinks(context, w, c, configuration);
 		newLine(w);
 		writeBannerApplicationLinks(context, w, c, configuration);
 		newLine(w);
+		
+		w.endElement("div");
 		if (DEBUG) {
 			w.writeComment("End Banner"); // $NON-NLS-1$
 			newLine(w);
@@ -223,22 +252,27 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 	}
 
 	protected void writeBannerLink(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
-		w.startElement("a", c);
-		w.writeAttribute("class", "btn btn-navbar pull-left", null); // $NON-NLS-1$
+		w.startElement("button", c);
+		w.writeAttribute("class", "btn btn-navbar", null); // $NON-NLS-1$
+		w.writeAttribute("data-toggle", "collapse", null);
+		w.writeAttribute("data-target", ".nav-collapse", null);
+		w.writeAttribute("onclick", "javascript:return false;", null); // $NON-NLS-1$
+																		// $NON-NLS-2$
+																	// $NON-NLS-3$
 
-		String href = "#"; // (String) getProperty(PROP_BANNERLINKHREF);
-		if (null == href || '#' != href.charAt(0)) {
-			href = "#"; //$NON-NLS-1$
+		for (int i = 1; i <= 3; i++) {
+			w.startElement("span", c);
+			w.writeAttribute("class", "icon-bar", null); // $NON-NLS-1$
+			w.endElement("span");
 		}
-		w.writeAttribute("href", href, null); // $NON-NLS-1$
 
-		w.endElement("a"); // $NON-NLS-1$
+		w.endElement("button");
 	}
 
 	protected void writeBannerProductlogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
         w.startElement("span",c); // $NON-NLS-1$
         
-        String clazz = ExtLibUtil.concatStyleClasses("pull-left",configuration.getProductLogoClass());
+        String clazz = ExtLibUtil.concatStyleClasses("brand",configuration.getProductLogoClass());
         if(StringUtil.isNotEmpty(clazz)) {
             w.writeAttribute("class",clazz,null); // $NON-NLS-1$
         }
@@ -606,7 +640,8 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 	// Main content
 	// ================================================================
 
-	protected void writeMainContent(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
+	protected void writeMainContent(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration,
+			boolean collapseLeftColumn) throws IOException {
 		w.startElement("div", c); // $NON-NLS-1$
 		w.writeAttribute("class", FLUID ? "container-fluid" : "container", null); // $NON-NLS-1$
 		newLine(w);
@@ -615,7 +650,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		w.writeAttribute("class", FLUID ? "row-fluid" : "row", null); // $NON-NLS-1$
 
 		// Write the 3 columns
-		writeLeftColumn(context, w, c, configuration);
+		writeLeftColumn(context, w, c, configuration, collapseLeftColumn);
 		writeContentColumn(context, w, c, configuration);
 		writeRightColumn(context, w, c, configuration);
 
@@ -626,7 +661,8 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		newLine(w, "container"); // $NON-NLS-1$
 	}
 
-	protected void writeLeftColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
+	protected void writeLeftColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration,
+			boolean collapseLeftColumn) throws IOException {
 		UIComponent left = c.getLeftColumn();
 		if (!isEmptyComponent(left)) {
 			if (DEBUG) {
@@ -634,8 +670,109 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 				newLine(w);
 			}
 			w.startElement("div", c); // $NON-NLS-1$
-			w.writeAttribute("class", "span2 applayout-column-left", null); // $NON-NLS-1$
+			if (collapseLeftColumn) {
+				w.writeAttribute("class", "hidden-phone span2 applayout-column-left", null); // $NON-NLS-1$
+			} else {
+				w.writeAttribute("class", "span2 applayout-column-left", null); // $NON-NLS-1$
+			}
 
+			FacesUtil.renderComponent(context, left);
+
+			w.endElement("div");
+			newLine(w); // $NON-NLS-1$
+
+			if (collapseLeftColumn) {
+				// Write the small screen component (collapsed menu)
+				w.startElement("div", c); // $NON-NLS-1$
+				w.writeAttribute("class",
+						"visible-phone dropdown applayout-column-left",
+						null); // $NON-NLS-1$
+	
+				// create the dropdown button above the menu
+				//if (!addedDropdownButton) {
+					addDropdownMenuButton(left.getChildren());
+				//	addedDropdownButton = true;
+				//}
+	
+				FacesUtil.renderComponent(context, left);
+	
+				w.endElement("div");
+				newLine(w); // $NON-NLS-1$
+			}
+
+			if (DEBUG) {
+				w.writeComment("End Left Column"); // $NON-NLS-1$
+				newLine(w);
+			}
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void addDropdownMenuButton(List<UIComponent> children) {
+
+		for (UIComponent comp : children) {
+
+			if (comp instanceof AbstractOutline) {
+
+				// create the button to toggle the dropdown
+				UIPassThroughTag result = new UIPassThroughTag();
+				result.setTag("button");
+
+				result.addAttribute("class", "btn dropdown-toggle");
+				result.addAttribute("data-toggle", "dropdown");
+
+				UIPassThroughText textComp = new UIPassThroughText();
+				textComp.setText("Menu ");
+
+				result.getChildren().add(textComp);
+
+				UIPassThroughTag component = new UIPassThroughTag();
+				component.setTag("span");
+				component.addAttribute("class", "caret");
+
+				result.getChildren().add(component);
+
+				children.add(children.indexOf(comp), result);
+
+				// set class on the ul
+				AbstractOutline ao = (AbstractOutline) comp;
+				ao.setStyleClass("dropdown-menu");
+				break;
+
+			}
+
+			addDropdownMenuButton(comp.getChildren());
+		}
+	}
+/*
+	@SuppressWarnings("unchecked")
+	protected void writeLeftColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, int size, BasicApplicationConfigurationImpl configuration) throws IOException {
+		UIComponent left = c.getLeftColumn();
+		if (!isEmptyComponent(left)) {
+			if (DEBUG) {
+				w.writeComment("Start Left Column"); // $NON-NLS-1$
+				newLine(w);
+			}
+			
+			
+			
+			// Write the medium/ large screen component
+			w.startElement("div", c); // $NON-NLS-1$
+			w.writeAttribute("class", getColumnPrefix()+size+" hidden-xs hidden-sm applayout-column-left", null); // $NON-NLS-1$
+			//w.writeAttribute("class", getColumnPrefix()+size+" applayout-column-left", null); // $NON-NLS-1$
+			
+			FacesUtil.renderComponent(context, left);
+
+			w.endElement("div");
+			newLine(w); // $NON-NLS-1$
+			
+			// Write the small screen component (collapsed menu)
+			w.startElement("div", c); // $NON-NLS-1$
+			w.writeAttribute("class", "visible-xs visible-sm dropdown applayout-column-left", null); // $NON-NLS-1$
+			
+			//create the dropdown button above the menu
+			processChildren( left.getChildren() );
+			
 			FacesUtil.renderComponent(context, left);
 
 			w.endElement("div");
@@ -647,6 +784,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 			}
 		}
 	}
+	*/
 
 	protected void writeRightColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		UIComponent right = c.getRightColumn();
