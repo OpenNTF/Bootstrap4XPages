@@ -30,18 +30,14 @@ import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.Boot
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapSearchOptionsRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapTitleBarTabsRenderer;
 import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.layout.tree.BootstrapUtilityLinksRenderer3;
-import org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.outline.BootstrapOutlineMenuRenderer;
 import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.complex.Attr;
 import com.ibm.xsp.component.UICallback;
-import com.ibm.xsp.component.UIInputText;
 import com.ibm.xsp.component.UIPassThroughTag;
+import com.ibm.xsp.component.UIPassThroughTag.TagAttribute;
 import com.ibm.xsp.component.UIPassThroughText;
-import com.ibm.xsp.component.xp.XspCommandButton;
 import com.ibm.xsp.component.xp.XspEventHandler;
-import com.ibm.xsp.component.xp.XspOutputText;
 import com.ibm.xsp.extlib.component.layout.ApplicationConfiguration;
 import com.ibm.xsp.extlib.component.layout.UIApplicationLayout;
 import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl;
@@ -67,9 +63,6 @@ import com.ibm.xsp.util.TypedUtil;
 public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 	public static final boolean FLUID = true;
-	
-	private boolean addedDropdownButton = false;
-
 	
 	// ==========================================================================
 	// Calculate the styles used by boot strap
@@ -714,13 +707,28 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	private void addDropdownMenuButton(List<UIComponent> children) {
 
 		for (UIComponent comp : children) {
-
-			if (comp instanceof AbstractOutline) {
+			
+			//check if a dropdown button is already in the left column
+			if (comp instanceof UIPassThroughTag) {
+				
+				UIPassThroughTag t = (UIPassThroughTag)comp;
+				
+				List<TagAttribute> attrs = t.getTagAttributes();
+				for( TagAttribute attr : attrs) {
+					if (attr.getName().equals("data-toggle") &&
+							attr.getValue().equals("dropdown") ) {
+						//dropdown button already added - abort
+						return;
+					}
+					
+				}
+				
+			} else if (comp instanceof AbstractOutline) {
 
 				// create the button to toggle the dropdown
 				UIPassThroughTag result = new UIPassThroughTag();
+				
 				result.setTag("button");
-
 				result.addAttribute("class", "btn dropdown-toggle");
 				result.addAttribute("data-toggle", "dropdown");
 
@@ -734,7 +742,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 				component.addAttribute("class", "caret");
 
 				result.getChildren().add(component);
-
+				
 				children.add(children.indexOf(comp), result);
 
 				// set class on the ul
@@ -779,10 +787,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 				w.writeAttribute("class", "visible-xs visible-sm dropdown applayout-column-left", null); // $NON-NLS-1$
 				
 				//insert the dropdown button above the menu
-				if (!addedDropdownButton) {
-					addDropdownMenuButton( left.getChildren() );
-					addedDropdownButton = true;
-				}
+				addDropdownMenuButton( left.getChildren() );
 				
 				FacesUtil.renderComponent(context, left);
 
@@ -827,8 +832,8 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			}
 			w.startElement("div", c); // $NON-NLS-1$
 
-			boolean left = !isEmptyComponent(c.getLeftColumn());
-			boolean right = !isEmptyComponent(c.getRightColumn());
+			//boolean left = !isEmptyComponent(c.getLeftColumn());
+			//boolean right = !isEmptyComponent(c.getRightColumn());
 			w.writeAttribute("class", getColumnPrefix()+size+" applayout-content", null); // $NON-NLS-1$
 
 			renderChildren(context, c);
