@@ -37,6 +37,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.UICallback;
 import com.ibm.xsp.component.UIPassThroughTag;
 import com.ibm.xsp.component.UIPassThroughText;
+import com.ibm.xsp.component.UIPassThroughTag.TagAttribute;
 import com.ibm.xsp.component.xp.XspEventHandler;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.component.layout.ApplicationConfiguration;
@@ -64,10 +65,7 @@ import com.ibm.xsp.util.TypedUtil;
 public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 
 	public static final boolean FLUID = true;
-	
-	private boolean addedDropdownButton = false;
 
-	
 	// ==========================================================================
 	// Check for the bootstrap specific configuration
 	// ==========================================================================
@@ -661,6 +659,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		newLine(w, "container"); // $NON-NLS-1$
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void writeLeftColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration,
 			boolean collapseLeftColumn) throws IOException {
 		UIComponent left = c.getLeftColumn();
@@ -689,10 +688,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 						null); // $NON-NLS-1$
 	
 				// create the dropdown button above the menu
-				//if (!addedDropdownButton) {
-					addDropdownMenuButton(left.getChildren());
-				//	addedDropdownButton = true;
-				//}
+				addDropdownMenuButton( left.getChildren());
 	
 				FacesUtil.renderComponent(context, left);
 	
@@ -711,8 +707,23 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 	private void addDropdownMenuButton(List<UIComponent> children) {
 
 		for (UIComponent comp : children) {
-
-			if (comp instanceof AbstractOutline) {
+			
+			//check if a dropdown button is already in the left column
+			if (comp instanceof UIPassThroughTag) {
+				
+				UIPassThroughTag t = (UIPassThroughTag)comp;
+				
+				List<TagAttribute> attrs = t.getTagAttributes();
+				for( TagAttribute attr : attrs) {
+					if (attr.getName().equals("data-toggle") &&
+							attr.getValue().equals("dropdown") ) {
+						//dropdown button already added - abort
+						return;
+					}
+					
+				}
+				
+			} else if (comp instanceof AbstractOutline) {
 
 				// create the button to toggle the dropdown
 				UIPassThroughTag result = new UIPassThroughTag();

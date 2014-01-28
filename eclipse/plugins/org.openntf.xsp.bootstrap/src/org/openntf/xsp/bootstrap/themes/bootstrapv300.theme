@@ -127,23 +127,5 @@
 			<value>form-control</value>
 		</property>
 	</control>
-	
-	<!-- Check Box -->
-	<control>
-		<name>CheckBox</name>
-		<property mode="concat">
-			<name>styleClass</name>
-			<value>form-control</value>
-		</property>
-	</control>
-	
-	<!-- Radio Button -->
-	<control>
-		<name>RadioButton</name>
-		<property mode="concat">
-			<name>styleClass</name>
-			<value>form-control</value>
-		</property>
-	</control>
 
 </theme>
