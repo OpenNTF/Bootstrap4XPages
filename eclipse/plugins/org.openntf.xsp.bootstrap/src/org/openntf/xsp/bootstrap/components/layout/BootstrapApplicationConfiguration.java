@@ -20,8 +20,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 
 import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl;
-import com.ibm.xsp.extlib.component.layout.impl.SearchBar;
-import com.ibm.xsp.util.StateHolderUtil;
 
 /**
  * Bootstrap Application Configuration object.
@@ -30,6 +28,7 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
 
 	// Bootstrap specific properties
     private Boolean navbarInverted;
+    private Boolean collapseLeftColumn;
 	
 	public BootstrapApplicationConfiguration() {
 	}
@@ -52,18 +51,37 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
         this.navbarInverted = navbarInverted;
     }
     
+    public boolean isCollapseLeftColumn() {
+    	 if(collapseLeftColumn!=null) {
+             return collapseLeftColumn;
+         }
+         ValueBinding vb = getValueBinding("collapseLeftColumn"); // $NON-NLS-1$
+         if(vb!=null) {
+             Boolean b = (Boolean)vb.getValue(getFacesContext());
+             if(b!=null) {
+                 return b;
+             }
+         }
+         return false;
+    }
+    public void setCollapseLeftColumn(boolean collapseLeftColumn) {
+		this.collapseLeftColumn = collapseLeftColumn;
+	}
+    
     @Override
     public void restoreState(FacesContext context, Object state) {
         Object values[] = (Object[]) state;
         super.restoreState(context, values[0]);
         this.navbarInverted = (Boolean)values[1];
+        this.collapseLeftColumn = (Boolean)values[2];
     }
 
     @Override
     public Object saveState(FacesContext context) {
-        Object values[] = new Object[31];
+        Object values[] = new Object[3];
         values[0] = super.saveState(context);
         values[1] = navbarInverted;
+        values[2] = collapseLeftColumn;
         return values;
     }
 }

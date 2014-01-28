@@ -36,6 +36,15 @@
 			<property-extension>
 			</property-extension>
 		</property>
+		
+		<property>
+			<description>Indicates if the left column should be collapsed on smaller screens.</description>
+			<display-name>Collapse Left Column</display-name>
+			<property-name>collapseLeftColumn</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+			</property-extension>
+		</property>
 
     	<complex-extension>
 			<base-complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</base-complex-id>
