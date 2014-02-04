@@ -280,11 +280,13 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
         }
         
         String logoImg = configuration.getProductLogo();
+        String logoAlt = configuration.getProductLogoAlt();
+        
         if(StringUtil.isNotEmpty(logoImg)) {
             String imgSrc = HtmlRendererUtil.getImageURL(context, logoImg);
             w.startElement("img",c); // $NON-NLS-1$
             w.writeURIAttribute("src",imgSrc,null); // $NON-NLS-1$
-            String logoAlt = configuration.getProductLogoAlt();
+           
             if(!isAltNotEmpty(logoAlt)) {
                 logoAlt = "Banner Product Logo"; // $NLS-AbstractApplicationLayoutRenderer.BannerProductLogo-1$
             }
@@ -298,6 +300,11 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
                 w.writeAttribute("height",height,null); // $NON-NLS-1$
             }
             w.endElement("img"); // $NON-NLS-1$
+            
+        } else if ( StringUtil.isNotEmpty( logoAlt) ) {
+        	
+        	w.writeText(logoAlt, null); // $NON-NLS-1$
+        	
         }
     
         w.endElement("span"); // $NON-NLS-1$
