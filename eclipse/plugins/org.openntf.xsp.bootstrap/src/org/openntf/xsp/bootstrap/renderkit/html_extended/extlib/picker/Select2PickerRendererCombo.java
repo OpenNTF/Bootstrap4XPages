@@ -27,6 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.openntf.xsp.bootstrap.component.UISelect2PickerCombo;
+import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
@@ -34,6 +35,7 @@ import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
+import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.resource.ScriptResource;
 import com.ibm.xsp.resource.StyleSheetResource;
 import com.ibm.xsp.util.FacesUtil;
@@ -68,6 +70,10 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
     	rootEx.addEncodeResource(js);
     	rootEx.addEncodeResource(css);
     	rootEx.addEncodeResource(cssBootstrap);
+    	
+    	rootEx.setDojoTheme(true);
+    	rootEx.setDojoParseOnLoad(true);
+    	ExtLibResources.addEncodeResource(rootEx, BootstrapResources.bootstrapPickerSelect2);
 
 		if (!readOnly) {
 
@@ -95,7 +101,7 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
 
 			try {
 				writer.writeText(
-						"XSP.initSelect2Picker("
+						"XSP.initSelect2PickerNow("
 								+ JsonGenerator.toJson(
 										JsonJavaFactory.instanceEx, params)
 								+ ");", null);
