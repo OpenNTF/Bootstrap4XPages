@@ -64,8 +64,7 @@
 		<href>/.ibmxspres/.extlib/bootstrap/xpages300.js</href>
 	</resource>
 
-
-	<!-- Basic Input Text 
+	<!-- Basic Input Text -->
 	<control>
 		<name>InputField</name>
 		<property mode="concat">
@@ -73,7 +72,6 @@
 			<value>form-control</value>
 		</property>
 	</control>
-	-->
 	
 	<!-- Standard Edit Box -->
 	<control>
