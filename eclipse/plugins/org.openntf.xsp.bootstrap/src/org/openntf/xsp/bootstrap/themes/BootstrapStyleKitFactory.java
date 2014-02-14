@@ -73,7 +73,7 @@ public class BootstrapStyleKitFactory implements StyleKitFactory {
 			if(themeId.equals("bootstrapv2.3.2")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv232_extlib.theme"); //$NON-NLS-1$
 			}
-			if(themeId.equals("bootstrapv3.0.0")){ //$NON-NLS-1$
+			if(themeId.startsWith("bootstrapv3.0.0")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv300_extlib.theme"); //$NON-NLS-1$
 			}
 		}
