@@ -1,26 +1,33 @@
 dojo.provide("extlib.dijit.BootstrapPickerSelect2");
 
-XSP.initSelect2PickerNow = function(options) {
-	
-	console.log('init it...');
-	
-	var extract = function(markStart,markEnd) {
-		var startIndex = cont.indexOf(markStart);
-		if( startIndex >= 0 ){
-			var endIndex = cont.lastIndexOf(markEnd);
-			if( endIndex >= 0 ) {
-				var script = cont.substring(startIndex+markStart.length, endIndex);
-				cont = cont.substring(0, startIndex) + cont.substring(endIndex+markEnd.length);
-				return script;
-			}
-		}
-	};
-	// Execute the script inthe header first
-	var header = extract("<!-- XSP_UPDATE_HEADER_START -->\n","<!-- XSP_UPDATE_HEADER_END -->\n");
-	if(header) {
-		XSP.execScripts(XSP.processScripts(header,true));
-	}
-	
-		
-}
+dojo.require("dijit._WidgetBase");
+dojo.require("dojo.io.script");
+dojo.require("dojo.NodeList-manipulate");
 
+dojo.declare(
+	'extlib.dijit.BootstrapPickerSelect2',
+	dijit._WidgetBase,
+	{
+		
+		constructor: function(args) {
+			console.log('construct it');
+	        dojo.safeMixin(this,args);
+			
+			var head = dojo.query("head");
+			
+			head.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"/xsp/.ibmxspres/.extlib/bootstrap/select2/select2.css\">");
+			head.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"/xsp/.ibmxspres/.extlib/bootstrap/select2/select2-bootstrap.css\">");
+			
+			var deferred = dojo.io.script.get({url : "/xsp/.ibmxspres/.extlib/bootstrap/select2/select2.js"});
+	       
+			deferred.then( dojo.hitch( this, function() {
+				//code executed after the script lib has loaded
+				
+				x$(this.forId)
+					.select2();
+				
+			} ));
+			
+	    }
+	}
+);

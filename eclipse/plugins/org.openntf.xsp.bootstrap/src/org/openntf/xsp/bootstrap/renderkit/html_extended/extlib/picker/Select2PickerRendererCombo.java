@@ -36,12 +36,18 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
+import com.ibm.xsp.renderkit.FacesRenderer;
 import com.ibm.xsp.resource.ScriptResource;
 import com.ibm.xsp.resource.StyleSheetResource;
 import com.ibm.xsp.util.FacesUtil;
 
 public class Select2PickerRendererCombo extends FacesRendererEx {
 
+	
+    /*protected String getDefaultDojoType() {
+        return "extlib.dijit.BootstrapPickerSelect2"; // $NON-NLS-1$
+    }*/
+	
 	@Override
 	public void encodeBegin(FacesContext context, UIComponent component)
 			throws IOException {
@@ -56,7 +62,7 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
 				context, _for) : false;
 
 		// load select2 library and stylesheet
-		ScriptResource js = new ScriptResource();
+		/*ScriptResource js = new ScriptResource();
 		js.setClientSide(true);
 		js.setSrc("/.ibmxspres/.extlib/bootstrap/select2/select2.js");
 
@@ -65,14 +71,14 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
 
     	StyleSheetResource cssBootstrap = new StyleSheetResource();
     	cssBootstrap.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2-bootstrap.css");
-    	
+    	*/
     	UIViewRootEx rootEx = (UIViewRootEx) context.getViewRoot();
-    	rootEx.addEncodeResource(js);
+    	/*rootEx.addEncodeResource(js);
     	rootEx.addEncodeResource(css);
     	rootEx.addEncodeResource(cssBootstrap);
-    	
+    	*/
     	rootEx.setDojoTheme(true);
-    	rootEx.setDojoParseOnLoad(true);
+    	//rootEx.setDojoParseOnLoad(true);
     	ExtLibResources.addEncodeResource(rootEx, BootstrapResources.bootstrapPickerSelect2);
 
 		if (!readOnly) {
@@ -80,6 +86,12 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
 			String id = picker.getId();
 
 			newLine(writer);
+			
+			//writer.startElement("span", component);
+			
+			//writer.writeAttribute("dojoType", "extlib.dijit.BootstrapPickerSelect2" , null);
+			//writer.endElement("span");
+			
 			writer.startElement("script", component); // $NON-NLS-1$
 
 			// create the parameters to initialize a new select2 object
@@ -98,10 +110,14 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
 			if (StringUtil.isNotEmpty(lw)) {
 				params.put("listWidth", lw); // $NON-NLS-1$
 			}
-
+			
+/*dojo.ready(function() {
+	//...make elements into widgets
+	var widget = new dijit.form.Button({},'makeMeAWidget'); //options,elementID
+});*/
 			try {
 				writer.writeText(
-						"XSP.initSelect2PickerNow("
+						"new extlib.dijit.BootstrapPickerSelect2("
 								+ JsonGenerator.toJson(
 										JsonJavaFactory.instanceEx, params)
 								+ ");", null);
