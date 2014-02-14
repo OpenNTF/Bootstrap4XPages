@@ -51,7 +51,7 @@ public abstract class BootstrapResources {
             r = Bootstrap231Resources.instance;
         } else if(v==BootstrapUtil.BOOTSTRAP_V232) {
             r = Bootstrap232Resources.instance;
-        } else if(v==BootstrapUtil.BOOTSTRAP_V300) {
+        } else if(v==BootstrapUtil.BOOTSTRAP_V300 || v==BootstrapUtil.BOOTSTRAP_V311 ) {
             r = Bootstrap300Resources.instance;
         } else {
             // Default to v232 anyway
