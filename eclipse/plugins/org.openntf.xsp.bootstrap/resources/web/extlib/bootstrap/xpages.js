@@ -72,7 +72,6 @@ XSP.initSelect2Picker = function(params) {
 	            //sets a default value (if a value was selected previously
 	            var id=$(element).val();
 	            if (id!=="") {
-	            	//console.log("existing: " + id);
 	                $.ajax( 
 	                	"#{javascript:configBean.getDbUrl()}/zoekGebruiker.xsp" ,
 	                		{
@@ -87,7 +86,6 @@ XSP.initSelect2Picker = function(params) {
 		
 		if (params.hasOwnProperty('listWidth') ) {
 			select2Options.width = params.listWidth;
-			console.log("width set to " + params.listWidth);
 		}
 		
 		x$(params.forId)
