@@ -73,11 +73,8 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
     	cssBootstrap.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2-bootstrap.css");
     	*/
     	UIViewRootEx rootEx = (UIViewRootEx) context.getViewRoot();
-    	/*rootEx.addEncodeResource(js);
-    	rootEx.addEncodeResource(css);
-    	rootEx.addEncodeResource(cssBootstrap);
-    	*/
-    	rootEx.setDojoTheme(true);
+    	
+    	//rootEx.setDojoTheme(true);
     	//rootEx.setDojoParseOnLoad(true);
     	ExtLibResources.addEncodeResource(rootEx, BootstrapResources.bootstrapPickerSelect2);
 
@@ -87,17 +84,12 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
 
 			newLine(writer);
 			
-			//writer.startElement("span", component);
-			
-			//writer.writeAttribute("dojoType", "extlib.dijit.BootstrapPickerSelect2" , null);
-			//writer.endElement("span");
-			
 			writer.startElement("script", component); // $NON-NLS-1$
 
 			// create the parameters to initialize a new select2 object
 			HashMap<String, Object> params = new HashMap<String, Object>();
 
-			params.put("id", id);
+			params.put("thisId",  id);		//if we name this paramater 'id', Dojo will use it to register the widget
 			params.put("forId", _for.getClientId(context));
 			params.put("isNativeSelect", true);
 			params.put("useRemoteData", false);
@@ -111,10 +103,6 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
 				params.put("listWidth", lw); // $NON-NLS-1$
 			}
 			
-/*dojo.ready(function() {
-	//...make elements into widgets
-	var widget = new dijit.form.Button({},'makeMeAWidget'); //options,elementID
-});*/
 			try {
 				writer.writeText(
 						"new extlib.dijit.BootstrapPickerSelect2("

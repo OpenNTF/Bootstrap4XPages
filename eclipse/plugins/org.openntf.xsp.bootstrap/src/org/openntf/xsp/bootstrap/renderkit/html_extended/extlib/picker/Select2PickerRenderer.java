@@ -26,6 +26,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.openntf.xsp.bootstrap.component.UISelect2Picker;
+import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
@@ -34,6 +35,7 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.xsp.component.UIInputEx;
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
+import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.resource.ScriptResource;
 import com.ibm.xsp.resource.StyleSheetResource;
 import com.ibm.xsp.util.FacesUtil;
@@ -65,9 +67,10 @@ public class Select2PickerRenderer extends FacesRendererEx {
     	cssBootstrap.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2-bootstrap.css");
     	
     	UIViewRootEx rootEx = (UIViewRootEx) context.getViewRoot();
-    	rootEx.addEncodeResource(js);
-    	rootEx.addEncodeResource(css);
-    	rootEx.addEncodeResource(cssBootstrap);
+    	//rootEx.addEncodeResource(js);
+    	//rootEx.addEncodeResource(css);
+    	//rootEx.addEncodeResource(cssBootstrap);
+    	ExtLibResources.addEncodeResource(rootEx, BootstrapResources.bootstrapPickerSelect2);
     	
     	if (readOnly ) {
     		
@@ -99,7 +102,7 @@ public class Select2PickerRenderer extends FacesRendererEx {
     		//create the parameters to initialize a new select2 object
     		HashMap<String,Object> params = new HashMap<String,Object>();
     	    		
-            params.put("id",  id);
+            params.put("thisId",  id);		//if we name this paramater 'id', Dojo will use it to register the widget
             params.put("forId", _for.getClientId(context));
             params.put("currentValue", _for.getValueAsString() );		
             params.put("allowMultiple", StringUtil.isNotEmpty(_for.getMultipleSeparator()) );
@@ -122,10 +125,14 @@ public class Select2PickerRenderer extends FacesRendererEx {
                 params.put("maxRowCount", maxRowCount); // $NON-NLS-1$
             }
             
-			try {
-				//writer.writeText("dojo.addOnLoad( function() { initSelect2(" + JsonGenerator.toJson(JsonJavaFactory.instanceEx, params) + "); } );", null);
-				writer.writeText("XSP.initSelect2Picker(" + JsonGenerator.toJson(JsonJavaFactory.instanceEx, params) + ");", null);
-			} catch (JsonException e) { }
+        	try {
+				writer.writeText(
+						"new extlib.dijit.BootstrapPickerSelect2("
+								+ JsonGenerator.toJson(
+										JsonJavaFactory.instanceEx, params)
+								+ ");", null);
+			} catch (JsonException e) {
+			}
 			
     		writer.endElement("script");
     		newLine(writer);
