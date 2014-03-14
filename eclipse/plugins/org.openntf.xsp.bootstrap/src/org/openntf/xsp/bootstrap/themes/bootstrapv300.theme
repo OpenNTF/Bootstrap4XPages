@@ -37,7 +37,7 @@
 	<!-- JQuery -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/jquery182/js/jquery-1.8.2.js</href>
+		<href>/.ibmxspres/.extlib/bootstrap/jquery182/js/jquery-1.8.2.min.js</href>
 	</resource>
 
 	<!-- Core Bootstrap JavaScript files -->
