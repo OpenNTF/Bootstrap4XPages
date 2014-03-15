@@ -15,11 +15,11 @@
     <!-- Core Bootstrap CSS files -->
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap.css</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap.min.css</href>
 	</resource>
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap-theme.css</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap-theme.min.css</href>
 	</resource>
 
 	<!-- Dojo Theme -->
@@ -45,13 +45,13 @@
 	<!-- JQuery -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/jquery182/js/jquery-1.8.2.js</href>
+		<href>/.ibmxspres/.extlib/bootstrap/jquery182/js/jquery-1.8.2.min.js</href>
 	</resource>
 
 	<!-- Core Bootstrap JavaScript files -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/js/bootstrap.js</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/js/bootstrap.min.js</href>
 	</resource>
 	
 	<!-- XPages/Bootstrap specific JS -->
