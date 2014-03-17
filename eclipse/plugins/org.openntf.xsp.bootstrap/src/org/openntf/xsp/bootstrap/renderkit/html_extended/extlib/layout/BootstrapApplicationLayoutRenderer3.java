@@ -34,15 +34,11 @@ import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.UICallback;
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UIPassThroughTag.TagAttribute;
-import com.ibm.xsp.component.UIPassThroughText;
 import com.ibm.xsp.component.xp.XspEventHandler;
 import com.ibm.xsp.extlib.component.layout.ApplicationConfiguration;
 import com.ibm.xsp.extlib.component.layout.UIApplicationLayout;
 import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl;
 import com.ibm.xsp.extlib.component.layout.impl.SearchBar;
-import com.ibm.xsp.extlib.component.outline.AbstractOutline;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
 import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.AbstractTreeRenderer;
 import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.ComboBoxRenderer;
@@ -710,65 +706,12 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		w.endElement("div");
 		newLine(w, "container"); // $NON-NLS-1$
 	}
-	
-	@SuppressWarnings("unchecked")
-	private void addDropdownMenuButton(List<UIComponent> children) {
 
-		for (UIComponent comp : children) {
-			
-			//check if a dropdown button is already in the left column
-			if (comp instanceof UIPassThroughTag) {
-				
-				UIPassThroughTag t = (UIPassThroughTag)comp;
-				
-				List<TagAttribute> attrs = t.getTagAttributes();
-				for( TagAttribute attr : attrs) {
-					if (attr.getName().equals("data-toggle") &&
-							attr.getValue().equals("dropdown") ) {
-						//dropdown button already added - abort
-						return;
-					}
-					
-				}
-				
-			} else if (comp instanceof AbstractOutline) {
-
-				// create the button to toggle the dropdown
-				UIPassThroughTag result = new UIPassThroughTag();
-				
-				result.setTag("button");
-				result.addAttribute("class", "btn dropdown-toggle");
-				result.addAttribute("data-toggle", "dropdown");
-
-				UIPassThroughText textComp = new UIPassThroughText();
-				textComp.setText("Menu ");
-
-				result.getChildren().add(textComp);
-
-				UIPassThroughTag component = new UIPassThroughTag();
-				component.setTag("span");
-				component.addAttribute("class", "caret");
-
-				result.getChildren().add(component);
-				
-				children.add(children.indexOf(comp), result);
-
-				// set class on the ul
-				AbstractOutline ao = (AbstractOutline) comp;
-				ao.setStyleClass("dropdown-menu");
-				break;
-
-			}
-
-			addDropdownMenuButton(comp.getChildren());
-		}
-	}
-
-	@SuppressWarnings("unchecked")
 	protected void writeLeftColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, int size, BasicApplicationConfigurationImpl configuration, 
 			boolean collapseLeftColumn) throws IOException {
 		
 		UIComponent left = c.getLeftColumn();
+		
 		if (!isEmptyComponent(left)) {
 			if (DEBUG) {
 				w.writeComment("Start Left Column"); // $NON-NLS-1$
@@ -776,6 +719,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			}
 			
 			// Write the medium/ large screen component
+			// if the collapseLeftColumn option is set, the large screen component is hidden on smaller screens
 			w.startElement("div", c); // $NON-NLS-1$
 			if (collapseLeftColumn) {
 				w.writeAttribute("class", getColumnPrefix()+size+" hidden-xs hidden-sm applayout-column-left", null); // $NON-NLS-1$
@@ -789,18 +733,13 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			newLine(w); // $NON-NLS-1$
 			
 			if (collapseLeftColumn) {
-		
+				
 				// Write the small screen component (collapsed menu)
-				w.startElement("div", c); // $NON-NLS-1$
-				w.writeAttribute("class", "visible-xs visible-sm dropdown applayout-column-left", null); // $NON-NLS-1$
+	    		w.startElement("script", c); // $NON-NLS-1$
+	    		w.writeText("dojo.addOnLoad( function() { bs4xp.initCollapsibleMenu(); } );", null);
+	    		w.endElement("script");
+				newLine(w);
 				
-				//insert the dropdown button above the menu
-				addDropdownMenuButton( left.getChildren() );
-				
-				FacesUtil.renderComponent(context, left);
-
-				w.endElement("div");
-				newLine(w); // $NON-NLS-1$
 			}
 
 			if (DEBUG) {
@@ -809,7 +748,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			}
 		}
 	}
-
+	
 	protected void writeRightColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, int size, BasicApplicationConfigurationImpl configuration) throws IOException {
 		UIComponent right = c.getRightColumn();
 		if (!isEmptyComponent(right)) {
