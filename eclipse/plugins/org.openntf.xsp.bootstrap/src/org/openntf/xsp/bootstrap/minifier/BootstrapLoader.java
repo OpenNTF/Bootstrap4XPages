@@ -82,8 +82,11 @@ public class BootstrapLoader extends ExtLibLoaderExtension {
             prefixes.put("3T1b","/.ibmxspres/.extlib/bootstrap/bootstrap232/js"); 	//$NON-NLS-1$ //$NON-NLS-2$
             prefixes.put("3T1c","/.ibmxspres/.extlib/bootstrap/bootstrap232/css"); 	//$NON-NLS-1$ //$NON-NLS-2$
             prefixes.put("3T2a","/.ibmxspres/.extlib/bootstrap/bootstrap300"); 		//$NON-NLS-1$ //$NON-NLS-2$
-            prefixes.put("3T3b","/.ibmxspres/.extlib/bootstrap/bootstrap300/js"); 	//$NON-NLS-1$ //$NON-NLS-2$
-            prefixes.put("3T3c","/.ibmxspres/.extlib/bootstrap/bootstrap300/css"); 	//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T2b","/.ibmxspres/.extlib/bootstrap/bootstrap300/js"); 	//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T2c","/.ibmxspres/.extlib/bootstrap/bootstrap300/css"); 	//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T3a","/.ibmxspres/.extlib/bootstrap/bootstrap311"); 		//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T3b","/.ibmxspres/.extlib/bootstrap/bootstrap311/js"); 	//$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3T3c","/.ibmxspres/.extlib/bootstrap/bootstrap311/css"); 	//$NON-NLS-1$ //$NON-NLS-2$
             prefixes.put("3TXa","/.ibmxspres/.extlib/bootstrap/dbootstrap"); 			//$NON-NLS-1$ //$NON-NLS-2$
         }
     }
