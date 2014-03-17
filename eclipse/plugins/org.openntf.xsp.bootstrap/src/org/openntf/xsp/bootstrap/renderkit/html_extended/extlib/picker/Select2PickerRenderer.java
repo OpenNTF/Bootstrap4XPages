@@ -1,7 +1,7 @@
 package org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.picker;
 
 /*
- * © Copyright IBM Corp. 2010
+ * @author Mark Leusink
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -48,9 +48,7 @@ public class Select2PickerRenderer extends FacesRendererEx {
 		
         ResponseWriter writer = context.getResponseWriter();
         
-        UISelect2Picker picker = (UISelect2Picker)component;
-        //IPickerData data = picker.getDataProvider();
-                   
+        UISelect2Picker picker = (UISelect2Picker)component;              
         UIInputEx _for = (UIInputEx) getFor(context,picker);
        
         boolean readOnly = _for!=null ? FacesUtil.isComponentReadOnly(context, _for) : false;
@@ -67,9 +65,6 @@ public class Select2PickerRenderer extends FacesRendererEx {
     	cssBootstrap.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2-bootstrap.css");
     	
     	UIViewRootEx rootEx = (UIViewRootEx) context.getViewRoot();
-    	//rootEx.addEncodeResource(js);
-    	//rootEx.addEncodeResource(css);
-    	//rootEx.addEncodeResource(cssBootstrap);
     	ExtLibResources.addEncodeResource(rootEx, BootstrapResources.bootstrapPickerSelect2);
     	
     	if (readOnly ) {
@@ -119,11 +114,7 @@ public class Select2PickerRenderer extends FacesRendererEx {
                 params.put("listWidth",lw); // $NON-NLS-1$
             }
             
-            int maxRowCount = picker.getMaxRowCount();
-            
-            if (maxRowCount>0) {
-                params.put("maxRowCount", maxRowCount); // $NON-NLS-1$
-            }
+            params.put("maxRowCount", picker.getMaxRowCount() ); // $NON-NLS-1$
             
         	try {
 				writer.writeText(

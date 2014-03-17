@@ -6,12 +6,7 @@ dojo.require("dijit._WidgetBase");
 dojo.require("dojo.io.script");
 dojo.require("dojo.NodeList-manipulate");
 
-/*
- * TODO:
- * - fix not being able to set hidden input
- * - default value when working with remote data?
- */
-
+//TODO: pagination (e.g. view controls has more hits than shown by default...
 
 dojo.declare(
 	'extlib.dijit.BootstrapPickerSelect2',
@@ -25,7 +20,7 @@ dojo.declare(
 			head.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"/xsp/.ibmxspres/.extlib/bootstrap/select2/select2.css\">");
 			head.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"/xsp/.ibmxspres/.extlib/bootstrap/select2/select2-bootstrap.css\">");
 			
-			var deferred = dojo.io.script.get({url : "/xsp/.ibmxspres/.extlib/bootstrap/select2/select2.js"});
+			var deferred = dojo.io.script.get({url : "/xsp/.ibmxspres/.extlib/bootstrap/select2/select2.min.js"});
 	       
 			deferred.then( dojo.hitch( this, function() {
 				
@@ -39,6 +34,8 @@ dojo.declare(
 	    createSelect2 : function() {
 	    	
 	    	if (this.useRemoteData) {		//picker with remote search capability
+	    		
+	    		var restUrl = this.restUrl;
 	    		
 	    		var select2Options = {
 	    			placeholder: this.placeHolder,	
@@ -90,21 +87,34 @@ dojo.declare(
 	                		}
 	                       
 	                   }//results
-	    		    } //end ajax function
-	    		    /*initSelection: function(element, callback) {		//TODO
-	    	            //sets a default value (if a value was selected previously
+	    		    }, //end ajax function
+	    		    initSelection: function(element, callback) {		
+	    	            //sets a default value (if a value was selected previously)
+	    		    	//default value is retrieve by making a call to the rest service
+	    		    	//using the current value
 	    	            var id=$(element).val();
-	    	            if (id!=="") {
-	    	                $.ajax( 
-	    	                	"#{javascript:configBean.getDbUrl()}/zoekGebruiker.xsp" ,
-	    	                		{
-	    	                    		data: {
-	    	                        		id: id
-	    	                    		},
-	    	                    dataType: "json"
-	    	                }).done(function(data) { callback(data); } );
+	    	            if (id !== "") {
+	    	            	
+	    	            	$.ajax( {
+	    	            		url : restUrl,
+	    	            		dataType : 'json',
+	    	            		data : {
+	    	            			startkeys: "*" + id + "*", // search term,
+	    	            			count: 1
+	    	            		}
+	    	            	}).done ( function(data) {
+	    	            		if (data.items && data.items.length == 1) {
+	    	            		
+		    	            		callback({
+	    	            				text : data.items[0]['@label'], 
+	    	            				id : data.items[0]['@value'] 
+	    	            			});
+	    	            		}
+	    	            	});
+	    	            	
+	    	            	
 	    				}
-	    			}	*/
+	    			}	
 	    		};
 	    		
 	    		if (this.listWidth != null) {
@@ -119,7 +129,7 @@ dojo.declare(
 	    		var select2Options = this.getSelect2Options();
 	    		
 	    		if (this.isNativeSelect) {
-	    			//code to execute if select2 should be attached to a <select> element 
+	    			//code to execute if select2 is attached to a <select> element 
 	    			
 	    			var $select = x$(this.forId);
 	    			
@@ -135,9 +145,11 @@ dojo.declare(
 	    			
 	    		} else {
 	    			//code to execute if select2 is attached to a (hidden) input
-	    	
+	    			//data is read using the REST service
+	    			
+	    			//use maxRowCount here (already set in the ui component)
 	    			dojo.xhrGet({
-	    				url : this.restUrl,
+	    				url : this.restUrl + '&count=' + this.maxRowCount,
 	    				handleAs: "json"
 	    			
 	    			})
@@ -184,14 +196,11 @@ dojo.declare(
 			}
 				
 			//setup the select2 picker
-			x$(this.thisId)
+			$select
 				.select2( this.getSelect2Options() )
-					.on("change", function(e) {		//set value in target field on change
-						
-						//TODO / FIXME: this.forId = null, so the value is never set
-						console.log(e.val);
-						console.log(this.forId);
-						x$(this.forId).val(e.val);
+					.on("change", { forId : this.forId }, function(e) {		
+						//set value in target field on change
+						x$(e.data.forId).val(e.val);
 					});
 	    },
 	    
@@ -213,10 +222,12 @@ dojo.declare(
     		
     		if (this.formatSelection != null) {
     			//use a template to render the selected entry
+    			
+    			var formatSelection = this.formatSelection;
     		
     			select2Options.formatSelection = function(entry) {
     			    if (!entry.id) { return entry.text; } // optgroup
-    			    return this.formatSelection
+    			    return formatSelection
     			    	.replace(/{value}/g, entry.id)
     			    	.replace(/{text}/g, entry.text);
     			};
@@ -226,10 +237,12 @@ dojo.declare(
     		
     		if (this.formatResult != null) {
     			//use a template to render the entries
-    		
+
+    			var formatResult = this.formatResult;
+    			
     			select2Options.formatResult = function(entry) {
     			    if (!entry.id) { return entry.text; } // optgroup
-    			    return (this.formatResult)
+    			    return formatResult
     			    	.replace(/{value}/g, entry.id)
     			    	.replace(/{text}/g, entry.text);
     			};

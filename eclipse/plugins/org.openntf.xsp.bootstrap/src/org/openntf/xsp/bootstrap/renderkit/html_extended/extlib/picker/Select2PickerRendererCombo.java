@@ -1,7 +1,7 @@
 package org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.picker;
 
 /*
- * © Copyright IBM Corp. 2010
+ * @author Mark Leusink
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -36,17 +36,9 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
-import com.ibm.xsp.renderkit.FacesRenderer;
-import com.ibm.xsp.resource.ScriptResource;
-import com.ibm.xsp.resource.StyleSheetResource;
 import com.ibm.xsp.util.FacesUtil;
 
 public class Select2PickerRendererCombo extends FacesRendererEx {
-
-	
-    /*protected String getDefaultDojoType() {
-        return "extlib.dijit.BootstrapPickerSelect2"; // $NON-NLS-1$
-    }*/
 	
 	@Override
 	public void encodeBegin(FacesContext context, UIComponent component)
@@ -62,20 +54,8 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
 				context, _for) : false;
 
 		// load select2 library and stylesheet
-		/*ScriptResource js = new ScriptResource();
-		js.setClientSide(true);
-		js.setSrc("/.ibmxspres/.extlib/bootstrap/select2/select2.js");
-
-		StyleSheetResource css = new StyleSheetResource();
-		css.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2.css");
-
-    	StyleSheetResource cssBootstrap = new StyleSheetResource();
-    	cssBootstrap.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2-bootstrap.css");
-    	*/
     	UIViewRootEx rootEx = (UIViewRootEx) context.getViewRoot();
-    	
-    	//rootEx.setDojoTheme(true);
-    	//rootEx.setDojoParseOnLoad(true);
+
     	ExtLibResources.addEncodeResource(rootEx, BootstrapResources.bootstrapPickerSelect2);
 
 		if (!readOnly) {
