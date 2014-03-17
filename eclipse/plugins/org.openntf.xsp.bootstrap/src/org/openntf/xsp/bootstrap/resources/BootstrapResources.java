@@ -51,7 +51,7 @@ public abstract class BootstrapResources {
             r = Bootstrap231Resources.instance;
         } else if(v==BootstrapUtil.BOOTSTRAP_V232) {
             r = Bootstrap232Resources.instance;
-        } else if(v==BootstrapUtil.BOOTSTRAP_V300) {
+        } else if(v==BootstrapUtil.BOOTSTRAP_V300 || v==BootstrapUtil.BOOTSTRAP_V311 ) {
             r = Bootstrap300Resources.instance;
         } else {
             // Default to v232 anyway
@@ -76,6 +76,7 @@ public abstract class BootstrapResources {
     public static final DojoModuleResource bootstrapPickerListSearch3 = new DojoModuleResource("extlib.dijit.BootstrapPickerListSearch3"); // $NON-NLS-1$
     public static final DojoModuleResource bootstrapPickerName = new DojoModuleResource("extlib.dijit.BootstrapPickerName"); // $NON-NLS-1$
     public static final DojoModuleResource bootstrapPickerName3 = new DojoModuleResource("extlib.dijit.BootstrapPickerName3"); // $NON-NLS-1$
+    public static final DojoModuleResource bootstrapPickerSelect2 = new DojoModuleResource("extlib.dijit.BootstrapPickerSelect2"); // $NON-NLS-1$
     
     public BootstrapResources() {
         this.BLANK_GIF      				  = "/.ibmxspres/.extlib/bootstrap/icons/blank.gif"; // $NON-NLS-1$

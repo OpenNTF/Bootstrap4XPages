@@ -1,5 +1,9 @@
 <theme extends="bootstrap">
 
+	<!-- This theme also loads the optional Bootstrap 3 theme -->
+	<!-- It adds a 3d effect to various elements (buttons, messages, ...) just as in Bootstrap 2.3 -->
+	<!-- See http://getbootstrap.com/getting-started/ for details -->
+
 	<!-- All the resources are defined here to ensure that they are loaded in order -->
 	
     <!-- Core XPages styles -->
@@ -11,7 +15,11 @@
     <!-- Core Bootstrap CSS files -->
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/css/bootstrap.css</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap311/css/bootstrap.css</href>
+	</resource>
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap311/css/bootstrap-theme.css</href>
 	</resource>
 
 	<!-- Dojo Theme -->
@@ -33,7 +41,6 @@
 		<href>/.ibmxspres/.extlib/bootstrap/xpages300.css</href>
 	</resource>
 
-
 	<!-- JQuery -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
@@ -43,9 +50,9 @@
 	<!-- Core Bootstrap JavaScript files -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap300/js/bootstrap.min.js</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap311/js/bootstrap.min.js</href>
 	</resource>
- 
+	
 	<!-- XPages/Bootstrap specific JS -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
@@ -59,7 +66,7 @@
 			<name>styleClass</name>
 			<value>form-control</value>
 		</property>
-	</control>	 
+	</control>
 	
 	<!-- Standard Edit Box -->
 	<control>
@@ -105,23 +112,5 @@
 			<value></value> <!-- avoid form-control -->
 		</property>
 	</control>
-	
-	<!-- Combo Box -->
-	<control>
-		<name>ComboBox</name>
-		<property mode="concat">
-			<name>styleClass</name>
-			<value>form-control</value>
-		</property>
-	</control>
-	
-	<!-- List Box -->
-	<control>
-		<name>ListBox</name>
-		<property mode="concat">
-			<name>styleClass</name>
-			<value>form-control</value>
-		</property>
-	</control>
-
 </theme>
+

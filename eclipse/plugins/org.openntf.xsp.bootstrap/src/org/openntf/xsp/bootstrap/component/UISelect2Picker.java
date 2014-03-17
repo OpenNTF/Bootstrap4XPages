@@ -45,6 +45,8 @@ import com.ibm.xsp.util.TypedUtil;
 
 public class UISelect2Picker extends UIBaseRestService {
 
+	private static final int MAX_ROWS_DEFAULT = 50;
+	
 	private String _for;
 	private IValuePickerData dataProvider;
 	private boolean useRemoteData;
@@ -100,7 +102,7 @@ public class UISelect2Picker extends UIBaseRestService {
 	}
 	
 	public int getMaxRowCount() {
-		return maxRowCount;
+		return (maxRowCount == 0 ? MAX_ROWS_DEFAULT : maxRowCount);
 	}
 	public void setMaxRowCount(int maxRowCount) {
 		this.maxRowCount = maxRowCount;

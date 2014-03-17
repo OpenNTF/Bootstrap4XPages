@@ -1,7 +1,7 @@
 package org.openntf.xsp.bootstrap.renderkit.html_extended.extlib.picker;
 
 /*
- * © Copyright IBM Corp. 2010
+ * @author Mark Leusink
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -27,6 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.openntf.xsp.bootstrap.component.UISelect2PickerCombo;
+import org.openntf.xsp.bootstrap.resources.BootstrapResources;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
@@ -34,12 +35,11 @@ import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
-import com.ibm.xsp.resource.ScriptResource;
-import com.ibm.xsp.resource.StyleSheetResource;
+import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.util.FacesUtil;
 
 public class Select2PickerRendererCombo extends FacesRendererEx {
-
+	
 	@Override
 	public void encodeBegin(FacesContext context, UIComponent component)
 			throws IOException {
@@ -54,32 +54,22 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
 				context, _for) : false;
 
 		// load select2 library and stylesheet
-		ScriptResource js = new ScriptResource();
-		js.setClientSide(true);
-		js.setSrc("/.ibmxspres/.extlib/bootstrap/select2/select2.js");
-
-		StyleSheetResource css = new StyleSheetResource();
-		css.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2.css");
-
-    	StyleSheetResource cssBootstrap = new StyleSheetResource();
-    	cssBootstrap.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2-bootstrap.css");
-    	
     	UIViewRootEx rootEx = (UIViewRootEx) context.getViewRoot();
-    	rootEx.addEncodeResource(js);
-    	rootEx.addEncodeResource(css);
-    	rootEx.addEncodeResource(cssBootstrap);
+
+    	ExtLibResources.addEncodeResource(rootEx, BootstrapResources.bootstrapPickerSelect2);
 
 		if (!readOnly) {
 
 			String id = picker.getId();
 
 			newLine(writer);
+			
 			writer.startElement("script", component); // $NON-NLS-1$
 
 			// create the parameters to initialize a new select2 object
 			HashMap<String, Object> params = new HashMap<String, Object>();
 
-			params.put("id", id);
+			params.put("thisId",  id);		//if we name this paramater 'id', Dojo will use it to register the widget
 			params.put("forId", _for.getClientId(context));
 			params.put("isNativeSelect", true);
 			params.put("useRemoteData", false);
@@ -92,10 +82,10 @@ public class Select2PickerRendererCombo extends FacesRendererEx {
 			if (StringUtil.isNotEmpty(lw)) {
 				params.put("listWidth", lw); // $NON-NLS-1$
 			}
-
+			
 			try {
 				writer.writeText(
-						"XSP.initSelect2Picker("
+						"new extlib.dijit.BootstrapPickerSelect2("
 								+ JsonGenerator.toJson(
 										JsonJavaFactory.instanceEx, params)
 								+ ");", null);
