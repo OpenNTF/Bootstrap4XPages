@@ -200,7 +200,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		String navStyle = "navbar navbar-static-top navbar-inverse applayout-banner";
 			
 		if ( !navbarInverted ) {
-			navStyle = "navbar navbar-static-top applayout-banner";
+			navStyle = "navbar navbar-static-top navbar-default applayout-banner";
 		}
 		w.writeAttribute("class", navStyle, null); // $NON-NLS-1$
 		newLine(w);
