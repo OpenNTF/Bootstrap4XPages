@@ -200,7 +200,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		String navStyle = "navbar navbar-static-top navbar-inverse applayout-banner";
 			
 		if ( !navbarInverted ) {
-			navStyle = "navbar navbar-static-top applayout-banner";
+			navStyle = "navbar navbar-static-top navbar-default applayout-banner";
 		}
 		w.writeAttribute("class", navStyle, null); // $NON-NLS-1$
 		newLine(w);
@@ -403,10 +403,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			w.startElement("div", c); // $NON-NLS-1$
 			w.writeAttribute("class","col-md-4 navbar-search navbar-right applayout-searchbar",null); // $NON-NLS-1$
 			w.writeAttribute("role", "search", null); // $NON-NLS-1$
-			w.startElement("div", c); // $NON-NLS-1$
-			w.writeAttribute("class","form-group",null); // $NON-NLS-1$
 			FacesUtil.renderComponent(context, cSearchBar);
-			w.endElement("div"); // $NON-NLS-1$
 			w.endElement("div"); // $NON-NLS-1$
 			if (DEBUG) {
 				w.writeComment("End SearchBar Facet"); // $NON-NLS-1$
