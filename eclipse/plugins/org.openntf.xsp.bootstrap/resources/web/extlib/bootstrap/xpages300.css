@@ -283,9 +283,16 @@
 	width: 100%;
 }
 
-.row {
+.container-full > .row {
 	margin-left: 5px;
     margin-right: 5px;
+}
+
+/*fix for #54: right margin in full width layout*/
+@media (min-width: 768px) {
+  .applayout-banner .navbar-nav.navbar-right:last-child {
+    margin-right: 0 !important;
+  }
 }
 
 /***********************************************************************	

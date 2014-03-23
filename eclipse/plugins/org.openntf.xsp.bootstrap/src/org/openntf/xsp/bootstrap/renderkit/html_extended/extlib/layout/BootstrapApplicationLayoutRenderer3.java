@@ -52,7 +52,7 @@ import com.ibm.xsp.util.JSUtil;
 import com.ibm.xsp.util.TypedUtil;
 
 /**
- * Base class for a boostrap application layout renderer.
+ * Base class for a Bootstrap application layout renderer.
  * 
  * @author priand
  */
@@ -234,9 +234,9 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		w.writeAttribute("class", "navbar-collapse collapse", null); // $NON-NLS-1$
 		newLine(w);
 		
-		writeBannerUtilityLinks(context, w, c, configuration);
-		newLine(w);
 		writeBannerApplicationLinks(context, w, c, configuration);
+		newLine(w);
+		writeBannerUtilityLinks(context, w, c, configuration);
 		newLine(w);
 		
 		w.endElement("div");
