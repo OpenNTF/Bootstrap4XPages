@@ -30,14 +30,16 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
 	public static final String WIDTH_FLUID = "fluid";
 	public static final String WIDTH_FIXED = "fixed";
 	
+	private static final String COLLAPSE_LEFT_COLUMN_TARGET = ".applayout-column-left";
+	
 	// Bootstrap specific properties
     private Boolean navbarInverted;
+    private Boolean navbarFixed;
     private Boolean collapseLeftColumn;
+    private String collapseLeftColumnTarget;
     private String pageWidth;
 	
 	public BootstrapApplicationConfiguration() {
-		
-		pageWidth = WIDTH_FULL;		//default page width
 		
 	}
 	
@@ -54,10 +56,27 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
         }
         return false;
     }
-    
     public void setNavbarInverted(boolean navbarInverted) {
         this.navbarInverted = navbarInverted;
     }
+    
+    public boolean isNavbarFixed() {
+        if(navbarFixed!=null) {
+            return navbarFixed;
+        }
+        ValueBinding vb = getValueBinding("navbarFixed"); // $NON-NLS-1$
+        if(vb!=null) {
+            Boolean b = (Boolean)vb.getValue(getFacesContext());
+            if(b!=null) {
+                return b;
+            }
+        }
+        return false;
+    }
+    public void setNavbarFixed(boolean navbarFixed) {
+        this.navbarFixed = navbarFixed;
+    }
+    
     
     public boolean isCollapseLeftColumn() {
     	 if(collapseLeftColumn!=null) {
@@ -76,8 +95,15 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
 		this.collapseLeftColumn = collapseLeftColumn;
 	}
     
-    public String getPageWidth() {
-    	return pageWidth;
+    public String getCollapseLeftColumnTarget() {
+    	return (collapseLeftColumnTarget != null ? collapseLeftColumnTarget : COLLAPSE_LEFT_COLUMN_TARGET);
+	}
+    public void setCollapseLeftColumnTarget(String collapseLeftColumnTarget) {
+		this.collapseLeftColumnTarget = collapseLeftColumnTarget;
+	}
+    
+	public String getPageWidth() {
+		return (pageWidth != null ? pageWidth : WIDTH_FULL);
     }
     public void setPageWidth(String pageWidth) {
     	this.pageWidth = pageWidth;
@@ -90,15 +116,19 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
         this.navbarInverted = (Boolean)values[1];
         this.collapseLeftColumn = (Boolean)values[2];
         this.pageWidth = (String)values[3];
+        this.navbarFixed = (Boolean)values[4];
+        this.collapseLeftColumnTarget = (String)values[5];
     }
 
     @Override
     public Object saveState(FacesContext context) {
-        Object values[] = new Object[4];
+        Object values[] = new Object[6];
         values[0] = super.saveState(context);
         values[1] = navbarInverted;
         values[2] = collapseLeftColumn;
         values[3] = pageWidth;
+        values[4] = navbarFixed;
+        values[5] = collapseLeftColumnTarget;
         return values;
     }
 }

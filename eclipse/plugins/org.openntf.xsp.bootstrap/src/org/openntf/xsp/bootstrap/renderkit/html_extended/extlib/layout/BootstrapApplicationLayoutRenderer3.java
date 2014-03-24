@@ -91,14 +91,27 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	protected void writeMainFrame(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		
 		boolean navbarInverted = false;
+		boolean navbarFixed = false;
 		boolean collapseLeftColumn = false;
+		String collapseLeftColumnTarget = "";
 		String pageWidth = BootstrapApplicationConfiguration.WIDTH_FULL;
 		
 		BootstrapApplicationConfiguration bc = asBootstrapConfig(configuration);
 		if(bc!=null) {
 			navbarInverted = bc.isNavbarInverted();
+			navbarFixed = bc.isNavbarFixed();
 			collapseLeftColumn = bc.isCollapseLeftColumn();
+			collapseLeftColumnTarget = bc.getCollapseLeftColumnTarget();
 			pageWidth = bc.getPageWidth();
+		}
+		
+		//CSS required for fixed navbar
+		if (navbarFixed) {
+			w.startElement("style", c);
+			w.writeAttribute("type", "text/css", null); // $NON-NLS-1$
+			w.writeText("body {padding-top:51px}", null);
+			w.endElement("style");
+			
 		}
 		
 		// Start the mast header
@@ -117,7 +130,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 			// Start the banner
 			if (configuration.isBanner()) {
-				writeBanner(context, w, c, configuration, navbarInverted, pageWidth);
+				writeBanner(context, w, c, configuration, navbarInverted, navbarFixed, pageWidth);
 			}
 			
 			// Start the title bar
@@ -131,7 +144,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			}
 
 			// Start the main content
-			writeMainContent(context, w, c, configuration, collapseLeftColumn, pageWidth);
+			writeMainContent(context, w, c, configuration, collapseLeftColumn, pageWidth, collapseLeftColumnTarget);
 
 			// Start the footer
 			if (configuration.isFooter()) {
@@ -197,23 +210,24 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	// ================================================================
 
 	protected void writeBanner(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, 
-			boolean navbarInverted, String pageWidth) throws IOException {
+			boolean navbarInverted, boolean navbarFixed, String pageWidth) throws IOException {
+		
 		w.startElement("div", c);
-
-		String navStyle = "navbar navbar-static-top navbar-inverse applayout-banner";
-			
-		if ( !navbarInverted ) {
-			navStyle = "navbar navbar-static-top navbar-default applayout-banner";
-		}
-		w.writeAttribute("class", navStyle, null); // $NON-NLS-1$
+		String navClass = "navbar applayout-banner " +
+				(navbarInverted ? "navbar-inverse " : "navbar-default ") +
+				(navbarFixed ? "navbar-fixed-top " : "navbar-static-top ");
+		
+		w.writeAttribute("class", navClass, null); // $NON-NLS-1$
 		newLine(w);
-
+		
 		//container div
 		w.startElement("div",c);
 		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FLUID)) {
-			w.writeAttribute("class", "container-fluid", null); // $NON-NLS-1$
+			w.writeAttribute("class", "container-fluid applayout-banner-container", null); // $NON-NLS-1$
 		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
-			w.writeAttribute("class", "container", null); // $NON-NLS-1$
+			w.writeAttribute("class", "container applayout-banner-container", null); // $NON-NLS-1$
+		} else {
+			w.writeAttribute("class", "applayout-banner-container", null); // $NON-NLS-1$
 		}
 		newLine(w);
 
@@ -686,7 +700,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	// ================================================================
 
 	protected void writeMainContent(FacesContext context, ResponseWriter w, UIApplicationLayout c, 
-			BasicApplicationConfigurationImpl configuration, boolean collapseLeftColumn, String pageWidth) throws IOException {
+			BasicApplicationConfigurationImpl configuration, boolean collapseLeftColumn, String pageWidth, String collapseLeftColumnTarget) throws IOException {
 		
 		w.startElement("div", c); // $NON-NLS-1$
 		
@@ -723,7 +737,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		}
 		
 		// Write the 3 columns
-		writeLeftColumn(context, w, c, leftSize, configuration, collapseLeftColumn);
+		writeLeftColumn(context, w, c, leftSize, configuration, collapseLeftColumn, collapseLeftColumnTarget);
 		writeContentColumn(context, w, c, contentSize, configuration);
 		writeRightColumn(context, w, c, rightSize, configuration);
 
@@ -738,7 +752,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	}
 
 	protected void writeLeftColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, int size, BasicApplicationConfigurationImpl configuration, 
-			boolean collapseLeftColumn) throws IOException {
+			boolean collapseLeftColumn, String collapseLeftColumnTarget) throws IOException {
 		
 		UIComponent left = c.getLeftColumn();
 		
@@ -766,7 +780,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 				
 				// Write the small screen component (collapsed menu)
 	    		w.startElement("script", c); // $NON-NLS-1$
-	    		w.writeText("dojo.addOnLoad( function() { bs4xp.initCollapsibleMenu(); } );", null);
+	    		w.writeText("dojo.addOnLoad( function() { bs4xp.initCollapsibleMenu('" + collapseLeftColumnTarget + "'); } );", null);
 	    		w.endElement("script");
 				newLine(w);
 				
