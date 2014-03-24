@@ -75,14 +75,14 @@
 		<name>Button</name>
 		<property mode="concat">
 			<name>styleClass</name>
-			<value>btn</value>
+			<value>btn btn-default</value>
 		</property>
 	</control>
 	<control>
 		<name>Button.Command</name>
 		<property mode="concat">
 			<name>styleClass</name>
-			<value>btn</value>
+			<value>btn btn-default</value>
 		</property>
 	</control>
 	<control>
@@ -106,7 +106,7 @@
 		<name>Button.Cancel</name>
 		<property mode="concat">
 			<name>styleClass</name>
-			<value>btn</value>
+			<value>btn btn-default</value>
 		</property>
 	</control>
 	<control>
