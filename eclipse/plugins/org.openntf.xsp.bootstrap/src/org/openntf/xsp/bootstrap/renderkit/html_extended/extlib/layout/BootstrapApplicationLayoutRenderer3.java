@@ -135,12 +135,12 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 			// Start the footer
 			if (configuration.isFooter()) {
-				writeFooter(context, w, c, configuration);
+				writeFooter(context, w, c, configuration, pageWidth);
 			}
 
 			// Start the legal
 			if (configuration.isLegal()) {
-				writeLegal(context, w, c, configuration);
+				writeLegal(context, w, c, configuration, pageWidth);
 			}
 		}
 
@@ -829,15 +829,29 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	// Footer
 	// ================================================================
 
-	protected void writeFooter(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
+	protected void writeFooter(FacesContext context, ResponseWriter w, UIApplicationLayout c, 
+			BasicApplicationConfigurationImpl configuration, String pageWidth) throws IOException {
 		w.startElement("footer", c);
 		w.writeAttribute("class", "navbar navbar-bottom applayout-footer", null); // $NON-NLS-1$
+		newLine(w);
+		
+		//container div
+		w.startElement("div", c);
+		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FLUID)) {
+			w.writeAttribute("class", "applayout-titlebar-inner container-fluid", null); // $NON-NLS-1$
+		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
+			w.writeAttribute("class", "applayout-titlebar-inner container", null); // $NON-NLS-1$
+		} else {
+			w.writeAttribute("class", "applayout-titlebar-inner", null); // $NON-NLS-1$
+		}
 		newLine(w);
 
 		writeFooterLinks(context, w, c, configuration);
 
+		w.endElement("div");
+		newLine(w, "container"); // $NON-NLS-1$ $NON-NLS-2$
 		w.endElement("footer");
-		newLine(w, "footer");
+		newLine(w, "footer"); // $NON-NLS-1$ $NON-NLS-2$
 	}
 
 	protected void writeFooterLinks(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
@@ -854,9 +868,21 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	// Legal
 	// ================================================================
 
-	protected void writeLegal(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
+	protected void writeLegal(FacesContext context, ResponseWriter w, UIApplicationLayout c, 
+			BasicApplicationConfigurationImpl configuration, String pageWidth) throws IOException {
 		w.startElement("footer", c);
 		w.writeAttribute("class", "navbar navbar-bottom applayout-legal", null); // $NON-NLS-1$
+		newLine(w);
+		
+		//container div
+		w.startElement("div", c);
+		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FLUID)) {
+			w.writeAttribute("class", "applayout-titlebar-inner container-fluid", null); // $NON-NLS-1$
+		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
+			w.writeAttribute("class", "applayout-titlebar-inner container", null); // $NON-NLS-1$
+		} else {
+			w.writeAttribute("class", "applayout-titlebar-inner", null); // $NON-NLS-1$
+		}
 		newLine(w);
 
 		w.startElement("div", c);
@@ -868,9 +894,11 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 		w.endElement("div");
 		newLine(w, null); // $NON-NLS-1$ $NON-NLS-2$
-
+		
+		w.endElement("div");
+		newLine(w, "container"); // $NON-NLS-1$ $NON-NLS-2$
 		w.endElement("footer");
-		newLine(w, "footer");
+		newLine(w, "footer"); // $NON-NLS-1$ $NON-NLS-2$
 	}
 
 	protected void writeLegalLogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
