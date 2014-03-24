@@ -206,6 +206,11 @@
 	top: -10000px;	
 }
 
+/*correct layout of select2 picker within form-horizontal*/
+.form-horizontal .select2-container {
+	margin-top: 3px;
+}
+
 /***********************************************************************	
 	OneUI like specific styles used by XPages controls
 	-> Ideally, these classes should be renamed and the rendered adapted
