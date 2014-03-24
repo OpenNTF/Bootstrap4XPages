@@ -45,6 +45,26 @@
 			<property-extension>
 			</property-extension>
 		</property>
+		
+		<property>
+			<description>Determines the width of the page: full = full width, fluid
+				= used Bootstrap 'fluid' container (almost full width), fixed = Fixed
+				width.</description>
+			<display-name>Page width</display-name>
+			<property-name>pageWidth</property-name>
+			<property-class>string</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor
+					</editor>
+					<editor-parameter>full&#xd;
+						fluid&#xd;
+						fixed
+					</editor-parameter>
+					<default-value>full</default-value>
+				</designer-extension>
+			</property-extension>
+		</property>
 
     	<complex-extension>
 			<base-complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</base-complex-id>

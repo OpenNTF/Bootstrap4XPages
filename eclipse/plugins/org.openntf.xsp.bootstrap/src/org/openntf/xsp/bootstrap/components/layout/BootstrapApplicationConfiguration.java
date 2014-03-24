@@ -25,12 +25,20 @@ import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImp
  * Bootstrap Application Configuration object.
  */
 public class BootstrapApplicationConfiguration extends BasicApplicationConfigurationImpl {
-
+	
+	public static final String WIDTH_FULL = "full";	
+	public static final String WIDTH_FLUID = "fluid";
+	public static final String WIDTH_FIXED = "fixed";
+	
 	// Bootstrap specific properties
     private Boolean navbarInverted;
     private Boolean collapseLeftColumn;
+    private String pageWidth;
 	
 	public BootstrapApplicationConfiguration() {
+		
+		pageWidth = WIDTH_FULL;		//default page width
+		
 	}
 	
     public boolean isNavbarInverted() {
@@ -68,20 +76,29 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
 		this.collapseLeftColumn = collapseLeftColumn;
 	}
     
+    public String getPageWidth() {
+    	return pageWidth;
+    }
+    public void setPageWidth(String pageWidth) {
+    	this.pageWidth = pageWidth;
+    }
+    
     @Override
     public void restoreState(FacesContext context, Object state) {
         Object values[] = (Object[]) state;
         super.restoreState(context, values[0]);
         this.navbarInverted = (Boolean)values[1];
         this.collapseLeftColumn = (Boolean)values[2];
+        this.pageWidth = (String)values[3];
     }
 
     @Override
     public Object saveState(FacesContext context) {
-        Object values[] = new Object[3];
+        Object values[] = new Object[4];
         values[0] = super.saveState(context);
         values[1] = navbarInverted;
         values[2] = collapseLeftColumn;
+        values[3] = pageWidth;
         return values;
     }
 }
