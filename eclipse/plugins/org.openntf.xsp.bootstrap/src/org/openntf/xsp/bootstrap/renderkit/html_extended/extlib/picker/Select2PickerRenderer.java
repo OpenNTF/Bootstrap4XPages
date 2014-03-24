@@ -36,8 +36,6 @@ import com.ibm.xsp.component.UIInputEx;
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
-import com.ibm.xsp.resource.ScriptResource;
-import com.ibm.xsp.resource.StyleSheetResource;
 import com.ibm.xsp.util.FacesUtil;
 
 public class Select2PickerRenderer extends FacesRendererEx {
@@ -52,18 +50,7 @@ public class Select2PickerRenderer extends FacesRendererEx {
         UIInputEx _for = (UIInputEx) getFor(context,picker);
        
         boolean readOnly = _for!=null ? FacesUtil.isComponentReadOnly(context, _for) : false;
-        
-        //load select2 library and stylesheet
-    	ScriptResource js = new ScriptResource();
-    	js.setClientSide(true);
-    	js.setSrc("/.ibmxspres/.extlib/bootstrap/select2/select2.js");
-    	
-    	StyleSheetResource css = new StyleSheetResource();
-    	css.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2.css");
-    	
-    	StyleSheetResource cssBootstrap = new StyleSheetResource();
-    	cssBootstrap.setHref("/.ibmxspres/.extlib/bootstrap/select2/select2-bootstrap.css");
-    	
+       
     	UIViewRootEx rootEx = (UIViewRootEx) context.getViewRoot();
     	ExtLibResources.addEncodeResource(rootEx, BootstrapResources.bootstrapPickerSelect2);
     	
