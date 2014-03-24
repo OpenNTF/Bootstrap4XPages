@@ -201,6 +201,11 @@
 	margin-right: 0;
 }
 
+/*hide the tooltip when not hovered*/
+.tooltip {
+	top: -10000px;	
+}
+
 /***********************************************************************	
 	OneUI like specific styles used by XPages controls
 	-> Ideally, these classes should be renamed and the rendered adapted
