@@ -191,6 +191,16 @@
 .dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
 .dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
 
+/*margin between icons and text in buttons*/
+.btn .glyphicon {
+	margin-right: 4px;
+}
+ 
+/*class to use for icon-only buttons*/
+.btn.btn-icon .glyphicon {
+	margin-right: 0;
+}
+
 /***********************************************************************	
 	OneUI like specific styles used by XPages controls
 	-> Ideally, these classes should be renamed and the rendered adapted
