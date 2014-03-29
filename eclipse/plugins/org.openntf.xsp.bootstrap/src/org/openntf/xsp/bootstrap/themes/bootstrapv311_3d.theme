@@ -112,5 +112,24 @@
 			<value></value> <!-- avoid form-control -->
 		</property>
 	</control>
+	
+	<!-- Combo Box -->
+	<control>
+		<name>ComboBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- List Box -->
+	<control>
+		<name>ListBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+
 </theme>
 
