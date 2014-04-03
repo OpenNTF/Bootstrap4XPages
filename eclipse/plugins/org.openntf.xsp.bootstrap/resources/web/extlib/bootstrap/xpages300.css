@@ -63,6 +63,14 @@
 	cursor: pointer !important;
 }
 
+/* fix for combo boxes in RT editor in Bootstrap 3 */
+.cke_editor * {
+        box-sizing:content-box;
+   -moz-box-sizing:content-box;
+    -ms-box-sizing:content-box;
+-webkit-box-sizing:content-box;
+}
+
 /***********************************************************************	
 	Bootstrap styles used by extlib XPages controls
 ***********************************************************************/
