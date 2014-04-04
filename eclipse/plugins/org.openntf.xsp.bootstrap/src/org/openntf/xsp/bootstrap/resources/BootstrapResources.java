@@ -47,9 +47,7 @@ public abstract class BootstrapResources {
             return r;
         }
         Version v = BootstrapUtil.getBootstrapVersion(context);
-        if(v==BootstrapUtil.BOOTSTRAP_V231) {
-            r = Bootstrap231Resources.instance;
-        } else if(v==BootstrapUtil.BOOTSTRAP_V232) {
+        if(v==BootstrapUtil.BOOTSTRAP_V232) {
             r = Bootstrap232Resources.instance;
         } else if(v==BootstrapUtil.BOOTSTRAP_V300 || v==BootstrapUtil.BOOTSTRAP_V311 ) {
             r = Bootstrap300Resources.instance;
