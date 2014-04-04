@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" disableTheme="true">
+
+	<!--
+	<<
+	XPage Debug Toolbar
+	Copyright 2012,2013 Mark Leusink http://linqed.eu
+	Licensed under the Apache License, Version 2.0 (the "License"); you may not use this 
+	file except in compliance with the License. You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software distributed under
+	the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF 
+	ANY KIND, either express or implied. See the License for the specific language governing
+	permissions and limitations under the License
+	>> 
+	-->
+	
+	<xp:this.pageTitle><![CDATA[#{javascript:"Messages for \"" + database.getTitle() + "\""}]]></xp:this.pageTitle>
+	<style type="text/css">
+		body, form { font-family: Arial !important; font-size: 12px !important; background: #444444 !important; color: #ffffff !important; }
+		.content {padding: 4px; }
+		.settings { background: #eeeeee !important; color: #000000 !important;border: 1px solid black !important; padding: 5px !important; }
+		label {display:inline; } 
+		
+		table.messages tr { vertical-align: top !important; }
+		table.messages tr:nth-child(even) {
+				background: #545454;
+		}
+		
+		.messagesList { color: #ffffff !important; border: 1px solid #eeeeee !important; margin-top: 2px !important; font-size: 11px !important; }
+		a, a:visited {		text-decoration: underline !important; color: #ffffff !important; } 
+		table { border-collapse: collapse !important; } 
+		td { padding: 2px !important; margin: 0 !important;
+		} 
+		td.time {
+		width: 50px; white-space: nowrap; padding-right: 10px;
+		}
+		
+		tr.divider {background: white; }
+		tr.divider td {padding: 0 !important; line-height: 2px;}
+		
+		.error { color: #f75454 !important; } 
+		.warning { color: gold !important; } 
+		.debug { font-style: italic !important; }
+
+	</style>
+	<xp:this.resources>
+		<xp:script src="/xpDebugToolbar.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[
+		var reloadInterval;
+		
+		function setReloadInterval() {
+		
+			//get interval settings (in seconds);
+			var i = dojo.byId("#{id:comboInterval}");
+			var s = i.options[i.selectedIndex].value * 1000;
+			clearInterval(reloadInterval)
+			reloadInterval = setInterval( reloadLogMessages, s);
+		}
+		function reloadLogMessages() {
+			XSP.partialRefreshGet("#{id:logMessagesList}", {});
+		}
+		
+		dojo.addOnLoad( function() {setReloadInterval();});
+		]]></xp:this.value>
+	</xp:scriptBlock>
+
+<div class="content">
+	<div class="settings">
+		automatically&#160;refresh this page:
+		<xp:radio text="never" id="radio1" groupName="autoRefresh" selectedValue="disabled">
+			<xp:eventHandler event="onclick" submit="false">
+				<xp:this.script><![CDATA[clearInterval(reloadInterval);
+		]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:radio>
+		&#160;
+		<xp:radio text="every " id="radio2" defaultSelected="true" groupName="autoRefresh" selectedValue="auto">
+			<xp:eventHandler event="onclick" submit="false">
+				<xp:this.script><![CDATA[setReloadInterval();]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:radio>
+		&#160;
+		<xp:comboBox id="comboInterval" defaultValue="5">
+			<xp:selectItems>
+				<xp:this.value><![CDATA[#{javascript:[
+				"2|2",
+	"5|5",
+	"10|10",
+	"30|30",
+	"60|60"
+]}]]></xp:this.value>
+			</xp:selectItems>
+			<xp:eventHandler event="onchange" submit="false">
+				<xp:this.script><![CDATA[setReloadInterval();]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:comboBox>
+		seconds
+		<xp:br></xp:br>
+		show:&#160;
+		<xp:checkBox text="info" id="checkBox1" checkedValue="info">
+			<xp:this.defaultChecked><![CDATA[#{javascript:!dBar.isFiltered("info");}]]></xp:this.defaultChecked>
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="logMessagesList">
+				<xp:this.action><![CDATA[#{javascript:var p = this.getParent();
+dBar.toggleFiltered(p.getCheckedValue(), p.isChecked());
+}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:checkBox>
+		<xp:checkBox text="warning" id="checkBox2" checkedValue="warning">
+			<xp:this.defaultChecked><![CDATA[#{javascript:!dBar.isFiltered("warning");}]]></xp:this.defaultChecked>
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="logMessagesList">
+				<xp:this.action><![CDATA[#{javascript:var p = this.getParent();
+dBar.toggleFiltered(p.getCheckedValue(), p.isChecked());
+}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:checkBox>
+		<xp:checkBox text="debug" id="checkBox3" checkedValue="debug">
+			<xp:this.defaultChecked><![CDATA[#{javascript:!dBar.isFiltered("debug");}]]></xp:this.defaultChecked>
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="logMessagesList">
+				<xp:this.action><![CDATA[#{javascript:var p = this.getParent();
+dBar.toggleFiltered(p.getCheckedValue(), p.isChecked());
+}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:checkBox>
+		<xp:checkBox text="error" id="checkBox4" checkedValue="error">
+			<xp:this.defaultChecked><![CDATA[#{javascript:!dBar.isFiltered("error");}]]></xp:this.defaultChecked>
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="logMessagesList">
+				<xp:this.action><![CDATA[#{javascript:var p = this.getParent();
+dBar.toggleFiltered(p.getCheckedValue(), p.isChecked());
+}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:checkBox>
+	</div>
+	<xp:div id="logMessagesList" style="padding-top: 10px">
+
+		<div style="float:right; font-size: 11px;">
+			<xp:link escape="true" text="refresh now" id="link2" disableTheme="true">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="logMessagesList">
+				</xp:eventHandler>
+			</xp:link>
+			&#160;|&#160;
+			<xp:link escape="true" text="add divider" id="link3" disableTheme="true">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="logMessagesList">
+					<xp:this.action><![CDATA[#{javascript:dBar.addDivider();}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			
+			&#160;|&#160;
+					
+			<xp:link escape="false" id="link33" text="show milliseconds" rendered="#{!dBar.detailedTimings}">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="logMessagesList" execId="logMessagesList" execMode="partial" immediate="true">
+					<xp:this.action><![CDATA[#{javascript:dBar.setDetailedTimings(true);}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			<xp:link escape="false" id="link34" text="hide milliseconds" rendered="#{dBar.detailedTimings}">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="logMessagesList" execId="logMessagesList" execMode="partial" immediate="true">
+					<xp:this.action><![CDATA[#{javascript:dBar.setDetailedTimings(false);}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			
+			&#160;|&#160;
+			<xp:link escape="true" text="clear" id="link1" disableTheme="true">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="logMessagesList">
+					<xp:this.action><![CDATA[#{javascript:dBar.clearMessages();}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+		</div>
+
+		<b>Messages</b>
+		&#160; (last refreshed at&#160;
+		<xp:text escape="true" id="computedField1" value="#{javascript:new Date();}">
+			<xp:this.converter>
+				<xp:convertDateTime type="time"></xp:convertDateTime>
+			</xp:this.converter>
+		</xp:text>
+		)
+
+		<!-- messages list -->
+		<div class="messagesList">
+			
+			<xp:repeat id="dtMessages" rows="10000" indexVar="messageIndex" var="message"
+				value="#{dBar.filteredMessages}">
+
+				<xp:this.facets>
+					<xp:text xp:key="header" disableTheme="true" escape="false">
+						<xp:this.value><![CDATA[<table class="messages" style="width:100%; margin-top: 5px"><tbody>]]></xp:this.value>
+					</xp:text>
+					<xp:text xp:key="footer" disableTheme="true" escape="false">
+						<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+					</xp:text>
+				</xp:this.facets>
+
+				<xp:tr styleClass="divider">
+					<xp:this.rendered><![CDATA[#{javascript:message.type == "divider"}]]></xp:this.rendered>
+					<xp:td colspan="2">&#160;</xp:td>
+				</xp:tr>
+
+				<xp:tr>
+					<xp:this.rendered><![CDATA[#{javascript:message.type != "divider"}]]></xp:this.rendered>
+					<xp:td styleClass="time">
+						
+						<xp:text escape="false"	disableTheme="true" value="#{message.date}" rendered="#{!dBar.detailedTimings}">
+							<xp:this.converter>
+								<xp:convertDateTime type="time" pattern="HH:mm:ss">
+								</xp:convertDateTime>
+							</xp:this.converter>
+						</xp:text>
+						
+						<xp:text escape="false" disableTheme="true" value="#{message.date}" rendered="#{dBar.detailedTimings}">
+							<xp:this.converter>
+								<xp:convertDateTime type="time" pattern="HH:mm:ss:SSS">
+								</xp:convertDateTime>
+							</xp:this.converter>
+						</xp:text>
+						
+					</xp:td>
+
+					<xp:td>
+						<xp:text escape="false" disableTheme="true" styleClass="#{message.styleclass}">
+							<xp:this.value><![CDATA[#{javascript:(message.context != null ? "(" + message.context + ") " : "") + message.text;}]]></xp:this.value>
+						</xp:text>
+						
+						<!-- stacktrace for errors -->
+						<xp:div rendered="#{javascript:message.hasStackTrace();}" id="stackTrace">
+						
+							<xp:link escape="true" text="show stacktrace" id="link26" rendered="#{javascript:!message.isShowStackTrace()}">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="stackTrace" execMode="partial" immediate="true">
+								<xp:this.action><![CDATA[#{javascript:message.setShowStackTrace(true);}]]></xp:this.action>
+							</xp:eventHandler></xp:link>
+							<xp:link escape="true" text="hide stacktrace" id="link25"
+								rendered="#{javascript:message.isShowStackTrace()}">
+								<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="stackTrace" immediate="true" execMode="partial">
+									<xp:this.action><![CDATA[#{javascript:message.setShowStackTrace(false);}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link><br />
+
+							<xp:text escape="false" id="computedField5" value="#{message.stackTrace}"
+								rendered="#{message.showStackTrace}" styleClass="#{message.styleclass}">
+								<xp:this.converter>
+									<xp:customConverter getAsObject="#{javascript:value;}">
+										<xp:this.getAsString><![CDATA[#{javascript:@ReplaceSubstring(value, "\n", "<br />")}]]></xp:this.getAsString>
+									</xp:customConverter>
+								</xp:this.converter>
+							</xp:text>
+
+						</xp:div>
+						
+					</xp:td>
+
+				</xp:tr>
+
+			</xp:repeat>
+
+			<xp:text escape="true" id="computedField4" style="padding: 3px;" value="No messages found">
+				<xp:this.rendered><![CDATA[#{javascript:getComponent("dtMessages").getRowCount() ==0}]]></xp:this.rendered>
+			</xp:text>
+		</div>
+	</xp:div>
+</div>
+</xp:view>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:bx="http://www.openntf.org/xsp/bootstrap">
+
+	<xc:OneUILayout navigationPath="/Bootstrap/Form">
+
+		<xp:this.facets>
+			<xc:LeftBootstrap xp:key="LeftColumn"></xc:LeftBootstrap>
+		</xp:this.facets>
+
+		<xp:div styleClass="page-header">
+			<h2>Horizontal Form</h2>
+		</xp:div>
+
+		<xp:div styleClass="form-horizontal">
+
+			<div class="form-group">
+				<xp:label
+					value="Name"
+					id="label1"
+					for="inputText1"
+					styleClass="control-label col-sm-2">
+				</xp:label>
+				<div class="col-sm-10">
+					<xp:inputText id="inputText1">
+						<xp:this.attrs>
+							<xp:attr
+								name="placeholder"
+								value="Enter your name">
+							</xp:attr>
+						</xp:this.attrs>
+
+					</xp:inputText>
+				</div>
+			</div>
+			<div class="form-group">
+				<xp:label
+					value="Birth date"
+					id="label2"
+					for="inputText2"
+					styleClass="control-label col-sm-2">
+				</xp:label>
+				<div class="col-sm-10">
+					<xp:inputText id="inputText2">
+						<xp:this.converter>
+							<xp:convertDateTime type="date"></xp:convertDateTime>
+						</xp:this.converter>
+						<xp:dateTimeHelper></xp:dateTimeHelper>
+					</xp:inputText>
+				</div>
+			</div>
+
+			<div class="form-group">
+
+				<xp:label
+					value="Favorite colour"
+					id="label7"
+					for="comboBox1"
+					styleClass="control-label col-sm-2">
+				</xp:label>
+				<div class="col-sm-10">
+					<xp:comboBox id="comboBox1">
+						<xp:selectItem itemLabel="Green"></xp:selectItem>
+						<xp:selectItem itemLabel="Red"></xp:selectItem>
+					</xp:comboBox>
+					<bx:select2PickerCombo
+						id="select2PickerCombo1"
+						for="comboBox1">
+					</bx:select2PickerCombo>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<xp:label
+					value="Bio"
+					id="label3"
+					for="inputRichText1"
+					styleClass="control-label col-sm-2">
+				</xp:label>
+				<div class="col-sm-10">
+					<xp:inputRichText id="inputRichText1"></xp:inputRichText>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<xp:button
+						value="Save"
+						id="button1"
+						themeId="Button.Primary">
+						<i class="glyphicon glyphicon-ok"></i>
+					</xp:button>
+				</div>
+			</div>
+
+		</xp:div>
+
+	</xc:OneUILayout>
+
+</xp:view>

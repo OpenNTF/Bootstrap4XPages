@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<p>
+		<xp:checkBox
+			text="label van de checkbox"
+			id="checkBox1">
+		</xp:checkBox>
+	</p>
+
+	<p>
+		<xp:checkBox
+			text="label van de checkbox"
+			id="checkBox2"
+			defaultChecked="true">
+		</xp:checkBox>
+	</p>
+
+	<p>
+		<xp:checkBox
+			text="label van de checkbox"
+			id="checkBox3"
+			value="#{viewScope.kkk}">
+		</xp:checkBox>
+	</p>
+
+	<p>
+		<xp:checkBox
+			text="label van de checkbox"
+			id="checkBox4"
+			defaultChecked="true"
+			value="#{viewScope.lll}">
+		</xp:checkBox>
+	</p>
+
+</xp:view>

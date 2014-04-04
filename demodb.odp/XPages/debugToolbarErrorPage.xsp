@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	pageTitle="An error occurred">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:dBar.error( requestScope.error );
+dBar.setCollapsed(false);
+dBar.openTab("messages");}]]></xp:this.beforePageLoad>
+
+	<style type="text/css">
+	#box {
+	  position: relative;
+	  width: 350px;
+	  background: #ddd;
+	  -moz-border-radius: 5px;
+	  border-radius: 5px;
+	  padding: 2em 1.5em;
+	  margin: 60px auto;
+	 }
+	#box:before, #box:after {
+	  z-index: -1; 
+	  position: absolute; 
+	  content: "";
+	  bottom: 15px;
+	  left: 10px;
+	  width: 50%; 
+	  top: 80%;
+	  max-width:350px;
+	  
+	  background: rgba(0, 0, 0, 0.7); 
+	  -webkit-box-shadow: 0 15px 10px rgba(0,0,0, 0.7);   
+	  -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+	  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+	  -webkit-transform: rotate(-3deg);    
+	  -moz-transform: rotate(-3deg);   
+	  -o-transform: rotate(-3deg);
+	  -ms-transform: rotate(-3deg);
+	  transform: rotate(-3deg);
+	}
+	#box:after 	{
+	  -webkit-transform: rotate(3deg);
+	  -moz-transform: rotate(3deg);
+	  -o-transform: rotate(3deg);
+	  -ms-transform: rotate(3deg);
+	  transform: rotate(3deg);
+	  right: 10px;
+	  left: auto;
+	}	
+</style>
+
+	<div id="box">
+		<h2>Oops... that wasn't supposed to happen</h2>
+		
+		<div style="margin-top:15px">
+			But rest assured: the error has been logged by the amazing&#160;<strong>XPage Debug Toolbar</strong>&#160;and we'll do everything in our power to never let it happen again!
+		</div> 
+		
+		<div style="margin-top:15px">
+			<xp:link escape="true" text="Back to previous page" id="link1" value="#{javascript:context.getHistoryUrl(-1);}"></xp:link>
+		</div>
+	
+	</div>
+</xp:view>

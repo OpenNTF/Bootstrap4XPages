@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:applicationLayout id="applicationLayout1">ok
+		<xe:this.configuration>
+			<xe:oneuiApplication
+				legal="false"
+				footer="false"
+				banner="true">
+
+				<xe:this.bannerApplicationLinks>
+					<xe:loginTreeNode label="login"></xe:loginTreeNode>
+				</xe:this.bannerApplicationLinks>
+				<xe:this.bannerUtilityLinks>
+					<xe:pageTreeNode label="page"></xe:pageTreeNode>
+				</xe:this.bannerUtilityLinks></xe:oneuiApplication>
+		</xe:this.configuration>
+	</xe:applicationLayout></xp:view>

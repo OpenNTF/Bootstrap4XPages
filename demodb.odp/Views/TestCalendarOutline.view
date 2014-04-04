@@ -1,0 +1,808 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='TestCalendarOutline' alias='TestCalendarOutline' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257C4200706062' showinmenu='true'
+ noreplace='true' publicaccess='true' designerversion='8.5.3' language='en'
+ unreadmarks='standard' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='none' opencollapsed='false' showresponsehierarchy='false' showmargin='false'
+ shrinkrows='true' extendlastcolumn='true' showhierarchies='false' unreadcolor='#6260a1'
+ rowlinecount='9' headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='gray'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='true' allownewdocuments='true'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' belowheadermargin='10px'
+ marginbgcolor='white' showswitcher='true' uniquekeys='false'>
+<noteinfo noteid='24e' unid='98DC12E493D303EE80257BAB005506CD' sequence='5'>
+<created><datetime dst='true'>20130717T162843,01+01</datetime></created>
+<modified><datetime>20131215T212728,06+01</datetime></modified>
+<revised><datetime>20131125T230436,63+01</datetime></revised>
+<lastaccessed><datetime>20140103T085023,87+01</datetime></lastaccessed>
+<addedtofile><datetime>20131215T212728,05+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Gleeson/OU=Ireland/O=IBM</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<globals><code event='declarations'><lotusscript>
+
+</lotusscript></code></globals><code event='selection'><formula>SELECT @IsAvailable(CalendarDateTime)</formula></code><code
+ event='form'><formula>tmpOldVersion := @If(@TextToNumber(@Version) &lt; 174;@True;@False);
+
+@If(
+	tmpOldVersion &amp; form = "Notice"; "(R5Notice)";
+	tmpOldVersion &amp; Form = "Appointment";"(R5CalendarEntry)";
+	Form="";@False;Form)</formula></code><code event='helprequest'><formula>@Command([OpenHelpDocument];[ClientHelp];"(Help)";"MAIL_V_CALENDAR")</formula></code>
+<actionbar borderstyle='none' useappletinbrowser='true' showdefaultrightclickitems='false'
+ bgcolor='#b0c8e0' bordercolor='#51728f'><actionbarstyle height='10.4000ex'
+ repeat='hrepeat'><font size='3pt' name='multilingual'/><imageref><code event='value'><formula
+>@If(@ClientType = "Web"; "MailFS - Shadow - Web"; "ViewGradient.gif")</formula></code></imageref></actionbarstyle>
+<actionbuttonstyle showdropdown='true' bgcolor='none'/><font size='9pt' name='multilingual'
+ color='#004080'/><border style='solid' width='1px 1px 2px' color='#a9c0d7'/>
+<action title='Archive\Archive Now' showinbar='false'><code event='click'><formula
+>@Command([RunAgent]; "(Archive Now)")</formula></code><code event='hidewhen'><formula
+>arch := @GetProfileField("Archive Database Profile"; "ArchiveDatabase"; ""; [EnsureCache]);
+@If(@Text(arch) = "1"; @True; @False)</formula></code></action>
+<action title='Archive\Archive Selected Documents' showinbar='false'><code
+ event='click'><formula>@Command([RunAgent];"(Archive Selected Documents)")</formula></code><code
+ event='hidewhen'><formula>arch := @GetProfileField("Archive Database Profile"; "ArchiveDatabase"; ""; [EnsureCache]);
+@If(@Text(arch) = "1"; @True; @False)</formula></code></action>
+<action title='Archive\Create Criteria...' showinbar='false'><code event='click'><formula
+>@Command([RunAgent]; "(Create Criteria)")</formula></code><code event='hidewhen'><formula
+>arch := @GetProfileField("Archive Database Profile"; "ArchiveDatabase"; ""; [EnsureCache]);
+@If(@Text(arch) = "1"; @True; @False)</formula></code></action>
+<action title='Archive\Open Log' showinbar='false'><code event='click'><formula
+>@Command([RunAgent]; "(Open Log)")</formula></code><code event='hidewhen'><formula
+>arch := @GetProfileField("Archive Database Profile"; "ArchiveDatabase"; ""; [EnsureCache]);
+@If(@Text(arch) = "1"; @True; @False)</formula></code></action>
+<action title='Archive\Settings...' showinbar='false'><code event='click'><formula
+>@Command([RunAgent]; "(archivesettings)")</formula></code><code event='hidewhen'><formula
+>arch := @GetProfileField("Archive Database Profile"; "ArchiveDatabase"; ""; [EnsureCache]);
+@If(@Text(arch) = "1"; @True; @False)</formula></code></action>
+<action title='Synchronize Address Book' showinbar='false' hide='web'><code
+ event='click'><formula>@Command([ToolsRunMacro];"Synchronize Address Book")</formula></code><code
+ event='hidewhen'><formula>@If(@TextToNumber(@Version) &gt;= 303;@True;@False)</formula></code></action>
+<action title='Edit' showinbar='false' systemcommand='edit'/>
+<action title='New Calendar Entry' showinmenu='false' hide='web' targetframe='_top'><code
+ event='click'><formula>OEMClient:=@Environment("OEMClient");
+CSDocType:=@If
+						(
+						OEMClient = "1";
+							"0";
+						"3"
+						);
+
+@If(@ClientType = "Notes"; @Environment("CSDocType";CSDocType) : @Command([Compose];"Appointment") : @Return(0);"");
+path := @ReplaceSubstring(@ReplaceSubstring(@Subset(@DbName;-1);"\\";"/");" ";"+");
+@URLOpen("/" + path + "/Appointment?OpenForm&amp;Type=3")</formula></code><code
+ event='hidewhen'><formula>@If(@TextToNumber(@Version) &lt; 174;@True;@False) | !@Environment("OEMClient") = "1"</formula></code></action>
+<action title='New\New - Default Calendar Entry' icon='30' showinmenu='false'
+ hide='preview read edit previewedit web' splitbutton='true' targetframe='_top'><code
+ event='click'><formula>@Command([Compose]; "altCalEntry")</formula></code><code
+ event='hidewhen'><formula>@True | !@IsUsingJavaElement | @If(@TextToNumber(@Version) &lt; 174;@True;@False) | @Environment("OEMClient") = "1"</formula></code><code
+ event='label'><formula>"Meeting"</formula></code></action>
+<action title='New\New - Meeting (C&amp;S Views)' icon='30' hide='preview edit previewedit'
+ splitbutton='true' targetframe='_top'><code event='click'><formula>@Command([Compose]; "altCalEntry")</formula></code><code
+ event='hidewhen'><formula>@If(@TextToNumber(@Version) &lt; 174;@True;@False) | @Environment("OEMClient") = "1"</formula></code><code
+ event='label'><formula>"Meeting"</formula></code></action>
+<action title='F_orward' showinbar='false' hide='web' systemcommand='forward'/>
+<action title='Add to Folder...' showinbar='false' hide='web' systemcommand='movetofolder'/>
+<action title='Delete' icon='11' hide='web' onlyiconinbar='true'><code event='click'><formula
+>@Command([EditClear])</formula></code><code event='hidewhen'><formula>@If(@DocLength=0; @Return(@True); @False);
+
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(tmpLevel &lt;=2 &amp; tmpWrite="0";@Return(@True);@False);
+
+Iscancel:=@If(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon = 81;@True;@False);
+IsNonMeeting:=@If(AppointmentType !="3";@True;@False);
+@If(IsNonMeeting=@True | IsCancel = @True; @Return(@False);@True)</formula></code><code
+ event='label'><formula>"Delete"</formula></code></action>
+<action title='Copy Into New\_Message' hide='preview edit previewedit web'><code
+ event='click'><formula>@Command([ToolsRunMacro]; "(CSCopyIntoMessageAction)")</formula></code><code
+ event='hidewhen'><formula>REM; "Hide-when for C&amp;S (non Mail)";
+
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@DocLength = 0 | @If((tmpLevel &lt;= 2 &amp; tmpWrite="0"); @True; @False)  | tmpLevel=0</formula></code></action>
+<action title='Copy Into New\Calendar Entry' hide='preview edit previewedit web'><code
+ event='click'><formula>@Command([ToolsRunMacro]; "(CSCopyIntoCalendarEntryAction)")</formula></code><code
+ event='hidewhen'><formula>REM; "Hide-when for C&amp;S (non Mail)";
+
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@DocLength = 0 |
+@If(@TextToNumber(@Version) &lt; 174;@True;@False) | @If((tmpLevel &lt;=2 &amp; tmpWrite="0"); @True; @False)</formula></code></action>
+<action title='Copy Into New\_To Do' hide='preview edit previewedit web'><code
+ event='click'><formula>@Command([ToolsRunMacro]; "(CSCopyIntoToDoAction)")</formula></code><code
+ event='hidewhen'><formula>REM; "Hide-when for C&amp;S (non Mail)";
+
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@DocLength = 0 | @If(@TextToNumber(@Version) &lt; 174;@True;@False) | @If((tmpLevel &lt;=2 &amp; tmpWrite="0"); @True; @False)</formula></code></action>
+<action title='Chat\Chat - Chat with... (C&amp;S)' icon='130' hide='preview edit previewedit web mobile'
+ onlyiconinbar='true'><code event='click'><formula>SentBy := @If(Chair = ""; Principal; Chair);
+REM {Attendees := @Trim(RequiredAttendees : OptionalAttendees); Who := @If(DeliveredDate != ""; SentBy; @Elements(Attendees) &gt; 0; @Subset(Attendees; 1); SendTo = "" &amp; @ViewTitle!="($Drafts)"&amp; @Name([Abbreviate];@UserName)!=@Name([Abbreviate];SentBy) ; SentBy; sendTo="" &amp; @ViewTitle!="($Drafts)";SentBy;@Subset(SendTo; 1));};
+CN1 := @Trim(@Name([Abbreviate]; SentBy));
+RName := @If(@Contains(CN1; "@");@If(@ValidateInternetAddress([Address821];CN1)= Null | @ValidateInternetAddress([Address822];CN1)= Null ;@Name([Address821];CN1);@Left(CN1; "@"));CN1);
+@If(Form = "Delivery Report" : "NonDelivery Report" : "Trace Report" : "Quota Report"; Rname :="Mail Router"; Rname);
+@Command([SendInstantMessage];Rname)</formula></code><code event='hidewhen'><formula
+>@If(@IsError(@IsUsingJavaElement);0;@IsUsingJavaElement;@Return(@True);0);
+OkToShow := @If(@Version &lt; @Text(192);  0; @HasFeature("650Lic"); 1; 0);
+showcs := @If(@IsUnavailable( $BusyPriority)  &amp; @IsUnavailable( OrgRepeat) &amp; @IsUnavailable(NoticeType) &amp; AppointmentType = "3";"1";"0");
+showtodo := @If(@IsUnavailable( AssignedTo) &amp; TaskType= "2";"1";"0");
+OkToShow != 1 | @IsError(OkToShow) | @DocLength = 0 | TaskType="1" | AppointmentType = "1":"2":"4":"0"  |  showcs="1" | showtodo="1" |   @IsNewDoc</formula></code><code
+ event='label'><formula>"Chat with..."</formula></code></action>
+<action title='Chat\Chat separator (C&amp;S)' hide='preview previewedit web mobile'
+ displaytype='menuseparator'><code event='hidewhen'><formula>@If(@IsError(@IsUsingJavaElement);0;@IsUsingJavaElement;@Return(@True);0);
+showcs := @If(@IsUnavailable( $BusyPriority)  &amp; @IsUnavailable( OrgRepeat) &amp; @IsUnavailable(NoticeType) &amp; AppointmentType = "3";"1";"0");
+showtodo := @If((@IsUnavailable( AssignedTo) &amp; @IsUnavailable( OptionalAssignedTo) &amp; @IsUnavailable( FYIAssignedTo) ) &amp; TaskType= "2";"1";"0");
+OkToShow := @If(@Version &lt; @Text(192);  0; @HasFeature("650Lic"); 1; 0);
+OkToShow != 1 | @IsError(OkToShow) | @DocLength = 0 | TaskType="1" | showcs="1" | showtodo="1" | AppointmentType = "1":"2":"4":"0"  |  @IsNewDoc</formula></code></action>
+<action title='Chat\Chat - Show-Hide Sametime Contact List (C&amp;S)' icon='130'
+ hide='preview previewedit web mobile' onlyiconinbar='true'><code event='click'><formula
+>@Command([ShowHideIMContactList])</formula></code><code event='hidewhen'><formula
+>@If(@IsError(@IsUsingJavaElement);0;@IsUsingJavaElement;@Return(@True);0);
+REM { Test if this is version 6.1 of Notes and 6.1 of the template};
+OkToShow := @If(@Version &lt; @Text(192);  0; @HasFeature("650Lic"); 1; 0);
+showtodo := @If((@IsUnavailable( AssignedTo) &amp; @IsUnavailable( OptionalAssignedTo) &amp; @IsUnavailable( FYIAssignedTo) ) &amp; TaskType= "2";"1";"0");
+showcs := @If(@IsUnavailable( $BusyPriority)  &amp; @IsUnavailable( OrgRepeat) &amp; @IsUnavailable(NoticeType) &amp; AppointmentType = "3";"1";"0");
+OkToShow != 1 | @IsError(OkToShow) | @DocLength=0 | AppointmentType = "1":"2":"4":"0"  | showcs="1" | showtodo="1" | TaskType="1" |  @IsNewDoc
+
+| (@IsEmbeddedInsideWCT &amp; @Environment("Use_WCT_IM") = "1" &amp; @Environment("USE_ST_IM")  != "1")</formula></code><code
+ event='label'><formula>"Show/Hide Sametime Contact List"</formula></code></action>
+<action title='Chat\Chat - Add to Sametime Contact List... (C&amp;S)' icon='130'
+ hide='preview previewedit web mobile' onlyiconinbar='true'><code event='click'><formula
+>SentBy := @If(Chair = ""; Principal; Chair);
+REM { Attendees := @Trim(RequiredAttendees : OptionalAttendees); Who := @If(DeliveredDate != ""; SentBy; @Elements(Attendees) &gt; 0; @Subset(Attendees; 1); SendTo = ""; SentBy; @Subset(SendTo; 1)); CN1 := @Trim(@Name([Abbreviate]; Who));};
+RName := @If(@Contains(SentBy; "@");@If(@ValidateInternetAddress([Address821];SentBy)= Null  | @ValidateInternetAddress([Address822];SentBy)= Null ;@Name([Address821];SentBy);@Left(SentBy; "@"));SentBy);
+@Command([AddToIMContactList];Rname)</formula></code><code event='hidewhen'><formula
+>@If(@IsError(@IsUsingJavaElement);0;@IsUsingJavaElement;@Return(@True);0);
+REM { Test if this is version 6.1 of Notes and 6.1 of the template};
+OkToShow := @If(@Version &lt; @Text(192);  0; @HasFeature("650Lic"); 1; 0);
+showtodo := @If(@IsUnavailable( AssignedTo) &amp; TaskType= "2";"1";"0");
+showcs := @If(@IsUnavailable( $BusyPriority)  &amp; @IsUnavailable( OrgRepeat) &amp; @IsUnavailable(NoticeType) &amp; AppointmentType = "3";"1";"0");
+OkToShow != 1 | @IsError(OkToShow) | @DocLength=0 | AppointmentType = "1":"2":"4":"0" | showcs="1" | showtodo="1" | TaskType="1" |  @IsNewDoc</formula></code><code
+ event='label'><formula>"Add to Sametime Contact List..."</formula></code></action>
+<action title='Tools\' hide='web' displaytype='menuseparator'><code event='hidewhen'><formula
+>@Version &lt; @Text(190)</formula></code><code event='parentlabel'><formula
+>"More"</formula></code></action>
+<action title='Tools\Open Person&apos;s Calendar...' hide='web'><code event='click'><formula
+>tmpOtherName := "Other...";
+
+tmpManageCalendarFor := @Name([Abbreviate]; @Trim(@GetProfileField("CalendarProfile";"ManageCalendarFor")));
+
+tmpChoice := @If(tmpManageCalendarFor != "" &amp; @Elements(tmpManageCalendarFor) &gt; 0;
+	@Prompt([OkCancelList]: [NoSort]; "Open Calendar For"; "Select a Calendar to  Open."; @Subset(tmpManageCalendarFor; 1);  tmpManageCalendarFor: tmpOtherName);
+	tmpOtherName);
+
+@If(tmpChoice = 1 | tmpChoice = ""; @Return(0);"");
+
+entername := @If(tmpChoice = tmpOtherName; ""; tmpChoice);
+
+@Command([OpenCalendar]; entername; [UseFrameset])</formula></code><code event='hidewhen'><formula
+>@Environment("OEMClient") = "1" | @GetViewInfo([IsSideCalendar])</formula></code></action>
+<action title='Tools\Calendar Cleanup...' hide='web mobile'><code event='click'><formula
+>@Command([ToolsRunMacro];"CalClean")</formula></code><code event='hidewhen'><formula
+>mailowner:=@GetProfileField("calendarprofile";"Owner");
+deleteaccess:=@Text(@UserAccess( @DbName ;[DeleteDocuments]));
+accesslevel:=@Text(@UserAccess( @DbName ));
+isowner:=@If(@Name([Abbreviate];@UserName) = @Name([Abbreviate];mailowner);"1";"0");
+
+@If(@Version &lt; "251";@True;@False) |
+@If(deleteaccess!="0";
+ @If(isowner="1";
+  @If(accesslevel &gt;= "4";@False;@True);
+  accesslevel = "6";@False;@True);
+ @Return(@True))</formula></code></action>
+<action title='Calendar Format\One Day' showinmenu='false' hide='notes'><code
+ event='click'><formula>@Command([CalendarFormat]; "1")</formula></code></action>
+<action title='Calendar Format\Two Days' showinmenu='false' hide='notes'><code
+ event='click'><formula>@Command([CalendarFormat]; "2")</formula></code></action>
+<action title='Calendar Format\One Week' showinmenu='false' hide='notes'><code
+ event='click'><formula>@Command([CalendarFormat]; "7")</formula></code></action>
+<action title='Calendar Format\Two Weeks' showinmenu='false' hide='notes'><code
+ event='click'><formula>@Command([CalendarFormat]; "14")</formula></code></action>
+<action title='Calendar Format\One Month' showinmenu='false' hide='notes'><code
+ event='click'><formula>@Command([CalendarFormat]; "30")</formula></code></action>
+<action title='Display\Chair...' hide='web mobile'><code event='click'><formula
+>REM {tell the dialog which filter text to display...};
+ENVIRONMENT CalFilter := "Chair";
+
+xxTitle := "Filter Calendar by Chair";
+@DialogBox("(CalendarFilters)"; [AutoVertFit] : [AutoHorzFit] : [NoCancel] : [NoFieldUpdate] : [SizeToTable] : [NoOkCancel] : [NoNote]; xxTitle);
+
+
+REM {get the choice off of the colorprofile and tell the view what the user wanted to filter by...};
+choice := @Environment("CalFilter_Chair");
+HitOk := @Environment("CalFilter");
+
+@If(HitOk != ""; @SetViewInfo([SetViewFilter]; choice; "$153"; FALSE; 0); "")</formula></code><code
+ event='hidewhen'><formula>@If(@IsUsingJavaElement;@Return(@True);@False);
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(@TextToNumber(@Version) &lt; 258;@True;@False) |
+@If((tmpLevel &lt;=2 &amp; tmpWrite="0"); @True; @False)</formula></code><code
+ event='parentlabel'><formula>"Filter by"</formula></code></action>
+<action title='Display\Type...' hide='web mobile'><code event='click'><formula
+>REM {tell the dialog which filter text to display...};
+ENVIRONMENT CalFilter := "Type";
+
+xxTitle := "Filter Calendar by Type";
+@DialogBox("(CalendarFilters)"; [AutoVertFit] : [AutoHorzFit] : [NoCancel] : [NoFieldUpdate] : [SizeToTable] : [NoOkCancel] : [NoNote]; xxTitle);
+
+
+REM {get the choice off of the colorprofile and tell the view what the user wanted to filter by...};
+choice := @Environment("CalFilter_Type");
+HitOk := @Environment("CalFilter");
+sortchoice := @If( choice = "Meeting"; "3"; choice = "Appointment"; "0"; choice = "All Day Event"; "2"; choice = "Anniversary";  "1";  choice = "Reminder"; "4"; choice = "To Do"; "To Do"; "");
+
+REM {use status column to filter on To Do's, else filter on ApptType column};
+@If(HitOk != "";
+	@If(sortchoice = "To Do";
+		@SetViewInfo([SetViewFilter]; sortchoice; "$152"; FALSE; 1);
+	@SetViewInfo([SetViewFilter]; sortchoice; "$152"; FALSE; 1));
+"")</formula></code><code event='hidewhen'><formula>@If(@IsUsingJavaElement;@Return(@True);@False);
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(@TextToNumber(@Version) &lt; 258;@True;@False) |
+@If((tmpLevel &lt;=2 &amp; tmpWrite="0"); @True; @False)</formula></code></action>
+<action title='Display\Status...' hide='web mobile'><code event='click'><formula
+>REM {tell the dialog which filter text to display...};
+ENVIRONMENT CalFilter := "Status";
+
+xxTitle := "Filter Calendar by Status";
+@DialogBox("(CalendarFilters)"; [AutoVertFit] : [AutoHorzFit] : [NoCancel] : [NoFieldUpdate] : [SizeToTable] : [NoOkCancel] : [NoNote]; xxTitle);
+
+
+REM {get the choice off of the colorprofile and tell the view what the user wanted to filter by...};
+choice := @Environment("CalFilter_Status");
+HitOk := @Environment("CalFilter");
+
+@If(HitOk != ""; @SetViewInfo([SetViewFilter]; choice; "$160"; FALSE; 1); "")</formula></code><code
+ event='hidewhen'><formula>@If(@IsUsingJavaElement;@Return(@True);@False);
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(@TextToNumber(@Version) &lt; 258;@True;@False) |
+@If((tmpLevel &lt;=2 &amp; tmpWrite="0"); @True; @False)</formula></code></action>
+<action title='Display\Private' hide='web mobile'><code event='click'><formula
+>REM {Filter by Private
+the 1 is what will match in the $154 column with private entries.  0 are public};
+@SetViewInfo([SetViewFilter]; "1"; "$154"; FALSE; 0)</formula></code><code
+ event='hidewhen'><formula>@If(@IsUsingJavaElement;@Return(@True);@False);
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+mailowner:=@GetProfileField("calendarprofile";"Owner");
+
+@If(@TextToNumber(@Version) &lt; 258;@True;@False) |
+@If(@Name([Abbreviate];@UserName) != @Name([Abbreviate];mailowner); @True; @False)</formula></code></action>
+<action title='Filter by\Chair' hide='web' align='right'><code event='click'><formula
+>REM {tell the dialog which filter text to display...};
+ENVIRONMENT CalFilter := "Chair";
+
+xxTitle := "Filter Calendar by Chair";
+@DialogBox("(CalendarFilters)"; [AutoVertFit] : [AutoHorzFit] : [NoCancel] : [NoFieldUpdate] : [SizeToTable] : [NoOkCancel] : [NoNote]; xxTitle);
+
+
+REM {get the choice off of the colorprofile and tell the view what the user wanted to filter by...};
+choice := @Environment("CalFilter_Chair");
+HitOk := @Environment("CalFilter");
+
+@If(HitOk != ""; @SetViewInfo([SetViewFilter]; choice; "$153"; FALSE; 0;"You are seeing: meetings by chair"); "")</formula></code><code
+ event='hidewhen'><formula>@If(!@IsUsingJavaElement;@Return(@True);@False);
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(@TextToNumber(@Version) &lt; 303;@True;@False) |
+@If((tmpLevel &lt;=2 &amp; tmpWrite="0"); @True; @False)</formula></code></action>
+<action title='Filter by\Type' hide='web' align='right'><code event='click'><formula
+>REM {tell the dialog which filter text to display...};
+ENVIRONMENT CalFilter := "Type";
+
+xxTitle := "Filter Calendar by Type";
+@DialogBox("(CalendarFilters)"; [AutoVertFit] : [AutoHorzFit] : [NoCancel] : [NoFieldUpdate] : [SizeToTable] : [NoOkCancel] : [NoNote]; xxTitle);
+
+
+REM {get the choice off of the colorprofile and tell the view what the user wanted to filter by...};
+choice := @Environment("CalFilter_Type");
+HitOk := @Environment("CalFilter");
+sortchoice := @If( choice = "Meeting"; "3"; choice = "Appointment"; "0"; choice = "All Day Event"; "2"; choice = "Anniversary";  "1";  choice = "Reminder"; "4"; choice = "To Do"; "To Do"; "");
+
+REM {use status column to filter on To Do's, else filter on ApptType column};
+@If(HitOk != "";
+	@If(sortchoice = "To Do";
+		@SetViewInfo([SetViewFilter]; sortchoice; "$152"; FALSE; 1;"You are seeing: entries by type");
+	@SetViewInfo([SetViewFilter]; sortchoice; "$152"; FALSE; 1;"You are seeing: entries by type"));
+"")</formula></code><code event='hidewhen'><formula>@If(!@IsUsingJavaElement;@Return(@True);@False);
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(@TextToNumber(@Version) &lt; 303;@True;@False) |
+@If((tmpLevel &lt;=2 &amp; tmpWrite="0"); @True; @False)</formula></code></action>
+<action title='Filter by\Status' hide='web' align='right'><code event='click'><formula
+>REM {tell the dialog which filter text to display...};
+ENVIRONMENT CalFilter := "Status";
+
+xxTitle := "Filter Calendar by Status";
+@DialogBox("(CalendarFilters)"; [AutoVertFit] : [AutoHorzFit] : [NoCancel] : [NoFieldUpdate] : [SizeToTable] : [NoOkCancel] : [NoNote]; xxTitle);
+
+
+REM {get the choice off of the colorprofile and tell the view what the user wanted to filter by...};
+choice := @Environment("CalFilter_Status");
+HitOk := @Environment("CalFilter");
+
+@If(HitOk != ""; @SetViewInfo([SetViewFilter]; choice; "$160"; FALSE; 1;"You are seeing: entries by status"); "")</formula></code><code
+ event='hidewhen'><formula>@If(!@IsUsingJavaElement;@Return(@True);@False);
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(@TextToNumber(@Version) &lt; 303;@True;@False) |
+@If((tmpLevel &lt;=2 &amp; tmpWrite="0"); @True; @False)</formula></code></action>
+<action title='Filter by\Private' hide='web' align='right'><code event='click'><formula
+>REM {Filter by Private
+the 1 is what will match in the $154 column with private entries.  0 are public};
+@SetViewInfo([SetViewFilter]; "1"; "$154"; FALSE; 0;"You are seeing: private entries")</formula></code><code
+ event='hidewhen'><formula>@If(!@IsUsingJavaElement;@Return(@True);@False);
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+mailowner:=@GetProfileField("calendarprofile";"Owner");
+
+@If(@TextToNumber(@Version) &lt; 303;@True;@False) |
+@If(@Name([Abbreviate];@UserName) != @Name([Abbreviate];mailowner); @True; @False)</formula></code></action>
+<action title='Filter by\None' hide='web' align='right'><code event='click'><formula
+>@SetViewInfo([SetViewFilter];"";"$147";FALSE)</formula></code><code event='hidewhen'><formula
+>@If(@IsError(@IsUsingJavaElement);@Return(@True);!@IsUsingJavaElement;@Return(@True);@False);
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+mailowner:=@GetProfileField("calendarprofile";"Owner");
+
+@If(@TextToNumber(@Version) &lt; 303;@True;@False) |
+@If(@Name([Abbreviate];@UserName) != @Name([Abbreviate];mailowner); @True; @False)</formula></code></action>
+<action title='Tools\Unfilter' hide='web mobile'><code event='click'><formula
+>@SetViewInfo([SetViewFilter];"";"$147";FALSE)</formula></code><code event='hidewhen'><formula
+>@If(@IsUsingJavaElement;@Return(@True);@False);
+OkToShow := @If(@Version &lt; @Text(258);  0; @GetViewInfo([IsViewFiltered]); 1; 0);
+
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(OkToShow = 0;@True;@False) |
+@If((tmpLevel &lt;=2 &amp; tmpWrite="0"); @True; @False)</formula></code><code
+ event='parentlabel'><formula>"More"</formula></code></action>
+<action title='Tools\Help' showinmenu='false' hide='notes' targetframe='_top'><code
+ event='click'><formula>@Command([OpenPage];"WebHelp")</formula></code></action>
+<action title='rt click - Cut' showinmenu='false' showinbar='false' showinrightbuttonmenu='true'
+ hide='web' systemcommand='cut'><imageref name='tb_16_cut_n.gif'/><code event='hidewhen'><formula
+>@If(AppointmentType="3";@True;@False)</formula></code><code event='label'><formula
+>"Cu_t" + @Char(9) + "Ctrl+X"</formula></code></action>
+<action title='rt click - Copy' showinmenu='false' showinbar='false' showinrightbuttonmenu='true'
+ hide='web' systemcommand='copy'><imageref name='tb_16_copy_n.gif'/><code
+ event='hidewhen'><formula>@If(AppointmentType="3";@True;@False)</formula></code><code
+ event='label'><formula>"_Copy" + @Char(9) + "Ctrl+C"</formula></code></action>
+<action title='rt click - Paste' showinmenu='false' showinbar='false' showinrightbuttonmenu='true'
+ hide='web' systemcommand='paste'><imageref name='tb_16_paste_n.gif'/><code
+ event='hidewhen'><formula>@If(AppointmentType="3";@True;@False)</formula></code><code
+ event='label'><formula>"P_aste" + @Char(9) + "Ctrl+V"</formula></code></action>
+<action title='rt click - Menu Separator' showinmenu='false' showinbar='false'
+ showinrightbuttonmenu='true' hide='preview previewedit web' displaytype='menuseparator'/>
+<action title='rt click - Menu Separator' showinmenu='false' showinbar='false'
+ showinrightbuttonmenu='true' hide='preview previewedit web' displaytype='menuseparator'/>
+<action title='rt click - Forward' icon='7' showinmenu='false' showinbar='false'
+ showinrightbuttonmenu='true' hide='web'><code event='click'><formula>@Command([MailForward])</formula></code><code
+ event='label'><formula>"F_orward"</formula></code></action>
+<action title='Copy Into New \rt click - Copy Into New Message' showinmenu='false'
+ showinbar='false' showinrightbuttonmenu='true' hide='preview read edit previewedit web'><code
+ event='click'><formula>@Command([ToolsRunMacro]; "(CopyIntoMessageAction)")</formula></code><code
+ event='hidewhen'><formula>REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(@TextToNumber(@Version) &lt; 174;@True;@False) | @If((tmpLevel &lt;= 2 &amp; tmpWrite="0"); @True; @False) | tmpLevel=0</formula></code><code
+ event='label'><formula>"Message"</formula></code><code event='parentlabel'><formula
+>"Cop_y Into New "</formula></code></action>
+<action title='Copy Into New \rt click - Copy Into New Calendar Entry' showinmenu='false'
+ showinbar='false' showinrightbuttonmenu='true' hide='preview read edit previewedit web'><code
+ event='click'><formula>@Command([ToolsRunMacro];"(CopyIntoCalendarEntryAction)")</formula></code><code
+ event='hidewhen'><formula>REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(@TextToNumber(@Version) &lt; 174;@True;@False) | @If((tmpLevel &lt;= 2 &amp; tmpWrite="0"); @True; @False)</formula></code><code
+ event='label'><formula>"Calendar Entry"</formula></code></action>
+<action title='Copy Into New \rt click - Copy Into New To Do' showinmenu='false'
+ showinbar='false' showinrightbuttonmenu='true' hide='preview read edit previewedit web'><code
+ event='click'><formula>@Command([ToolsRunMacro];"(CopyIntoToDoAction)")</formula></code><code
+ event='hidewhen'><formula>REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(@TextToNumber(@Version) &lt; 174;@True;@False) | @If((tmpLevel &lt;= 2 &amp; tmpWrite="0"); @True; @False)</formula></code><code
+ event='label'><formula>"To Do"</formula></code></action>
+<action title='rt click - Menu Separator' showinmenu='false' showinbar='false'
+ showinrightbuttonmenu='true' hide='preview previewedit web' displaytype='menuseparator'/>
+<action title='rt click - Print...' icon='98' showinmenu='false' showinbar='false'
+ showinrightbuttonmenu='true' hide='web' systemcommand='print'><code event='label'><formula
+>"_Print..." + @Char(9) + "Ctrl+P"</formula></code></action>
+<action title='rt click - Open in New Window' showinmenu='false' showinbar='false'
+ showinrightbuttonmenu='true' hide='web' systemcommand='openinnewwindow'><code
+ event='label'><formula>"Ope_n in New Window"</formula></code></action>
+<action title='rt click - Menu Separator' showinmenu='false' showinbar='false'
+ showinrightbuttonmenu='true' hide='preview previewedit web' displaytype='menuseparator'/>
+<action title='rt click - Delete' showinmenu='false' showinbar='false' showinrightbuttonmenu='true'
+ hide='web' systemcommand='delete'><imageref name='noSoftDelete.gif'/><code
+ event='hidewhen'><formula>@If(@DocLength=0; @Return(@True); @False);
+
+REM; "Check for users with read/write public access";
+tmpLevel := @TextToNumber(@Subset(@UserAccess(@DbName); 1));
+tmpRead := @Subset(@UserAccess(@DbName); -2);
+tmpWrite := @Subset(@UserAccess(@DbName); -1);
+
+@If(tmpLevel &lt;=2 &amp; tmpWrite="0";@Return(@True);@False);
+
+Iscancel:=@If(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon = 81;@True;@False);
+IsNonMeeting:=@If(AppointmentType !="3";@True;@False);
+@If(IsNonMeeting=@True | IsCancel = @True; @Return(@False);@True)</formula></code><code
+ event='label'><formula>"_Delete" + @Char(9) + "Del"</formula></code></action></actionbar>
+<column sort='ascending' hidedetailrows='false' itemname='$134' width='9.5000'
+ resizable='false' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' hidden='true' extattrs='$STARTDATE$=true'><font size='9pt'
+ color='blue'/><columnheader><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ show='datetime' date='yearmonthday' time='hourminutesecond' zone='never'
+ dateformat='weekdaymonthdayyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='/'
+ dateseparator3='/' timeseparator=':' preference='usersetting'/><numberformat
+ format='general' varying='true' punctuated='false' parens='false' percent='false'
+ bytes='false' decimalsym='.' thousandssep=',' currencysymtype='custom' currencysym='$'
+ usecustomsym='false'/><code event='value'><formula>StartTime :=@Time(CalendarDateTime);
+Datelist:= @If(AppointmentType="2";@Explode(@TextToTime(@Text(StartDateTime) + "-" + @Text(EndDateTime))) ;
+@Explode(@TextToTime(@Text(CalendarDateTime) + "-" + @Text(EndDateTime))) );
+
+@If(@IsAvailable($CSVersion) &amp; @IsAvailable(TaskType); @TextToTime(@Text(DateList)+ " " + @Text(@Time(CalendarDateTime))); AppointmentType = "0":"1":"2":"3":"4";CalendarDateTime;@TextToTime(@Text(DateList) + " " + @Text(StartTime)))</formula></code></column>
+<column hidedetailrows='false' itemname='$135' width='6.8750' resizable='false'
+ separatemultiplevalues='true' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ hidden='true' extattrs='$DURATION$=true'><font size='9pt'/><columnheader
+><font size='9pt' name='multilingual'/></columnheader><code event='value'><formula
+>@If(AppointmentType = "0": "3"; (EndDateTime - StartDateTime) / 60; 0)</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='$126' width='5.2500'
+ resizable='false' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' hidden='true' extattrs='$EVENTTYPE$=true'><font size='9pt'/><columnheader
+><font size='9pt' name='multilingual'/></columnheader><numberformat format='general'
+ varying='true' punctuated='false' parens='false' percent='false' bytes='false'
+ decimalsym='.' thousandssep=',' currencysymtype='custom' currencysym='$'
+ usecustomsym='false'/><code event='value'><formula>section := @Left(OrgTable; 1);
+@If(section = "T";
+     0;
+section = "P";
+     1;
+section = "A" | @IsAvailable($SrvrHldy) | (@IsAvailable(Type) &amp; Type="Holiday");
+     2;
+9)</formula></code></column>
+<column hidedetailrows='false' itemname='$155' width='2.1250' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ showascolor='true' hidden='true' extattrs='$HEXSTRINGCOLOR$=true'><columnheader
+ title='color2 (hidden)'><font size='9pt'/></columnheader><code event='value'><formula
+>REM {this color column is used only if the user has not saved their mail preferences};
+meeting := 193:221:249:42:107:171;
+appointment := 194:247:159:52:100:16;
+reminder := 255:210:138:201:95:0;
+event := 254:248:198:201:95:0;
+anniversary := 215:180:242:146:88:192;
+todo := 255:243:138:229:119:0;
+ghost := 230:230:230:64:64:64;
+cancel := 216:136:112:0:0:0;
+@If(@LowerCase(form) = "task"; todo;
+@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon != 81 | ($GhostedCalendarEntry = "1" &amp; !Form="Appointment" &amp; !Form="Notice"); ghost;
+@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon = 81; cancel;
+AppointmentType = "0"; appointment;
+AppointmentType = "1"; anniversary;
+AppointmentType = "2"; event;
+AppointmentType = "3"; meeting;
+AppointmentType = "4"; reminder; "")</formula></code></column>
+<column hidedetailrows='false' itemname='$Cal' width='14.3750' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ showascolor='true' userdefinable='true' profiledocname='CalColorProfile'
+ hidden='true' extattrs='$RGBCOLOR$=true'><font size='9pt'/><columnheader
+ title='ColorColumn(Hidden)'><font size='9pt' name='multilingual'/></columnheader><numberformat
+ format='fixed' punctuated='false' parens='false' percent='false' bytes='false'
+ decimalsym='.' thousandssep=',' currencysymtype='custom' currencysym='$'
+ usecustomsym='false'/><code event='value'><formula>@UserName</formula></code></column>
+<column hidedetailrows='false' itemname='$149' width='1.8750' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ showasicons='true' extattrs='$ICON$=true'><font size='9pt'/><columnheader
+ title='Icon'><font size='9pt' name='multilingual'/></columnheader><code event='value'><formula
+>CSisPrivate := @If(@IsUnavailable($PublicAccess) &amp; @IsAvailable($CSVersion);"1";"0");
+
+IconsToShow := @If(
+CSIsPrivate = "1"; 164;
+(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon != 81); 187;
+(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon = 81); _ViewIcon;
+(ApptUNIDURL!="" &amp; OnlineMeeting="1") | SametimeType="1";70;
+	(AppointmentType = "3"  &amp;  ( !@IsAvailable($BusyPriority) &amp; !@IsAvailable(PostedDate))); 58;
+	(Form = "Task" &amp; DueState = 9); 82;
+	(TaskType = "2"  &amp;  !@IsAvailable(_ViewIcon)); 58;
+	Form = "Task" &amp; duestate = 0; 90 ;
+	OrgConfidential = "1"; 61;
+	AppointmentType="4"; _ViewIcon;
+	AppointmentType="1";199;
+	(AppointmentType != "1" &amp; BookFreeTime = "1"); 12;!@IsAvailable(_ViewIcon);0;
+ _ViewIcon);
+
+ICS2 := @If(
+@Version &lt; @Text(300); IconsToShow;
+(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon != 81); 187;
+OrgConfidential = "1"; 206;
+IconsToShow = 9; 194;
+IconsToShow = 10; 195;
+IconsToShow = 33; 196;
+IconsToShow = 38; 197;
+IconsToShow = 39; 198;
+IconsToShow = 63; 199;
+IconsToShow = 70; 189;
+IconsToShow = 81; 200;
+IconsToShow = 82; 201;
+IconsToShow = 83; 202;
+IconsToShow = 84; 203;
+IconsToShow= 133; 212;
+IconsToShow=150; 204;
+IconsToShow= 158; 210;
+IconsToShow= 160; 205;
+IconsToShow= 164; 206;
+IconsToShow= 166; 207;
+IconsToShow= 169; 208;
+IconsToShow= 170; 209;
+IconsToShow);
+
+Col2 := @If(
+Importance = "1"; 150;
+(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon != 81) &amp; OrgConfidential = "1"; 206;
+0);
+
+Col2Icon :=  @If(@Version &lt; @Text(300); Col2;
+Col2 = 150; 204; Col2);
+
+ics2 : col2Icon</formula></code><code event='hidewhen'><formula>@If(@GetViewInfo([IsCalendarPrintingCal]);@Return(@False);@GetViewInfo([IsCalendarSummarized]);@Return(@True);
+@IsUsingJavaElement &amp; @GetViewInfo([IsSideCalendar]) &amp; @GetViewInfo([IsCalendarSummarized]); @Return(@True);
+@IsUsingJavaElement &amp; @GetViewInfo([CalendarViewFormat])=30;@Return(@True);@False)</formula></code></column>
+<column hidedetailrows='false' listseparator='space' itemname='$157' width='3'
+ resizable='false' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' hidden='true' extattrs='$STARTTIMEZONE$=true'><font size='9pt'
+ color='blue'/><columnheader title='STZ  ( hidden )'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='time' date='yearmonthday' time='hourminute' zone='never'/><code
+ event='value'><formula>StartTimeZone</formula></code><code event='hidewhen'
+ enabled='false'><formula>!@GetViewInfo([IsCalendarPrintingCal]) &amp; ( @GetViewInfo([IsCalViewTimeSlotOn]) = 1 | (@GetViewInfo([CalendarViewFormat]) = 30 &amp;
+!@GetViewInfo([IsCalendarSummarized])) )</formula></code></column>
+<column hidedetailrows='false' listseparator='space' itemname='$158' width='3'
+ resizable='false' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' hidden='true' extattrs='$ENDTIMEZONE$=true'><font size='9pt'
+ color='blue'/><columnheader title='ETZ  ( hidden )'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='time' date='yearmonthday' time='hourminute' zone='never'/><code
+ event='value'><formula>EndTimeZone</formula></code><code event='hidewhen'
+ enabled='false'><formula>!@GetViewInfo([IsCalendarPrintingCal]) &amp; ( @GetViewInfo([IsCalViewTimeSlotOn]) = 1 | (@GetViewInfo([CalendarViewFormat]) = 30 &amp;
+!@GetViewInfo([IsCalendarSummarized])) )</formula></code></column>
+<column hidedetailrows='false' listseparator='space' itemname='$144' width='6'
+ resizable='false' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' extattrs='$mergedColumn=true,$STARTTIME$=true'><font
+ size='9pt' color='blue'/><columnheader title='Time'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='time' date='yearmonthday' time='hourminute' zone='never'/><code
+ event='value'><formula>REM {if this a repeating ghost, you can't use SDT and EDT.   
+Use CDT for SDT and (CDT + duration) for EDT
+};
+@If(Form="Notice"  &amp; OrgRepeat="1";
+	(CalendarDateTime);
+	@If(AppointmentType = "0":"3":"4"; StartDateTime;""))</formula></code><code
+ event='hidewhen'><formula>@If(@GetViewInfo([IsCalendarPrintingCal]);@Return(@False);@True);
+@If(@IsUsingJavaElement &amp; @GetViewInfo([IsSideCalendar]) &amp; !@GetViewInfo([IsCalendarSummarized]); @Return(@True); @False) |
+@If(@IsUsingJavaElement &amp; @GetViewInfo([CalendarViewFormat])=30;@Return(@False);
+@IsUsingJavaElement &amp; (@GetViewInfo([CalendarViewFormat]) = 7) &amp; !@GetViewInfo([IsCalendarSummarized]); @Return(@True); @False) |
+!@GetViewInfo([IsCalendarPrintingCal]) &amp; ( @GetViewInfo([IsCalViewTimeSlotOn]) = 1 | (@GetViewInfo([CalendarViewFormat]) = 30 &amp;
+!@GetViewInfo([IsCalendarSummarized])))</formula></code></column>
+<column hidedetailrows='false' itemname='$145' width='1' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ extattrs='$merge=1,$DASH$=true'><font size='9pt'/><columnheader align='center'
+ title='-'><font size='9pt' name='multilingual'/></columnheader><code event='value'><formula
+>@If(AppointmentType = "0":"3"; "-";"")</formula></code><code event='hidewhen'><formula
+>@If(@GetViewInfo([IsCalendarPrintingCal]);@Return(@False);@True);
+@If(@IsUsingJavaElement &amp; @GetViewInfo([IsSideCalendar]) &amp; @GetViewInfo([IsCalendarSummarized]); @Return(@True); @False) |
+@If(@IsUsingJavaElement &amp; (@GetViewInfo([CalendarViewFormat]) = 7) &amp; !@GetViewInfo([IsCalendarSummarized]); @Return(@True); @False) |
+!@GetViewInfo([IsCalendarPrintingCal]) &amp; ( @GetViewInfo([IsCalViewTimeSlotOn]) = 1 | (@GetViewInfo([CalendarViewFormat]) = 30 &amp;
+!@GetViewInfo([IsCalendarSummarized])))</formula></code></column>
+<column hidedetailrows='false' listseparator='space' itemname='$146' width='6'
+ resizable='false' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' extattrs='$merge=2,$ENDTIME$=true'><font size='9pt' color='blue'/><columnheader
+ title='End'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='time' date='yearmonthday' time='hourminute' zone='never'/><code
+ event='value'><formula>REM {if this a repeating ghost, you can't use SDT and EDT.   
+Use CDT for SDT and (CDT + duration) for EDT
+};
+duration := @If(AppointmentType = "0": "3"; (EndDateTime - StartDateTime) / 60; 0);
+
+@If(Form="Notice" &amp; OrgRepeat="1";
+	(@Adjust(CalendarDateTime; 0; 0; 0; 0; duration; 0));
+	@If(AppointmentType = "0":"3"; EndDateTime;""))</formula></code><code event='hidewhen'><formula
+>@If(@GetViewInfo([IsCalendarPrintingCal]);@Return(@False);@True);
+@If(@IsUsingJavaElement &amp; @GetViewInfo([IsSideCalendar]) &amp; @GetViewInfo([IsCalendarSummarized]); @Return(@True); @False) |
+@If(@IsUsingJavaElement &amp; (@GetViewInfo([CalendarViewFormat]) = 7) &amp; !@GetViewInfo([IsCalendarSummarized]); @Return(@True); @False) |
+!@GetViewInfo([IsCalendarPrintingCal]) &amp; ( @GetViewInfo([IsCalViewTimeSlotOn]) = 1 | (@GetViewInfo([CalendarViewFormat]) = 30 &amp;
+!@GetViewInfo([IsCalendarSummarized])))</formula></code></column>
+<column hidedetailrows='false' itemname='SametimeInfo' width='10' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ hidden='true' extattrs='$SAMETIMEINFO$=true' publish='SelectedEmailAddressChanged'><font
+ size='9pt' color='blue'/><columnheader title='SametimeInfo'><font size='9pt'/></columnheader><code
+ event='value'><formula>@If(AppointmentType="3" | TaskType="2";@Name([Abbreviate];chair);"")</formula></code></column>
+<column hidedetailrows='false' itemname='$161' width='5.6250' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ extattrs='$ICON2$=true'><font size='9pt'/><columnheader title='Icon'><font
+ size='9pt' name='multilingual'/></columnheader><code event='value'><formula
+>CSisPrivate := @If(@IsUnavailable($PublicAccess) &amp; @IsAvailable($CSVersion);"1";"0");
+
+IconsToShow := @If(
+CSIsPrivate = "1"; 164;
+(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon != 81); 187;
+(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon = 81); _ViewIcon;
+(ApptUNIDURL!="" &amp; OnlineMeeting="1");70;
+	(AppointmentType = "3"  &amp;  ( !@IsAvailable($BusyPriority) &amp; !@IsAvailable(PostedDate))); 58;
+	(Form = "Task" &amp; DueState = 9); 82;
+	(TaskType = "2"  &amp;  !@IsAvailable(_ViewIcon)); 58;
+	Form = "Task" &amp; duestate = 0; 90 ;
+	OrgConfidential = "1"; 61;
+	AppointmentType="4"; _ViewIcon;
+	AppointmentType="1";199;
+	(AppointmentType != "1" &amp; BookFreeTime = "1"); 12;!@IsAvailable(_ViewIcon);0;
+ _ViewIcon);
+
+ICS2 := @If(
+@Version &lt; @Text(300); IconsToShow;
+(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon != 81); 187;
+OrgConfidential = "1"; 206;
+IconsToShow = 9; 194;
+IconsToShow = 10; 195;
+IconsToShow = 33; 196;
+IconsToShow = 38; 197;
+IconsToShow = 39; 198;
+IconsToShow = 63; 199;
+IconsToShow = 70; 189;
+IconsToShow = 81; 200;
+IconsToShow = 82; 201;
+IconsToShow = 83; 202;
+IconsToShow = 84; 203;
+IconsToShow= 133; 212;
+IconsToShow=150; 204;
+IconsToShow= 158; 210;
+IconsToShow= 160; 205;
+IconsToShow= 164; 206;
+IconsToShow= 166; 207;
+IconsToShow= 169; 208;
+IconsToShow= 170; 209;
+IconsToShow);
+
+Col2 := @If(
+Importance = "1"; 150;
+(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon != 81) &amp; OrgConfidential = "1"; 206;
+0);
+
+Col2Icon :=  @If(@Version &lt; @Text(300); Col2;
+Col2 = 150; 204; Col2);
+
+ics2 : col2Icon</formula></code><code event='hidewhen'><formula>@If(@ClientType = "Notes"; @False;@Return(@True));
+@If(@IsUsingJavaElement &amp; @GetViewInfo([IsSideCalendar]) &amp; @GetViewInfo([IsCalendarSummarized]);@Return(@True);@False);
+@If(!@GetViewInfo([IsCalendarSummarized]); @Return(@True);@False)</formula></code></column>
+<column hidedetailrows='false' listseparator='newline' itemname='$147' width='18'
+ resizable='false' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' editable='true' extwindowwidth='true' viewisnarrow='wrapsecondrow'
+ extattrs='showFirstRowBold = true,$AGGREGATEDSUBJECT$=true,$DisplayName=true'
+ publish='SelectedSubjectChanged'><font size='9pt' color='blue'/><columnheader
+ title='Subject'><font size='9pt' name='multilingual'/></columnheader><columnnamesformat
+ showonline='true' columncontainsname='false' columnname='SametimeInfo' verticalorientation='bottom'/><code
+ event='value'><formula>REM {variables to translate};};
+xxInvitation:="Invitation";
+xxReschedule:="Reschedule";
+xxCancellation:="Cancellation";
+xxUpdate:="Update";
+xxConfirmed:="Confirmed";
+xxColonSpace:=": ";
+xxNotice:="Notice";
+REM {END variables to translate};
+
+xxRoom:= @If(AppointmentType != "3"; ""; @Length(Room); @Name([Abbreviate];@Subset(Room;1));"");
+xxLocation := @If(@Length(@Trim(Location)) &gt;= 1;Location; "");
+xxChair := @If(AppointmentType = "3";  @Name([CN];Chair); TaskType = "2"; @Name([CN];Chair);"");
+xxPrefix := @If(NoticeType = "I"; xxInvitation + xxColonSpace; NoticeType = "U"; xxReschedule + xxColonSpace; NoticeType = "C"; xxCancellation + xxColonSpace;NoticeType = "S" ; xxUpdate + xxColonSpace; NoticeType = "N"; xxConfirmed + xxColonSpace ; "" );
+
+@If(@IsAvailable(Topic) &amp; @IsAvailable(CalendarDateTime) &amp; Form = xxNotice &amp; _ViewIcon != 81; @Trim((xxPrefix +" " +Topic): xxRoom: xxLocation : xxChair);
+@Trim(Subject : xxRoom : xxLocation : xxChair))</formula></code><code event='hidewhen'><formula
+>TemplateLang := "en";
+@If(@ClientType = "Notes"; @LocationGetInfo([NamePreference]) = "1"; @False)</formula></code></column>
+<column hidedetailrows='false' listseparator='newline' itemname='$151' width='18'
+ resizable='false' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' editable='true' hideinr5='true' extwindowwidth='true'
+ viewisnarrow='wrapsecondrow' extattrs='showFirstRowBold = true,$AGGREGATEDSUBJECT2$=true'><font
+ size='9pt' color='blue'/><columnheader title='Subject'><font size='9pt' name='multilingual'/></columnheader><columnnamesformat
+ showonline='true' columncontainsname='false' columnname='SametimeInfo' verticalorientation='bottom'/><code
+ event='value'><formula>REM {variables to translate};};
+xxInvitation:="Invitation";
+xxReschedule:="Reschedule";
+xxCancellation:="Cancellation";
+xxUpdate:="Update";
+xxConfirmed:="Confirmed";
+xxColonSpace:=": ";
+xxNotice:="Notice";
+REM {END variables to translate};
+REM {This column is an alternative column for alternate names};
+REM {The variable TemplateLang should much the language of the template.};
+REM {For example, en for English, de for German, and ja for Japanese.};
+REM {The variable in the hide column when formula in both Description columns should be same.};
+TemplateLang := "en";
+
+bUseAltChair := @IsMember($LangChair; TemplateLang);
+tmpChair := @Name([CN]; @If(bUseAltChair &amp; (AltChair != "") &amp; (AltChair != Chair); AltChair; Chair));
+xxRoom:= @If(AppointmentType != "3"; ""; @Length(Room); @Name([Abbreviate];@Subset(Room;1));"");
+xxLocation := @If(@Length(@Trim(Location)) &gt;= 1;Location; "");
+xxChair := @If(AppointmentType = "3"; tmpChair; TaskType = "2"; tmpChair;"");
+xxPrefix := @If(NoticeType = "I"; xxInvitation + xxColonSpace; NoticeType = "U"; xxReschedule + xxColonSpace; NoticeType = "C"; xxCancellation + xxColonSpace;NoticeType = "S" ; xxUpdate + xxColonSpace; NoticeType = "N"; xxConfirmed + xxColonSpace ; "" );
+
+@If(@IsAvailable(Topic) &amp; @IsAvailable(CalendarDateTime) &amp; Form = xxNotice &amp; _ViewIcon != 81; @Trim((xxPrefix +" " +Topic): xxRoom: xxLocation : xxChair);
+@Trim(Subject : xxRoom : xxLocation : xxChair))</formula></code><code event='hidewhen'><formula
+>TemplateLang := "en";
+@If(@ClientType = "Notes"; @LocationGetInfo([NamePreference]) != "1"; @True)</formula></code></column>
+<column hidedetailrows='false' itemname='$152' width='10' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ hidden='true' extattrs='$APPOINTMENTTYPE$=true'><columnheader title='AppointmentType'><font
+ size='9pt' name='multilingual'/></columnheader><code event='value'><formula
+>@If(@IsAvailable(TaskType);"To Do";AppointmentType)</formula></code></column>
+<column hidedetailrows='false' itemname='$153' width='10.3750' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ hidden='true' extattrs='$CHAIR$=true' publish='SelectedNameChanged'><columnheader
+ title='Chair'><font size='9pt' name='multilingual'/></columnheader><code
+ event='value'><formula>@Name([CN];Chair)</formula></code></column>
+<column hidedetailrows='false' itemname='$154' width='1' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ hidden='true' extattrs='$CONFIDENTIAL$=true'><columnheader><font size='9pt'
+ style='bold'/></columnheader><code event='value'><formula>@If(OrgConfidential = "1";1;0)</formula></code></column>
+<column hidedetailrows='false' itemname='$160' width='10' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ hidden='true' extattrs='$STATUS$=true'><columnheader title='status'><font
+ size='9pt'/></columnheader><code event='value'><formula>@If(@IsAvailable(CalendarDateTime) &amp; Form = "Notice" &amp; _ViewIcon != 81;"Ghosts";AppointmentType = "3"  &amp;  $BusyPriority="2"; "Tentatively Accepted";
+AppointmentType = "3"  &amp;  ( !@IsAvailable($BusyPriority) &amp; !@IsAvailable(PostedDate)); "Draft";
+@IsAvailable(TaskType);"Accepted"; "Accepted")</formula></code></column>
+<column hidedetailrows='false' itemname='$UserData' width='10' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ hidden='true' extattrs='$USERDATA$=true'><columnheader><font size='9pt' style='bold'/></columnheader></column>
+<item name='DEBUG_SIG' sign='true'><text>1</text></item>
+<item name='$CalendarFormat' summary='true' sign='true'>
+<rawitemdata type='18'>
+AX8BAAAJAQAACQEBAAoAAAIAAAABAOABOAQ8AAEAAAAAAAEA////AAQA////AP///wD///8A////
+ACMDAQDh4eEAAQD///8AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQD/AAAAAQAACQAAAAAAAAAA
+AAAAAA==
+</rawitemdata></item></view>
+

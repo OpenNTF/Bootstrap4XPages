@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	here's an edit box:<xp:br></xp:br>
+	<xp:inputText id="inputText1"></xp:inputText>
+	<xp:br></xp:br>
+	<xp:br></xp:br>and a checkbox:<xp:br></xp:br>
+	<xp:checkBox
+		text="Label"
+		id="checkBox1">
+	</xp:checkBox>
+	<xp:br></xp:br>
+	<xp:br></xp:br>and a combo:<xp:br></xp:br>
+	<xp:comboBox id="comboBox1"></xp:comboBox></xp:view>

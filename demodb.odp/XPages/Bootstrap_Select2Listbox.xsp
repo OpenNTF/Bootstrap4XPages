@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:bx="http://www.openntf.org/xsp/bootstrap"
+	pageTitle="Select2 - List and combo box"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout navigationPath="/Bootstrap/Select2Listbox">
+
+		<xp:this.facets>
+			<xc:LeftBootstrap
+				xp:key="LeftColumn"></xc:LeftBootstrap>
+		</xp:this.facets>
+
+		<xp:div>
+
+			<h4>Select2 enhanced List- and Combo boxes</h4>
+
+			<div
+				class="row">
+				<div
+					class="col-md-6">
+
+					<div
+						class="well">
+
+						Standard Combo box:
+						<xp:br></xp:br>
+
+						<xp:comboBox
+							id="comboBox2"
+							value="#{viewScope.comboBox1}">
+							<xp:selectItem
+								itemLabel="Monday"
+								itemValue="m">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Tuesday"
+								itemValue="t">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Wednesday"
+								itemValue="w">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Thursday"
+								itemValue="th">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Friday"
+								itemValue="fr">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Saturday"
+								itemValue="sat">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Sunday"
+								itemValue="sun">
+							</xp:selectItem>
+						</xp:comboBox>
+
+					</div>
+				</div>
+			</div>
+
+			<div
+				class="row">
+				<div
+					class="col-md-6">
+
+					<div
+						class="well">
+
+						Select2 enhanced Combo box:
+						<xp:br></xp:br>
+
+						<xp:comboBox
+							id="comboBox1"
+							value="#{viewScope.comboBox1}">
+							<xp:selectItem
+								itemLabel="Monday"
+								itemValue="m">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Tuesday"
+								itemValue="t">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Wednesday"
+								itemValue="w">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Thursday"
+								itemValue="th">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Friday"
+								itemValue="fr">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Saturday"
+								itemValue="sat">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Sunday"
+								itemValue="sun">
+							</xp:selectItem>
+						</xp:comboBox>
+
+						<bx:select2PickerCombo
+							id="select2PickerCombo2"
+							for="comboBox1">
+						</bx:select2PickerCombo>
+
+					</div>
+				</div>
+			</div>
+
+			<div
+				class="row">
+
+				<div
+					class="col-md-6">
+
+
+
+					<div
+						class="well">
+
+						Select2 enhanced List box (single value):
+						<xp:br></xp:br>
+
+						<xp:listBox
+							id="listBox1"
+							value="#{viewScope.listBox1}">
+							<xp:selectItem
+								itemLabel="Monday"
+								itemValue="m">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Tuesday"
+								itemValue="t">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Wednesday"
+								itemValue="w">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Thursday"
+								itemValue="th">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Friday"
+								itemValue="fr">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Saturday"
+								itemValue="sat">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Sunday"
+								itemValue="sun">
+							</xp:selectItem>
+						</xp:listBox>
+
+
+						<bx:select2PickerCombo
+							id="select2PickerCombo1"
+							for="listBox1">
+						</bx:select2PickerCombo>
+					</div>
+
+
+				</div>
+
+			</div>
+
+
+			<div
+				class="row">
+				<div
+					class="col-md-6">
+
+					<div
+						class="well">
+						Select2 enhanced List box (multi-value):
+						<xp:br></xp:br>
+
+						<xp:listBox
+							id="listBox2"
+							value="#{viewScope.listBox2}"
+							multiple="true">
+							<xp:selectItem
+								itemLabel="Monday"
+								itemValue="m">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Tuesday"
+								itemValue="t">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Wednesday"
+								itemValue="w">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Thursday"
+								itemValue="th">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Friday"
+								itemValue="fr">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Saturday"
+								itemValue="sat">
+							</xp:selectItem>
+							<xp:selectItem
+								itemLabel="Sunday"
+								itemValue="sun">
+							</xp:selectItem>
+						</xp:listBox>
+						<bx:select2PickerCombo
+							id="select2PickerCombo3"
+							for="listBox2">
+						</bx:select2PickerCombo>
+
+					</div>
+
+				</div>
+			</div>
+
+			<xp:button
+				value="Set page to readonly"
+				id="button2">
+				<xp:eventHandler
+					event="onclick"
+					submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:view.setReadonly(true)}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+
+			<xp:button
+				value="Set page to editmode"
+				id="button3">
+				<xp:eventHandler
+					event="onclick"
+					submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:view.setReadonly(false)}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+
+		</xp:div>
+
+	</xc:OneUILayout>
+
+
+
+</xp:view>

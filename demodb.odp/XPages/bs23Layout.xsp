@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:bx="http://www.openntf.org/xsp/bootstrap">
+
+	<xe:applicationLayout
+		id="oneUILayout1">
+		<xe:this.facets>
+			<xp:callback
+				xp:key="LeftColumn"
+				facetName="LeftColumn"
+				id="callback1">
+			</xp:callback>
+		</xe:this.facets>
+		<xe:this.configuration>
+
+			<bx:bootstrapApplication
+				navbarInverted="true"
+				placeBar="false">
+				<bx:this.bannerApplicationLinks>
+					<xe:basicLeafNode
+						label="Home"
+						selected="true"
+						href="/">
+					</xe:basicLeafNode>
+				</bx:this.bannerApplicationLinks>
+
+			</bx:bootstrapApplication>
+		</xe:this.configuration>
+
+		<xp:callback
+			id="OneUIMainAreaCallback"></xp:callback>
+
+	</xe:applicationLayout>
+</xp:view>

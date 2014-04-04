@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257C4200706062" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="3d6" sequence="21" unid="63F13745A19440BBC1257C2E007A94F9">
+<created><datetime>20131125T231855,29+01</datetime></created>
+<modified><datetime>20140128T141602,20-05</datetime></modified>
+<revised><datetime>20140128T141602,19-05</datetime></revised>
+<lastaccessed><datetime>20140128T141602,19-05</datetime></lastaccessed>
+<addedtofile><datetime>20131215T212729,03+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$Flags"><text>34567Cg~`</text></item>
+
+
+<item name="$FileNames" sign="true"><text>bootstrap-extended.theme</text></item>
+<item name="$CSSFiles" sign="true"><text>amelia.min.css</text></item>
+<item name="$TITLE" sign="true"><text>bootstrap-amelia.theme</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item></note>

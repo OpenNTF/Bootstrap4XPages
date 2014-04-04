@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='AllThreads' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257C4200706062' showinmenu='false' noreplace='true' publicaccess='false'
+ designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='26a' unid='E978CB594CD61CF180257BAB00550747' sequence='5'>
+<created><datetime dst='true'>20130717T162844,23+01</datetime></created>
+<modified><datetime>20131215T212728,13+01</datetime></modified>
+<revised><datetime>20131125T230432,06+01</datetime></revised>
+<lastaccessed><datetime>20131219T125306,32+01</datetime></lastaccessed>
+<addedtofile><datetime>20131215T212728,12+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Gleeson/OU=Ireland/O=IBM</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT ((Form = "Discussion"))</formula></code>
+<column hidedetailrows='false' itemname='$0' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader title='#'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>@DocNumber</formula></code></column>
+<column hidedetailrows='false' itemname='Title' width='32.2500' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ twisties='true'><columnheader title='Title'><font size='9pt' style='bold'/></columnheader></column>
+<column sort='descending' resort='both' hidedetailrows='false' itemname='date'
+ width='10' resizable='true' separatemultiplevalues='false' sortnoaccent='false'
+ sortnocase='true' showaslinks='false'><columnheader title='Date'><font size='9pt'
+ style='bold'/></columnheader><code event='value'><formula>@Created</formula></code></column>
+<column sort='ascending' resort='both' hidedetailrows='false' itemname='Author'
+ width='18.7500' resizable='true' separatemultiplevalues='false' sortnoaccent='false'
+ sortnocase='true' showaslinks='false'><columnheader title='Author'><font
+ size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='Abstract' width='30' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Abstract'><font size='9pt' style='bold'/></columnheader></column>
+<item name='$SelQuery' sign='true'>
+<rawitemdata type='f'>
+gQYAAAAAif8WAAAAAAABAAoARGlzY3Vzc2lvbg==
+</rawitemdata></item></view>
+

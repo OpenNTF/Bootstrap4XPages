@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<imageresource name='$DBIcon' xmlns='http://www.lotus.com/dxl' version='9.0'
+ maintenanceversion='1.0' replicaid='C1257C4200706062' publicaccess='false'
+ designerversion='8.5.3' imagename='C:\Documents and Settings\Andrejus Chaliapinas\My Documents\IBM\OpenNTF\XPagesLibrary_r1_32.png'>
+<noteinfo noteid='3c6' unid='CA4421650C7517BD80257BAB00550A28' sequence='5'>
+<created><datetime dst='true'>20130717T162851,60+01</datetime></created>
+<modified><datetime>20131215T212729,00+01</datetime></modified>
+<revised><datetime>20131125T230437,06+01</datetime></revised>
+<lastaccessed><datetime>20131215T212728,99+01</datetime></lastaccessed>
+<addedtofile><datetime>20131215T212728,99+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Gleeson/OU=Ireland/O=IBM</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAABKVJREFUeNrUV3tMW1UY/922tIW+eIw3lREwULaprKMGJk4XzWBJNZgJ
+auY/msW00WBi1AAZCy6icYn+4RSVmMyEGMNA4siGMcRQsbiwyaNOR20UgYk8xrMF+sbv3m6lHZ1C
+ARe/5OTec+537ved3/c8zMrKCu4k8XCHSbAeprq6txyh1quqKkX/iQJEQq1Wi/n5BW6iUMjR1taG
++vqPl29l1OleiAxLAb3+JfvtmBiGgdVqIwXmfXbj+Sx35MiT4kC+5uazm0JAdOzY87DZFoMYpFIJ
+Gho+hdH4vf8bu8YSn8/fWh9YWlrG4mKwAjdPW1i4H3Nzc9x7dHQ0DIZO7n10dJR7KpXKzSuQlpYK
+p9MZbHyhkHt2dxvXIBCKTpx4I8iUtbU14nUrwNo6lP3/CYFbT67R5ItYZ2Udtafn0pZFwbqJFT4z
+M+OfnzxZt8a5jx+vEm+bAgkJOyAWiyCXy2A2m3H06DOi5WWfDpGRYjQ2fr69CExOThECs7DbfUKT
+khLh8XhuGzW8rUcgHikpydyTpcBSE6rsbDsCG3JCNqYXFqxBDKwtN0PDwyP+3CKRSLYfgfUQ85B+
+6xVoMvShovknsGnj6b2piJp2oqFrAu90f4DqsiIU52VuXx7weL14veEcVGXl3PxsSxN7TuSWP8XN
+T7V+ubUKnL7wI1p+uIbqbyq5+bOP5MNFoWbqu8rNo2h4yeX9c48Xr57pQOeVP/wBQaMe2jJ9WAq0
+9pjhKn4CpTmJcLhX0NVngt3tRYRlABEU66wJpFIpPuocIEk8OBgexlKyUHKwGFECPlosU0Bbk47t
+AsJSoFSTjS8uGdHq1gARQhTlqiBJTMaQwYAHEiKwMy4KfLEYu+IjYeHFIL2oCAq5BO2/XSd7UVK6
+0gcOATJdWAq8eFiN8b++Qud3HcC9+ehye5AdJ4HqcAlMAyZ0fG0Cw+MjWa2GSpWDWbsLxmGqD4s2
+oP8iYLO+i0Olr4D2he2Ej2YpUK4tgO79ZuDuXJjdGdz6/vvuwW5VJhi+AEsCEYwj074N438CgyaU
+ZErRrtSScPfmU3HZgTx0v1eB5zKkgIlKr8MB09gsBm1eXJ134uIwQe6kfvbnXhQL59H4cikKlMTL
+Cr8xghCYmpqmNDodJMThcPr7Ao3mfu7dYvnV/93udMHJ/oz8WkbHsdrsNFb3i1fcXFqWRsqRGCPF
+7+yiyx06DNPTlYiLi13TE7Ikk0mpvA76u2KWPjlvRPWZdiTu2gP1g4UYmqGU63aRjal5FUSQ9Cgk
+xUgQ+/ABdFFpbqn5DI9nKyCPZ7BAfsEd7ObN6F+6YlFqanJQr3bBPCe8TGAp8/YiIT4W3UPXfeVu
+gnrE8RFwKTFlJxCf6uuoMnZgcmIao/29cCzaTt118NBrI7NLqwpsMJd/iJgE3e59eRAIBOi/Rh7u
+IluPWsjTraeJ5U0WKBoVkEXrkJbFIaJWxhH6LnKXXmB2qh57CvQbVoCEK8DjzyFHvbq4QAqMDVH6
+81QiV/N20IZfemrAF9QihaJEFhO4DuJlwkeALkGBdxIuseTs+zbkhsHLxTf4HwtYZfn1zGZvx4Gl
+9X95O/5bgAEApvXFWSOes3MAAAAASUVORK5CYII=
+</jpeg>
+<item name='$FileSize' sign='true'><number>1283</number></item>
+<item name='$FileModDT' sign='true'><datetime dst='true'>20111004T194219,00+01</datetime></item></imageresource>
+

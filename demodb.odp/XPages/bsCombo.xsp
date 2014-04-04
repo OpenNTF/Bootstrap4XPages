@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:bx="http://www.openntf.org/xsp/bootstrap"
+	pageTitle="Select2 - List and combo box"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<div class="panel">
+
+		<xp:comboBox
+			id="comboBox2"
+			value="#{viewScope.comboBox1}">
+			<xp:selectItem
+				itemLabel="Monday"
+				itemValue="m">
+			</xp:selectItem>
+			<xp:selectItem
+				itemLabel="Tuesday"
+				itemValue="t">
+			</xp:selectItem>
+			<xp:selectItem
+				itemLabel="Wednesday"
+				itemValue="w">
+			</xp:selectItem>
+			<xp:selectItem
+				itemLabel="Thursday"
+				itemValue="th">
+			</xp:selectItem>
+
+		</xp:comboBox>
+
+		<bx:select2PickerCombo
+			id="select2PickerCombo1"
+			for="comboBox2">
+		</bx:select2PickerCombo>
+
+		<xp:inputHidden
+			id="inputHidden1"
+			value="#{viewScope.picker1}">
+		</xp:inputHidden>
+
+		<bx:select2Picker
+			id="select2Picker1"
+			for="inputHidden1"
+			allowClearing="true"
+			placeHolder="Select something"
+			useRemoteData="false">
+			<bx:this.dataProvider>
+				<xe:simpleValuePicker>
+					<xe:this.valueList><![CDATA[blue
+red
+green
+purple
+yellow]]></xe:this.valueList>
+				</xe:simpleValuePicker>
+			</bx:this.dataProvider>
+		</bx:select2Picker>
+		
+
+	</div>
+
+	<xp:button
+		value="Set page to readonly"
+		id="button2">
+		<xp:eventHandler
+			event="onclick"
+			submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:view.setReadonly(true)}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+
+	<xp:button
+		value="Set page to editmode"
+		id="button3">
+		<xp:eventHandler
+			event="onclick"
+			submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:view.setReadonly(false)}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+
+</xp:view>

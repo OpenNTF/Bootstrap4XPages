@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:bx="http://www.openntf.org/xsp/bootstrap">
+
+	<xp:comboBox id="comboBox1">
+		<xp:selectItem itemLabel="Untitled"></xp:selectItem>
+		<xp:selectItem itemLabel="Untitled"></xp:selectItem>
+	</xp:comboBox>
+	<bx:select2PickerCombo
+		id="select2PickerCombo1"
+		for="comboBox1">
+	</bx:select2PickerCombo>
+
+
+<xp:comboBox id="comboBox2">
+		<xp:selectItem itemLabel="Untitled"></xp:selectItem>
+		<xp:selectItem itemLabel="Untitled"></xp:selectItem>
+	</xp:comboBox>
+
+	<bx:select2PickerCombo
+		id="select2PickerCombo2"
+		for="comboBox2">
+	</bx:select2PickerCombo>
+
+</xp:view>
+

@@ -1,0 +1,12 @@
+
+<theme extends="bootstrapv3.1.1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="platform:/plugin/com.ibm.designer.domino.stylekits/schema/stylekit.xsd" >
+	
+	<resource>
+		<content-type>text/css</content-type>
+		<href>bs-saxion/css/bootstrap.min.css</href>
+	</resource>
+	
+	
+</theme>

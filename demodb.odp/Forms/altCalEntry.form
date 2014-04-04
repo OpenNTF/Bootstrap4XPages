@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='altCalEntry' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257C4200706062' noreplace='true' publicaccess='false' designerversion='8.5.2'
+ renderpassthrough='true'>
+<noteinfo noteid='326' unid='CFB820948096A5A680257BAB005508AF' sequence='5'>
+<created><datetime dst='true'>20130717T162847,83+01</datetime></created>
+<modified><datetime>20131215T212728,60+01</datetime></modified>
+<revised><datetime>20131125T230432,26+01</datetime></revised>
+<lastaccessed><datetime>20131215T212728,59+01</datetime></lastaccessed>
+<addedtofile><datetime>20131215T212728,59+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Brian Gleeson/OU=Ireland/O=IBM</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<body><richtext>
+<pardef id='1' leftmargin='1in' rightmargin='100%'/>
+<par def='1'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'/></run></par>
+<par def='1'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'/>*** RAW FORM TO DEFINE TEST CALENDAR METADATA ***</run></par>
+<par def='1'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'/></run></par>
+<par def='1'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'/>*** CAN BE USED FOR DUMMY DATA ENTRY BUT PREFERABLY USE CalendarEntry.xsp ***</run></par>
+<par def='1'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'/>					</run></par>
+<par def='1'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'/>			</run></par>
+<table rightmargin='100%' widthtype='fixedleft' refwidth='9.5188in'><tablecolumn
+ width='3.1729in'/><tablecolumn width='3.1729in'/><tablecolumn width='3.1729in'/>
+<tablerow>
+<tablecell>
+<pardef id='2' keepwithnext='true' keeptogether='true'/>
+<par def='2'><run><font style='bold'/>  Field</run></par></tablecell>
+<tablecell>
+<pardef id='3' keepwithnext='true' keeptogether='true'/>
+<par def='3'><run><font style='bold'/> Calendar Column</run></par></tablecell>
+<tablecell>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'><run><font style='bold'/> Sample Data </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'> <field usenotesstyle='false' height='0.2500in' width='1.7875in'
+ multiline='true' borderstyle='single' type='datetime' kind='editable' name='CalendarDateTime'><datetimeformat
+ show='datetime' date='yearmonthday' fourdigityearfor21stcentury='true' time='hourminute'
+ zone='never' dateformat='weekdaydaymonthyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='/'
+ dateseparator3='/' timeseparator=':' timeformat24='true' preference='usersetting'/></field></par></tablecell>
+<tablecell>
+<par def='3'> <run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30' color='#4200ff'/>"$134"</run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30'/>, </run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30' color='#3f8080'/>// colCalendarDate</run></par></tablecell>
+<tablecell>
+<par def='4'> 10/08/2010 17:00:00 <run><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30' color='#4200ff'/> </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'> <field type='number' kind='editable' name='_ViewIcon'><numberformat
+ format='general' digits='2' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='defaultvalue'><formula>158</formula></code></field></par></tablecell>
+<tablecell>
+<par def='3'> <run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30' color='#4200ff'/>"$149"</run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30'/>, </run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30' color='#3f8080'/>// colEntryIcon</run></par></tablecell>
+<tablecell>
+<par def='4'> <run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30' color='#4200ff'/> </run>Examples:</par>
+<par def='4'> 158, e.g.  <picture width='13px' height='15px'><gif>
+R0lGODlhDQAPAOQAANDg+MjY8P///8jg8NDQ0FjYOMDAwIiIiIDAaKCgoODg4LCwsMD4kDiYOMDA
+eDhgGGBgAICAANCwoPDw8Pjg2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAA
+DQAPAEAIcwAFCBxIcGAAAwIUFCiAgEGBCAAiBjhAgMCCigYMEIgIIMAAjiBBehxAsqTJAQcrVlQg
+oACDBxINLEgggWEDixw9htwZoKfPnz8/JuB4IGSABAcOIFVKAEFOhAooKJiAwEGBBjEFNrQKQUHO
+jztFgg0bMSAAOw==
+</gif></picture></par>
+<par def='4'> 160</par>
+<par def='4'>   63 <run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30' color='#4200ff'/> </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'> <field usenotesstyle='false' height='0.2500in' width='1.7875in'
+ multiline='true' borderstyle='single' type='datetime' kind='editable' name='StartDateTIme'><datetimeformat
+ show='datetime' date='yearmonthday' fourdigityearfor21stcentury='true' time='hourminute'
+ zone='never' dateformat='weekdaydaymonthyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='/'
+ dateseparator3='/' timeseparator=':' timeformat24='true' preference='usersetting'/></field></par></tablecell>
+<tablecell>
+<par def='3'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'
+ color='#4200ff'/> "$144"</run><run><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30'/>, </run><run><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30' color='#3f8080'/>// colStartTime</run></par></tablecell>
+<tablecell>
+<par def='4'>  e.g. 16:00:00  </par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'> <field usenotesstyle='false' height='0.2500in' width='1.7875in'
+ multiline='true' borderstyle='single' type='datetime' kind='editable' name='EndDateTIme'><datetimeformat
+ show='datetime' date='yearmonthday' fourdigityearfor21stcentury='true' time='hourminute'
+ zone='never' dateformat='weekdaydaymonthyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='/'
+ dateseparator3='/' timeseparator=':' timeformat24='true' preference='usersetting'/></field></par></tablecell>
+<tablecell>
+<par def='3'> <run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30' color='#4200ff'/>"$146"</run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30'/>, </run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30' color='#3f8080'/>// colEndTime</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'
+ color='#4200ff'/> </run>e.g. 17:00:00<run><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30' color='#4200ff'/> </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'> <field type='text' kind='editable' name='Subject'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='3'> <run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30' color='#4200ff'/>"$147"</run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30'/>, </run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30' color='#3f8080'/>// colSubject</run></par></tablecell>
+<tablecell>
+<par def='4'> <run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30' color='#4200ff'/> </run>@Trim(Subject : xxRoom : xxLocation : xxChair)) <run
+><font name='Courier New' pitch='fixed' truetype='true' familyid='30' color='#4200ff'/> </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'><run><font color='red'/> </run><field type='text' kind='editable'
+ name='AltSubject'><code event='inputtranslation'><formula>Subject</formula></code></field><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='9' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font color='red'/></run></par></tablecell>
+<tablecell>
+<par def='3'><run><font color='red'/> </run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30' color='#4200ff'/>"$151"</run><run
+><font name='Courier New' pitch='fixed' truetype='true' familyid='30'/>, </run><run
+><font name='Courier New' pitch='fixed' truetype='true' familyid='30' color='#3f8080'/>// colAltSubject</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'
+ color='#4200ff'/> </run>@Trim(Subject : xxRoom : xxLocation : xxChair))</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'><field usenotesstyle='false' height='0.2500in' width='1.7875in'
+ multiline='true' borderstyle='inset' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' kind='editable' name='AppointmentType'><keywords helperbutton='false'
+ columns='1' ui='combobox'><textlist><text>1</text><text>2</text><text>3</text><text
+>4</text><text>5</text></textlist></keywords><code event='defaultvalue'><formula
+>"3"</formula></code></field></par></tablecell>
+<tablecell>
+<par def='3'>  <run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30' color='#4200ff'/>$152"</run><run><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30'/>, </run><run><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30' color='#3f8080'/>// colEntryType</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'
+ color='#4200ff'/> </run>AppointmentType</par>
+<par def='4'>  "3" = Meeting</par>
+<par def='4'>  "1" = Appointment etc</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'> <field type='names' kind='editable' name='Chair'><code event='defaultvalue'><formula
+>@Name([CN];@UserName)</formula></code><code event='inputtranslation'><formula
+>Chair</formula></code></field></par></tablecell>
+<tablecell>
+<par def='3'>  <run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30' color='#4200ff'/>"$153"</run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30'/>, </run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30' color='#3f8080'/>// colChair</run></par></tablecell>
+<tablecell>
+<par def='4'> @Name([CN];Chair)</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'> <field type='number' kind='editable' name='OrgConfidential'><numberformat
+ format='general' varying='true' digits='2' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='defaultvalue'><formula>""</formula></code></field></par></tablecell>
+<tablecell>
+<par def='3'> <run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30' color='#4200ff'/>"$154"</run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30'/>, </run><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30' color='#3f8080'/>// colConfidential</run></par></tablecell>
+<tablecell>
+<par def='4'> @If(OrgConfidential = "1";1;0)</par>
+<par def='4'> "1", "0", ""</par>
+<par def='4'> Leave blank for default - i.e. not confidenitial </par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'> <field type='text' kind='editable' name='status'><code event='defaultvalue'><formula
+>"Accepted"</formula></code></field><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='3'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'
+ color='#4200ff'/> $160"</run><run><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30'/>, </run><run><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30' color='#3f8080'/>// colStatus</run></par></tablecell>
+<tablecell>
+<par def='4'> "Accepted" | "Draft" Etc <run><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30' color='#4200ff'/>"</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'><run><font color='red'/>  TBD</run></par></tablecell>
+<tablecell>
+<par def='3'><run><font color='red'/> </run> <run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30' color='#4200ff'/>"$UserData"</run><run
+><font name='Courier New' pitch='fixed' truetype='true' familyid='30'/>, </run><run
+><font name='Courier New' pitch='fixed' truetype='true' familyid='30' color='#3f8080'/>// colCustomData</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'
+ color='red'/> </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell columnspan='3'>
+<pardef id='5' keepwithnext='true' keeptogether='true'/>
+<par def='5'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'
+ color='red'/> Fields below are usually just computed - you can override here if need be </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'
+ color='#3f8080'/> </run><field type='text' kind='editable' name='From'><code
+ event='defaultvalue'><formula>@Name([CN];Chair)</formula></code></field><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='9' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font name='Courier New'
+ pitch='fixed' truetype='true' familyid='30' color='#3f8080'/></run></par></tablecell>
+<tablecell>
+<par def='3'><field usenotesstyle='false' height='0.2500in' width='1.7875in'
+ multiline='true' borderstyle='single' type='datetime' kind='editable' name='PostedDate'><datetimeformat
+ show='date' date='yearmonthday' fourdigityearfor21stcentury='true' time='hourminute'
+ zone='never' dateformat='weekdaydaymonthyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='/'
+ dateseparator3='/' timeseparator=':' timeformat24='true' preference='usersetting'/><code
+ event='defaultvalue'><formula>@Today</formula></code><code event='inputtranslation'><formula
+>CalendarDateTime</formula></code></field><run><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30' color='red'/> </run></par></tablecell>
+<tablecell>
+<par def='4'><run><font name='Courier New' pitch='fixed' truetype='true' familyid='30'
+ color='#3f8080'/></run></par></tablecell></tablerow></table>
+<par def='1'/>
+<par def='1'>Enter agenda details, etc.</par>
+<par def='1'><field type='richtext' kind='editable' name='Body'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata></par></richtext></body>
+<item name='$134' summary='false'>
+<rawitemdata type='400'>
+AAAAAAAAAAA=
+</rawitemdata></item>
+<item name='Untitled' summary='false'><number>0</number></item>
+<item name='Untitled_1' summary='false'><number>0</number></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>altCalEntry</text></item>
+<item name='_ViewIcon' summary='false'><number>0</number></item>
+<item name='OrgConfidential' summary='false'><number>0</number></item></form>
+

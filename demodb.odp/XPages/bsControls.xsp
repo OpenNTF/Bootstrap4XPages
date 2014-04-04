@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+ 
+	Input controls<xp:br></xp:br>
+	edit box:&#160;<xp:inputText id="inputText1"></xp:inputText><xp:br></xp:br>multiline edit box:&#160;
+	<xp:inputTextarea id="inputTextarea1"></xp:inputTextarea>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	Buttons<xp:br></xp:br>
+	<xp:button
+		value="standard"
+		id="button1">
+	</xp:button>
+	<xp:button
+		value="submit"
+		id="button2">
+	<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="false" save="true"></xp:eventHandler></xp:button>
+	<xp:button
+		value="cancel"
+		id="button3">
+	<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="true" save="false"></xp:eventHandler></xp:button>
+	<xp:button
+		id="button4" value="another standard button">
+	</xp:button>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:br></xp:br></xp:view>

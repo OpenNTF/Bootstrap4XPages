@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:bx="http://www.openntf.org/xsp/bootstrap">
+	
+	<xe:applicationLayout id="applicationLayout1">
+		<xp:callback
+			facetName="facetMiddle"
+			id="facetMiddle">
+		</xp:callback>
+		
+		<xe:this.configuration>
+
+			<bx:bootstrapApplication
+				titleBar="false"
+				placeBar="false"
+				footer="false"
+				legal="false"
+				navbarInverted="true"
+				collapseLeftColumn="true"
+				banner="true"
+				productLogoAlt="Select2 Demo">
+			</bx:bootstrapApplication>
+		</xe:this.configuration>
+	</xe:applicationLayout>
+</xp:view>
