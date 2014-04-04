@@ -38,6 +38,9 @@ public class BootstrapStyleKitFactory implements StyleKitFactory {
 			if(themeId.equals("bootstrap")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrap.theme"); //$NON-NLS-1$
 			}
+			if(themeId.equals("bootstrapv2_base")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv2_base.theme"); //$NON-NLS-1$
+			}
 			if(themeId.equals("bootstrapv2.3.1")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv231.theme"); //$NON-NLS-1$
 			}
@@ -49,6 +52,9 @@ public class BootstrapStyleKitFactory implements StyleKitFactory {
 			}
 			if(themeId.equals("bootstrapv2.3.2r")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv232r.theme"); //$NON-NLS-1$
+			}
+			if(themeId.equals("bootstrapv3_base")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv3_base.theme"); //$NON-NLS-1$
 			}
 			if(themeId.equals("bootstrapv3.0.0")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv300.theme"); //$NON-NLS-1$
@@ -79,11 +85,17 @@ public class BootstrapStyleKitFactory implements StyleKitFactory {
 			if(themeId.equals("bootstrapv2.3.2")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv232_extlib.theme"); //$NON-NLS-1$
 			}
+			if (themeId.equals("bootstrapv2_base") ) {
+				return getThemeFromBundle(folderPath+"/bootstrapv232_extlib.theme"); //$NON-NLS-1$
+			}
 			if(themeId.startsWith("bootstrapv3.1.1")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv311_extlib.theme"); //$NON-NLS-1$
 			}
 			if(themeId.startsWith("bootstrapv3.0.0")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv300_extlib.theme"); //$NON-NLS-1$
+			}
+			if (themeId.equals("bootstrapv3_base") ) {
+				return getThemeFromBundle(folderPath+"/bootstrapv311_extlib.theme"); //$NON-NLS-1$
 			}
 		}
 		return null;

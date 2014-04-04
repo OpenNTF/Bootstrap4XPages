@@ -1,6 +1,6 @@
 /*
   XPages Boostrap specific JavaScript files
-  This defines the missing JS code in Bs 3.0
+  This defines the missing JS code in Bootstrap 3 (all versions)
 */
 
 /* Fix the missing sub menu in BS 3.0*/

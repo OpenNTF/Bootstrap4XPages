@@ -1,0 +1,49 @@
+<theme extends="bootstrap">
+
+	<!-- All the resources are defined here to ensure that they are loaded in order -->
+	
+    <!-- Core XPages styles -->
+    <resource>
+        <content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xsptheme/xsp.css</href>
+    </resource>
+
+	<!-- Dojo Theme -->
+ 	<resource dojoTheme="true">
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/dojoroot/dijit/themes/tundra/tundra.css</href>
+	</resource>
+	<control>
+		<name>ViewRoot</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xsp tundra</value>
+		</property>
+	</control>
+
+	<!-- XPages/Bootstrap specific styles -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages232.css</href>
+	</resource>
+
+
+	<!-- JQuery -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/jquery182/js/jquery-1.8.2.min.js</href>
+	</resource>
+
+	<!-- Core Bootstrap JavaScript files -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap232/js/bootstrap.min.js</href>
+	</resource>
+ 
+	<!-- XPages/Bootstrap specific JS -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages232.js</href>
+	</resource>
+
+</theme>
