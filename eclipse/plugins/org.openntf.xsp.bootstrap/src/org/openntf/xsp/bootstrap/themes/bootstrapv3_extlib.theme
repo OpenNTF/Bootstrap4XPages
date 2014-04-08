@@ -36,7 +36,7 @@
 		<name>Picker.Name</name>
 		<property>
 			<name>rendererType</name>
-			<value>org.openntf.xsp.bootstrap.picker.BootstrapValuePicker3</value>
+			<value>org.openntf.xsp.bootstrap.picker.BootstrapNamePicker3</value>
 		</property>
 	</control>
 
