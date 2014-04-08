@@ -15,6 +15,14 @@
 		</property>
 	</control>
 	
+	<!-- Bootstrap META tag -->
+	<resources>
+		<metaData>
+			<name>viewport</name>
+			<content>width=device-width, initial-scale=1</content>
+		</metaData>
+	</resources>
+	
 	<!-- View Title -->
 	<control>
 		<name>Text.ViewTitle</name>
