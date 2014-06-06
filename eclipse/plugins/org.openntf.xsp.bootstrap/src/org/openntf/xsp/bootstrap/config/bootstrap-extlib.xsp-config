@@ -59,7 +59,16 @@
 			<description>By default the Menu dropdown button for a collapsed left column menu is attached to the left column. Optionally you can enter a selector here (jQuery syntax, see http://api.jquery.com/category/selectors/) 
 			to which the menu should be attached. Sample values: .applayout-column-left (after the element with the applayout-column-left class) or .applayout-banner-collapse</description>
 			<display-name>Collapse Left Column Target</display-name>
-			<property-name>collapseLeftColumnTarget</property-name>
+			<property-name>collapseLeftTarget</property-name>
+			<property-class>string</property-class>
+			<property-extension>
+			</property-extension>
+		</property>
+		
+		<property>
+			<description>Label on the menu button shown when the left column is collapsed. 'Menu' by default.</description>
+			<display-name>Collapsed Left Column Menu Label</display-name>
+			<property-name>collapseLeftMenuLabel</property-name>
 			<property-class>string</property-class>
 			<property-extension>
 			</property-extension>

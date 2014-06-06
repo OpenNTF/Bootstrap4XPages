@@ -31,12 +31,14 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
 	public static final String WIDTH_FIXED = "fixed";
 	
 	private static final String COLLAPSE_LEFT_COLUMN_TARGET = ".applayout-column-left";
+	private static final String COLLAPSE_LEFT_MENU_LABEL = "Menu";		//default
 	
 	// Bootstrap specific properties
     private Boolean navbarInverted;
     private Boolean navbarFixed;
     private Boolean collapseLeftColumn;
-    private String collapseLeftColumnTarget;
+    private String collapseLeftTarget;
+    private String collapseLeftMenuLabel;
     private String pageWidth;
 	
 	public BootstrapApplicationConfiguration() {
@@ -95,11 +97,19 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
 		this.collapseLeftColumn = collapseLeftColumn;
 	}
     
-    public String getCollapseLeftColumnTarget() {
-    	return (collapseLeftColumnTarget != null ? collapseLeftColumnTarget : COLLAPSE_LEFT_COLUMN_TARGET);
+    public String getCollapseLeftTarget() {
+    	return (collapseLeftTarget != null ? collapseLeftTarget : COLLAPSE_LEFT_COLUMN_TARGET);
 	}
-    public void setCollapseLeftColumnTarget(String collapseLeftColumnTarget) {
-		this.collapseLeftColumnTarget = collapseLeftColumnTarget;
+    public void setCollapseLeftColumnTarget(String collapseLeftTarget) {
+		this.collapseLeftTarget = collapseLeftTarget;
+	}
+    
+    public String getCollapseLeftMenuLabel() {
+		return (collapseLeftMenuLabel != null ? collapseLeftMenuLabel : COLLAPSE_LEFT_MENU_LABEL);
+	}
+    public void setCollapseLeftMenuLabel(
+			String collapseLeftMenuLabel) {
+		this.collapseLeftMenuLabel = collapseLeftMenuLabel;
 	}
     
 	public String getPageWidth() {
@@ -117,18 +127,20 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
         this.collapseLeftColumn = (Boolean)values[2];
         this.pageWidth = (String)values[3];
         this.navbarFixed = (Boolean)values[4];
-        this.collapseLeftColumnTarget = (String)values[5];
+        this.collapseLeftTarget = (String)values[5];
+        this.collapseLeftMenuLabel = (String)values[6];
     }
 
     @Override
     public Object saveState(FacesContext context) {
-        Object values[] = new Object[6];
+        Object values[] = new Object[7];
         values[0] = super.saveState(context);
         values[1] = navbarInverted;
         values[2] = collapseLeftColumn;
         values[3] = pageWidth;
         values[4] = navbarFixed;
-        values[5] = collapseLeftColumnTarget;
+        values[5] = collapseLeftTarget;
+        values[6] = collapseLeftMenuLabel;
         return values;
     }
 }

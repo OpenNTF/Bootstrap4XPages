@@ -84,7 +84,8 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		boolean navbarInverted = false;
 		boolean navbarFixed = false;
 		boolean collapseLeftColumn = false;
-		String collapseLeftColumnTarget = "";
+		String collapseLeftTarget = "";
+		String collapseLeftMenuLabel = "";
 		String pageWidth = BootstrapApplicationConfiguration.WIDTH_FULL;
 		
 		BootstrapApplicationConfiguration bc = asBootstrapConfig(configuration);
@@ -92,11 +93,20 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 			navbarInverted = bc.isNavbarInverted();
 			navbarFixed = bc.isNavbarFixed();
 			collapseLeftColumn = bc.isCollapseLeftColumn();
-			collapseLeftColumnTarget = bc.getCollapseLeftColumnTarget();
+			collapseLeftTarget = bc.getCollapseLeftTarget();
+			collapseLeftMenuLabel = bc.getCollapseLeftMenuLabel();
 			pageWidth = bc.getPageWidth();
 		}
 		
 		boolean isResponsiveTheme = BootstrapUtil.isResponsive ( (FacesContextEx)context );
+		
+		if (navbarFixed) {
+			w.startElement("style", c);
+			w.writeAttribute("type", "text/css",  null);
+			w.writeText("body {padding-top: 44px;}", null);
+			w.endElement("style");
+			
+		}
 		
 		// Start the mast header
 		if (null != configuration && configuration.isMastHeader()) {
@@ -128,7 +138,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 			}
 
 			// Start the main content
-			writeMainContent(context, w, c, configuration, collapseLeftColumn, pageWidth, isResponsiveTheme, collapseLeftColumnTarget);
+			writeMainContent(context, w, c, configuration, collapseLeftColumn, pageWidth, isResponsiveTheme, collapseLeftTarget, collapseLeftMenuLabel);
 
 			// Start the footer
 			if (configuration.isFooter()) {
@@ -668,7 +678,8 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 	// ================================================================
 
 	protected void writeMainContent(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration,
-			boolean collapseLeftColumn, String pageWidth, boolean isResponsiveTheme, String collapseLeftColumnTarget) throws IOException {
+			boolean collapseLeftColumn, String pageWidth, boolean isResponsiveTheme, String collapseLeftColumnTarget,
+			String collapseLeftColumnButtonLabel) throws IOException {
 		
 		//container
 		w.startElement("div", c); // $NON-NLS-1$
@@ -686,7 +697,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		w.writeAttribute("class", FLUID ? "row-fluid" : "row", null); // $NON-NLS-1$
 
 		// Write the 3 columns
-		writeLeftColumn(context, w, c, configuration, collapseLeftColumn, isResponsiveTheme, collapseLeftColumnTarget);
+		writeLeftColumn(context, w, c, configuration, collapseLeftColumn, isResponsiveTheme, collapseLeftColumnTarget, collapseLeftColumnButtonLabel);
 		writeContentColumn(context, w, c, configuration);
 		writeRightColumn(context, w, c, configuration);
 
@@ -698,7 +709,8 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 	}
 
 	protected void writeLeftColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration,
-			boolean collapseLeftColumn, boolean isResponsiveTheme, String collapseLeftColumnTarget) throws IOException {
+			boolean collapseLeftColumn, boolean isResponsiveTheme, String collapseLeftColumnTarget,
+			String collapseLeftColumnButtonLabel) throws IOException {
 		UIComponent left = c.getLeftColumn();
 		if (!isEmptyComponent(left)) {
 			if (DEBUG) {
@@ -721,7 +733,7 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 				
 				// Write the small screen component (collapsed menu)
 	    		w.startElement("script", c); // $NON-NLS-1$
-	    		w.writeText("dojo.addOnLoad( function() { bs4xp.initCollapsibleMenu('" + collapseLeftColumnTarget + "'); } );", null);
+	    		w.writeText("dojo.addOnLoad( function() { bs4xp.initCollapsibleMenu('" + collapseLeftColumnButtonLabel + "', '" + collapseLeftColumnTarget + "'); } );", null);
 	    		w.endElement("script");
 				newLine(w);
 				

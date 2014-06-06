@@ -33,7 +33,7 @@ var bs4xp = bs4xp || {};
 
 //function to create a responsive collapsible menu from the left column contents
 
-bs4xp.initCollapsibleMenu = function(collapseTo) {
+bs4xp.initCollapsibleMenu = function(label, collapseTo) {
 	
 	var left = $(".applayout-column-left");		//left column
 	var ul = left.find("ul").first();
@@ -41,7 +41,7 @@ bs4xp.initCollapsibleMenu = function(collapseTo) {
 	if (ul.length>0) {
 		
 		var div = $('<div/>').addClass('visible-xs visible-sm dropdown');
-		var btn = $('<button class="btn btn-default btn-left-col-menu dropdown-toggle" data-toggle="dropdown">Menu<span class="caret"></span></button>');
+		var btn = $('<button class="btn btn-default btn-left-col-menu dropdown-toggle" data-toggle="dropdown">' + label + ' <span class="caret"></span></button>');
 		var clone = ul.clone().addClass('dropdown-menu');		//clone of the menu
 	
 		div.append( btn );
