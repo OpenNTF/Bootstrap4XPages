@@ -10,12 +10,13 @@
 .xspPickerButton{width:70px!important;margin:0 8px 0 5px;}
 .xspPickerButton2{width:70px!important;margin:0 8px 0 5px}
 .xspPickerButton3{width:100px!important;margin:0 8px 0 5px}
+.xspPickerHr {margin-top:10px; margin-bottom:10px;}
 .unselectable {-moz-user-select: none; -webkit-user-select: none;}
 </style>
 <div style="padding:10px">
 	<span class="xspPickerInputText" dojoAttachPoint="inputText"></span>
 	<span dojoType="extlib.dijit.ListTextBox" dojoAttachPoint="inputList"></span>
-	<hr/>
+	<hr class="xspPickerHr" />
     <div>
     <input dojoAttachPoint="edSearch" type="text"></input>
     <button dojoAttachPoint="btSearch" class="btn btn-small xspPickerButton2">${PickerListSearch_Search}</button>

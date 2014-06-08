@@ -22,8 +22,7 @@ dojo.declare(
 	'extlib.dijit.BootstrapPickerName3',
 	[extlib.dijit.PickerName],
 	{
-		// Should not be set for a 2 lists dialog
-        //listWidth: "100%",
+        listWidth: "210px"
 		templateString: dojo.cache("extlib.dijit", "templates/BootstrapPickerName3.html")
 	}
 );
