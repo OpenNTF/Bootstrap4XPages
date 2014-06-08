@@ -100,7 +100,7 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
     public String getCollapseLeftTarget() {
     	return (collapseLeftTarget != null ? collapseLeftTarget : COLLAPSE_LEFT_COLUMN_TARGET);
 	}
-    public void setCollapseLeftColumnTarget(String collapseLeftTarget) {
+    public void setCollapseLeftTarget(String collapseLeftTarget) {
 		this.collapseLeftTarget = collapseLeftTarget;
 	}
     

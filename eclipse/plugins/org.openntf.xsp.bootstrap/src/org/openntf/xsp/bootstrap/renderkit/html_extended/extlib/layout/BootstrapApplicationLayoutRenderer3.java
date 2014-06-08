@@ -702,7 +702,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	// ================================================================
 
 	protected void writeMainContent(FacesContext context, ResponseWriter w, UIApplicationLayout c, 
-			BasicApplicationConfigurationImpl configuration, boolean collapseLeftColumn, String pageWidth, String collapseLeftColumnTarget,
+			BasicApplicationConfigurationImpl configuration, boolean collapseLeftColumn, String pageWidth, String collapseLeftTarget,
 			String collapseLeftColumnButtonLabel) throws IOException {
 		
 		w.startElement("div", c); // $NON-NLS-1$
@@ -740,7 +740,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		}
 		
 		// Write the 3 columns
-		writeLeftColumn(context, w, c, leftSize, configuration, collapseLeftColumn, collapseLeftColumnTarget, collapseLeftColumnButtonLabel);
+		writeLeftColumn(context, w, c, leftSize, configuration, collapseLeftColumn, collapseLeftTarget, collapseLeftColumnButtonLabel);
 		writeContentColumn(context, w, c, contentSize, configuration);
 		writeRightColumn(context, w, c, rightSize, configuration);
 
@@ -755,7 +755,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	}
 
 	protected void writeLeftColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, int size, BasicApplicationConfigurationImpl configuration, 
-			boolean collapseLeftColumn, String collapseLeftColumnTarget, String collapseLeftColumnButtonLabel) throws IOException {
+			boolean collapseLeftColumn, String collapseLeftTarget, String collapseLeftButtonLabel) throws IOException {
 		
 		UIComponent left = c.getLeftColumn();
 		
@@ -783,7 +783,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 				
 				// Write the small screen component (collapsed menu)
 	    		w.startElement("script", c); // $NON-NLS-1$
-	    		w.writeText("dojo.addOnLoad( function() { bs4xp.initCollapsibleMenu('" + collapseLeftColumnButtonLabel + "', '" + collapseLeftColumnTarget + "'); } );", null);
+	    		w.writeText("dojo.addOnLoad( function() { bs4xp.initCollapsibleMenu('" + collapseLeftButtonLabel + "', '" + collapseLeftTarget + "'); } );", null);
 	    		w.endElement("script");
 				newLine(w);
 				
