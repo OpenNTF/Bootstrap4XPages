@@ -221,6 +221,8 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		w.startElement("div",c);
 		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
 			w.writeAttribute("class", "container applayout-banner-container", null); // $NON-NLS-1$
+		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FLUID)) {
+			w.writeAttribute("class", "container-fluid applayout-banner-container", null); // $NON-NLS-1$
 		} else {
 			w.writeAttribute("class", "applayout-banner-container", null); // $NON-NLS-1$
 		}
@@ -857,11 +859,13 @@ public class BootstrapApplicationLayoutRenderer extends FacesRendererEx {
 		
 		//container div
 		w.startElement("div",c);
-		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
+		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FLUID)) {
+			w.writeAttribute("class", "container-fluid", null); // $NON-NLS-1$
+		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
 			w.writeAttribute("class", "container", null); // $NON-NLS-1$
 		}
 		newLine(w);
-		
+			
 		w.startElement("div", c);
 		w.writeAttribute("style", "display: table; margin-left: auto; margin-right: auto; text-align: center;", null); // $NON-NLS-1$
 		newLine(w);
