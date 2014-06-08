@@ -63,6 +63,11 @@
 	cursor: pointer !important;
 }
 
+/*normal font weight for checkboxes in pickers */
+label.xspPickerSpan {
+	font-weight: normal;
+}
+
 /***********************************************************************	
 	Bootstrap styles used by extlib XPages controls
 ***********************************************************************/
