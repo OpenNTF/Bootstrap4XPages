@@ -23,7 +23,7 @@
 		height: 16px !important;
 		width: 16px !important;
 	*/
-	background-image: url("/xsp/.ibmxspres/.extlib/bootstrap/bootstrap231/img/glyphicons-halflings.png");
+	background-image: url("/xsp/.ibmxspres/.extlib/bootstrap/bootstrap232/img/glyphicons-halflings.png");
 	background-position: -192px -120px;
 	height: 14px;
     width: 14px;
@@ -31,6 +31,9 @@
 	box-shadow: none !important;
 	padding: 0px !important;
 	cursor: pointer !important;
+	background-color: rgba(0, 0, 0, 0);
+	margin-top: 5px;
+	margin-left: 4px;
 }
 .xspInputFieldDatePickerIcon{
 	/* XPages classic icons
@@ -38,7 +41,7 @@
 		height: 16px !important;
 		width: 16px !important;
 	*/
-	background-image: url("/xsp/.ibmxspres/.extlib/bootstrap/bootstrap231/img/glyphicons-halflings.png");
+	background-image: url("/xsp/.ibmxspres/.extlib/bootstrap/bootstrap232/img/glyphicons-halflings.png");
 	background-position: -192px -120px;
 	height: 14px;
     width: 14px;
@@ -46,6 +49,9 @@
 	box-shadow: none !important;
 	padding: 0px !important;
 	cursor: pointer !important;
+	background-color: rgba(0, 0, 0, 0);
+	margin-top: 5px;
+	margin-left: 4px;
 }
 .xspInputFieldTimePickerIcon{
 	/* XPages classic icons
@@ -53,7 +59,7 @@
 		height: 16px !important;
 		width: 16px !important;
 	*/
-	background-image: url("/xsp/.ibmxspres/.extlib/bootstrap/bootstrap231/img/glyphicons-halflings.png");
+	background-image: url("/xsp/.ibmxspres/.extlib/bootstrap/bootstrap232/img/glyphicons-halflings.png");
 	background-position: -48px -24px;
 	height: 14px;
     width: 14px;
@@ -61,6 +67,17 @@
 	box-shadow: none !important;
 	padding: 0px !important;
 	cursor: pointer !important;
+	background-color: rgba(0, 0, 0, 0);
+	margin-top: 5px;
+	margin-left: 4px;
+}
+
+/* styling of icons in date/ time pickers */
+.dijitDateTextBox > div.dijitButtonNode {
+	margin-top: 0;
+	margin-right: 0;
+	width: 25px;
+	height: 26px;	
 }
 
 /* fix for combo boxes in RT editor in Bootstrap 3 */
