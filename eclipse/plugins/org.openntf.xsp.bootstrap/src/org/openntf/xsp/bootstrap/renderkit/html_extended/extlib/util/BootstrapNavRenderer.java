@@ -102,6 +102,7 @@ public class BootstrapNavRenderer extends HtmlListRenderer {
 	protected void writePopupImage(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
     	if(tree.getNode().getType()==ITreeNode.NODE_CONTAINER) {
     		if(tree.getDepth()==2) {
+    			writer.write(" ");
 	    		writer.startElement("span", null);
 	    		writer.writeAttribute("class", "caret", null);
 	    		writer.endElement("span");

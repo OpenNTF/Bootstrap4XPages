@@ -15,6 +15,14 @@
 		</property>
 	</control>
 	
+	<!-- Bootstrap META tag -->
+	<resources>
+		<metaData>
+			<name>viewport</name>
+			<content>width=device-width, initial-scale=1</content>
+		</metaData>
+	</resources>
+	
 	<!-- View Title -->
 	<control>
 		<name>Text.ViewTitle</name>
@@ -73,21 +81,21 @@
 	<!-- XPages Buttons -->
 	<control>
 		<name>Button</name>
-		<property>
+		<property mode="concat">
 			<name>styleClass</name>
-			<value>btn</value>
+			<value>btn btn-default</value>
 		</property>
 	</control>
 	<control>
 		<name>Button.Command</name>
-		<property>
+		<property mode="concat">
 			<name>styleClass</name>
-			<value>btn</value>
+			<value>btn btn-default</value>
 		</property>
 	</control>
 	<control>
 		<name>Button.Submit</name>
-		<property>
+		<property mode="concat">
 			<name>styleClass</name>
 			<value>btn btn-primary</value>
 		</property>
@@ -96,45 +104,59 @@
 	
 	<!-- Extra Bootstrap Buttons -->
 	<control>
-		<name>Button.Cancel</name>
-		<property>
+		<name>Button.Default</name>
+		<property mode="concat">
 			<name>styleClass</name>
-			<value>btn</value>
+			<value>btn btn-default</value>
+		</property>
+	</control>
+	<control>
+		<name>Button.Cancel</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-default</value>
 		</property>
 	</control>
 	<control>
 		<name>Button.Primary</name>
-		<property>
+		<property mode="concat">
 			<name>styleClass</name>
 			<value>btn btn-primary</value>
 		</property>
 	</control>
 	<control>
 		<name>Button.Danger</name>
-		<property>
+		<property mode="concat">
 			<name>styleClass</name>
 			<value>btn btn-danger</value>
 		</property>
 	</control>
 	<control>
 		<name>Button.Warning</name>
-		<property>
+		<property mode="concat">
 			<name>styleClass</name>
 			<value>btn btn-warning</value>
 		</property>
 	</control>
 	<control>
 		<name>Button.Success</name>
-		<property>
+		<property mode="concat">
 			<name>styleClass</name>
 			<value>btn btn-success</value>
 		</property>
 	</control>
 	<control>
 		<name>Button.Info</name>
-		<property>
+		<property mode="concat">
 			<name>styleClass</name>
 			<value>btn btn-info</value>
+		</property>
+	</control>
+	<control>
+		<name>Button.Link</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-link</value>
 		</property>
 	</control>
 	<control>

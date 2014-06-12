@@ -29,9 +29,18 @@
     	<complex-class>org.openntf.xsp.bootstrap.components.layout.BootstrapApplicationConfiguration</complex-class>
 
   		<property>
-			<description>Indicates if the navbar is inverted, using the style navbar-inverse. false by default.</description>
+			<description>Indicates if the navbar is inverted, using the style navbar-inverse. False by default.</description>
 			<display-name>Navbar Inverted</display-name>
 			<property-name>navbarInverted</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+			</property-extension>
+		</property>
+		
+		<property>
+			<description>Indicates if the navbar is fixed at the to of the page. False by default.</description>
+			<display-name>Navbar Fixed</display-name>
+			<property-name>navbarFixed</property-name>
 			<property-class>boolean</property-class>
 			<property-extension>
 			</property-extension>
@@ -43,6 +52,45 @@
 			<property-name>collapseLeftColumn</property-name>
 			<property-class>boolean</property-class>
 			<property-extension>
+			</property-extension>
+		</property>
+		
+		<property>
+			<description>By default the Menu dropdown button for a collapsed left column menu is attached to the left column. Optionally you can enter a selector here (jQuery syntax, see http://api.jquery.com/category/selectors/) 
+			to which the menu should be attached. Sample values: .applayout-column-left (after the element with the applayout-column-left class) or .applayout-banner-collapse</description>
+			<display-name>Collapse Left Column Target</display-name>
+			<property-name>collapseLeftTarget</property-name>
+			<property-class>string</property-class>
+			<property-extension>
+			</property-extension>
+		</property>
+		
+		<property>
+			<description>Label on the menu button shown when the left column is collapsed. 'Menu' by default.</description>
+			<display-name>Collapsed Left Column Menu Label</display-name>
+			<property-name>collapseLeftMenuLabel</property-name>
+			<property-class>string</property-class>
+			<property-extension>
+			</property-extension>
+		</property>
+		
+		<property>
+			<description>Determines the width of the page: full = full width, fluid
+				= used Bootstrap 'fluid' container (almost full width), fixed = Fixed
+				width.</description>
+			<display-name>Page width</display-name>
+			<property-name>pageWidth</property-name>
+			<property-class>string</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor
+					</editor>
+					<editor-parameter>full&#xd;
+						fluid&#xd;
+						fixed
+					</editor-parameter>
+					<default-value>full</default-value>
+				</designer-extension>
 			</property-extension>
 		</property>
 

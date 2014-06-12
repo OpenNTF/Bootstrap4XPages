@@ -45,7 +45,7 @@
 	<!-- JQuery -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/jquery182/js/jquery-1.8.2.min.js</href>
+		<href>/.ibmxspres/.extlib/bootstrap/jquery/jquery-1.11.0.min.js</href>
 	</resource>
 
 	<!-- Core Bootstrap JavaScript files -->
@@ -113,5 +113,24 @@
 			<value></value> <!-- avoid form-control -->
 		</property>
 	</control>
+	
+	<!-- Combo Box -->
+	<control>
+		<name>ComboBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- List Box -->
+	<control>
+		<name>ListBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+
 </theme>
 

@@ -35,27 +35,34 @@ public class BootstrapStyleKitFactory implements StyleKitFactory {
 	public InputStream getThemeAsStream(String themeId, int scope) {
 		if(scope==StyleKitFactory.STYLEKIT_GLOBAL) {
             String folderPath = "org/openntf/xsp/bootstrap/themes"; //$NON-NLS-1$
+            
 			if(themeId.equals("bootstrap")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrap.theme"); //$NON-NLS-1$
 			}
-			if(themeId.equals("bootstrapv2.3.1")){ //$NON-NLS-1$
-                return getThemeFromBundle(folderPath+"/bootstrapv231.theme"); //$NON-NLS-1$
+			
+			if(themeId.equals("bootstrapv2_base")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv2_base.theme"); //$NON-NLS-1$
 			}
-			if(themeId.equals("bootstrapv2.3.1r")){ //$NON-NLS-1$
-                return getThemeFromBundle(folderPath+"/bootstrapv231r.theme"); //$NON-NLS-1$
-			}
-			if(themeId.equals("bootstrapv2.3.2")){ //$NON-NLS-1$
+			
+			//redirect 2.3.1 theme to 2.3.2
+			if(themeId.equals("bootstrapv2.3.2") || themeId.equals("bootstrapv2.3.1") ){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv232.theme"); //$NON-NLS-1$
 			}
-			if(themeId.equals("bootstrapv2.3.2r")){ //$NON-NLS-1$
+			if(themeId.equals("bootstrapv2.3.2r") || themeId.equals("bootstrapv2.3.1r")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv232r.theme"); //$NON-NLS-1$
 			}
+
+			if(themeId.equals("bootstrapv3_base")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv3_base.theme"); //$NON-NLS-1$
+			}
+			
 			if(themeId.equals("bootstrapv3.0.0")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv300.theme"); //$NON-NLS-1$
 			}
 			if(themeId.equals("bootstrapv3.0.0_3d")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv300_3d.theme"); //$NON-NLS-1$
 			}
+			
 			if(themeId.equals("bootstrapv3.1.1")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv311.theme"); //$NON-NLS-1$
 			}
@@ -73,18 +80,15 @@ public class BootstrapStyleKitFactory implements StyleKitFactory {
 			if(themeId.equals("bootstrap")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrap_extlib.theme"); //$NON-NLS-1$
 			}
-			if(themeId.equals("bootstrapv2.3.1")){ //$NON-NLS-1$
-                return getThemeFromBundle(folderPath+"/bootstrapv231_extlib.theme"); //$NON-NLS-1$
+			
+			if(themeId.startsWith("bootstrapv2")){ //$NON-NLS-1$
+				return getThemeFromBundle(folderPath+"/bootstrapv232_extlib.theme"); //$NON-NLS-1$
 			}
-			if(themeId.equals("bootstrapv2.3.2")){ //$NON-NLS-1$
-                return getThemeFromBundle(folderPath+"/bootstrapv232_extlib.theme"); //$NON-NLS-1$
+			
+			if(themeId.startsWith("bootstrapv3")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv3_extlib.theme"); //$NON-NLS-1$
 			}
-			if(themeId.startsWith("bootstrapv3.1.1")){ //$NON-NLS-1$
-                return getThemeFromBundle(folderPath+"/bootstrapv311_extlib.theme"); //$NON-NLS-1$
-			}
-			if(themeId.startsWith("bootstrapv3.0.0")){ //$NON-NLS-1$
-                return getThemeFromBundle(folderPath+"/bootstrapv300_extlib.theme"); //$NON-NLS-1$
-			}
+
 		}
 		return null;
 	}

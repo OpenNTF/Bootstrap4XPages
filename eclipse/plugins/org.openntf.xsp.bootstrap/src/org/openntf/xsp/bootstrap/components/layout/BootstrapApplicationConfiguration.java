@@ -25,12 +25,24 @@ import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImp
  * Bootstrap Application Configuration object.
  */
 public class BootstrapApplicationConfiguration extends BasicApplicationConfigurationImpl {
-
+	
+	public static final String WIDTH_FULL = "full";	
+	public static final String WIDTH_FLUID = "fluid";
+	public static final String WIDTH_FIXED = "fixed";
+	
+	private static final String COLLAPSE_LEFT_COLUMN_TARGET = ".applayout-column-left";
+	private static final String COLLAPSE_LEFT_MENU_LABEL = "Menu";		//default
+	
 	// Bootstrap specific properties
     private Boolean navbarInverted;
+    private Boolean navbarFixed;
     private Boolean collapseLeftColumn;
+    private String collapseLeftTarget;
+    private String collapseLeftMenuLabel;
+    private String pageWidth;
 	
 	public BootstrapApplicationConfiguration() {
+		
 	}
 	
     public boolean isNavbarInverted() {
@@ -46,10 +58,27 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
         }
         return false;
     }
-    
     public void setNavbarInverted(boolean navbarInverted) {
         this.navbarInverted = navbarInverted;
     }
+    
+    public boolean isNavbarFixed() {
+        if(navbarFixed!=null) {
+            return navbarFixed;
+        }
+        ValueBinding vb = getValueBinding("navbarFixed"); // $NON-NLS-1$
+        if(vb!=null) {
+            Boolean b = (Boolean)vb.getValue(getFacesContext());
+            if(b!=null) {
+                return b;
+            }
+        }
+        return false;
+    }
+    public void setNavbarFixed(boolean navbarFixed) {
+        this.navbarFixed = navbarFixed;
+    }
+    
     
     public boolean isCollapseLeftColumn() {
     	 if(collapseLeftColumn!=null) {
@@ -68,20 +97,50 @@ public class BootstrapApplicationConfiguration extends BasicApplicationConfigura
 		this.collapseLeftColumn = collapseLeftColumn;
 	}
     
+    public String getCollapseLeftTarget() {
+    	return (collapseLeftTarget != null ? collapseLeftTarget : COLLAPSE_LEFT_COLUMN_TARGET);
+	}
+    public void setCollapseLeftTarget(String collapseLeftTarget) {
+		this.collapseLeftTarget = collapseLeftTarget;
+	}
+    
+    public String getCollapseLeftMenuLabel() {
+		return (collapseLeftMenuLabel != null ? collapseLeftMenuLabel : COLLAPSE_LEFT_MENU_LABEL);
+	}
+    public void setCollapseLeftMenuLabel(
+			String collapseLeftMenuLabel) {
+		this.collapseLeftMenuLabel = collapseLeftMenuLabel;
+	}
+    
+	public String getPageWidth() {
+		return (pageWidth != null ? pageWidth : WIDTH_FULL);
+    }
+    public void setPageWidth(String pageWidth) {
+    	this.pageWidth = pageWidth;
+    }
+    
     @Override
     public void restoreState(FacesContext context, Object state) {
         Object values[] = (Object[]) state;
         super.restoreState(context, values[0]);
         this.navbarInverted = (Boolean)values[1];
         this.collapseLeftColumn = (Boolean)values[2];
+        this.pageWidth = (String)values[3];
+        this.navbarFixed = (Boolean)values[4];
+        this.collapseLeftTarget = (String)values[5];
+        this.collapseLeftMenuLabel = (String)values[6];
     }
 
     @Override
     public Object saveState(FacesContext context) {
-        Object values[] = new Object[3];
+        Object values[] = new Object[7];
         values[0] = super.saveState(context);
         values[1] = navbarInverted;
         values[2] = collapseLeftColumn;
+        values[3] = pageWidth;
+        values[4] = navbarFixed;
+        values[5] = collapseLeftTarget;
+        values[6] = collapseLeftMenuLabel;
         return values;
     }
 }

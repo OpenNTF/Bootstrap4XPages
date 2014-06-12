@@ -8,22 +8,6 @@
 		<href>/.ibmxspres/.extlib/bootstrap/xsptheme/xsp.css</href>
     </resource>
 
-    <!-- Core Bootstrap CSS files -->
-	<resource>
-		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap231/css/bootstrap.css</href>
-	</resource>
-	<resource>
-		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap231/css/bootstrap-responsive.css</href>
-	</resource>
-	<resources>
-		<metaData>
-			<name>viewport</name>
-			<content>width=device-width, initial-scale=1.0</content>
-		</metaData>
-	</resources>
-
 	<!-- Dojo Theme -->
  	<resource dojoTheme="true">
 		<content-type>text/css</content-type>
@@ -40,26 +24,26 @@
 	<!-- XPages/Bootstrap specific styles -->
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/xpages231.css</href>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages232.css</href>
 	</resource>
 
 
 	<!-- JQuery -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/jquery182/js/jquery-1.8.2.js</href>
+		<href>/.ibmxspres/.extlib/bootstrap/jquery/jquery-1.11.0.min.js</href>
 	</resource>
 
 	<!-- Core Bootstrap JavaScript files -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap231/js/bootstrap.js</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap232/js/bootstrap.min.js</href>
 	</resource>
  
 	<!-- XPages/Bootstrap specific JS -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/xpages231.js</href>
+		<href>/.ibmxspres/.extlib/bootstrap/xpages232.js</href>
 	</resource>
 
 </theme>

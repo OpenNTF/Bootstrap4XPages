@@ -22,7 +22,7 @@ dojo.declare(
 	'extlib.dijit.BootstrapPickerListSearch3',
 	[extlib.dijit.PickerListSearch],
 	{
-        listWidth: "100%",
+        listWidth: "210px",
 		templateString: dojo.cache("extlib.dijit", "templates/BootstrapPickerListSearch3.html")
 	}
 );

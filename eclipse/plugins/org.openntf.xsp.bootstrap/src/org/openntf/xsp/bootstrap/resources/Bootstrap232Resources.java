@@ -23,7 +23,7 @@ package org.openntf.xsp.bootstrap.resources;
  * 
  * @author priand
  */
-public class Bootstrap232Resources extends Bootstrap231Resources {
+public class Bootstrap232Resources extends BootstrapResources {
 	
     public static final Bootstrap232Resources instance = new Bootstrap232Resources();
 

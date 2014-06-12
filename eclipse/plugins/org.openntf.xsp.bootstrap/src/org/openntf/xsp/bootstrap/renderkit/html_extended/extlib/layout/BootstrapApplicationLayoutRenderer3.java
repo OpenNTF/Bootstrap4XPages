@@ -52,7 +52,7 @@ import com.ibm.xsp.util.JSUtil;
 import com.ibm.xsp.util.TypedUtil;
 
 /**
- * Base class for a boostrap application layout renderer.
+ * Base class for a Bootstrap application layout renderer.
  * 
  * @author priand
  */
@@ -91,12 +91,29 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	protected void writeMainFrame(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
 		
 		boolean navbarInverted = false;
+		boolean navbarFixed = false;
 		boolean collapseLeftColumn = false;
+		String collapseLeftTarget = "";
+		String collapseLeftMenuLabel = "";
+		String pageWidth = BootstrapApplicationConfiguration.WIDTH_FULL;
 		
 		BootstrapApplicationConfiguration bc = asBootstrapConfig(configuration);
 		if(bc!=null) {
 			navbarInverted = bc.isNavbarInverted();
+			navbarFixed = bc.isNavbarFixed();
 			collapseLeftColumn = bc.isCollapseLeftColumn();
+			collapseLeftTarget = bc.getCollapseLeftTarget();
+			collapseLeftMenuLabel = bc.getCollapseLeftMenuLabel();
+			pageWidth = bc.getPageWidth();
+		}
+		
+		//CSS required for fixed navbar
+		if (navbarFixed) {
+			w.startElement("style", c);
+			w.writeAttribute("type", "text/css", null); // $NON-NLS-1$
+			w.writeText("body {padding-top:51px}", null);
+			w.endElement("style");
+			
 		}
 		
 		// Start the mast header
@@ -115,12 +132,12 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 			// Start the banner
 			if (configuration.isBanner()) {
-				writeBanner(context, w, c, configuration, navbarInverted);
+				writeBanner(context, w, c, configuration, navbarInverted, navbarFixed, pageWidth);
 			}
 			
 			// Start the title bar
 			if (configuration.isTitleBar()) {
-				writeTitleBar(context, w, c, configuration);
+				writeTitleBar(context, w, c, configuration, pageWidth);
 			}
 
 			// Start the place bar
@@ -129,16 +146,16 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 			}
 
 			// Start the main content
-			writeMainContent(context, w, c, configuration, collapseLeftColumn);
+			writeMainContent(context, w, c, configuration, collapseLeftColumn, pageWidth, collapseLeftTarget, collapseLeftMenuLabel);
 
 			// Start the footer
 			if (configuration.isFooter()) {
-				writeFooter(context, w, c, configuration);
+				writeFooter(context, w, c, configuration, pageWidth);
 			}
 
 			// Start the legal
 			if (configuration.isLegal()) {
-				writeLegal(context, w, c, configuration);
+				writeLegal(context, w, c, configuration, pageWidth);
 			}
 		}
 
@@ -194,23 +211,32 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	// Banner
 	// ================================================================
 
-	protected void writeBanner(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, boolean navbarInverted) throws IOException {
+	protected void writeBanner(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, 
+			boolean navbarInverted, boolean navbarFixed, String pageWidth) throws IOException {
+		
 		w.startElement("div", c);
-
-		String navStyle = "navbar navbar-static-top navbar-inverse applayout-banner";
-			
-		if ( !navbarInverted ) {
-			navStyle = "navbar navbar-static-top navbar-default applayout-banner";
-		}
-		w.writeAttribute("class", navStyle, null); // $NON-NLS-1$
+		String navClass = "navbar applayout-banner " +
+				(navbarInverted ? "navbar-inverse " : "navbar-default ") +
+				(navbarFixed ? "navbar-fixed-top " : "navbar-static-top ");
+		
+		w.writeAttribute("class", navClass, null); // $NON-NLS-1$
 		newLine(w);
-
-		// w.startElement("div",c);
-		// w.writeAttribute("class","container-fluid",null); // $NON-NLS-1$
-		// newLine(w);
+		
+		//container div
+		w.startElement("div",c);
+		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FLUID)) {
+			w.writeAttribute("class", "container-fluid applayout-banner-container", null); // $NON-NLS-1$
+		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
+			w.writeAttribute("class", "container applayout-banner-container", null); // $NON-NLS-1$
+		} else {
+			w.writeAttribute("class", "applayout-banner-container", null); // $NON-NLS-1$
+		}
+		newLine(w);
 
 		writeBannerContent(context, w, c, configuration);
 
+		w.endElement("div");
+		newLine(w, "container"); // $NON-NLS-1$
 		w.endElement("div");
 		newLine(w, "navbar-fixed-top"); // $NON-NLS-1$
 	}
@@ -234,9 +260,9 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		w.writeAttribute("class", "navbar-collapse collapse", null); // $NON-NLS-1$
 		newLine(w);
 		
-		writeBannerUtilityLinks(context, w, c, configuration);
-		newLine(w);
 		writeBannerApplicationLinks(context, w, c, configuration);
+		newLine(w);
+		writeBannerUtilityLinks(context, w, c, configuration);
 		newLine(w);
 		
 		w.endElement("div");
@@ -342,13 +368,21 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	// Title Bar
 	// ================================================================
 
-	protected void writeTitleBar(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
+	protected void writeTitleBar(FacesContext context, ResponseWriter w, UIApplicationLayout c, 
+			BasicApplicationConfigurationImpl configuration, String pageWidth) throws IOException {
 		w.startElement("div", c);
 		w.writeAttribute("class", "navbar navbar-static-top applayout-titlebar", null); // $NON-NLS-1$
 		newLine(w);
 
+		//container div
 		w.startElement("div", c);
-		w.writeAttribute("class", "applayout-titlebar-inner", null); // $NON-NLS-1$
+		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FLUID)) {
+			w.writeAttribute("class", "applayout-titlebar-inner container-fluid", null); // $NON-NLS-1$
+		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
+			w.writeAttribute("class", "applayout-titlebar-inner container", null); // $NON-NLS-1$
+		} else {
+			w.writeAttribute("class", "applayout-titlebar-inner", null); // $NON-NLS-1$
+		}
 		newLine(w);
 		
 		writeSearchBar(context, w, c, configuration);
@@ -667,15 +701,28 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	// Main content
 	// ================================================================
 
-	protected void writeMainContent(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, boolean collapseLeftColumn) throws IOException {
+	protected void writeMainContent(FacesContext context, ResponseWriter w, UIApplicationLayout c, 
+			BasicApplicationConfigurationImpl configuration, boolean collapseLeftColumn, String pageWidth, String collapseLeftTarget,
+			String collapseLeftColumnButtonLabel) throws IOException {
+		
 		w.startElement("div", c); // $NON-NLS-1$
-		// Use a custom class with 3.0
-		// See: http://stackoverflow.com/questions/18449918/100-width-twitter-bootstrap-3-template
-		w.writeAttribute("class", "container-full", null); // $NON-NLS-1$
+		
+		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FULL)) {
+			// Use a custom class with 3.0
+			// See: http://stackoverflow.com/questions/18449918/100-width-twitter-bootstrap-3-template
+			w.writeAttribute("class", "container-full", null); // $NON-NLS-1$
+		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FLUID)) {
+			w.writeAttribute("class", "container-fluid", null); // $NON-NLS-1$
+		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
+			w.writeAttribute("class", "container", null); // $NON-NLS-1$
+		}
+		
 		newLine(w);
-
-		w.startElement("div", c); // $NON-NLS-1$
-		w.writeAttribute("class", "row", null); // $NON-NLS-1$
+		
+		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FULL)) {
+			w.startElement("div", c); // $NON-NLS-1$
+			w.writeAttribute("class", "row", null); // $NON-NLS-1$
+		}
 
 		boolean left = !isEmptyComponent(c.getLeftColumn());
 		boolean right = !isEmptyComponent(c.getRightColumn());
@@ -693,19 +740,22 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 		}
 		
 		// Write the 3 columns
-		writeLeftColumn(context, w, c, leftSize, configuration, collapseLeftColumn);
+		writeLeftColumn(context, w, c, leftSize, configuration, collapseLeftColumn, collapseLeftTarget, collapseLeftColumnButtonLabel);
 		writeContentColumn(context, w, c, contentSize, configuration);
 		writeRightColumn(context, w, c, rightSize, configuration);
 
 		// Close the main content
-		w.endElement("div");
-		newLine(w, "row"); // $NON-NLS-1$
+		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FULL)) {
+			w.endElement("div");
+			newLine(w, "row"); // $NON-NLS-1$
+		}
+		
 		w.endElement("div");
 		newLine(w, "container"); // $NON-NLS-1$
 	}
 
 	protected void writeLeftColumn(FacesContext context, ResponseWriter w, UIApplicationLayout c, int size, BasicApplicationConfigurationImpl configuration, 
-			boolean collapseLeftColumn) throws IOException {
+			boolean collapseLeftColumn, String collapseLeftTarget, String collapseLeftButtonLabel) throws IOException {
 		
 		UIComponent left = c.getLeftColumn();
 		
@@ -733,7 +783,7 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 				
 				// Write the small screen component (collapsed menu)
 	    		w.startElement("script", c); // $NON-NLS-1$
-	    		w.writeText("dojo.addOnLoad( function() { bs4xp.initCollapsibleMenu(); } );", null);
+	    		w.writeText("dojo.addOnLoad( function() { bs4xp.initCollapsibleMenu('" + collapseLeftButtonLabel + "', '" + collapseLeftTarget + "'); } );", null);
 	    		w.endElement("script");
 				newLine(w);
 				
@@ -796,15 +846,29 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	// Footer
 	// ================================================================
 
-	protected void writeFooter(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
+	protected void writeFooter(FacesContext context, ResponseWriter w, UIApplicationLayout c, 
+			BasicApplicationConfigurationImpl configuration, String pageWidth) throws IOException {
 		w.startElement("footer", c);
 		w.writeAttribute("class", "navbar navbar-bottom applayout-footer", null); // $NON-NLS-1$
+		newLine(w);
+		
+		//container div
+		w.startElement("div", c);
+		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FLUID)) {
+			w.writeAttribute("class", "applayout-titlebar-inner container-fluid", null); // $NON-NLS-1$
+		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
+			w.writeAttribute("class", "applayout-titlebar-inner container", null); // $NON-NLS-1$
+		} else {
+			w.writeAttribute("class", "applayout-titlebar-inner", null); // $NON-NLS-1$
+		}
 		newLine(w);
 
 		writeFooterLinks(context, w, c, configuration);
 
+		w.endElement("div");
+		newLine(w, "container"); // $NON-NLS-1$ $NON-NLS-2$
 		w.endElement("footer");
-		newLine(w, "footer");
+		newLine(w, "footer"); // $NON-NLS-1$ $NON-NLS-2$
 	}
 
 	protected void writeFooterLinks(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
@@ -821,9 +885,21 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 	// Legal
 	// ================================================================
 
-	protected void writeLegal(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
+	protected void writeLegal(FacesContext context, ResponseWriter w, UIApplicationLayout c, 
+			BasicApplicationConfigurationImpl configuration, String pageWidth) throws IOException {
 		w.startElement("footer", c);
 		w.writeAttribute("class", "navbar navbar-bottom applayout-legal", null); // $NON-NLS-1$
+		newLine(w);
+		
+		//container div
+		w.startElement("div", c);
+		if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FLUID)) {
+			w.writeAttribute("class", "applayout-titlebar-inner container-fluid", null); // $NON-NLS-1$
+		} else if ( pageWidth.equals(BootstrapApplicationConfiguration.WIDTH_FIXED)) {
+			w.writeAttribute("class", "applayout-titlebar-inner container", null); // $NON-NLS-1$
+		} else {
+			w.writeAttribute("class", "applayout-titlebar-inner", null); // $NON-NLS-1$
+		}
 		newLine(w);
 
 		w.startElement("div", c);
@@ -835,9 +911,11 @@ public class BootstrapApplicationLayoutRenderer3 extends FacesRendererEx {
 
 		w.endElement("div");
 		newLine(w, null); // $NON-NLS-1$ $NON-NLS-2$
-
+		
+		w.endElement("div");
+		newLine(w, "container"); // $NON-NLS-1$ $NON-NLS-2$
 		w.endElement("footer");
-		newLine(w, "footer");
+		newLine(w, "footer"); // $NON-NLS-1$ $NON-NLS-2$
 	}
 
 	protected void writeLegalLogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
