@@ -15,14 +15,14 @@
 */
 dojo.provide("extlib.dijit.BootstrapPickerName3");
 
-dojo.require("extlib.dijit.BootstrapDialog3")
-dojo.require("extlib.dijit.PickerName")
+dojo.require("extlib.dijit.BootstrapDialog3");
+dojo.require("extlib.dijit.PickerName");
 
 dojo.declare(
 	'extlib.dijit.BootstrapPickerName3',
 	[extlib.dijit.PickerName],
 	{
-        listWidth: "210px"
+        listWidth: "210px",
 		templateString: dojo.cache("extlib.dijit", "templates/BootstrapPickerName3.html")
 	}
 );

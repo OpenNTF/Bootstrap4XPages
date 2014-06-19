@@ -11,11 +11,11 @@
     <!-- Core Bootstrap CSS files -->
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap232/css/bootstrap.css</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap232/css/bootstrap.min.css</href>
 	</resource>
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/bootstrap/bootstrap232/css/bootstrap-responsive.css</href>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap232/css/bootstrap-responsive.min.css</href>
 	</resource>
 	<resources>
 		<metaData>
