@@ -1,5 +1,9 @@
 <theme extends="bootstrap">
 
+	<!-- This theme also loads the optional Bootstrap 3 theme -->
+	<!-- It adds a 3d effect to various elements (buttons, messages, ...) just as in Bootstrap 2.3 -->
+	<!-- See http://getbootstrap.com/getting-started/ for details -->
+
 	<!-- All the resources are defined here to ensure that they are loaded in order -->
 	
     <!-- Core XPages styles -->
@@ -7,6 +11,16 @@
         <content-type>text/css</content-type>
 		<href>/.ibmxspres/.extlib/bootstrap/xsptheme/xsp.css</href>
     </resource>
+
+    <!-- Core Bootstrap CSS files -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap320/css/bootstrap.min.css</href>
+	</resource>
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap320/css/bootstrap-theme.min.css</href>
+	</resource>
 
 	<!-- Dojo Theme -->
  	<resource dojoTheme="true">
@@ -38,7 +52,7 @@
 		<content-type>application/x-javascript</content-type>
 		<href>/.ibmxspres/.extlib/bootstrap/bootstrap320/js/bootstrap.min.js</href>
 	</resource>
- 
+	
 	<!-- XPages/Bootstrap specific JS -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
@@ -52,7 +66,7 @@
 			<name>styleClass</name>
 			<value>form-control</value>
 		</property>
-	</control>	 
+	</control>
 	
 	<!-- Standard Edit Box -->
 	<control>
@@ -118,3 +132,4 @@
 	</control>
 
 </theme>
+

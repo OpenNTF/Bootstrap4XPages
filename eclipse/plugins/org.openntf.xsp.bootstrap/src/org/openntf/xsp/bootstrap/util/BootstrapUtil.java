@@ -38,6 +38,7 @@ public class BootstrapUtil {
     public static final Version BOOTSTRAP_V232  = new Version(2, 3, 2); // Bootstrap v232
     public static final Version BOOTSTRAP_V300  = new Version(3, 0, 0); // Bootstrap v300
     public static final Version BOOTSTRAP_V311  = new Version(3, 1, 1); // Bootstrap v311
+    public static final Version BOOTSTRAP_V320  = new Version(3, 2, 0); // Bootstrap v320
     
     @SuppressWarnings("deprecation") //$NON-NLS-1$
     public static Version getBootstrapVersion(FacesContext context) {
@@ -67,8 +68,11 @@ public class BootstrapUtil {
                 if(libname.startsWith("bootstrapv3.0.0")) { // $NON-NLS-1$ $NON-NLS-2$
                     return BOOTSTRAP_V300;
                 }
-                if(libname.startsWith("bootstrapv3.1.1") || libname.startsWith("bootstrapv3") ) { // $NON-NLS-1$ $NON-NLS-2$
+                if(libname.startsWith("bootstrapv3.1.1") ) { // $NON-NLS-1$ $NON-NLS-2$
                     return BOOTSTRAP_V311;
+                }
+                if(libname.startsWith("bootstrapv3.2.0") || libname.startsWith("bootstrapv3") ) { // $NON-NLS-1$ $NON-NLS-2$
+                    return BOOTSTRAP_V320;
                 }
             }
         }

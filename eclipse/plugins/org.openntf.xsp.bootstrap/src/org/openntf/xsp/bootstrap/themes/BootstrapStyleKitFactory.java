@@ -69,6 +69,13 @@ public class BootstrapStyleKitFactory implements StyleKitFactory {
 			if(themeId.equals("bootstrapv3.1.1_3d")){ //$NON-NLS-1$
                 return getThemeFromBundle(folderPath+"/bootstrapv311_3d.theme"); //$NON-NLS-1$
 			}
+			
+			if(themeId.equals("bootstrapv3.2.0")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv320.theme"); //$NON-NLS-1$
+			}
+			if(themeId.equals("bootstrapv3.2.0_3d")){ //$NON-NLS-1$
+                return getThemeFromBundle(folderPath+"/bootstrapv320_3d.theme"); //$NON-NLS-1$
+			}
 		}
 		return null;
 	}
