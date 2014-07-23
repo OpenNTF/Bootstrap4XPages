@@ -8,6 +8,12 @@
 		<href>/.ibmxspres/.extlib/bootstrap/xsptheme/xsp.css</href>
     </resource>
 
+    <!-- Core Bootstrap CSS files -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/bootstrap/bootstrap320/css/bootstrap.min.css</href>
+	</resource>
+
 	<!-- Dojo Theme -->
  	<resource dojoTheme="true">
 		<content-type>text/css</content-type>
@@ -26,6 +32,7 @@
 		<content-type>text/css</content-type>
 		<href>/.ibmxspres/.extlib/bootstrap/xpages300.css</href>
 	</resource>
+
 
 	<!-- JQuery -->
 	<resource>

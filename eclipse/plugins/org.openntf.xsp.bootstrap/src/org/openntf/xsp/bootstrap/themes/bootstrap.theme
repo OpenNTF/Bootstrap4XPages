@@ -284,7 +284,7 @@
 		<name>Column.View</name>
 		<property>
 			<name>viewCheckboxStyle</name>
-			<value>margin: 0px 2px; height: 12px;</value>
+			<value>margin: 0 3px 0 2px;</value>
 		</property>
 		<property>
 			<name>expandedImage</name>
@@ -296,12 +296,12 @@
 		</property>
 	</control>
 
-	<!-- View Column checkbox -->
+	<!-- View Column checkbox: remove the checkbox class that is set on the CheckBox control -->
 	<control>
 		<name>CheckBox.ViewColumn</name>
 		<property>
 			<name>styleClass</name>
-			<value>checkbox</value>
+			<value></value>
 		</property>
 	</control>
 
