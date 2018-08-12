@@ -3,5 +3,5 @@
    <description name="Bootstrap4XPages" url="http://bootstrap4xpages.openntf.org/">
       Bootstrap4XPages contains new themes which can be deployed globally on an IBM Domino server and used in XPages applications without having to import any design elements or to change application code.
    </description>
-   <feature url="features/org.openntf.xsp.bootstrap.feature_1.0.0.201406081717.jar" id="org.openntf.xsp.bootstrap.feature" version="1.0.0.201406081717"/>
+   <feature url="features/org.openntf.xsp.bootstrap.feature_1.0.0.qualifier.jar" id="org.openntf.xsp.bootstrap.feature" version="1.0.0.qualifier"/>
 </site>
