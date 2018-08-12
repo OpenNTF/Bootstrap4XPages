@@ -15,7 +15,6 @@
 	<properties>
 		<tycho-version>0.19.0</tycho-version>
 		<compiler>1.6</compiler>
-		<notes-platform>file:///V:\Projects\DominoUpdateSite</notes-platform>
 
 		<!--<maven.build.timestamp.format>'v00_10_SNAPSHOT.'yyyyMMdd-HHmm</maven.build.timestamp.format> <build.qualifier>${maven.build.timestamp}</build.qualifier> -->
 	</properties>
